@@ -1,0 +1,172 @@
+version: '3.9'
+
+# ── Brixstac Microservices — Production Compose ───────────────
+# Services: postgres, auth, workspace, project, chat, billing, admin, gateway
+# All backend services share one Postgres DB (can shard later)
+# nginx gateway routes traffic by URL path pattern
+
+x-service-defaults: &service-defaults
+  restart: unless-stopped
+  networks: [brixnet]
+  env_file: .env
+
+x-backend-defaults: &backend-defaults
+  <<: *service-defaults
+  depends_on:
+    postgres:
+      condition: service_healthy
+
+services:
+
+  # ── Database ────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: brixstac-db
+    <<: *service-defaults
+    environment:
+      POSTGRES_USER: ${DB_USER:-brixstac}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME:-brixstac_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-brixstac} -d ${DB_NAME:-brixstac_db}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # ── Auth Service (port 3001) ─────────────────────────────────
+  auth:
+    build:
+      context: ./services/auth
+      dockerfile: Dockerfile
+    container_name: brixstac-auth
+    <<: *backend-defaults
+    environment:
+      PORT: 3001
+      DATABASE_URL: postgresql://${DB_USER:-brixstac}:${DB_PASSWORD}@postgres:5432/${DB_NAME:-brixstac_db}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      EMAIL_FROM: ${EMAIL_FROM:-noreply@brixstac.com}
+      FRONTEND_URL: ${FRONTEND_URL:-https://brixstac.com}
+      GATEWAY_URL: http://gateway
+    command: sh -c "npx prisma migrate deploy && node dist/index.js"
+
+  # ── Workspace Service (port 3002) ───────────────────────────
+  workspace:
+    build:
+      context: ./services/workspace
+      dockerfile: Dockerfile
+    container_name: brixstac-workspace
+    <<: *backend-defaults
+    environment:
+      PORT: 3002
+      DATABASE_URL: postgresql://${DB_USER:-brixstac}:${DB_PASSWORD}@postgres:5432/${DB_NAME:-brixstac_db}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      EMAIL_FROM: ${EMAIL_FROM:-noreply@brixstac.com}
+      FRONTEND_URL: ${FRONTEND_URL:-https://brixstac.com}
+      GATEWAY_URL: http://gateway
+
+  # ── Project Service (port 3003) ─────────────────────────────
+  project:
+    build:
+      context: ./services/project
+      dockerfile: Dockerfile
+    container_name: brixstac-project
+    <<: *backend-defaults
+    environment:
+      PORT: 3003
+      DATABASE_URL: postgresql://${DB_USER:-brixstac}:${DB_PASSWORD}@postgres:5432/${DB_NAME:-brixstac_db}
+      JWT_SECRET: ${JWT_SECRET}
+      GATEWAY_URL: http://gateway
+
+  # ── Chat Service (port 3004, Socket.IO) ──────────────────────
+  chat:
+    build:
+      context: ./services/chat
+      dockerfile: Dockerfile
+    container_name: brixstac-chat
+    <<: *backend-defaults
+    environment:
+      PORT: 3004
+      DATABASE_URL: postgresql://${DB_USER:-brixstac}:${DB_PASSWORD}@postgres:5432/${DB_NAME:-brixstac_db}
+      JWT_SECRET: ${JWT_SECRET}
+      GATEWAY_URL: http://gateway
+
+  # ── Billing Service (port 3005) ─────────────────────────────
+  billing:
+    build:
+      context: ./services/billing
+      dockerfile: Dockerfile
+    container_name: brixstac-billing
+    <<: *backend-defaults
+    environment:
+      PORT: 3005
+      DATABASE_URL: postgresql://${DB_USER:-brixstac}:${DB_PASSWORD}@postgres:5432/${DB_NAME:-brixstac_db}
+      JWT_SECRET: ${JWT_SECRET}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
+      FRONTEND_URL: ${FRONTEND_URL:-https://brixstac.com}
+      GATEWAY_URL: http://gateway
+
+  # ── Admin Service (port 3006) ────────────────────────────────
+  admin:
+    build:
+      context: ./services/admin
+      dockerfile: Dockerfile
+    container_name: brixstac-admin
+    <<: *backend-defaults
+    environment:
+      PORT: 3006
+      DATABASE_URL: postgresql://${DB_USER:-brixstac}:${DB_PASSWORD}@postgres:5432/${DB_NAME:-brixstac_db}
+      JWT_SECRET: ${JWT_SECRET}
+      GATEWAY_URL: http://gateway
+
+  # ── AI Gateway Service (port 3007) ───────────────────────────
+  ai-gateway:
+    build:
+      context: ./services/ai-gateway
+      dockerfile: Dockerfile
+    container_name: brixstac-ai-gateway
+    <<: *service-defaults
+    environment:
+      PORT: 3007
+      JWT_SECRET: ${JWT_SECRET}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      GATEWAY_URL: http://gateway
+      DATA_DIR: /app/data
+    volumes:
+      - ai_gateway_data:/app/data
+
+  # ── API Gateway + Frontend (nginx, port 80/443) ───────────────
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway
+    container_name: brixstac-gateway
+    <<: *service-defaults
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    depends_on:
+      - auth
+      - workspace
+      - project
+      - chat
+      - billing
+      - admin
+      - ai-gateway
+
+volumes:
+  postgres_data:
+  ai_gateway_data:
+
+networks:
+  brixnet:
+    driver: bridge

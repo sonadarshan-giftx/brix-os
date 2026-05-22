@@ -1,0 +1,553 @@
+/* ═════════════════════════════════════════════════════════════
+   GLOBAL QA FIXES CSS
+   Addresses: animations, transitions, hover effects, 
+   focus states, micro-interactions, visual polish
+   ═════════════════════════════════════════════════════════════ */
+
+/* ── 1. PAGE TRANSITION ANIMATIONS ── */
+.main-content-enter {
+  animation: fadeSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── 2. SIDEBAR NAVIGATION HOVER TRANSITIONS ── */
+.app-rail-item,
+[data-rail-item] {
+  transition: background-color 0.15s ease, border-left-color 0.15s ease, transform 0.1s ease !important;
+}
+.app-rail-item:hover,
+[data-rail-item]:hover {
+  background-color: rgba(91, 95, 199, 0.08) !important;
+  transform: translateX(1px);
+}
+
+/* ── 3. PROJECT CARD HOVER LIFT ── */
+.project-card,
+[data-project-card] {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.project-card:hover,
+[data-project-card]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04) !important;
+}
+
+/* ── 4. STAT CARD HOVER ── */
+.stat-card,
+[data-stat-card] {
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease !important;
+}
+.stat-card:hover,
+[data-stat-card]:hover {
+  background-color: rgba(91, 95, 199, 0.04) !important;
+  border-color: #5b5fc7 !important;
+  transform: translateY(-1px);
+}
+
+/* ── 5. BUTTON HOVER TRANSITIONS ── */
+button,
+[role="button"] {
+  transition: background-color 0.15s ease, 
+              border-color 0.15s ease, 
+              box-shadow 0.15s ease,
+              transform 0.1s ease !important;
+}
+button:hover:not(:disabled),
+[role="button"]:hover {
+  transform: translateY(-0.5px);
+}
+button:active:not(:disabled),
+[role="button"]:active {
+  transform: translateY(0.5px) scale(0.98);
+}
+
+/* Primary button hover */
+button[style*="backgroundColor: #5b5fc7"]:hover,
+button[style*="background: #5b5fc7"]:hover {
+  filter: brightness(1.08) !important;
+}
+
+/* Green button hover */
+button[style*="backgroundColor: #237b4b"]:hover,
+button[style*="background: #237b4b"]:hover {
+  filter: brightness(1.1) !important;
+}
+
+/* Danger/Red button hover */
+button[style*="backgroundColor: #c4314b"]:hover,
+button[style*="background: #c4314b"]:hover {
+  filter: brightness(1.1) !important;
+}
+
+/* ── 6. TAB BUTTON HOVER ── */
+.tab-button,
+[data-tab] {
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease !important;
+}
+.tab-button:hover,
+[data-tab]:hover {
+  background-color: rgba(91, 95, 199, 0.06) !important;
+}
+
+/* ── 7. APP CARD HOVER ── */
+.app-card,
+[data-app-card] {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.15s ease !important;
+}
+.app-card:hover,
+[data-app-card]:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.1) !important;
+  border-color: #5b5fc7 !important;
+}
+
+/* ── 8. APP CONNECT BUTTON HOVER ── */
+.app-connect-btn {
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease !important;
+}
+.app-connect-btn:hover {
+  transform: scale(1.02);
+}
+
+/* ── 9. CALENDAR EVENT HOVER ── */
+.calendar-event {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease !important;
+}
+.calendar-event:hover {
+  transform: scale(1.02) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12) !important;
+  z-index: 10;
+  opacity: 1 !important;
+}
+
+/* ── 10. CHAT MESSAGE HOVER ── */
+.chat-message {
+  transition: background-color 0.12s ease !important;
+}
+.chat-message:hover {
+  background-color: rgba(0,0,0,0.02) !important;
+}
+
+/* ── 11. APPROVAL CARD HOVER ── */
+.approval-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.15s ease !important;
+}
+.approval-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06) !important;
+}
+
+/* ── 12. TEAM CARD HOVER ── */
+.team-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+.team-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important;
+}
+
+/* ── 13. SETTINGS MENU ITEM HOVER ── */
+.settings-menu-item {
+  transition: background-color 0.12s ease, color 0.12s ease !important;
+}
+.settings-menu-item:hover {
+  background-color: rgba(91, 95, 199, 0.08) !important;
+}
+
+/* ── 14. AVATAR HOVER ── */
+.avatar-hover {
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+.avatar-hover:hover {
+  transform: scale(1.08) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+}
+
+/* ── 15. PROGRESS BAR ANIMATION ── */
+.progress-bar-fill {
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* ── 16. TOAST/NOTIFICATION ANIMATION ── */
+.toast-enter {
+  animation: toastSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes toastSlideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── 17. MODAL BACKDROP FADE ── */
+.modal-backdrop {
+  transition: opacity 0.2s ease !important;
+}
+
+/* ── 18. DROPDOWN MENU ANIMATION ── */
+.dropdown-menu {
+  animation: dropdownSlide 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes dropdownSlide {
+  from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── 19. FOCUS RINGS ── */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid #5b5fc7 !important;
+  outline-offset: 2px !important;
+  border-radius: 4px !important;
+}
+
+/* ── 20. SKELETON LOADING SHIMMER ── */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%) !important;
+  background-size: 200% 100% !important;
+  animation: skeletonShimmer 1.5s infinite !important;
+}
+@keyframes skeletonShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── 21. AI AGENT PULSE ── */
+.ai-agent-active {
+  animation: agentPulse 2s ease-in-out infinite !important;
+}
+@keyframes agentPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(91, 95, 199, 0.2); }
+  50%      { box-shadow: 0 0 0 8px rgba(91, 95, 199, 0); }
+}
+
+/* ── 22. BADGE ANIMATION ── */
+.badge-pulse {
+  animation: badgePulse 2s ease-in-out infinite !important;
+}
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.1); }
+}
+
+/* ── 23. SMOOTH SCROLL ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── 24. REDUCED MOTION SUPPORT ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ── 25. TOOLTIP FADE ── */
+.tooltip {
+  transition: opacity 0.15s ease, transform 0.15s ease !important;
+}
+
+/* ── 26. SEARCH INPUT HOVER ── */
+.search-input {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+.search-input:hover {
+  border-color: #5b5fc7 !important;
+}
+.search-input:focus {
+  box-shadow: 0 0 0 3px rgba(91, 95, 199, 0.15) !important;
+}
+
+/* ── 27. CHECKBOX/RADIO TRANSITION ── */
+input[type="checkbox"],
+input[type="radio"] {
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+/* ── 28. LINK HOVER UNDERLINE ── */
+a {
+  transition: color 0.15s ease, opacity 0.15s ease !important;
+}
+a:hover {
+  opacity: 0.85;
+}
+
+/* ── 29. TAG/CHIP HOVER ── */
+.tag-chip,
+.chip {
+  transition: background-color 0.12s ease, transform 0.1s ease !important;
+}
+.tag-chip:hover,
+.chip:hover {
+  transform: scale(1.03);
+}
+
+/* ── 30. SIDEBAR COLLAPSE ANIMATION ── */
+.sidebar-collapse {
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* ── 31. CONTEXT LIST ITEM HOVER ── */
+.context-list-item {
+  transition: background-color 0.12s ease, padding-left 0.15s ease !important;
+}
+.context-list-item:hover {
+  background-color: rgba(91, 95, 199, 0.06) !important;
+  padding-left: 4px;
+}
+
+/* ── 32. FORM INPUT LABEL FLOAT ── */
+.form-input {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+/* ── 33. TOGGLE SWITCH TRANSITION ── */
+.toggle-switch {
+  transition: background-color 0.2s ease !important;
+}
+.toggle-switch-knob {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* ── 34. STATUS DOT BLINK ── */
+.status-dot-live {
+  animation: statusBlink 2s ease-in-out infinite !important;
+}
+@keyframes statusBlink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+
+/* ── 35. RIPPLE EFFECT FOR BUTTONS ── */
+.ripple-button {
+  position: relative;
+  overflow: hidden;
+}
+.ripple-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+.ripple-button:active::after {
+  width: 200%;
+  height: 200%;
+}
+
+/* ── 36. CHAT COMPOSER TOOLBAR ── */
+.chat-toolbar-btn {
+  transition: background-color 0.12s ease, color 0.12s ease, transform 0.1s ease !important;
+}
+.chat-toolbar-btn:hover {
+  background-color: rgba(0,0,0,0.06) !important;
+  transform: scale(1.05);
+}
+
+/* ── 37. CALENDAR DAY CELL HOVER ── */
+.calendar-day-cell {
+  transition: background-color 0.12s ease, color 0.12s ease !important;
+}
+.calendar-day-cell:hover:not(.calendar-day-selected):not(.calendar-day-today) {
+  background-color: rgba(91, 95, 199, 0.06) !important;
+}
+
+/* ── 38. CALENDAR TODAY HIGHLIGHT ── */
+.calendar-day-today {
+  animation: todayPulse 3s ease-in-out infinite !important;
+}
+@keyframes todayPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(91, 95, 199, 0.2); }
+  50%      { box-shadow: 0 0 0 4px rgba(91, 95, 199, 0); }
+}
+
+/* ── 39. SECURITY SCORE RING ── */
+.security-score-ring {
+  transition: stroke-dashoffset 1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* ── 40. THREAT ITEM HOVER ── */
+.threat-item {
+  transition: background-color 0.12s ease, transform 0.1s ease !important;
+}
+.threat-item:hover {
+  background-color: rgba(196, 49, 75, 0.04) !important;
+  transform: translateX(2px);
+}
+
+/* ── 41. ACTIVITY FEED ITEM ── */
+.activity-item {
+  transition: opacity 0.15s ease, transform 0.15s ease !important;
+}
+.activity-item:hover {
+  opacity: 1 !important;
+  transform: translateX(2px);
+}
+
+/* ── 42. DATA TABLE ROW HOVER ── */
+.data-table-row {
+  transition: background-color 0.12s ease !important;
+}
+.data-table-row:hover {
+  background-color: rgba(91, 95, 199, 0.04) !important;
+}
+
+/* ── 43. KANBAN CARD HOVER ── */
+.kanban-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+.kanban-card:hover {
+  transform: translateY(-2px) rotate(0.5deg) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+
+/* ── 44. KANBAN CARD DRAG ── */
+.kanban-card-dragging {
+  transform: rotate(2deg) scale(1.02) !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.15) !important;
+  opacity: 0.9;
+}
+
+/* ── 45. BREADCRUMB ITEM HOVER ── */
+.breadcrumb-item {
+  transition: color 0.12s ease, text-decoration 0.12s ease !important;
+}
+.breadcrumb-item:hover {
+  text-decoration: underline;
+}
+
+/* ── 46. PAGINATION BUTTON ── */
+.pagination-btn {
+  transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease !important;
+}
+.pagination-btn:hover:not(.pagination-active) {
+  background-color: rgba(91, 95, 199, 0.08) !important;
+}
+
+/* ── 47. FILE UPLOAD DROPZONE ── */
+.dropzone {
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease !important;
+}
+.dropzone:hover,
+.dropzone.drag-over {
+  border-color: #5b5fc7 !important;
+  background-color: rgba(91, 95, 199, 0.04) !important;
+  transform: scale(1.01);
+}
+
+/* ── 48. MENU ITEM ── */
+.menu-item {
+  transition: background-color 0.1s ease, color 0.1s ease !important;
+}
+.menu-item:hover {
+  background-color: rgba(91, 95, 199, 0.08) !important;
+}
+
+/* ── 49. SLIDER/THUMB ── */
+input[type="range"] {
+  transition: opacity 0.15s ease !important;
+}
+input[type="range"]:hover {
+  opacity: 1;
+}
+
+/* ── 50. CODE BLOCK SYNTAX HIGHLIGHT ── */
+.code-block {
+  transition: border-color 0.15s ease !important;
+}
+.code-block:hover {
+  border-color: #5b5fc7 !important;
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVE FIXES
+   ════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .project-card:hover,
+  .app-card:hover,
+  .team-card:hover {
+    transform: none !important;
+  }
+}
+
+/* ════════════════════════════════════════════
+   CURSOR FIXES
+   ════════════════════════════════════════════ */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]) {
+  cursor: pointer !important;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed !important;
+  opacity: 0.5;
+}
+
+/* ════════════════════════════════════════════
+   SELECTION COLOR
+   ════════════════════════════════════════════ */
+::selection {
+  background-color: rgba(91, 95, 199, 0.2);
+  color: inherit;
+}
+
+/* ── Z-INDEX HIERARCHY ── */
+.z-index-dropdown { z-index: 1000 !important; }
+.z-index-modal { z-index: 2000 !important; }
+.z-index-toast { z-index: 3000 !important; }
+.z-index-tooltip { z-index: 4000 !important; }
+
+/* ── SCROLL BEHAVIOR ── */
+.scroll-smooth { scroll-behavior: smooth !important; }
+.scroll-hidden { overflow: hidden !important; }
+.scroll-auto { overflow: auto !important; }
+
+/* ── BORDER RADIUS CONSISTENCY ── */
+.rounded-standard { border-radius: 8px !important; }
+.rounded-pill { border-radius: 9999px !important; }
+
+/* ── FOCUS VISIBLE (keyboard only) ── */
+.focus-ring:focus-visible {
+  outline: 2px solid #5b5fc7 !important;
+  outline-offset: 2px !important;
+}
+
+/* ── RESPONSIVE BREAKPOINTS ── */
+@media (max-width: 640px) {
+  .hide-mobile { display: none !important; }
+  .stack-mobile { flex-direction: column !important; }
+}
+
+@media (min-width: 1024px) {
+  .show-desktop { display: flex !important; }
+}
+
+/* ── CONTRAST RATIOS ── */
+.text-high-contrast { color: #242424 !important; }
+.text-medium-contrast { color: #616161 !important; }
+.text-low-contrast { color: #a0a0a0 !important; }
+
+/* ── PERFORMANCE ── */
+.will-change-transform { will-change: transform !important; }
+.will-change-opacity { will-change: opacity !important; }
+.content-visibility-auto { content-visibility: auto !important; }

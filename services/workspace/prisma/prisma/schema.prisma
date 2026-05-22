@@ -1,0 +1,939 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// Core Authentication
+// ============================================================
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  password     String
+  name         String
+  avatar       String?
+  bio          String?
+  initials     String?
+  department   String?
+  title        String?
+  vpnUserId    String?
+  role         UserRole @default(MEMBER)
+  status       UserStatus @default(ACTIVE)
+  emailVerified Boolean @default(false)
+  mfaEnabled   Boolean  @default(false)
+  mfaSecret    String?
+  
+  // Auth tokens
+  refreshTokens RefreshToken[]
+  passwordResets PasswordReset[]
+  emailVerifications EmailVerification[]
+  
+  // Relations
+  workspaces   WorkspaceMember[]
+  ownedWorkspaces Workspace[] @relation("WorkspaceOwner")
+  invitesSent  WorkspaceInvite[] @relation("InviteSender")
+  projects     Project[] @relation("ProjectCreator")
+  tickets      Ticket[] @relation("TicketAssignee")
+  ticketsCreated Ticket[] @relation("TicketCreator")
+  messages     Message[]
+  meetings     MeetingAttendee[]
+  approvals    Approval[] @relation("ApprovalRequester")
+  approvalsReviewed Approval[] @relation("ApprovalReviewer")
+  auditLogs    AuditLog[]
+  subscriptions Subscription[]
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  deletedAt    DateTime?
+  
+  @@index([email])
+  @@index([status])
+  @@map("users")
+}
+
+enum UserRole {
+  OWNER
+  ADMIN
+  MANAGER
+  MEMBER
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  DEACTIVATED
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  
+  @@map("refresh_tokens")
+}
+
+model PasswordReset {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  
+  @@map("password_resets")
+}
+
+model EmailVerification {
+  id        String   @id @default(cuid())
+  code      String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  
+  @@map("email_verifications")
+}
+
+// ============================================================
+// Workspace / Organization
+// ============================================================
+
+model Workspace {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  industry    String?
+  timezone    String   @default("UTC")
+  language    String   @default("en")
+  logo        String?
+  billingEmail String?
+  
+  // Billing
+  plan        PlanTier @default(STARTER)
+  stripeCustomerId String?
+  stripeSubscriptionId String?
+  
+  // Limits
+  seats       Int      @default(5)
+  storageLimitMB Int  @default(10240) // 10GB
+  apiCallsLimit Int   @default(100000)
+  aiTokensLimit Int   @default(2000000)
+  
+  // Usage tracking
+  storageUsedMB Int  @default(0)
+  apiCallsUsed  Int  @default(0)
+  aiTokensUsed  Int  @default(0)
+  
+  // Security
+  require2FA  Boolean @default(false)
+  ssoEnabled  Boolean @default(false)
+  sessionTimeoutMinutes Int @default(240)
+  
+  ownerId     String
+  owner       User     @relation("WorkspaceOwner", fields: [ownerId], references: [id])
+  
+  members     WorkspaceMember[]
+  invites     WorkspaceInvite[]
+  projects    Project[]
+  teams       Team[]
+  auditLogs   AuditLog[]
+  integrations Integration[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  
+  @@index([ownerId])
+  @@index([plan])
+  @@map("workspaces")
+}
+
+enum PlanTier {
+  STARTER
+  PRO
+  ENTERPRISE
+}
+
+model WorkspaceMember {
+  id          String   @id @default(cuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role        WorkspaceRole @default(MEMBER)
+  status      MemberStatus @default(ACTIVE)
+  joinedAt    DateTime @default(now())
+  
+  @@unique([workspaceId, userId])
+  @@index([workspaceId, status])
+  @@index([userId])
+  @@map("workspace_members")
+}
+
+enum WorkspaceRole {
+  OWNER
+  ADMIN
+  MANAGER
+  MEMBER
+}
+
+enum MemberStatus {
+  ACTIVE
+  PENDING
+  SUSPENDED
+}
+
+model WorkspaceInvite {
+  id          String   @id @default(cuid())
+  email       String
+  role        WorkspaceRole @default(MEMBER)
+  token       String   @unique
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  invitedById String
+  invitedBy   User     @relation("InviteSender", fields: [invitedById], references: [id])
+  status      InviteStatus @default(PENDING)
+  expiresAt   DateTime
+  acceptedAt  DateTime?
+  
+  createdAt   DateTime @default(now())
+  
+  @@index([workspaceId, status])
+  @@index([token])
+  @@map("workspace_invites")
+}
+
+enum InviteStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  CANCELLED
+}
+
+// ============================================================
+// Projects
+// ============================================================
+
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  key         String
+  description String?
+  status      ProjectStatus @default(ACTIVE)
+  health      ProjectHealth @default(ON_TRACK)
+  
+  // Budget
+  budgetTotal    Int @default(0)
+  budgetSpent    Int @default(0)
+  budgetCurrency String @default("USD")
+  
+  // Timeline
+  startDate   DateTime?
+  endDate     DateTime?
+  
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  creatorId   String
+  creator     User     @relation("ProjectCreator", fields: [creatorId], references: [id])
+  
+  tickets     Ticket[]
+  sprints     Sprint[]
+  activities  ProjectActivity[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  
+  @@unique([workspaceId, key])
+  @@index([workspaceId, status])
+  @@index([creatorId])
+  @@map("projects")
+}
+
+enum ProjectStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+  ARCHIVED
+}
+
+enum ProjectHealth {
+  ON_TRACK
+  AT_RISK
+  OFF_TRACK
+  BLOCKED
+}
+
+model ProjectActivity {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  userId    String?
+  type      String
+  title     String
+  description String?
+  metadata  Json?
+  
+  createdAt DateTime @default(now())
+  
+  @@map("project_activities")
+}
+
+// ============================================================
+// Teams
+// ============================================================
+
+model Team {
+  id        String   @id @default(cuid())
+  name      String
+  icon      String   @default("users")
+  color     String   @default("#5b5fc7")
+  
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  
+  members   TeamMember[]
+  channels  Channel[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("teams")
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  teamId    String
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  userId    String
+  role      TeamRole @default(MEMBER)
+  
+  @@unique([teamId, userId])
+  @@map("team_members")
+}
+
+enum TeamRole {
+  LEAD
+  MEMBER
+}
+
+model Channel {
+  id        String   @id @default(cuid())
+  name      String
+  type      ChannelType @default(TEXT)
+  
+  teamId    String
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  
+  messages  Message[]
+  
+  createdAt DateTime @default(now())
+  
+  @@map("channels")
+}
+
+enum ChannelType {
+  TEXT
+  VOICE
+  ANNOUNCEMENT
+}
+
+// ============================================================
+// Tickets / Tasks
+// ============================================================
+
+model Ticket {
+  id          String   @id @default(cuid())
+  key         String
+  title       String
+  description String?
+  type        TicketType @default(TASK)
+  status      TicketStatus @default(TODO)
+  priority    Priority @default(MEDIUM)
+  points      Int      @default(0)
+  
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  assigneeId  String?
+  assignee    User?    @relation("TicketAssignee", fields: [assigneeId], references: [id])
+  creatorId   String
+  creator     User     @relation("TicketCreator", fields: [creatorId], references: [id])
+  sprintId    String?
+  sprint      Sprint?  @relation(fields: [sprintId], references: [id])
+  
+  tags        String[]
+  dueDate     DateTime?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  
+  @@index([projectId, status])
+  @@index([assigneeId])
+  @@index([sprintId])
+  @@map("tickets")
+}
+
+enum TicketType {
+  TASK
+  BUG
+  FEATURE
+  EPIC
+  STORY
+}
+
+enum TicketStatus {
+  TODO
+  IN_PROGRESS
+  REVIEW
+  DONE
+  CANCELLED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model Sprint {
+  id          String   @id @default(cuid())
+  name        String
+  goal        String?
+  status      SprintStatus @default(PLANNED)
+  velocity    Int      @default(0)
+  
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  tickets     Ticket[]
+  
+  startDate   DateTime?
+  endDate     DateTime?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  
+  @@map("sprints")
+}
+
+enum SprintStatus {
+  PLANNED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+// ============================================================
+// Chat / Conversations
+// ============================================================
+
+model Conversation {
+  id          String   @id @default(cuid())
+  type        ConversationType @default(DIRECT)
+  name        String?
+  
+  workspaceId String
+  
+  participants ConversationParticipant[]
+  messages    Message[]
+  
+  lastMessageAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([workspaceId])
+  @@index([lastMessageAt])
+  @@map("conversations")
+}
+
+enum ConversationType {
+  DIRECT
+  GROUP
+  CHANNEL
+}
+
+model ConversationParticipant {
+  id              String   @id @default(cuid())
+  conversationId  String
+  conversation    Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  userId          String
+  role            ParticipantRole @default(MEMBER)
+  lastReadAt      DateTime?
+  
+  @@unique([conversationId, userId])
+  @@index([userId])
+  @@map("conversation_participants")
+}
+
+enum ParticipantRole {
+  ADMIN
+  MEMBER
+}
+
+model Message {
+  id            String   @id @default(cuid())
+  content       String
+  type          MessageType @default(TEXT)
+  
+  conversationId String
+  conversation  Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId      String
+  sender        User     @relation(fields: [senderId], references: [id])
+  
+  replyToId     String?
+  attachments   Attachment[]
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([conversationId, createdAt])
+  @@index([senderId])
+  @@map("messages")
+}
+
+enum MessageType {
+  TEXT
+  SYSTEM
+  AI_GENERATED
+}
+
+model Attachment {
+  id          String   @id @default(cuid())
+  filename    String
+  mimeType    String
+  size        Int
+  url         String
+  
+  messageId   String
+  message     Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  
+  createdAt   DateTime @default(now())
+  
+  @@map("attachments")
+}
+
+// ============================================================
+// Meetings / Calls
+// ============================================================
+
+model Meeting {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  type        MeetingType @default(STANDUP)
+  status      MeetingStatus @default(SCHEDULED)
+  
+  workspaceId String
+  
+  startTime   DateTime
+  endTime     DateTime?
+  timezone    String   @default("UTC")
+  
+  meetingUrl  String?
+  recordingUrl String?
+  transcript  String?
+  
+  attendees   MeetingAttendee[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  
+  @@index([workspaceId, startTime])
+  @@map("meetings")
+}
+
+enum MeetingType {
+  STANDUP
+  SPRINT_PLANNING
+  RETROSPECTIVE
+  ONE_ON_ONE
+  CLIENT_CALL
+  ALL_HANDS
+}
+
+enum MeetingStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model MeetingAttendee {
+  id        String   @id @default(cuid())
+  meetingId String
+  meeting   Meeting  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status    AttendeeStatus @default(INVITED)
+  joinedAt  DateTime?
+  leftAt    DateTime?
+  
+  @@unique([meetingId, userId])
+  @@map("meeting_attendees")
+}
+
+enum AttendeeStatus {
+  INVITED
+  ACCEPTED
+  DECLINED
+  ATTENDED
+}
+
+// ============================================================
+// Calendar Events
+// ============================================================
+
+model CalendarEvent {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  type        EventType @default(EVENT)
+  
+  workspaceId String
+  
+  startTime   DateTime
+  endTime     DateTime?
+  timezone    String   @default("UTC")
+  allDay      Boolean  @default(false)
+  
+  recurrence  String?  // RRULE format
+  projectId   String?
+  
+  attendees   EventAttendee[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  
+  @@index([workspaceId, startTime])
+  @@map("calendar_events")
+}
+
+enum EventType {
+  EVENT
+  DEADLINE
+  MILESTONE
+  REMINDER
+}
+
+model EventAttendee {
+  id        String   @id @default(cuid())
+  eventId   String
+  event     CalendarEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  userId    String
+  status    AttendeeStatus @default(INVITED)
+  
+  @@unique([eventId, userId])
+  @@map("event_attendees")
+}
+
+// ============================================================
+// Approvals
+// ============================================================
+
+model Approval {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  type        ApprovalType @default(GENERAL)
+  status      ApprovalStatus @default(PENDING)
+  priority    Priority @default(MEDIUM)
+  
+  amount      Int?
+  currency    String   @default("USD")
+  
+  workspaceId String
+  requesterId String
+  requester User     @relation("ApprovalRequester", fields: [requesterId], references: [id])
+  reviewerId  String?
+  reviewer    User?    @relation("ApprovalReviewer", fields: [reviewerId], references: [id])
+  
+  dueDate     DateTime?
+  decidedAt   DateTime?
+  decision    String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  
+  @@index([workspaceId, status])
+  @@index([requesterId])
+  @@index([reviewerId])
+  @@map("approvals")
+}
+
+enum ApprovalType {
+  GENERAL
+  BUDGET
+  DEPLOYMENT
+  ACCESS
+  LEAVE
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  ESCALATED
+}
+
+// ============================================================
+// Security / Zero Trust
+// ============================================================
+
+model SecurityPolicy {
+  id          String   @id @default(cuid())
+  name        String
+  type        PolicyType @default(ACCESS)
+  description String?
+  rules       Json
+  
+  workspaceId String
+  isActive    Boolean  @default(true)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("security_policies")
+}
+
+enum PolicyType {
+  ACCESS
+  DATA
+  NETWORK
+  DEVICE
+  COMPLIANCE
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  action      String
+  entity      String
+  entityId    String?
+  details     Json?
+  
+  workspaceId String?
+  workspace   Workspace? @relation(fields: [workspaceId], references: [id])
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  
+  ipAddress   String?
+  userAgent   String?
+  
+  createdAt   DateTime @default(now())
+  
+  @@index([workspaceId, createdAt])
+  @@index([userId, createdAt])
+  @@map("audit_logs")
+}
+
+// ============================================================
+// Billing / Stripe
+// ============================================================
+
+model Subscription {
+  id                String   @id @default(cuid())
+  status            SubscriptionStatus @default(INCOMPLETE)
+  
+  userId            String
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspaceId       String?
+  
+  stripeSubscriptionId String?
+  stripeCustomerId     String?
+  stripePriceId        String?
+  
+  plan              PlanTier @default(STARTER)
+  quantity          Int      @default(1)
+  
+  currentPeriodStart DateTime?
+  currentPeriodEnd   DateTime?
+  cancelAtPeriodEnd  Boolean @default(false)
+  
+  invoices          Invoice[]
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  @@index([userId])
+  @@index([workspaceId])
+  @@map("subscriptions")
+}
+
+enum SubscriptionStatus {
+  INCOMPLETE
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  UNPAID
+  PAUSED
+}
+
+model Invoice {
+  id            String   @id @default(cuid())
+  stripeInvoiceId String? @unique
+  
+  subscriptionId String
+  subscription   Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  
+  amount        Int
+  currency      String   @default("USD")
+  status        InvoiceStatus @default(DRAFT)
+  
+  periodStart   DateTime?
+  periodEnd     DateTime?
+  paidAt        DateTime?
+  
+  pdfUrl        String?
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([subscriptionId])
+  @@map("invoices")
+}
+
+enum InvoiceStatus {
+  DRAFT
+  OPEN
+  PAID
+  UNCOLLECTIBLE
+  VOID
+}
+
+// ============================================================
+// Integrations
+// ============================================================
+
+model Integration {
+  id          String   @id @default(cuid())
+  type        IntegrationType
+  name        String
+  status      IntegrationStatus @default(DISCONNECTED)
+  
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  
+  config      Json?
+  webhookUrl  String?
+  lastSyncedAt DateTime?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([workspaceId, type])
+  @@map("integrations")
+}
+
+enum IntegrationType {
+  SLACK
+  GITHUB
+  JIRA
+  GOOGLE_CALENDAR
+  ZOOM
+  NOTION
+  LINEAR
+  DISCORD
+}
+
+enum IntegrationStatus {
+  CONNECTED
+  DISCONNECTED
+  ERROR
+  SYNCING
+}
+
+
+// ============================================================
+// Instance Configuration (Dedicated Mode)
+// ============================================================
+
+model Instance {
+  id            String   @id @default(cuid())
+  companyName   String
+  companySlug   String   @unique
+  industry      String?
+  licenseKey    String?
+  licenseType   String   @default("ENTERPRISE")
+  expiresAt     DateTime?
+  activatedAt   DateTime @default(now())
+
+  // Admin
+  adminName     String
+  adminEmail    String
+  adminUserId   String?
+
+  // Configuration
+  timezone      String   @default("UTC")
+  language      String   @default("en")
+  allowedDomains String[] @default([])
+  vpnOnly       Boolean  @default(true)
+  ldapEnabled   Boolean  @default(false)
+  ldapUrl       String?
+  ldapBaseDN    String?
+
+  // Security
+  require2FA    Boolean  @default(false)
+  ssoEnabled    Boolean  @default(false)
+  sessionTimeoutMinutes Int @default(240)
+
+  // Branding
+  logo          String?
+  accentColor   String   @default("#5b5fc7")
+
+  // Limits
+  maxUsers      Int      @default(100)
+  maxProjects   Int      @default(50)
+  maxStorageGB  Int      @default(100)
+
+  // License audit
+  licenseCheckFailCount Int @default(0)
+  licenseLastChecked    DateTime @default(now())
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("instances")
+}
+
+// ============================================================
+// AI Agents
+// ============================================================
+
+model AIAgent {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  avatar      String?
+  description String?
+  model       String   @default("claude-sonnet")
+  
+  workspaceId String
+  
+  skills      String[]
+  isActive    Boolean  @default(true)
+  
+  // Cost tracking
+  tokensUsed  Int      @default(0)
+  costIncurred Int   @default(0) // in cents
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("ai_agents")
+}

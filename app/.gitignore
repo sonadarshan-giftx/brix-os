@@ -1,0 +1,71 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Cache
+.cache/
+*.cache
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# Misc
+*.pem
+*.cert
+*.key
+
+# Backend (not needed for static deployment)
+api/
+
+# Mobile (separate project)
+mobile/
+
+# Desktop (separate project)
+src-tauri/
+
+# Docker
+docker-compose.yml
+Dockerfile
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.orig

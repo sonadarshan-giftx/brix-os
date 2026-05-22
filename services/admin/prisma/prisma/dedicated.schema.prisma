@@ -1,0 +1,659 @@
+// ═══════════════════════════════════════════
+// DEDICATED-MODE Prisma Schema
+// One instance = ONE company. No multi-tenancy.
+// No workspaceId, no workspace table, no shared anything.
+// ═══════════════════════════════════════════
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ── Instance Config (single row) ──
+model Instance {
+  id           String   @id @default(cuid())
+  companyName  String
+  companySlug  String   @unique
+  industry     String?
+  licenseKey   String   @unique
+  licenseType  String   @default("ENTERPRISE") // ENTERPRISE | PRO | STARTER
+  maxUsers     Int      @default(100)
+  maxProjects  Int      @default(50)
+  maxStorageGB Int      @default(100)
+  expiresAt    DateTime?
+  activatedAt  DateTime @default(now())
+  
+  // Settings
+  timezone     String   @default("UTC")
+  language     String   @default("en")
+  require2FA   Boolean  @default(false)
+  ssoEnabled   Boolean  @default(false)
+  sessionTimeoutMinutes Int @default(480)
+  
+  // Branding
+  logo         String?
+  accentColor  String   @default("#5b5fc7")
+  
+  // Security
+  vpnOnly      Boolean  @default(true)
+  allowedDomains String[] // e.g., ["acme.com", "acmesoftware.com"]
+  
+  // License audit
+  licenseCheckFailCount Int @default(0)
+  licenseLastChecked    DateTime @default(now())
+  
+  updatedAt    DateTime @updatedAt
+  
+  @@map("instance")
+}
+
+// ── Users ──
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  initials     String?
+  avatar       String?
+  bio          String?
+  role         UserRole @default(MEMBER)
+  department   String?
+  title        String?
+  
+  // Auth
+  password     String?  // null if LDAP/VPN-only
+  ldapDN       String?  // LDAP distinguished name
+  vpnUserId    String?  // ID from VPN proxy header
+  
+  // Status
+  status       UserStatus @default(ACTIVE)
+  emailVerified Boolean @default(false)
+  mfaEnabled   Boolean  @default(false)
+  mfaSecret    String?
+  lastLoginAt  DateTime?
+  lastIpAddress String?
+  
+  // Relations
+  sessions     UserSession[]
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  deletedAt    DateTime?
+  
+  @@index([email])
+  @@index([status])
+  @@index([role])
+  @@map("users")
+}
+
+enum UserRole {
+  OWNER
+  ADMIN
+  MANAGER
+  MEMBER
+  VIEWER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+model UserSession {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ipAddress String?
+  userAgent String?
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  
+  @@map("user_sessions")
+}
+
+// ── Projects ──
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  key         String   @unique
+  description String?
+  status      ProjectStatus @default(ACTIVE)
+  health      ProjectHealth @default(ON_TRACK)
+  
+  budgetTotal    Int @default(0)
+  budgetSpent    Int @default(0)
+  budgetCurrency String @default("USD")
+  
+  startDate   DateTime?
+  endDate     DateTime?
+  
+  creatorId   String
+  creator     User     @relation(fields: [creatorId], references: [id])
+  
+  tickets     Ticket[]
+  sprints     Sprint[]
+  activities  Activity[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  
+  @@index([status])
+  @@index([creatorId])
+  @@map("projects")
+}
+
+enum ProjectStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+  ARCHIVED
+}
+
+enum ProjectHealth {
+  ON_TRACK
+  AT_RISK
+  OFF_TRACK
+  BLOCKED
+}
+
+model Activity {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  userId    String?
+  type      String
+  title     String
+  description String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+  
+  @@map("activities")
+}
+
+// ── Teams ──
+model Team {
+  id        String   @id @default(cuid())
+  name      String
+  icon      String   @default("users")
+  color     String   @default("#5b5fc7")
+  
+  members   TeamMember[]
+  channels  Channel[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("teams")
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  teamId    String
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      TeamRole @default(MEMBER)
+  
+  @@unique([teamId, userId])
+  @@map("team_members")
+}
+
+enum TeamRole {
+  LEAD
+  MEMBER
+}
+
+model Channel {
+  id        String   @id @default(cuid())
+  name      String
+  type      ChannelType @default(TEXT)
+  
+  teamId    String
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  
+  messages  Message[]
+  
+  createdAt DateTime @default(now())
+  
+  @@map("channels")
+}
+
+enum ChannelType {
+  TEXT
+  VOICE
+  ANNOUNCEMENT
+}
+
+// ── Tickets ──
+model Ticket {
+  id          String   @id @default(cuid())
+  key         String
+  title       String
+  description String?
+  type        TicketType @default(TASK)
+  status      TicketStatus @default(TODO)
+  priority    Priority @default(MEDIUM)
+  points      Int      @default(0)
+  
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  assigneeId  String?
+  assignee    User?    @relation(fields: [assigneeId], references: [id])
+  creatorId   String
+  creator     User     @relation("TicketCreator", fields: [creatorId], references: [id])
+  sprintId    String?
+  sprint      Sprint?  @relation(fields: [sprintId], references: [id])
+  
+  tags        String[]
+  dueDate     DateTime?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  
+  @@index([projectId, status])
+  @@index([assigneeId])
+  @@index([sprintId])
+  @@map("tickets")
+}
+
+enum TicketType {
+  TASK
+  BUG
+  FEATURE
+  EPIC
+  STORY
+}
+
+enum TicketStatus {
+  TODO
+  IN_PROGRESS
+  REVIEW
+  DONE
+  CANCELLED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model Sprint {
+  id          String   @id @default(cuid())
+  name        String
+  goal        String?
+  status      SprintStatus @default(PLANNED)
+  velocity    Int      @default(0)
+  
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  tickets     Ticket[]
+  
+  startDate   DateTime?
+  endDate     DateTime?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  
+  @@map("sprints")
+}
+
+enum SprintStatus {
+  PLANNED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+// ── Chat ──
+model Conversation {
+  id          String   @id @default(cuid())
+  type        ConversationType @default(DIRECT)
+  name        String?
+  
+  participants ConversationParticipant[]
+  messages    Message[]
+  
+  lastMessageAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("conversations")
+}
+
+enum ConversationType {
+  DIRECT
+  GROUP
+  CHANNEL
+}
+
+model ConversationParticipant {
+  id              String   @id @default(cuid())
+  conversationId  String
+  conversation    Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role            ParticipantRole @default(MEMBER)
+  lastReadAt      DateTime?
+  
+  @@unique([conversationId, userId])
+  @@map("conversation_participants")
+}
+
+enum ParticipantRole {
+  ADMIN
+  MEMBER
+}
+
+model Message {
+  id            String   @id @default(cuid())
+  content       String
+  type          MessageType @default(TEXT)
+  
+  conversationId String
+  conversation  Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId      String
+  sender        User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  
+  replyToId     String?
+  attachments   Attachment[]
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([conversationId, createdAt])
+  @@map("messages")
+}
+
+enum MessageType {
+  TEXT
+  SYSTEM
+  AI_GENERATED
+}
+
+model Attachment {
+  id          String   @id @default(cuid())
+  filename    String
+  mimeType    String
+  size        Int
+  url         String
+  
+  messageId   String
+  message     Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  
+  createdAt   DateTime @default(now())
+  
+  @@map("attachments")
+}
+
+// ── Meetings ──
+model Meeting {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  type        MeetingType @default(STANDUP)
+  status      MeetingStatus @default(SCHEDULED)
+  
+  startTime   DateTime
+  endTime     DateTime?
+  timezone    String   @default("UTC")
+  
+  meetingUrl  String?
+  recordingUrl String?
+  transcript  String?
+  
+  attendees   MeetingAttendee[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  
+  @@index([startTime])
+  @@map("meetings")
+}
+
+enum MeetingType {
+  STANDUP
+  SPRINT_PLANNING
+  RETROSPECTIVE
+  ONE_ON_ONE
+  CLIENT_CALL
+  ALL_HANDS
+}
+
+enum MeetingStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model MeetingAttendee {
+  id        String   @id @default(cuid())
+  meetingId String
+  meeting   Meeting  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status    AttendeeStatus @default(INVITED)
+  joinedAt  DateTime?
+  leftAt    DateTime?
+  
+  @@unique([meetingId, userId])
+  @@map("meeting_attendees")
+}
+
+enum AttendeeStatus {
+  INVITED
+  ACCEPTED
+  DECLINED
+  ATTENDED
+}
+
+// ── Calendar ──
+model CalendarEvent {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  type        EventType @default(EVENT)
+  
+  startTime   DateTime
+  endTime     DateTime?
+  timezone    String   @default("UTC")
+  allDay      Boolean  @default(false)
+  
+  recurrence  String?
+  projectId   String?
+  
+  attendees   EventAttendee[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  
+  @@index([startTime])
+  @@map("calendar_events")
+}
+
+enum EventType {
+  EVENT
+  DEADLINE
+  MILESTONE
+  REMINDER
+}
+
+model EventAttendee {
+  id        String   @id @default(cuid())
+  eventId   String
+  event     CalendarEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status    AttendeeStatus @default(INVITED)
+  
+  @@unique([eventId, userId])
+  @@map("event_attendees")
+}
+
+// ── Approvals ──
+model Approval {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  type        ApprovalType @default(GENERAL)
+  status      ApprovalStatus @default(PENDING)
+  priority    Priority @default(MEDIUM)
+  
+  amount      Int?
+  currency    String   @default("USD")
+  
+  requesterId String
+  requester   User     @relation("ApprovalRequester", fields: [requesterId], references: [id])
+  reviewerId  String?
+  reviewer    User?    @relation("ApprovalReviewer", fields: [reviewerId], references: [id])
+  
+  dueDate     DateTime?
+  decidedAt   DateTime?
+  decision    String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+  
+  @@index([status])
+  @@map("approvals")
+}
+
+enum ApprovalType {
+  GENERAL
+  BUDGET
+  DEPLOYMENT
+  ACCESS
+  LEAVE
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  ESCALATED
+}
+
+// ── Security ──
+model SecurityPolicy {
+  id          String   @id @default(cuid())
+  name        String
+  type        PolicyType @default(ACCESS)
+  description String?
+  rules       Json
+  isActive    Boolean  @default(true)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("security_policies")
+}
+
+enum PolicyType {
+  ACCESS
+  DATA
+  NETWORK
+  DEVICE
+  COMPLIANCE
+}
+
+// ── Audit ──
+model AuditLog {
+  id          String   @id @default(cuid())
+  action      String
+  entity      String
+  entityId    String?
+  details     Json?
+  
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  
+  ipAddress   String?
+  userAgent   String?
+  
+  createdAt   DateTime @default(now())
+  
+  @@index([userId, createdAt])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+// ── Integrations ──
+model Integration {
+  id          String   @id @default(cuid())
+  type        IntegrationType
+  name        String
+  status      IntegrationStatus @default(DISCONNECTED)
+  
+  config      Json?
+  webhookUrl  String?
+  lastSyncedAt DateTime?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([type])
+  @@map("integrations")
+}
+
+enum IntegrationType {
+  SLACK
+  GITHUB
+  JIRA
+  GOOGLE_CALENDAR
+  ZOOM
+  NOTION
+  LINEAR
+  DISCORD
+}
+
+enum IntegrationStatus {
+  CONNECTED
+  DISCONNECTED
+  ERROR
+  SYNCING
+}
+
+// ── AI Agents ──
+model AIAgent {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  avatar      String?
+  description String?
+  model       String   @default("claude-sonnet")
+  
+  skills      String[]
+  isActive    Boolean  @default(true)
+  
+  tokensUsed  Int      @default(0)
+  costIncurred Int   @default(0)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("ai_agents")
+}
+
+// ── Settings ──
+model SystemSetting {
+  id    String @id
+  value Json?
+  
+  updatedAt DateTime @updatedAt
+  
+  @@map("system_settings")
+}
