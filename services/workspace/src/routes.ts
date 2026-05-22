@@ -8,6 +8,9 @@ import { z } from 'zod';
 
 const router = Router();
 
+// ── SCIM Router (no JWT auth — uses its own Bearer token) ──────────────────
+export const scimRouter = Router();
+
 function getPagination(req: any) {
   const page = Math.max(1, parseInt(req.query.page as string) || 1);
   const limit = Math.min(100, Math.max(1, parseInt(req.query.limit as string) || 20));
@@ -105,11 +108,10 @@ router.use(authenticateToken);
 // ── List My Workspaces ──
 router.get('/workspaces', async (req: AuthRequest, res) => {
   try {
-    const memberships = await prisma.workspaceMember.findMany({
+    const memberships = await (prisma.workspaceMember as any).findMany({
       where: { userId: req.user!.id, status: 'ACTIVE' },
       include: {
         workspace: {
-          where: { deletedAt: null },
           include: {
             owner: { select: { id: true, name: true, email: true } },
             _count: { select: { members: true } },
@@ -118,9 +120,9 @@ router.get('/workspaces', async (req: AuthRequest, res) => {
       },
     });
 
-    const validMemberships = memberships.filter((m) => m.workspace !== null);
+    const validMemberships = memberships.filter((m: any) => m.workspace && !m.workspace.deletedAt);
 
-    res.json(validMemberships.map((m) => ({
+    res.json(validMemberships.map((m: any) => ({
       ...m.workspace,
       myRole: m.role,
       memberCount: m.workspace._count.members,
@@ -277,6 +279,32 @@ router.post('/workspaces/:id/invites', async (req: AuthRequest, res) => {
   } catch (err: any) {
     if (err.name === 'ZodError') { res.status(400).json({ error: 'Validation failed', details: err.errors }); return; }
     res.status(500).json({ error: 'Failed to send invitation' });
+  }
+});
+
+// ── List Members ──
+router.get('/workspaces/:id/members', async (req: AuthRequest, res) => {
+  try {
+    const membership = await prisma.workspaceMember.findFirst({
+      where: { workspaceId: req.params.id, userId: req.user!.id },
+    });
+    if (!membership) { res.status(403).json({ error: 'Not a member' }); return; }
+
+    const { page, limit, skip } = getPagination(req);
+    const [members, total] = await Promise.all([
+      prisma.workspaceMember.findMany({
+        where: { workspaceId: req.params.id },
+        include: { user: { select: { id: true, name: true, email: true, avatar: true, status: true } } },
+        orderBy: { joinedAt: 'asc' },
+        skip,
+        take: limit,
+      }),
+      prisma.workspaceMember.count({ where: { workspaceId: req.params.id } }),
+    ]);
+    res.json({ members, total, page, totalPages: Math.ceil(total / limit) });
+  } catch (err) {
+    console.error('List members error:', err);
+    res.status(500).json({ error: 'Failed to load members' });
   }
 });
 
@@ -698,7 +726,7 @@ router.get('/workspaces/:id/channels/:channelId/moderators', async (req: AuthReq
 // ─── ═══════════════════════════════════════════════════════════════ ─────────
 
 // GET /scim/v2/ServiceProviderConfig
-router.get('/scim/v2/ServiceProviderConfig', (req, res) => {
+scimRouter.get('/v2/ServiceProviderConfig', (req, res) => {
   res.json({
     schemas: ['urn:ietf:params:scim:schemas:core:2.0:ServiceProviderConfig'],
     documentationUri: 'https://brixstac.io/docs/scim',
@@ -723,7 +751,7 @@ router.get('/scim/v2/ServiceProviderConfig', (req, res) => {
 });
 
 // GET /scim/v2/Users — list all users (SCIM ListResponse)
-router.get('/scim/v2/Users', async (req, res) => {
+scimRouter.get('/v2/Users', async (req, res) => {
   if (!validateScimToken(req, res)) return;
   try {
     const users = await prisma.user.findMany({
@@ -745,7 +773,7 @@ router.get('/scim/v2/Users', async (req, res) => {
 });
 
 // GET /scim/v2/Users/:id — single user in SCIM format
-router.get('/scim/v2/Users/:id', async (req, res) => {
+scimRouter.get('/v2/Users/:id', async (req, res) => {
   if (!validateScimToken(req, res)) return;
   try {
     const user = await prisma.user.findUnique({
@@ -764,7 +792,7 @@ router.get('/scim/v2/Users/:id', async (req, res) => {
 });
 
 // POST /scim/v2/Users — provision a new user
-router.post('/scim/v2/Users', async (req, res) => {
+scimRouter.post('/v2/Users', async (req, res) => {
   if (!validateScimToken(req, res)) return;
   try {
     const { userName, name, emails, active } = req.body;
@@ -783,9 +811,10 @@ router.post('/scim/v2/Users', async (req, res) => {
       res.status(409).json({ schemas: ['urn:ietf:params:scim:api:messages:2.0:Error'], status: '409', detail: 'User already exists' }); return;
     }
 
-    const { createHash, randomBytes } = await import('crypto');
-    const bcrypt = await import('bcryptjs');
-    const randomPassword = await bcrypt.hash(randomBytes(32).toString('hex'), 12);
+    const { createHash, randomBytes, scryptSync } = await import('crypto');
+    // Use scrypt (built-in) instead of bcryptjs to avoid extra dependency
+    const salt = randomBytes(16).toString('hex');
+    const randomPassword = salt + ':' + scryptSync(randomBytes(32).toString('hex'), salt, 64).toString('hex');
 
     const user = await prisma.user.create({
       data: {
@@ -806,7 +835,7 @@ router.post('/scim/v2/Users', async (req, res) => {
 });
 
 // PUT /scim/v2/Users/:id — replace user attributes
-router.put('/scim/v2/Users/:id', async (req, res) => {
+scimRouter.put('/v2/Users/:id', async (req, res) => {
   if (!validateScimToken(req, res)) return;
   try {
     const { userName, name, emails, active } = req.body;
@@ -837,7 +866,7 @@ router.put('/scim/v2/Users/:id', async (req, res) => {
 });
 
 // PATCH /scim/v2/Users/:id — partial update using SCIM Operations format
-router.patch('/scim/v2/Users/:id', async (req, res) => {
+scimRouter.patch('/v2/Users/:id', async (req, res) => {
   if (!validateScimToken(req, res)) return;
   try {
     const { Operations } = req.body;
@@ -889,7 +918,7 @@ router.patch('/scim/v2/Users/:id', async (req, res) => {
 });
 
 // DELETE /scim/v2/Users/:id — deprovision user
-router.delete('/scim/v2/Users/:id', async (req, res) => {
+scimRouter.delete('/v2/Users/:id', async (req, res) => {
   if (!validateScimToken(req, res)) return;
   try {
     // Remove from all workspaces
@@ -911,7 +940,7 @@ router.delete('/scim/v2/Users/:id', async (req, res) => {
 });
 
 // GET /scim/v2/Groups — return workspace roles as SCIM Groups
-router.get('/scim/v2/Groups', async (req, res) => {
+scimRouter.get('/v2/Groups', async (req, res) => {
   if (!validateScimToken(req, res)) return;
   try {
     // Return system roles as SCIM groups

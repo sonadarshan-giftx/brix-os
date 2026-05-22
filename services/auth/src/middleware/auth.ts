@@ -33,7 +33,7 @@ export function optionalAuth(req: AuthRequest, res: Response, next: NextFunction
   if (!token) { next(); return; }
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as { userId: string; email: string; role: string };
-    req.user = decoded;
+    req.user = { id: decoded.userId, email: decoded.email, role: decoded.role };
     next();
   } catch { next(); }
 }

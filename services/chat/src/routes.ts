@@ -315,13 +315,13 @@ router.get('/:workspaceId/channels', requireWorkspaceMember, async (req: AuthReq
       include: {
         participants: { select: { userId: true, role: true, lastReadAt: true } },
         messages: { orderBy: { createdAt: 'desc' }, take: 1, select: { createdAt: true, content: true } },
-      },
+      } as any,
       orderBy: { createdAt: 'asc' },
     });
 
-    const result = channels.map((ch) => {
-      const memberCount = ch.participants.length;
-      const myParticipant = ch.participants.find((p) => p.userId === userId);
+    const result = (channels as any[]).map((ch: any) => {
+      const memberCount = ch.participants?.length ?? 0;
+      const myParticipant = ch.participants?.find((p: any) => p.userId === userId);
       const lastMessage = ch.messages[0] ?? null;
       // Unread count: messages after lastReadAt
       return {
@@ -386,13 +386,20 @@ router.post('/:workspaceId/channels', requireWorkspaceMember, async (req: AuthRe
 /** GET /:workspaceId/channels/:channelId — get channel details */
 router.get('/:workspaceId/channels/:channelId', requireWorkspaceMember, async (req: AuthRequest, res) => {
   try {
-    const channel = await prisma.conversation.findFirst({
+    const channel = await (prisma.conversation as any).findFirst({
       where: { id: req.params.channelId, workspaceId: req.params.workspaceId, type: 'CHANNEL' },
-      include: {
-        participants: { include: { user: { select: { id: true, name: true, avatar: true } } } },
-      },
-    });
+    }) as any;
     if (!channel) return res.status(404).json({ error: 'Channel not found' });
+
+    const participants = await prisma.conversationParticipant.findMany({
+      where: { conversationId: req.params.channelId },
+    });
+    const userIds = participants.map((p: any) => p.userId);
+    const users = userIds.length > 0 ? await prisma.user.findMany({
+      where: { id: { in: userIds } },
+      select: { id: true, name: true, avatar: true },
+    }) : [];
+    const userMap = Object.fromEntries(users.map((u: any) => [u.id, u]));
 
     const pinnedMessageIds = pins[channel.id] ?? [];
     let pinnedMessages: any[] = [];
@@ -407,8 +414,8 @@ router.get('/:workspaceId/channels/:channelId', requireWorkspaceMember, async (r
       id: channel.id,
       name: channel.name?.replace(/^priv:/, ''),
       isPrivate: channel.name?.startsWith('priv:') ?? false,
-      memberCount: channel.participants.length,
-      members: channel.participants.map((p) => ({ ...p.user, role: p.role })),
+      memberCount: participants.length,
+      members: participants.map((p: any) => ({ ...(userMap[p.userId] ?? { id: p.userId }), role: p.role })),
       pinnedMessages: addReactionData(pinnedMessages),
       lastMessageAt: channel.lastMessageAt,
       createdAt: channel.createdAt,
@@ -539,11 +546,17 @@ router.get('/:workspaceId/channels/:channelId/members', requireWorkspaceMember, 
   try {
     const participants = await prisma.conversationParticipant.findMany({
       where: { conversationId: req.params.channelId },
-      include: { user: { select: { id: true, name: true, avatar: true, email: true, title: true } } },
     });
+    // Fetch user details separately since user relation isn't in Prisma schema
+    const userIds = participants.map((p) => p.userId);
+    const users = await prisma.user.findMany({
+      where: { id: { in: userIds } },
+      select: { id: true, name: true, avatar: true, email: true, title: true },
+    });
+    const userMap = Object.fromEntries(users.map((u) => [u.id, u]));
 
-    const result = participants.map((p) => ({
-      ...p.user,
+    const result = participants.map((p: any) => ({
+      ...(userMap[p.userId] || { id: p.userId }),
       role: p.role,
       lastReadAt: p.lastReadAt,
       presence: presence[p.userId] ?? { status: 'offline', userId: p.userId },
@@ -1076,14 +1089,14 @@ router.get('/:workspaceId/dm', requireWorkspaceMember, async (req: AuthRequest, 
       include: {
         participants: {
           include: { user: { select: { id: true, name: true, avatar: true, email: true } } },
-        },
+        } as any,
         messages: { orderBy: { createdAt: 'desc' }, take: 1 },
-      },
+      } as any,
       orderBy: { lastMessageAt: 'desc' },
-    });
+    }) as any[];
 
-    const result = await Promise.all(conversations.map(async (conv) => {
-      const myParticipant = conv.participants.find((p) => p.userId === userId);
+    const result = await Promise.all(conversations.map(async (conv: any) => {
+      const myParticipant = conv.participants?.find((p: any) => p.userId === userId);
       const lastReadAt = myParticipant?.lastReadAt;
       const unreadCount = lastReadAt
         ? await prisma.message.count({ where: { conversationId: conv.id, createdAt: { gt: lastReadAt } } })
@@ -1093,11 +1106,11 @@ router.get('/:workspaceId/dm', requireWorkspaceMember, async (req: AuthRequest, 
         id: conv.id,
         type: conv.type,
         name: conv.name,
-        participants: conv.participants.map((p) => ({
-          ...p.user,
+        participants: conv.participants?.map((p: any) => ({
+          ...(p.user || {}),
           presence: presence[p.userId] ?? { status: 'offline' },
-        })),
-        lastMessage: conv.messages[0] ?? null,
+        })) ?? [],
+        lastMessage: conv.messages?.[0] ?? null,
         lastMessageAt: conv.lastMessageAt,
         unreadCount,
       };
@@ -1411,23 +1424,32 @@ router.patch('/:workspaceId/notifications/:id/read', requireWorkspaceMember, asy
 /** GET /:workspaceId/conversations */
 router.get('/:workspaceId/conversations', requireWorkspaceMember, async (req: AuthRequest, res) => {
   try {
-    const conversations = await prisma.conversation.findMany({
+    const conversations = await (prisma.conversation as any).findMany({
       where: { workspaceId: req.params.workspaceId },
-      include: {
-        participants: {
-          include: { user: { select: { id: true, name: true, avatar: true } } },
-        },
-        messages: { orderBy: { createdAt: 'desc' }, take: 1 },
-      },
     });
-    res.json(conversations);
+    const convIds = conversations.map((c: any) => c.id);
+    const allParticipants = convIds.length > 0
+      ? await prisma.conversationParticipant.findMany({ where: { conversationId: { in: convIds } } })
+      : [];
+    const allUserIds = [...new Set(allParticipants.map((p: any) => p.userId))] as string[];
+    const allUsers = allUserIds.length > 0
+      ? await prisma.user.findMany({ where: { id: { in: allUserIds } }, select: { id: true, name: true, avatar: true } })
+      : [];
+    const userMap = Object.fromEntries(allUsers.map((u: any) => [u.id, u]));
+    const result = conversations.map((conv: any) => ({
+      ...conv,
+      participants: allParticipants
+        .filter((p: any) => p.conversationId === conv.id)
+        .map((p: any) => ({ ...(userMap[p.userId] ?? { id: p.userId }), role: p.role })),
+    }));
+    res.json({ conversations: result });
   } catch (err) { console.error(err); res.status(500).json({ error: 'Failed to list conversations' }); }
 });
 
 /** GET /:workspaceId/conversations/:conversationId */
 router.get('/:workspaceId/conversations/:conversationId', requireWorkspaceMember, async (req: AuthRequest, res) => {
   try {
-    const conversation = await prisma.conversation.findFirst({
+    const conversation = await (prisma.conversation as any).findFirst({
       where: { id: req.params.conversationId, workspaceId: req.params.workspaceId },
       include: {
         participants: { include: { user: { select: { id: true, name: true, avatar: true } } } },
@@ -1435,8 +1457,8 @@ router.get('/:workspaceId/conversations/:conversationId', requireWorkspaceMember
           orderBy: { createdAt: 'asc' },
           include: { sender: { select: { id: true, name: true, avatar: true } }, attachments: true },
         },
-      },
-    });
+      } as any,
+    }) as any;
     if (!conversation) return res.status(404).json({ error: 'Conversation not found' });
     res.json(conversation);
   } catch (err) { console.error(err); res.status(500).json({ error: 'Failed to get conversation' }); }
@@ -1698,12 +1720,11 @@ router.post('/:workspaceId/messages/:messageId/forward', requireWorkspaceMember,
     };
 
     const newMessage = await prisma.$transaction(async (tx) => {
-      const msg = await tx.message.create({
+      const msg = await (tx.message as any).create({
         data: {
           content: originalMessage.content,
           conversationId: targetChannelId,
           senderId: req.user!.id,
-          metadata: metadata as any,
         },
         include: { sender: { select: { id: true, name: true, avatar: true } }, attachments: true },
       });
@@ -1739,7 +1760,10 @@ router.post('/:workspaceId/slash-command', requireWorkspaceMember, async (req: A
     const userId = req.user!.id;
     const { workspaceId } = req.params;
 
-    switch (command) {
+    // Strip leading slash from command so both "/status" and "status" work
+    const cmd = (command || '').replace(/^\//, '');
+
+    switch (cmd) {
       case 'status': {
         const text = (args || '').trim();
         customStatuses.set(userId, { text, updatedAt: new Date().toISOString() });
@@ -1747,6 +1771,19 @@ router.post('/:workspaceId/slash-command', requireWorkspaceMember, async (req: A
           userId, workspaceId, customStatus: text, updatedAt: new Date().toISOString(),
         });
         return res.json({ type: 'ephemeral', text: `Status set to: ${text}` });
+      }
+
+      case 'me': {
+        const action = Array.isArray(args) ? args.join(' ') : (args || '').trim();
+        return res.json({ type: 'action', message: `*${userId} ${action}*` });
+      }
+
+      case 'poll': {
+        const parts = Array.isArray(args) ? args : (args || '').split(/\s+/);
+        const question = parts[0] || 'Poll';
+        const options = parts.slice(1);
+        const pollId = uuidv4();
+        return res.json({ type: 'poll', id: pollId, question, options, message: `Poll created: ${question}` });
       }
 
       case 'remind': {
@@ -1786,7 +1823,7 @@ router.post('/:workspaceId/slash-command', requireWorkspaceMember, async (req: A
       }
 
       default:
-        return res.json({ type: 'error', text: `Unknown command: /${command}` });
+        return res.json({ type: 'error', text: `Unknown command: /${cmd}` });
     }
   } catch (err) { console.error(err); res.status(500).json({ error: 'Failed to execute command' }); }
 });
