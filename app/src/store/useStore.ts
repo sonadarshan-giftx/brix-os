@@ -389,7 +389,7 @@ const DEFAULT_ROLES: RoleConfig[] = [
     name: 'Manager',
     description:
       'Can manage their team, approve requests, view team projects and budgets.',
-    color: '#5b5fc7',
+    color: '#D97757',
     scope: 'manager',
     permissions: {
       canCreateProject: false,
@@ -553,7 +553,7 @@ export const useStore = create<AppState>()(
 
           // ── Theme ──
           theme: 'light',
-          accentColor: '#5b5fc7',
+          accentColor: '#D97757',
           fontSize: 14,
 
           // ── Search/Filter ──
@@ -772,7 +772,7 @@ export const useStore = create<AppState>()(
               state.settingsOpen = false;
               // Reset theme
               state.theme = 'light';
-              state.accentColor = '#5b5fc7';
+              state.accentColor = '#D97757';
               state.fontSize = 14;
               // Reset filters
               state.filters = { ...DEFAULT_FILTERS };
@@ -1615,7 +1615,7 @@ export const useStore = create<AppState>()(
               }
               // Ensure accentColor exists
               if (!('accentColor' in state)) {
-                state.accentColor = '#5b5fc7';
+                state.accentColor = '#D97757';
               }
               // Ensure fontSize exists
               if (!('fontSize' in state)) {
@@ -1643,4 +1643,19 @@ if (typeof window !== 'undefined') {
       window.dispatchEvent(event);
     }
   });
+}
+
+// ── DEV-ONLY: expose the live store for preview/QA tooling (stripped in prod build) ──
+if (typeof window !== 'undefined' && import.meta.env && import.meta.env.DEV) {
+  (window as any).__appStore = useStore;
+  // Opt-in auto-login for visual QA: set localStorage.brixDemoAutoLogin='1' then reload.
+  // Runs at module-eval (before first render) so the app boots straight into the shell.
+  try {
+    if (localStorage.getItem('brixDemoAutoLogin') === '1' && !useStore.getState().currentUser) {
+      const demoJwt =
+        btoa('{}') + '.' + btoa(JSON.stringify({ sub: 'demo', exp: 9999999999 })) + '.s';
+      useStore.getState().setCurrentUser(currentUser as any, demoJwt, demoJwt);
+      useStore.getState().setOnboardingComplete(true);
+    }
+  } catch { /* ignore */ }
 }

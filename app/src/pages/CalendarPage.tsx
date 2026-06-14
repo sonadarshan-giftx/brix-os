@@ -118,15 +118,15 @@ function generateMeetingInstances(meetingsList: MeetingType[], day: Date): Meeti
    ═══════════════════════════════════════════ */
 function loadSavedMeetings() {
   try {
-    const saved = localStorage.getItem('brixstac-meetings');
+    const saved = localStorage.getItem('brixos-meetings');
     return saved ? JSON.parse(saved) : null;
   } catch { return null; }
 }
 function saveMeetingsToStorage(meetings: any[]) {
-  localStorage.setItem('brixstac-meetings', JSON.stringify(meetings));
+  localStorage.setItem('brixos-meetings', JSON.stringify(meetings));
 }
 
-export default function CalendarPage() {  useEffect(() => { document.title = "Calendar" + " - Brixstac"; }, []);
+export default function CalendarPage() {  useEffect(() => { document.title = "Calendar" + " - BrixOS"; }, []);
   const [view, setView] = useState<CalendarView>('week');
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);

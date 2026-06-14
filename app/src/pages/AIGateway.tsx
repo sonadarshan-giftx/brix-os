@@ -21,8 +21,8 @@ import {
 
 /* ── Demo data ── */
 const AGENTS = [
-  { id: 'dev', name: 'Dev Agent', role: 'Code Review & Generation', color: '#8B5CF6', icon: Code2, status: 'active', tasksToday: 12, tokens: '45.2K', cost: '$2.14', model: 'gpt-4' },
-  { id: 'pm', name: 'PM Agent', role: 'Sprint Planning', color: '#4F6EF7', icon: BarChart3, status: 'active', tasksToday: 8, tokens: '38.1K', cost: '$1.82', model: 'gpt-4' },
+  { id: 'dev', name: 'Dev Agent', role: 'Code Review & Generation', color: '#5b5fc7', icon: Code2, status: 'active', tasksToday: 12, tokens: '45.2K', cost: '$2.14', model: 'gpt-4' },
+  { id: 'pm', name: 'PM Agent', role: 'Sprint Planning', color: '#7c7ff0', icon: BarChart3, status: 'active', tasksToday: 8, tokens: '38.1K', cost: '$1.82', model: 'gpt-4' },
   { id: 'qa', name: 'QA Agent', role: 'Quality Assurance', color: '#F59E0B', icon: Terminal, status: 'active', tasksToday: 15, tokens: '52.7K', cost: '$2.51', model: 'claude-3' },
   { id: 'devops', name: 'DevOps Agent', role: 'Infrastructure', color: '#EC4899', icon: Cpu, status: 'active', tasksToday: 6, tokens: '28.4K', cost: '$1.35', model: 'gpt-4-turbo' },
   { id: 'support', name: 'Support Agent', role: 'Customer Support', color: '#06B6D4', icon: MessageSquare, status: 'paused', tasksToday: 23, tokens: '67.3K', cost: '$3.21', model: 'claude-3' },
@@ -70,9 +70,9 @@ const COST_DATA = [
 ];
 
 const MODEL_USAGE = [
-  { name: 'GPT-4', value: 45, color: '#8B5CF6' },
-  { name: 'Claude 3', value: 30, color: '#4F6EF7' },
-  { name: 'Brixstac Custom', value: 15, color: '#10B981' },
+  { name: 'GPT-4', value: 45, color: '#5b5fc7' },
+  { name: 'Claude 3', value: 30, color: '#7c7ff0' },
+  { name: 'BrixOS Custom', value: 15, color: '#10B981' },
   { name: 'GPT-4 Turbo', value: 10, color: '#06B6D4' },
 ];
 
@@ -243,17 +243,17 @@ export default function AIGatewayPage() {
                   <ResponsiveContainer width="100%" height={220}>
                     <AreaChart data={TOKEN_DATA}>
                       <defs>
-                        <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#8B5CF6" stopOpacity={0.2} /><stop offset="95%" stopColor="#8B5CF6" stopOpacity={0} /></linearGradient>
-                        <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#4F6EF7" stopOpacity={0.2} /><stop offset="95%" stopColor="#4F6EF7" stopOpacity={0} /></linearGradient>
+                        <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#5b5fc7" stopOpacity={0.2} /><stop offset="95%" stopColor="#5b5fc7" stopOpacity={0} /></linearGradient>
+                        <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#7c7ff0" stopOpacity={0.2} /><stop offset="95%" stopColor="#7c7ff0" stopOpacity={0} /></linearGradient>
                         <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#10B981" stopOpacity={0.2} /><stop offset="95%" stopColor="#10B981" stopOpacity={0} /></linearGradient>
                       </defs>
                       <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                       <XAxis dataKey="time" tick={{ fontSize: 11, fill: '#9ca3af' }} axisLine={false} tickLine={false} />
                       <YAxis tick={{ fontSize: 11, fill: '#9ca3af' }} axisLine={false} tickLine={false} />
                       <Tooltip contentStyle={{ borderRadius: 10, border: '1px solid #e5e7eb', fontSize: 12 }} />
-                      <Area type="monotone" dataKey="gpt4" stackId="1" stroke="#8B5CF6" fill="url(#g1)" strokeWidth={2} name="GPT-4" />
-                      <Area type="monotone" dataKey="claude" stackId="1" stroke="#4F6EF7" fill="url(#g2)" strokeWidth={2} name="Claude 3" />
-                      <Area type="monotone" dataKey="custom" stackId="1" stroke="#10B981" fill="url(#g3)" strokeWidth={2} name="Brixstac Custom" />
+                      <Area type="monotone" dataKey="gpt4" stackId="1" stroke="#5b5fc7" fill="url(#g1)" strokeWidth={2} name="GPT-4" />
+                      <Area type="monotone" dataKey="claude" stackId="1" stroke="#7c7ff0" fill="url(#g2)" strokeWidth={2} name="Claude 3" />
+                      <Area type="monotone" dataKey="custom" stackId="1" stroke="#10B981" fill="url(#g3)" strokeWidth={2} name="BrixOS Custom" />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>

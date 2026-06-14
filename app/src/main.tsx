@@ -185,7 +185,7 @@ class RootErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState
                   padding: '10px 20px',
                   borderRadius: '8px',
                   border: 'none',
-                  backgroundColor: '#5b5fc7',
+                  backgroundColor: '#D97757',
                   color: '#ffffff',
                   fontSize: '13px',
                   fontWeight: 500,

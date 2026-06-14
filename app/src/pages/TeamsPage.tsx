@@ -316,7 +316,7 @@ function confirmAction(message: string): boolean {
 // MAIN TEAMS PAGE
 // ═══════════════════════════════════════════════════════════
 
-export default function TeamsPage() {  useEffect(() => { document.title = "Teams" + " - Brixstac"; }, []);
+export default function TeamsPage() {  useEffect(() => { document.title = "Teams" + " - BrixOS"; }, []);
   const selectedTeamId = useStore((s) => s.selectedTeamId);
   const selectTeam = useStore((s) => s.selectTeam);
 
@@ -349,7 +349,7 @@ function TeamsListView({ onSelectTeam }: { onSelectTeam: (id: string) => void })
   const [isLoading, setIsLoading] = useState(false);
   const [teamList, setTeamList] = useState<Team[]>(() => {
     try {
-      const saved = localStorage.getItem('brixstac-teams');
+      const saved = localStorage.getItem('brixos-teams');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
@@ -361,7 +361,7 @@ function TeamsListView({ onSelectTeam }: { onSelectTeam: (id: string) => void })
   // Save team list to localStorage whenever it changes
   useEffect(() => {
     try {
-      localStorage.setItem('brixstac-teams', JSON.stringify(teamList));
+      localStorage.setItem('brixos-teams', JSON.stringify(teamList));
     } catch { /* ignore */ }
   }, [teamList]);
 
@@ -703,7 +703,7 @@ function TeamsListView({ onSelectTeam }: { onSelectTeam: (id: string) => void })
               />
               <label style={{ fontSize: 12, color: '#616161', display: 'block', marginBottom: 4, fontWeight: 500 }}>Color</label>
               <div className="flex gap-2 mb-4">
-                {['#5b5fc7', '#237b4b', '#c4314b', '#b56200', '#7c3aed', '#0891b2'].map(c => (
+                {['#5b5fc7', '#237b4b', '#c4314b', '#b56200', '#464775', '#0891b2'].map(c => (
                   <button
                     key={c}
                     onClick={() => setNewTeamColor(c)}
@@ -1843,7 +1843,7 @@ function TeamCalendarTab({ team, eventsList, setAddEventOpen }: { team: Team; ev
             <motion.div key={idx} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.05, duration: 0.2 }}>
               <Card className="flex items-center gap-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: evt.type === 'planning' ? '#fef3c7' : evt.type === 'retro' ? '#f3e8ff' : '#e0e7ff' }}>
-                  <Calendar size={18} style={{ color: evt.type === 'planning' ? '#f59e0b' : evt.type === 'retro' ? '#8b5cf6' : '#5b5fc7' }} />
+                  <Calendar size={18} style={{ color: evt.type === 'planning' ? '#f59e0b' : evt.type === 'retro' ? '#5b5fc7' : '#5b5fc7' }} />
                 </div>
                 <div className="flex-1">
                   <span style={{ fontSize: 14, fontWeight: 600, color: '#242424' }}>{evt.title}</span>
@@ -1892,7 +1892,7 @@ function TeamPerformanceTab({ team, members }: { team: Team; members: Employee[]
           { label: 'Team Velocity', value: Math.round(metrics.reduce((s, m) => s + m.velocity, 0) / Math.max(metrics.length, 1)), unit: 'pts/sprint', color: '#5b5fc7' },
           { label: 'Total Tickets', value: metrics.reduce((s, m) => s + m.ticketCount, 0), unit: 'completed', color: '#22c55e' },
           { label: 'PRs Merged', value: metrics.reduce((s, m) => s + m.prCount, 0), unit: 'this sprint', color: '#f59e0b' },
-          { label: 'Reviews Done', value: metrics.reduce((s, m) => s + m.reviewCount, 0), unit: 'across team', color: '#8b5cf6' },
+          { label: 'Reviews Done', value: metrics.reduce((s, m) => s + m.reviewCount, 0), unit: 'across team', color: '#5b5fc7' },
         ].map((kpi) => (
           <div key={kpi.label} className="rounded-lg border p-3 text-center" style={{ borderColor: '#e1e1e1' }}>
             <p style={{ fontSize: 10, fontWeight: 600, color: '#767676', textTransform: 'uppercase' }}>{kpi.label}</p>

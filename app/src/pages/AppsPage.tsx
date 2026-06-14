@@ -122,14 +122,14 @@ const ADMIN_APPS = [
   { id: 'code-workspace', name: 'Code Workspace', icon: Code2, desc: 'Repository management', color: '#1f1f1f' },
   { id: 'integrations', name: 'Integrations', icon: Plug, desc: 'Connected services', color: '#616161' },
   { id: 'branding', name: 'Branding', icon: Paintbrush, desc: 'Customize appearance', color: '#ec4899' },
-  { id: 'audit', name: 'Audit', icon: ClipboardCheck, desc: 'Compliance and audit log', color: '#8b5cf6' },
+  { id: 'audit', name: 'Audit', icon: ClipboardCheck, desc: 'Compliance and audit log', color: '#5b5fc7' },
   { id: 'communication', name: 'Communication', icon: Megaphone, desc: 'Announcements and templates', color: '#0891b2' },
   { id: 'helpdesk', name: 'Helpdesk', icon: LifeBuoy, desc: 'Support portal config', color: '#059669' },
   { id: 'observability', name: 'Observability', icon: Eye, desc: 'Monitoring and alerts', color: '#dc2626' },
 ];
 
 /* ── Color palette for charts ── */
-const CHART_COLORS = ['#5b5fc7', '#92c353', '#ffaa44', '#c4314b', '#0891b2', '#8b5cf6', '#ec4899', '#616161'];
+const CHART_COLORS = ['#5b5fc7', '#92c353', '#ffaa44', '#c4314b', '#0891b2', '#5b5fc7', '#ec4899', '#616161'];
 
 /* ── Integration Log Type ── */
 interface IntegrationLog {
@@ -164,7 +164,7 @@ interface Webhook {
 /* ═══════════════════════════════════════════
    AppsPage (main router)
    ═══════════════════════════════════════════ */
-export default function AppsPage() {  useEffect(() => { document.title = "Apps" + " - Brixstac"; }, []);
+export default function AppsPage() {  useEffect(() => { document.title = "Apps" + " - BrixOS"; }, []);
   const [selectedApp, setSelectedApp] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [search, setSearch] = useState('');
@@ -500,7 +500,7 @@ function ConfigureModal({ appName, onClose }: { appName: string; onClose: () => 
   const addIntegrationLog = useStore((s) => s.addIntegrationLog);
   const [apiEndpoint, setApiEndpoint] = useState(appConfig.apiEndpoint || `https://api.${appName.toLowerCase()}.example.com/v1`);
   const [authToken, setAuthToken] = useState(appConfig.authToken || '');
-  const [webhookUrl, setWebhookUrl] = useState(appConfig.webhookUrl || `https://api.brixstac.io/webhooks/${appName.toLowerCase()}`);
+  const [webhookUrl, setWebhookUrl] = useState(appConfig.webhookUrl || `https://api.brixos.io/webhooks/${appName.toLowerCase()}`);
   const [selectedEvents, setSelectedEvents] = useState<string[]>(appConfig.events || ['push', 'pr']);
   const [isSaving, setIsSaving] = useState(false);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
@@ -1675,10 +1675,10 @@ const INITIAL_INTEGRATION_LOGS: IntegrationLog[] = [
 ];
 
 const INITIAL_WEBHOOKS: Webhook[] = [
-  { id: 'wh1', app: 'GitHub', url: 'https://api.brixstac.io/webhooks/github', events: ['push', 'pr', 'merge'], status: 'active', lastDelivery: '2 min ago' },
-  { id: 'wh2', app: 'Slack', url: 'https://api.brixstac.io/webhooks/slack', events: ['message', 'reaction'], status: 'active', lastDelivery: '1 min ago' },
-  { id: 'wh3', app: 'Sentry', url: 'https://api.brixstac.io/webhooks/sentry', events: ['alert', 'event'], status: 'inactive', lastDelivery: 'Failed 12 min ago' },
-  { id: 'wh4', app: 'Linear', url: 'https://api.brixstac.io/webhooks/linear', events: ['issue', 'cycle'], status: 'active', lastDelivery: '5 min ago' },
+  { id: 'wh1', app: 'GitHub', url: 'https://api.brixos.io/webhooks/github', events: ['push', 'pr', 'merge'], status: 'active', lastDelivery: '2 min ago' },
+  { id: 'wh2', app: 'Slack', url: 'https://api.brixos.io/webhooks/slack', events: ['message', 'reaction'], status: 'active', lastDelivery: '1 min ago' },
+  { id: 'wh3', app: 'Sentry', url: 'https://api.brixos.io/webhooks/sentry', events: ['alert', 'event'], status: 'inactive', lastDelivery: 'Failed 12 min ago' },
+  { id: 'wh4', app: 'Linear', url: 'https://api.brixos.io/webhooks/linear', events: ['issue', 'cycle'], status: 'active', lastDelivery: '5 min ago' },
 ];
 
 const INITIAL_API_KEYS: ApiKey[] = [
@@ -2104,7 +2104,7 @@ function BrandingApp({ onBack }: { onBack: () => void }) {
             <Card>
               <h3 style={{ fontSize: 14, fontWeight: 600, color: '#242424', marginBottom: 12 }}>Primary Color</h3>
               <div className="flex gap-2">
-                {['#5b5fc7', '#237b4b', '#c4314b', '#b56200', '#0891b2', '#7c3aed', '#ec4899', '#1f1f1f'].map((c) => (
+                {['#5b5fc7', '#237b4b', '#c4314b', '#b56200', '#0891b2', '#464775', '#ec4899', '#1f1f1f'].map((c) => (
                   <button
                     key={c}
                     onClick={() => setPrimaryColor(c)}

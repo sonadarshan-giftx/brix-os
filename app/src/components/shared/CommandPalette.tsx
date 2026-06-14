@@ -21,7 +21,7 @@ interface CommandItem {
   keywords?: string[];
 }
 
-const RECENT_COMMANDS_KEY = 'brixstac-recent-commands';
+const RECENT_COMMANDS_KEY = 'brixos-recent-commands';
 const MAX_RECENT = 5;
 
 /** Load recent command IDs from localStorage */

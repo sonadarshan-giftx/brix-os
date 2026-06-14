@@ -64,7 +64,7 @@ export function AiCopilot() {
     // Static fallback
     setTimeout(() => {
       const lower = text.toLowerCase();
-      let response = 'I understand. Let me analyze that for you. Based on the current context of Brixstac, I can see we have 9 team members (5 AI agents), 3 active projects, and Sprint 14 is at 90% completion. What specific aspect would you like me to focus on?';
+      let response = 'I understand. Let me analyze that for you. Based on the current context of BrixOS, I can see we have 9 team members (5 AI agents), 3 active projects, and Sprint 14 is at 90% completion. What specific aspect would you like me to focus on?';
 
       if (lower.includes('sprint') || lower.includes('report') || lower.includes('progress')) response = quickResponses['sprint'];
       else if (lower.includes('code') || lower.includes('review') || lower.includes('pr')) response = quickResponses['code'];

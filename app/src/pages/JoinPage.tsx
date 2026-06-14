@@ -94,7 +94,7 @@ export default function JoinPage() {
           >
             <Zap size={18} color="#fff" />
           </div>
-          <span className="text-base font-semibold" style={{ color: '#242424' }}>Brixstac</span>
+          <span className="text-base font-semibold" style={{ color: '#242424' }}>BrixOS</span>
         </div>
       </div>
 
@@ -120,7 +120,7 @@ export default function JoinPage() {
                   {workspaceExists ? workspace?.name : 'Workspace'}
                 </p>
                 <p className="text-[11px]" style={{ color: '#616161' }}>
-                  {slug}.brixstac.io
+                  {slug}.brixos.io
                 </p>
               </div>
               {workspaceExists && (

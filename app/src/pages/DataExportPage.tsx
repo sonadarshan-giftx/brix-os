@@ -628,7 +628,7 @@ export default function DataExportPage() {
                 fontFamily: "Inter, sans-serif",
                 transition: "background 0.2s",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#4a4eb5")}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#464775")}
               onMouseLeave={(e) => (e.currentTarget.style.background = "#5b5fc7")}
             >
               Save Preferences

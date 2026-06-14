@@ -163,7 +163,7 @@ export default function BillingPage() {
   const [loading, setLoading] = useState(true);
   const [stripeConfigured, setStripeConfigured] = useState(false);
 
-  const token = localStorage.getItem('brixstac_token') || '';
+  const token = localStorage.getItem('brixos_token') || '';
 
   useEffect(() => {
     const load = async () => {

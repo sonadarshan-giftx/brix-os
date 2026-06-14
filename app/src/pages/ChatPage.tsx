@@ -1,5 +1,5 @@
 // ============================================================
-// Brixstac OS — Enterprise Chat Page
+// BrixOS — Enterprise Chat Page
 // Complete Slack + Teams replacement with Socket.IO real-time
 // ============================================================
 
@@ -173,13 +173,13 @@ const SLASH_COMMANDS = [
    ═══════════════════════════════════════════════════════════════ */
 
 const WORKSPACE_MEMBERS: WorkspaceMember[] = [
-  { id: 'u-alex', name: 'Alex Chen', title: 'CEO & Founder', email: 'alex@brixstac.io', status: 'online', kind: 'human', initials: 'AC', color: '#c4314b', timezone: 'America/New_York' },
-  { id: 'u-sarah', name: 'Sarah Kim', title: 'Co-founder & CTO', email: 'sarah@brixstac.io', status: 'online', kind: 'human', initials: 'SK', color: '#0891b2', timezone: 'Asia/Kolkata' },
-  { id: 'u-aria', name: 'Aria', title: 'AI Sr. Developer', email: 'aria@brixstac.io', status: 'online', kind: 'ai', initials: 'AR', color: '#7c3aed' },
-  { id: 'u-sage', name: 'Sage', title: 'AI Backend Dev', email: 'sage@brixstac.io', status: 'online', kind: 'ai', initials: 'SG', color: '#6d28d9' },
-  { id: 'u-pixel', name: 'Pixel', title: 'AI Designer', email: 'pixel@brixstac.io', status: 'online', kind: 'ai', initials: 'PX', color: '#7c3aed' },
-  { id: 'u-echo', name: 'Echo', title: 'AI DevOps', email: 'echo@brixstac.io', status: 'online', kind: 'ai', initials: 'EC', color: '#5b21b6' },
-  { id: 'u-nova', name: 'Nova', title: 'AI QA Engineer', email: 'nova@brixstac.io', status: 'away', kind: 'ai', initials: 'NV', color: '#0e7490' },
+  { id: 'u-alex', name: 'Alex Chen', title: 'CEO & Founder', email: 'alex@brixos.io', status: 'online', kind: 'human', initials: 'AC', color: '#c4314b', timezone: 'America/New_York' },
+  { id: 'u-sarah', name: 'Sarah Kim', title: 'Co-founder & CTO', email: 'sarah@brixos.io', status: 'online', kind: 'human', initials: 'SK', color: '#0891b2', timezone: 'Asia/Kolkata' },
+  { id: 'u-aria', name: 'Aria', title: 'AI Sr. Developer', email: 'aria@brixos.io', status: 'online', kind: 'ai', initials: 'AR', color: '#464775' },
+  { id: 'u-sage', name: 'Sage', title: 'AI Backend Dev', email: 'sage@brixos.io', status: 'online', kind: 'ai', initials: 'SG', color: '#3a3d6b' },
+  { id: 'u-pixel', name: 'Pixel', title: 'AI Designer', email: 'pixel@brixos.io', status: 'online', kind: 'ai', initials: 'PX', color: '#464775' },
+  { id: 'u-echo', name: 'Echo', title: 'AI DevOps', email: 'echo@brixos.io', status: 'online', kind: 'ai', initials: 'EC', color: '#3a3d6b' },
+  { id: 'u-nova', name: 'Nova', title: 'AI QA Engineer', email: 'nova@brixos.io', status: 'away', kind: 'ai', initials: 'NV', color: '#0e7490' },
 ];
 
 const INITIAL_CHANNELS: Channel[] = [
@@ -353,7 +353,7 @@ const Avatar = memo(({ member, size = 'md', showPresence = false, onClick }: Ava
       )}
       {showPresence && member.kind !== 'ai' && (
         <div
-          className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-[#1a1a2e]"
+          className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-[#26201A]"
           style={{ background: getPresenceDot(member.status) }}
         />
       )}
@@ -400,7 +400,7 @@ const EmojiPicker = memo(({ onSelect, onClose }: EmojiPickerProps) => {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('Smileys');
   const [recentEmojis, setRecentEmojis] = useState<string[]>(() => {
-    try { return JSON.parse(localStorage.getItem('brixstac-recent-emoji') || '[]'); } catch { return []; }
+    try { return JSON.parse(localStorage.getItem('brixos-recent-emoji') || '[]'); } catch { return []; }
   });
 
   const filteredEmojis = useMemo(() => {
@@ -412,7 +412,7 @@ const EmojiPicker = memo(({ onSelect, onClose }: EmojiPickerProps) => {
   const handleSelect = (emoji: string) => {
     const updated = [emoji, ...recentEmojis.filter(e => e !== emoji)].slice(0, 20);
     setRecentEmojis(updated);
-    localStorage.setItem('brixstac-recent-emoji', JSON.stringify(updated));
+    localStorage.setItem('brixos-recent-emoji', JSON.stringify(updated));
     onSelect(emoji);
   };
 
@@ -434,7 +434,7 @@ const EmojiPicker = memo(({ onSelect, onClose }: EmojiPickerProps) => {
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95, y: 8 }}
       transition={{ duration: 0.15 }}
-      className="absolute bottom-full mb-2 right-0 w-80 bg-[#1e1e32] border border-white/10 rounded-xl shadow-2xl z-50 overflow-hidden"
+      className="absolute bottom-full mb-2 right-0 w-80 bg-[#2B2219] border border-white/10 rounded-xl shadow-2xl z-50 overflow-hidden"
       onClick={e => e.stopPropagation()}
     >
       {/* Search */}
@@ -503,7 +503,7 @@ const ProfileCard = memo(({ member, onClose, onDm, isOwnProfile, onSetStatus }: 
     animate={{ opacity: 1, scale: 1, y: 0 }}
     exit={{ opacity: 0, scale: 0.95, y: 8 }}
     transition={{ duration: 0.15 }}
-    className="absolute z-50 w-72 bg-[#1e1e32] border border-white/10 rounded-xl shadow-2xl overflow-hidden"
+    className="absolute z-50 w-72 bg-[#2B2219] border border-white/10 rounded-xl shadow-2xl overflow-hidden"
     style={{ bottom: 'calc(100% + 8px)', left: 0 }}
     onClick={e => e.stopPropagation()}
   >
@@ -514,19 +514,19 @@ const ProfileCard = memo(({ member, onClose, onDm, isOwnProfile, onSetStatus }: 
       <div className="flex items-end justify-between -mt-6 mb-3">
         <div className="relative">
           <div
-            className="w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-lg border-4 border-[#1e1e32]"
+            className="w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-lg border-4 border-[#2B2219]"
             style={{ background: member.color }}
           >
             {member.initials}
           </div>
           {member.kind === 'ai' && (
-            <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 bg-purple-600 rounded-full flex items-center justify-center border-2 border-[#1e1e32]">
+            <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 bg-purple-600 rounded-full flex items-center justify-center border-2 border-[#2B2219]">
               <Sparkles size={9} className="text-white" />
             </div>
           )}
           {member.kind !== 'ai' && (
             <div
-              className="absolute bottom-0 right-1 w-3.5 h-3.5 rounded-full border-2 border-[#1e1e32]"
+              className="absolute bottom-0 right-1 w-3.5 h-3.5 rounded-full border-2 border-[#2B2219]"
               style={{ background: getPresenceDot(member.status) }}
             />
           )}
@@ -615,7 +615,7 @@ const PollRenderer = memo(({ poll, messageId, currentUserId, isCreator, onVote, 
                   className="absolute inset-0 transition-all duration-500"
                   style={{
                     width: `${pct}%`,
-                    background: isMyChoice ? 'rgba(217,119,87,0.2)' : 'rgba(255,255,255,0.05)',
+                    background: isMyChoice ? 'rgba(91,95,199,0.2)' : 'rgba(255,255,255,0.05)',
                   }}
                 />
                 <div className="relative flex items-center justify-between">
@@ -681,7 +681,7 @@ const MessageComposer = memo(({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const typingTimerRef = useRef<ReturnType<typeof setTimeout>>();
   const isTypingRef = useRef(false);
-  const draftKey = `brixstac-draft-${channelId}`;
+  const draftKey = `brixos-draft-${channelId}`;
 
   // Load draft
   useEffect(() => {
@@ -945,7 +945,7 @@ const MessageComposer = memo(({
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 4 }}
-              className="absolute bottom-full mb-1 left-0 w-64 bg-[#1e1e32] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50"
+              className="absolute bottom-full mb-1 left-0 w-64 bg-[#2B2219] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50"
             >
               <div className="px-3 py-1.5 text-xs text-gray-500 border-b border-white/5 uppercase tracking-wider">Commands</div>
               {filteredSlashCommands.map((cmd, i) => (
@@ -970,7 +970,7 @@ const MessageComposer = memo(({
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 4 }}
-              className="absolute bottom-full mb-1 left-0 w-64 bg-[#1e1e32] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50"
+              className="absolute bottom-full mb-1 left-0 w-64 bg-[#2B2219] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50"
             >
               {(showMentions ? filteredMentions : filteredChannelMentions).map((item, i) => (
                 <button
@@ -1164,7 +1164,7 @@ const MsgActionBar = memo(({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -4 }}
       transition={{ duration: 0.1 }}
-      className="absolute -top-9 right-2 flex items-center gap-0.5 bg-[#1e1e32] border border-white/10 rounded-lg shadow-xl px-1 py-1 z-10"
+      className="absolute -top-9 right-2 flex items-center gap-0.5 bg-[#2B2219] border border-white/10 rounded-lg shadow-xl px-1 py-1 z-10"
       onClick={e => e.stopPropagation()}
     >
       {/* Quick emoji reactions */}
@@ -1225,7 +1225,7 @@ const MsgActionBar = memo(({
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="absolute top-full right-0 mt-1 w-44 bg-[#1e1e32] border border-white/10 rounded-xl shadow-xl overflow-hidden z-20"
+              className="absolute top-full right-0 mt-1 w-44 bg-[#2B2219] border border-white/10 rounded-xl shadow-xl overflow-hidden z-20"
             >
               {[
                 { icon: <Forward size={13} />, label: 'Forward', action: () => { onForward(message); setShowMore(false); } },
@@ -1293,7 +1293,7 @@ function renderMessageContent(text: string): string {
       const l = (lang || '').toLowerCase();
       const highlighted = syntaxHighlight(code.trim(), l);
       const label = l ? `<span style="color:#546e7a;font-size:10px;text-transform:uppercase;letter-spacing:.05em">${l}</span>` : '';
-      return `<div class="my-2">${label}<pre style="background:#1e1e2e;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px;overflow-x:auto;margin:2px 0 0"><code style="font-family:monospace;font-size:12px;line-height:1.5">${highlighted}</code></pre></div>`;
+      return `<div class="my-2">${label}<pre style="background:#29221B;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px;overflow-x:auto;margin:2px 0 0"><code style="font-family:monospace;font-size:12px;line-height:1.5">${highlighted}</code></pre></div>`;
     })
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
@@ -1341,7 +1341,7 @@ const MessageItem = memo(({
   // Link preview fetch
   useEffect(() => {
     const dismissed = (() => {
-      try { return JSON.parse(localStorage.getItem('brixstac-dismissed-previews') || '[]') as string[]; } catch { return [] as string[]; }
+      try { return JSON.parse(localStorage.getItem('brixos-dismissed-previews') || '[]') as string[]; } catch { return [] as string[]; }
     })();
     const urlMatch = message.text.match(/https?:\/\/[^\s<>"]+/g);
     if (!urlMatch || urlMatch.length === 0) return;
@@ -1368,8 +1368,8 @@ const MessageItem = memo(({
   }, [message.text]);
 
   const dismissPreview = (url: string) => {
-    const prev = (() => { try { return JSON.parse(localStorage.getItem('brixstac-dismissed-previews') || '[]') as string[]; } catch { return [] as string[]; } })();
-    localStorage.setItem('brixstac-dismissed-previews', JSON.stringify([...prev, url]));
+    const prev = (() => { try { return JSON.parse(localStorage.getItem('brixos-dismissed-previews') || '[]') as string[]; } catch { return [] as string[]; } })();
+    localStorage.setItem('brixos-dismissed-previews', JSON.stringify([...prev, url]));
     setPreviewDismissed(true);
     setLinkPreview(null);
   };
@@ -1709,7 +1709,7 @@ const CreateChannelModal = memo(({ workspaceId, authToken, members, onClose, onC
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="w-full max-w-md bg-[#12122a] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
+        className="w-full max-w-md bg-[#1F1812] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-white/10">
@@ -1774,7 +1774,7 @@ const CreateChannelModal = memo(({ workspaceId, authToken, members, onClose, onC
               />
             </div>
             {inviteQuery && filteredMembers.length > 0 && (
-              <div className="bg-[#1e1e32] border border-white/10 rounded-xl overflow-hidden max-h-36 overflow-y-auto">
+              <div className="bg-[#2B2219] border border-white/10 rounded-xl overflow-hidden max-h-36 overflow-y-auto">
                 {filteredMembers.slice(0, 6).map(m => (
                   <button
                     key={m.id}
@@ -1855,7 +1855,7 @@ const PollBuilder = memo(({ onClose, onInsert }: PollBuilderProps) => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="w-full max-w-md bg-[#12122a] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
+        className="w-full max-w-md bg-[#1F1812] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-white/10">
@@ -1965,7 +1965,7 @@ const CustomStatusModal = memo(({ currentStatus, onClose, onSave }: CustomStatus
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="w-full max-w-sm bg-[#12122a] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
+        className="w-full max-w-sm bg-[#1F1812] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-white/10">
@@ -2042,7 +2042,7 @@ const SearchModal = memo(({ channels, members, allMessages, onClose, onNavigate 
   const [filterChannel, setFilterChannel] = useState('');
   const [filterPerson, setFilterPerson] = useState('');
   const [recentSearches] = useState<string[]>(() => {
-    try { return JSON.parse(localStorage.getItem('brixstac-searches') || '[]'); } catch { return []; }
+    try { return JSON.parse(localStorage.getItem('brixos-searches') || '[]'); } catch { return []; }
   });
 
   const results = useMemo((): SearchResult[] => {
@@ -2077,9 +2077,9 @@ const SearchModal = memo(({ channels, members, allMessages, onClose, onNavigate 
   const handleSearch = (q: string) => {
     setQuery(q);
     if (q.trim()) {
-      const prev = JSON.parse(localStorage.getItem('brixstac-searches') || '[]') as string[];
+      const prev = JSON.parse(localStorage.getItem('brixos-searches') || '[]') as string[];
       const updated = [q, ...prev.filter(s => s !== q)].slice(0, 10);
-      localStorage.setItem('brixstac-searches', JSON.stringify(updated));
+      localStorage.setItem('brixos-searches', JSON.stringify(updated));
     }
   };
 
@@ -2104,7 +2104,7 @@ const SearchModal = memo(({ channels, members, allMessages, onClose, onNavigate 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        className="w-full max-w-2xl mx-auto mt-16 bg-[#12122a] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
+        className="w-full max-w-2xl mx-auto mt-16 bg-[#1F1812] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         {/* Search input */}
@@ -2258,7 +2258,7 @@ const ThreadPanel = memo(({ thread, currentUserId, onClose, onReply, onToggleFol
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: 40, opacity: 0 }}
       transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-      className="w-96 flex-shrink-0 flex flex-col bg-[#0f0f22] border-l border-white/10 h-full"
+      className="w-96 flex-shrink-0 flex flex-col bg-[#1C1610] border-l border-white/10 h-full"
     >
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 flex-shrink-0">
@@ -2368,7 +2368,7 @@ const PinnedPanel = memo(({ messages, onClose, onUnpin, onJump }: PinnedPanelPro
     animate={{ x: 0, opacity: 1 }}
     exit={{ x: 40, opacity: 0 }}
     transition={{ type: 'spring', damping: 25 }}
-    className="w-80 flex-shrink-0 flex flex-col bg-[#0f0f22] border-l border-white/10 h-full"
+    className="w-80 flex-shrink-0 flex flex-col bg-[#1C1610] border-l border-white/10 h-full"
   >
     <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
       <div className="flex items-center gap-2">
@@ -2421,7 +2421,7 @@ const BookmarksPanel = memo(({ messages, onClose, onRemove, onJump }: BookmarksP
     animate={{ x: 0, opacity: 1 }}
     exit={{ x: 40, opacity: 0 }}
     transition={{ type: 'spring', damping: 25 }}
-    className="w-80 flex-shrink-0 flex flex-col bg-[#0f0f22] border-l border-white/10 h-full"
+    className="w-80 flex-shrink-0 flex flex-col bg-[#1C1610] border-l border-white/10 h-full"
   >
     <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
       <div className="flex items-center gap-2">
@@ -2486,7 +2486,7 @@ const MembersPanel = memo(({ channel, members, presenceMap, onClose, onProfileCl
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: 40, opacity: 0 }}
       transition={{ type: 'spring', damping: 25 }}
-      className="w-80 flex-shrink-0 flex flex-col bg-[#0f0f22] border-l border-white/10 h-full"
+      className="w-80 flex-shrink-0 flex flex-col bg-[#1C1610] border-l border-white/10 h-full"
     >
       <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
         <div className="flex items-center gap-2">
@@ -2587,7 +2587,7 @@ const ForwardMessageModal = memo(({ message, channels, workspaceId, authToken, o
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="w-full max-w-md bg-[#12122a] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
+        className="w-full max-w-md bg-[#1F1812] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-white/10">
@@ -2617,7 +2617,7 @@ const ForwardMessageModal = memo(({ message, channels, workspaceId, authToken, o
                 autoFocus
               />
             </div>
-            <div className="bg-[#1e1e32] border border-white/10 rounded-xl overflow-hidden max-h-40 overflow-y-auto">
+            <div className="bg-[#2B2219] border border-white/10 rounded-xl overflow-hidden max-h-40 overflow-y-auto">
               {filteredChannels.map(ch => (
                 <button
                   key={ch.id}
@@ -2739,7 +2739,7 @@ export default function ChatPage() {
 
   // ── Feature: Workflow Automation ──────────────────────────
   interface AutomationRule { id: string; name: string; enabled: boolean; trigger: { event: string; conditions?: { keyword?: string; channelId?: string } }; action: { type: string; config: { message?: string; emoji?: string; webhookUrl?: string } } }
-  const [automationRules] = useState<AutomationRule[]>(() => { try { return JSON.parse(localStorage.getItem('brixstac_automations') || '[]'); } catch { return []; } });
+  const [automationRules] = useState<AutomationRule[]>(() => { try { return JSON.parse(localStorage.getItem('brixos_automations') || '[]'); } catch { return []; } });
   const [showAutomationsPanel, setShowAutomationsPanel] = useState(false);
 
   // ── Feature: E2E Encryption ───────────────────────────────
@@ -2985,7 +2985,7 @@ export default function ChatPage() {
   // ── E2E key initialisation ────────────────────────────────
   useEffect(() => {
     if (!('subtle' in (window.crypto || {}))) return;
-    const stored = localStorage.getItem(`brixstac_e2e_${workspaceId}`);
+    const stored = localStorage.getItem(`brixos_e2e_${workspaceId}`);
     if (stored) {
       try {
         const { privateKeyJwk, publicKeyJwk } = JSON.parse(stored);
@@ -2999,7 +2999,7 @@ export default function ChatPage() {
     window.crypto.subtle.generateKey({ name: 'ECDH', namedCurve: 'P-256' }, true, ['deriveKey']).then(async (kp: any) => {
       const privateKeyJwk = await window.crypto.subtle.exportKey('jwk', kp.privateKey);
       const publicKeyJwk = await window.crypto.subtle.exportKey('jwk', kp.publicKey);
-      localStorage.setItem(`brixstac_e2e_${workspaceId}`, JSON.stringify({ privateKeyJwk, publicKeyJwk }));
+      localStorage.setItem(`brixos_e2e_${workspaceId}`, JSON.stringify({ privateKeyJwk, publicKeyJwk }));
       e2eKeysRef.current = { privateKey: kp.privateKey, publicKey: kp.publicKey };
     }).catch(() => {});
   }, [workspaceId]);
@@ -3536,10 +3536,10 @@ export default function ChatPage() {
      RENDER
      ───────────────────────────────────────────────────────── */
   return (
-    <div className="flex h-full bg-[#0f0f22] text-white overflow-hidden" onClick={() => { setContextMenu(null); setProfilePopover(null); }}>
+    <div className="flex h-full bg-[#1C1610] text-white overflow-hidden" onClick={() => { setContextMenu(null); setProfilePopover(null); }}>
 
       {/* ── LEFT SIDEBAR ─────────────────────────────────── */}
-      <div className="w-60 flex-shrink-0 flex flex-col bg-[#1a1a2e] border-r border-white/5 h-full overflow-hidden">
+      <div className="w-60 flex-shrink-0 flex flex-col bg-[#26201A] border-r border-white/5 h-full overflow-hidden">
         {/* Workspace header */}
         <div className="flex items-center justify-between px-3 py-3 border-b border-white/5">
           <div className="flex items-center gap-2 min-w-0">
@@ -3547,7 +3547,7 @@ export default function ChatPage() {
               <span className="text-white font-bold text-xs">B</span>
             </div>
             <div className="min-w-0">
-              <div className="text-sm font-semibold text-white truncate">{workspace?.name || 'Brixstac'}</div>
+              <div className="text-sm font-semibold text-white truncate">{workspace?.name || 'BrixOS'}</div>
               <div className="flex items-center gap-1.5">
                 <div className={`w-1.5 h-1.5 rounded-full ${socketConnected ? 'bg-green-400' : 'bg-gray-500'}`} />
                 <span className="text-xs text-gray-500 truncate">{socketConnected ? 'Connected' : 'Offline'}</span>
@@ -3671,7 +3671,7 @@ export default function ChatPage() {
                                   initial={{ opacity: 0, scale: 0.95 }}
                                   animate={{ opacity: 1, scale: 1 }}
                                   exit={{ opacity: 0, scale: 0.95 }}
-                                  className="absolute right-0 top-full mt-1 w-48 bg-[#1e1e32] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50"
+                                  className="absolute right-0 top-full mt-1 w-48 bg-[#2B2219] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50"
                                   onClick={e => e.stopPropagation()}
                                 >
                                   <div className="px-3 py-2 text-xs text-gray-500 uppercase tracking-wider border-b border-white/5">Notifications</div>
@@ -3747,7 +3747,7 @@ export default function ChatPage() {
                           <div className="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-bold" style={{ background: person.color }}>
                             {person.initials}
                           </div>
-                          <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border border-[#1a1a2e]" style={{ background: getPresenceDot(status) }} />
+                          <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border border-[#26201A]" style={{ background: getPresenceDot(status) }} />
                         </div>
                         <div className="flex-1 min-w-0">
                           <span className={`text-sm truncate block ${dm.unread > 0 ? 'font-semibold text-white' : 'text-gray-400'}`}>{person.name}</span>
@@ -3791,7 +3791,7 @@ export default function ChatPage() {
             <div className="w-7 h-7 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0" style={{ background: currentMember.color }}>
               {currentMember.initials}
             </div>
-            <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-green-400 border border-[#1a1a2e]" />
+            <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-green-400 border border-[#26201A]" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="text-xs font-medium text-white truncate">{currentMember.name}</div>
@@ -3826,7 +3826,7 @@ export default function ChatPage() {
       {/* ── MAIN AREA ────────────────────────────────────── */}
       <div className="flex-1 flex flex-col h-full min-w-0">
         {/* Channel header */}
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10 flex-shrink-0 bg-[#0f0f22]/80 backdrop-blur-sm">
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10 flex-shrink-0 bg-[#1C1610]/80 backdrop-blur-sm">
           <div className="flex items-center gap-2 flex-1 min-w-0">
             {activeDmId && activeDmPerson ? (
               <>
@@ -3834,7 +3834,7 @@ export default function ChatPage() {
                   <div className="w-7 h-7 rounded-full flex items-center justify-center text-white font-bold text-xs" style={{ background: activeDmPerson.color }}>
                     {activeDmPerson.initials}
                   </div>
-                  <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border border-[#0f0f22]" style={{ background: getPresenceDot(presenceMap[activeDmPerson.id] || activeDmPerson.status) }} />
+                  <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border border-[#1C1610]" style={{ background: getPresenceDot(presenceMap[activeDmPerson.id] || activeDmPerson.status) }} />
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
@@ -3929,7 +3929,7 @@ export default function ChatPage() {
                 {huddles[activeChannelId].participants.slice(0, 4).map(uid => {
                   const m = getMemberById(uid);
                   return m ? (
-                    <div key={uid} className="w-5 h-5 rounded-full border border-[#0f0f22] flex items-center justify-center text-white text-xs font-bold" style={{ background: m.color, fontSize: 8 }}>{m.initials}</div>
+                    <div key={uid} className="w-5 h-5 rounded-full border border-[#1C1610] flex items-center justify-center text-white text-xs font-bold" style={{ background: m.color, fontSize: 8 }}>{m.initials}</div>
                   ) : null;
                 })}
               </div>
@@ -3972,7 +3972,7 @@ export default function ChatPage() {
                   return (
                     <div key={item.key} className="flex items-center gap-3 my-3 px-4">
                       <div className="flex-1 h-px bg-white/5" />
-                      <span className="text-xs text-gray-500 font-medium whitespace-nowrap px-2 bg-[#0f0f22]">{item.label}</span>
+                      <span className="text-xs text-gray-500 font-medium whitespace-nowrap px-2 bg-[#1C1610]">{item.label}</span>
                       <div className="flex-1 h-px bg-white/5" />
                     </div>
                   );
@@ -4210,7 +4210,7 @@ export default function ChatPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="fixed z-50 w-52 bg-[#1e1e32] border border-white/10 rounded-xl shadow-2xl overflow-hidden"
+            className="fixed z-50 w-52 bg-[#2B2219] border border-white/10 rounded-xl shadow-2xl overflow-hidden"
             style={{ left: contextMenu.x, top: contextMenu.y }}
             onClick={e => e.stopPropagation()}
           >
@@ -4315,7 +4315,7 @@ export default function ChatPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="w-full max-w-sm bg-[#12122a] border border-white/10 rounded-2xl shadow-2xl p-6"
+              className="w-full max-w-sm bg-[#1F1812] border border-white/10 rounded-2xl shadow-2xl p-6"
             >
               <div className="text-center mb-4">
                 <div className="w-14 h-14 rounded-full bg-[#5b5fc7]/10 flex items-center justify-center mx-auto mb-3">
@@ -4345,7 +4345,7 @@ export default function ChatPage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="fixed bottom-28 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-[#1e1e32] border border-white/10 rounded-xl px-4 py-2.5 shadow-xl z-40"
+            className="fixed bottom-28 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-[#2B2219] border border-white/10 rounded-xl px-4 py-2.5 shadow-xl z-40"
           >
             <BarChart2 size={14} className="text-[#5b5fc7]" />
             <span className="text-sm text-white">Poll ready: "{pendingPoll.question.slice(0, 40)}"</span>

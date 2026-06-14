@@ -19,7 +19,7 @@ const accentColors = [
   { color: '#c4314b', name: "Crimson" },
   { color: '#b56200', name: "Amber" },
   { color: '#0891b2', name: "Ocean" },
-  { color: '#7c3aed', name: "Violet" },
+  { color: '#464775', name: "Violet" },
 ];
 
 const sections = [
@@ -34,7 +34,7 @@ const sections = [
 /** Load settings from localStorage */
 function loadPersistedSettings(): { accentColor: string; fontSize: string } {
   try {
-    const raw = localStorage.getItem('brixstac-ui-settings');
+    const raw = localStorage.getItem('brixos-ui-settings');
     if (raw) return JSON.parse(raw);
   } catch { /* ignore */ }
   return { accentColor: '#5b5fc7', fontSize: 'Default' };
@@ -42,7 +42,7 @@ function loadPersistedSettings(): { accentColor: string; fontSize: string } {
 
 /** Save settings to localStorage */
 function savePersistedSettings(settings: { accentColor: string; fontSize: string }) {
-  localStorage.setItem('brixstac-ui-settings', JSON.stringify(settings));
+  localStorage.setItem('brixos-ui-settings', JSON.stringify(settings));
 }
 
 /**
@@ -79,7 +79,7 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
 
   // Account fields (editable)
   const [accountName, setAccountName] = useState(currentUser.name);
-  const [accountEmail, setAccountEmail] = useState(currentUser.email || 'alex@acme-brixstac.com');
+  const [accountEmail, setAccountEmail] = useState(currentUser.email || 'alex@acme-brixos.com');
   const [accountOrg, setAccountOrg] = useState('Acme Software');
 
   // 2FA
@@ -100,7 +100,7 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
     accentColor: persisted.accentColor,
     fontSize: persisted.fontSize,
     accountName: currentUser.name,
-    accountEmail: currentUser.email || 'alex@acme-brixstac.com',
+    accountEmail: currentUser.email || 'alex@acme-brixos.com',
     accountOrg: 'Acme Software',
     twoFAEnabled: true,
   });
@@ -113,7 +113,7 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
         accentColor: p.accentColor,
         fontSize: p.fontSize,
         accountName: currentUser.name,
-        accountEmail: currentUser.email || 'alex@acme-brixstac.com',
+        accountEmail: currentUser.email || 'alex@acme-brixos.com',
         accountOrg: 'Acme Software',
         twoFAEnabled: true,
       };
@@ -249,7 +249,7 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
     setAccentColor(p.accentColor);
     setFontSize(p.fontSize);
     setAccountName(currentUser.name);
-    setAccountEmail(currentUser.email || 'alex@acme-brixstac.com');
+    setAccountEmail(currentUser.email || 'alex@acme-brixos.com');
     setAccountOrg('Acme Software');
     setHasChanges(false);
     setShowUnsavedWarning(false);
@@ -274,8 +274,8 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
 
   const handleDeleteAccount = () => {
     if (deleteConfirmText === 'DELETE') {
-      localStorage.removeItem('brixstac-store');
-      localStorage.removeItem('brixstac-ui-settings');
+      localStorage.removeItem('brixos-store');
+      localStorage.removeItem('brixos-ui-settings');
       window.location.reload();
     }
   };
@@ -406,7 +406,7 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
                     <div className="space-y-6">
                       <div>
                         <h3 style={{ fontSize: 16, fontWeight: 600, color: '#242424', marginBottom: 4 }}>Theme</h3>
-                        <p style={{ fontSize: 12, color: '#616161', marginBottom: 16 }}>Choose how Brixstac looks for you</p>
+                        <p style={{ fontSize: 12, color: '#616161', marginBottom: 16 }}>Choose how BrixOS looks for you</p>
 
                         <div className="grid grid-cols-3 gap-3">
                           {themeOptions.map((option) => {

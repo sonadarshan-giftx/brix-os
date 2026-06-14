@@ -69,7 +69,7 @@ function mapApiConversation(c: any) {
   };
 }
 
-const COLORS = ['#5b5fc7', '#D97757', '#237b4b', '#d97706', '#c4314b', '#0891b2'];
+const COLORS = ['#D97757', '#D97757', '#237b4b', '#d97706', '#c4314b', '#0891b2'];
 function pickColor(id: string): string {
   const hash = Array.from(id).reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
   return COLORS[hash % COLORS.length];

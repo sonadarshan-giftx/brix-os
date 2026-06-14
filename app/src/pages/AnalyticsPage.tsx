@@ -1,5 +1,5 @@
 /**
- * AnalyticsPage.tsx — Brixstac OS Analytics Dashboard
+ * AnalyticsPage.tsx — BrixOS Analytics Dashboard
  * Comprehensive workspace analytics with CSS charts, user activity,
  * channel health, and a GitHub-style activity heatmap.
  */
@@ -31,22 +31,22 @@ const LAST_14_DAYS_MESSAGES = [
 
 const TOP_CHANNELS = [
   { name: '#general', messages: 4821, color: '#5b5fc7' },
-  { name: '#engineering', messages: 3610, color: '#D97757' },
+  { name: '#engineering', messages: 3610, color: '#7c7ff0' },
   { name: '#product', messages: 2944, color: '#16a34a' },
   { name: '#random', messages: 1987, color: '#0891b2' },
-  { name: '#design', messages: 1542, color: '#7c3aed' },
-  { name: '#marketing', messages: 1103, color: '#c4314b' },
-  { name: '#hr', messages: 724, color: '#eab308' },
+  { name: '#design', messages: 1542, color: '#ec4899' },
+  { name: '#marketing', messages: 1103, color: '#f59e0b' },
+  { name: '#hr', messages: 724, color: '#8b5cf6' },
   { name: '#finance', messages: 481, color: '#94a3b8' },
 ];
 
 const MOCK_USERS = [
   { id: 'u1', name: 'Alex Rivera', avatar: 'AR', color: '#5b5fc7', messages: 1842, calls: 94, files: 37, lastActive: Date.now() - 12 * 60 * 1000 },
-  { id: 'u2', name: 'Maya Chen', avatar: 'MC', color: '#D97757', messages: 1534, calls: 78, files: 52, lastActive: Date.now() - 3 * 60 * 1000 },
+  { id: 'u2', name: 'Maya Chen', avatar: 'MC', color: '#0891b2', messages: 1534, calls: 78, files: 52, lastActive: Date.now() - 3 * 60 * 1000 },
   { id: 'u3', name: 'Jordan Kim', avatar: 'JK', color: '#16a34a', messages: 1201, calls: 61, files: 18, lastActive: Date.now() - 2 * 3600 * 1000 },
   { id: 'u4', name: 'Sam Torres', avatar: 'ST', color: '#c4314b', messages: 987, calls: 44, files: 29, lastActive: Date.now() - 6 * 3600 * 1000 },
   { id: 'u5', name: 'Riley Patel', avatar: 'RP', color: '#0891b2', messages: 876, calls: 39, files: 14, lastActive: Date.now() - 30 * 60 * 1000 },
-  { id: 'u6', name: 'Casey Wong', avatar: 'CW', color: '#7c3aed', messages: 743, calls: 28, files: 41, lastActive: Date.now() - 1 * 3600 * 1000 },
+  { id: 'u6', name: 'Casey Wong', avatar: 'CW', color: '#ec4899', messages: 743, calls: 28, files: 41, lastActive: Date.now() - 1 * 3600 * 1000 },
   { id: 'u7', name: 'Morgan Lee', avatar: 'ML', color: '#eab308', messages: 612, calls: 21, files: 9, lastActive: Date.now() - 15 * 3600 * 1000 },
   { id: 'u8', name: 'Drew Nakamura', avatar: 'DN', color: '#94a3b8', messages: 489, calls: 17, files: 6, lastActive: Date.now() - 2 * 86400 * 1000 },
   { id: 'u9', name: 'Quinn Garcia', avatar: 'QG', color: '#f97316', messages: 301, calls: 9, files: 3, lastActive: Date.now() - 3 * 86400 * 1000 },
@@ -429,7 +429,7 @@ export default function AnalyticsPage() {
       <div className="sticky top-0 z-10 px-8 py-4 border-b border-gray-200 bg-[#f5f5f3] flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Analytics</h1>
-          <p className="text-sm text-gray-500 mt-0.5">Workspace activity overview — May 2026</p>
+          <p className="text-sm text-gray-500 mt-0.5">Workspace activity overview — June 2026</p>
         </div>
         <div className="flex items-center gap-2 text-xs text-gray-500 bg-white border border-gray-200 rounded-lg px-3 py-2">
           <Clock size={13} />
@@ -454,7 +454,7 @@ export default function AnalyticsPage() {
             value="8 / 10"
             sub="80% engagement rate"
             trend="up"
-            color="#D97757"
+            color="#5b5fc7"
           />
           <StatCard
             icon={<Clock size={18} />}
@@ -491,7 +491,7 @@ export default function AnalyticsPage() {
             data={LAST_14_DAYS_MESSAGES}
             valueKey="calls"
             labelKey="day"
-            color="#D97757"
+            color="#5b5fc7"
             label="Call Minutes by Day (Last 14 Days)"
           />
           <ActivityHeatmap />

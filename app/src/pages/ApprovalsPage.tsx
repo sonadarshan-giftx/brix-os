@@ -90,7 +90,7 @@ function formatDate(iso: string): string {
 /* ═══════════════════════════════════════════
    ApprovalsPage
    ═══════════════════════════════════════════ */
-export default function ApprovalsPage() {  useEffect(() => { document.title = "Approvals" + " - Brixstac"; }, []);
+export default function ApprovalsPage() {  useEffect(() => { document.title = "Approvals" + " - BrixOS"; }, []);
 
   // Single source of truth: Zustand store
   const storeApprovals = useStore((s) => s.approvals);

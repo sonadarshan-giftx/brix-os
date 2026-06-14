@@ -80,9 +80,9 @@ const userGrowthData = [
 ];
 
 const planDistributionData = [
-  { name: "Starter", value: 320, color: "#a5b4fc" },
+  { name: "Starter", value: 320, color: "#EBB59C" },
   { name: "Pro", value: 160, color: PRIMARY },
-  { name: "Enterprise", value: 40, color: "#312e81" },
+  { name: "Enterprise", value: 40, color: "#7A3A1E" },
 ];
 
 const signups = Array.from({ length: 28 }, (_, i) => ({

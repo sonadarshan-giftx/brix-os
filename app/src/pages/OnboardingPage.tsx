@@ -144,9 +144,9 @@ export default function OnboardingPage() {
   const [hired, setHired] = useState<string[]>([]);
   const [projectName, setProjectName] = useState('A tax filing platform');
   const [invites, setInvites] = useState([
-    { id: 'i1', email: 'maya@acme-brixstac.com', name: 'Maya', role: 'Manager' as const },
-    { id: 'i2', email: 'raj@acme-brixstac.com', name: 'Raj', role: 'Member' as const },
-    { id: 'i3', email: 'priya@acme-brixstac.com', name: 'Priya', role: 'Member' as const },
+    { id: 'i1', email: 'maya@acme-brixos.com', name: 'Maya', role: 'Manager' as const },
+    { id: 'i2', email: 'raj@acme-brixos.com', name: 'Raj', role: 'Member' as const },
+    { id: 'i3', email: 'priya@acme-brixos.com', name: 'Priya', role: 'Member' as const },
   ]);
   const [connectedInts, setConnectedInts] = useState<string[]>([]);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -282,7 +282,7 @@ export default function OnboardingPage() {
 
         {/* Right */}
         <div className="flex items-center gap-3">
-          <button onClick={() => showToast("Help docs: brixstac.io/docs", "info")} className="flex items-center gap-1 cursor-pointer" style={{ fontSize: 12, color: '#616161' }}>
+          <button onClick={() => showToast("Help docs: brixos.io/docs", "info")} className="flex items-center gap-1 cursor-pointer" style={{ fontSize: 12, color: '#616161' }}>
             <HelpCircle size={14} />
             <span className="hidden sm:inline">Need help?</span>
           </button>
@@ -405,7 +405,7 @@ function Step1Signup() {
           </label>
           <input
             type="email"
-            value="alex@acme-brixstac.com"
+            value="alex@acme-brixos.com"
             disabled
             className="w-full rounded"
             style={{
@@ -596,9 +596,9 @@ function Step2Company() {
    ═══════════════════════════════════════════════ */
 function Step3Domain() {
   const dnsRecords = [
-    { type: 'TXT', name: '@', value: 'brixstac-verification=abc123xyz789', status: 'verified' as const },
-    { type: 'MX', name: '@', value: 'mx1.acme-brixstac.com', status: 'verified' as const },
-    { type: 'SPF', name: '@', value: 'v=spf1 include:_spf.acme-brixstac.com ~all', status: 'verified' as const },
+    { type: 'TXT', name: '@', value: 'brixos-verification=abc123xyz789', status: 'verified' as const },
+    { type: 'MX', name: '@', value: 'mx1.acme-brixos.com', status: 'verified' as const },
+    { type: 'SPF', name: '@', value: 'v=spf1 include:_spf.acme-brixos.com ~all', status: 'verified' as const },
   ];
 
   return (
@@ -616,7 +616,7 @@ function Step3Domain() {
         </label>
         <input
           type="text"
-          value="acme-brixstac.com"
+          value="acme-brixos.com"
           disabled
           className="w-full rounded"
           style={{
@@ -1229,7 +1229,7 @@ function ConfettiOverlay() {
           <Check size={40} color="#237b4b" />
         </div>
         <h1 style={{ fontSize: 28, fontWeight: 700, color: '#242424' }}>You&apos;re all set!</h1>
-        <p style={{ fontSize: 14, color: '#616161', marginTop: 8 }}>Launching Brixstac...</p>
+        <p style={{ fontSize: 14, color: '#616161', marginTop: 8 }}>Launching BrixOS...</p>
       </div>
     </div>
   );

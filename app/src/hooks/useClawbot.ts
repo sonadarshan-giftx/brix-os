@@ -29,7 +29,7 @@ interface AgentDef {
 
 const AGENTS: AgentDef[] = [
   {
-    id: 'ai-aria', name: 'Aria', role: 'Senior Developer', avatar: 'AR', color: '#7c3aed',
+    id: 'ai-aria', name: 'Aria', role: 'Senior Developer', avatar: 'AR', color: '#C4623E',
     skills: ['React', 'TypeScript', 'Code Review', 'Architecture'],
     personality: 'direct', voiceLang: 'en-IN',
     domainKeywords: ['frontend', 'react', 'typescript', 'component', 'code review', 'pr', 'pull request', 'hook', 'state', 'render', 'bug', 'fix', 'console error', 'build failed', 'lint', 'test', 'jest', 'cypress', 'merge', 'branch', 'commit'],
@@ -50,7 +50,7 @@ const AGENTS: AgentDef[] = [
     openers: ['So here\'s the thing,', 'From a design perspective,', 'I was thinking...', 'Visually speaking,', 'What if we tried'],
   },
   {
-    id: 'ai-echo', name: 'Echo', role: 'DevOps Engineer', avatar: 'EC', color: '#5b5fc7',
+    id: 'ai-echo', name: 'Echo', role: 'DevOps Engineer', avatar: 'EC', color: '#D97757',
     skills: ['CI/CD', 'Infrastructure', 'AWS', 'Security'],
     personality: 'concise', voiceLang: 'en-AU',
     domainKeywords: ['deploy', 'deployment', 'pipeline', 'ci', 'cd', 'jenkins', 'github action', 'docker', 'kubernetes', 'k8s', 'aws', 'ec2', 's3', 'cloudfront', 'infra', 'terraform', 'monitoring', 'alert', 'incident', 'rollback', 'production', 'staging', 'health check', 'uptime', 'latency', 'log', 'crash'],

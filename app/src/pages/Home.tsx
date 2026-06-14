@@ -12,7 +12,8 @@ import { projects, employees, activities, allTickets, companyGoals } from '@/dat
 import { ROUTES } from '@/const';
 
 const BRAND = '#5b5fc7';
-const BRAND2 = '#7c3aed';
+const BRAND2 = '#464775';
+const BRAND_DARK = '#3a3d6b';
 
 const ACTIVITY_ICONS: Record<string, React.ElementType> = {
   commit: GitCommit, 'pr-merged': GitPullRequest, 'file-uploaded': Sparkles,
@@ -22,7 +23,7 @@ const ACTIVITY_ICONS: Record<string, React.ElementType> = {
   'meeting-started': Users, comment: MessageSquare,
 };
 const ACTIVITY_COLORS: Record<string, string> = {
-  commit: '#7c3aed', 'pr-merged': '#16a34a', 'deploy-shipped': '#2563eb',
+  commit: '#464775', 'pr-merged': '#16a34a', 'deploy-shipped': '#2563eb',
   'ticket-completed': '#16a34a', 'risk-flagged': '#dc2626', 'approval-needed': '#d97706',
   'sprint-completed': '#16a34a', 'meeting-started': BRAND, default: '#71717a',
 };
@@ -77,12 +78,12 @@ export default function Home() {
     }}>
       {/* ── Hero Header ── */}
       <div style={{
-        background: `linear-gradient(135deg, ${BRAND_DARK} 0%, #3d4080 100%)`,
+        background: `linear-gradient(135deg, ${BRAND_DARK} 0%, #464775 50%, #4a4e82 100%)`,
         padding: '28px 36px 32px',
         position: 'relative', overflow: 'hidden',
       }}>
         {/* BG glow */}
-        <div style={{ position: 'absolute', top: -60, right: -60, width: 300, height: 300, borderRadius: '50%', background: 'rgba(124,58,237,0.15)', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: -60, right: -60, width: 300, height: 300, borderRadius: '50%', background: 'rgba(91,95,199,0.15)', filter: 'blur(60px)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', bottom: -40, left: 200, width: 200, height: 200, borderRadius: '50%', background: 'rgba(91,95,199,0.2)', filter: 'blur(40px)', pointerEvents: 'none' }} />
 
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
@@ -110,8 +111,8 @@ export default function Home() {
         {/* Stats row */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginTop: 24, position: 'relative' }}>
           {[
-            { label: 'Active Projects',  value: stats.activeProjects, change: '+2 this month', color: '#818cf8' },
-            { label: 'In Progress',      value: stats.inProgress,     change: `${stats.inReview} in review`, color: '#a78bfa' },
+            { label: 'Active Projects',  value: stats.activeProjects, change: '+2 this month', color: '#a5b4fc' },
+            { label: 'In Progress',      value: stats.inProgress,     change: `${stats.inReview} in review`, color: '#7c7ff0' },
             { label: 'Completed',        value: stats.done,           change: 'this sprint', color: '#34d399' },
             { label: 'Team Members',     value: stats.humans,         change: `+${stats.aiAgents} AI agents`, color: '#fbbf24' },
             { label: 'Velocity',         value: '94%',                change: '↑ 8% vs last sprint', color: '#60a5fa' },
@@ -278,7 +279,7 @@ export default function Home() {
                   <div key={emp.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '6px 0' }}>
                     <div style={{
                       width: 32, height: 32, borderRadius: 9, flexShrink: 0,
-                      background: `linear-gradient(135deg, #7c3aed, #5b5fc7)`,
+                      background: `linear-gradient(135deg, #464775, #5b5fc7)`,
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       fontSize: 11, fontWeight: 800, color: '#fff',
                     }}>

@@ -156,8 +156,8 @@ export default function CreateWorkspacePage() {
       createdAt: new Date().toISOString(),
     };
 
-    const existing = JSON.parse(localStorage.getItem("brixstac_workspaces") || "[]");
-    localStorage.setItem("brixstac_workspaces", JSON.stringify([...existing, workspace]));
+    const existing = JSON.parse(localStorage.getItem("brixos_workspaces") || "[]");
+    localStorage.setItem("brixos_workspaces", JSON.stringify([...existing, workspace]));
 
     showToast("Workspace created successfully!", "success");
     setTimeout(() => navigate("/projects"), 800);
@@ -182,7 +182,7 @@ export default function CreateWorkspacePage() {
                 <Building2 size={20} color="#ffffff" />
               </div>
               <span className="text-lg font-semibold" style={{ color: "#242424" }}>
-                Brixstac
+                BrixOS
               </span>
             </div>
             <span className="text-sm font-medium" style={{ color: "#616161" }}>
@@ -255,7 +255,7 @@ export default function CreateWorkspacePage() {
                       className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm"
                       style={{ color: "#616161" }}
                     >
-                      brixstac.io/
+                      brixos.io/
                     </span>
                     <input
                       type="text"
@@ -429,7 +429,7 @@ export default function CreateWorkspacePage() {
                       className="relative flex flex-col items-start rounded-xl border p-5 text-left transition-all"
                       style={{
                         borderColor: isSelected ? "#5b5fc7" : "#d1d1d1",
-                        background: isSelected ? "rgba(91, 95, 199, 0.04)" : "#ffffff",
+                        background: isSelected ? "rgba(91,95,199,0.04)" : "#ffffff",
                         borderRadius: "12px",
                         boxShadow: isSelected ? "0 0 0 1px #5b5fc7" : "none",
                       }}

@@ -68,9 +68,9 @@ const categoriesData: Category[] = [
     icon: <Rocket size={22} color="#5b5fc7" />,
     title: "Getting Started",
     articles: [
-      { id: "gs-1", title: "Creating your first workspace", content: "Learn how to set up your Brixstac workspace, invite team members, and configure your first project board in under 5 minutes." },
-      { id: "gs-2", title: "Quick start guide", content: "A comprehensive walkthrough of Brixstac features, from basic navigation to advanced workflow automation." },
-      { id: "gs-3", title: "Setting up integrations", content: "Connect Brixstac with your existing tools including Slack, GitHub, Google Workspace, and more." },
+      { id: "gs-1", title: "Creating your first workspace", content: "Learn how to set up your BrixOS workspace, invite team members, and configure your first project board in under 5 minutes." },
+      { id: "gs-2", title: "Quick start guide", content: "A comprehensive walkthrough of BrixOS features, from basic navigation to advanced workflow automation." },
+      { id: "gs-3", title: "Setting up integrations", content: "Connect BrixOS with your existing tools including Slack, GitHub, Google Workspace, and more." },
     ],
   },
   {
@@ -79,7 +79,7 @@ const categoriesData: Category[] = [
     title: "Account & Billing",
     articles: [
       { id: "ab-1", title: "Managing your subscription", content: "Upgrade, downgrade, or cancel your subscription. Understand billing cycles and payment methods." },
-      { id: "ab-2", title: "Understanding invoices", content: "How to read your Brixstac invoices, download receipts, and manage billing history." },
+      { id: "ab-2", title: "Understanding invoices", content: "How to read your BrixOS invoices, download receipts, and manage billing history." },
       { id: "ab-3", title: "Refund policy explained", content: "Our 14-day money-back guarantee for annual plans and pro-rated refund eligibility." },
       { id: "ab-4", title: "Adding team members to your plan", content: "How to invite colleagues, manage seats, and understand per-user pricing." },
     ],
@@ -132,7 +132,7 @@ const categoriesData: Category[] = [
     title: "Integrations",
     articles: [
       { id: "int-1", title: "Slack integration setup", content: "Receive notifications, create tasks, and run commands directly from Slack." },
-      { id: "int-2", title: "GitHub and GitLab connections", content: "Link commits, pull requests, and issues to your Brixstac projects for full traceability." },
+      { id: "int-2", title: "GitHub and GitLab connections", content: "Link commits, pull requests, and issues to your BrixOS projects for full traceability." },
       { id: "int-3", title: "Calendar sync (Google & Outlook)", content: "Two-way sync with Google Calendar and Outlook for deadline management." },
     ],
   },
@@ -567,7 +567,7 @@ export default function HelpCenterPage() {
                       fontFamily: "Inter, sans-serif",
                       transition: "background 0.2s",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = "#4a4eb5")}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = "#464775")}
                     onMouseLeave={(e) => (e.currentTarget.style.background = "#5b5fc7")}
                   >
                     <Send size={16} />

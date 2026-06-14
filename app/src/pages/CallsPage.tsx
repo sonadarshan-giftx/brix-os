@@ -1,5 +1,5 @@
 /**
- * CallsPage.tsx — Brixstac OS Calls & Meetings
+ * CallsPage.tsx — BrixOS Calls & Meetings
  * Enterprise-grade Teams + Zoom equivalent
  * 4 views: dashboard | lobby | call | schedule
  */
@@ -89,16 +89,16 @@ interface DrawHistoryEntry {
 
 const MOCK_PARTICIPANTS: MockParticipant[] = [
   { id: 'u1', name: 'Alex Rivera', initials: 'AR', color: '#5b5fc7', muted: false, cameraOff: false, handRaised: false, isSpeaking: true, role: 'host' },
-  { id: 'u2', name: 'Maya Chen', initials: 'MC', color: '#D97757', muted: true, cameraOff: false, handRaised: true, isSpeaking: false, role: 'co-host' },
+  { id: 'u2', name: 'Maya Chen', initials: 'MC', color: '#5b5fc7', muted: true, cameraOff: false, handRaised: true, isSpeaking: false, role: 'co-host' },
   { id: 'u3', name: 'Jordan Kim', initials: 'JK', color: '#16a34a', muted: false, cameraOff: true, handRaised: false, isSpeaking: false, role: 'participant' },
   { id: 'u4', name: 'Sam Torres', initials: 'ST', color: '#c4314b', muted: true, cameraOff: true, handRaised: false, isSpeaking: false, role: 'participant' },
   { id: 'u5', name: 'Riley Patel', initials: 'RP', color: '#0891b2', muted: false, cameraOff: false, handRaised: false, isSpeaking: false, role: 'participant' },
-  { id: 'u6', name: 'Casey Wong', initials: 'CW', color: '#7c3aed', muted: true, cameraOff: false, handRaised: false, isSpeaking: false, role: 'participant' },
+  { id: 'u6', name: 'Casey Wong', initials: 'CW', color: '#464775', muted: true, cameraOff: false, handRaised: false, isSpeaking: false, role: 'participant' },
 ];
 
 const TEAM_MEMBERS = [
   { id: 't1', name: 'Alex Rivera', initials: 'AR', color: '#5b5fc7' },
-  { id: 't2', name: 'Maya Chen', initials: 'MC', color: '#D97757' },
+  { id: 't2', name: 'Maya Chen', initials: 'MC', color: '#5b5fc7' },
   { id: 't3', name: 'Jordan Kim', initials: 'JK', color: '#16a34a' },
   { id: 't4', name: 'Sam Torres', initials: 'ST', color: '#c4314b' },
   { id: 't5', name: 'Riley Patel', initials: 'RP', color: '#0891b2' },
@@ -106,7 +106,7 @@ const TEAM_MEMBERS = [
 
 const MOCK_ACTIVE_MEETINGS: ActiveMeeting[] = [
   { id: 'm1', title: 'Weekly All-Hands', host: 'Alex Rivera', participants: MOCK_PARTICIPANTS, duration: 1847, color: '#5b5fc7' },
-  { id: 'm2', title: 'Design Review', host: 'Maya Chen', participants: MOCK_PARTICIPANTS.slice(0, 3), duration: 423, color: '#D97757' },
+  { id: 'm2', title: 'Design Review', host: 'Maya Chen', participants: MOCK_PARTICIPANTS.slice(0, 3), duration: 423, color: '#5b5fc7' },
   { id: 'm3', title: 'Sprint Planning', host: 'Jordan Kim', participants: MOCK_PARTICIPANTS.slice(2, 6), duration: 2100, color: '#16a34a' },
 ];
 
@@ -115,19 +115,19 @@ const MOCK_UPCOMING: ScheduledMeeting[] = [
     id: 'sched-1', title: 'Q3 Planning Session', description: 'Plan Q3 goals and OKRs', hostId: 'u1', hostName: 'Alex Rivera',
     startTime: Date.now() + 2 * 3600 * 1000, endTime: Date.now() + 3 * 3600 * 1000, timezone: 'America/New_York',
     recurrence: 'once', participantIds: ['u1', 'u2', 'u3'], participantNames: ['Alex Rivera', 'Maya Chen', 'Jordan Kim'],
-    type: 'video', waitingRoom: true, autoRecord: false, meetingId: 'qpls-2026', joinLink: 'https://brixstac.io/join/qpls-2026', status: 'upcoming',
+    type: 'video', waitingRoom: true, autoRecord: false, meetingId: 'qpls-2026', joinLink: 'https://brixos.io/join/qpls-2026', status: 'upcoming',
   },
   {
     id: 'sched-2', title: '1:1 with Maya', description: 'Weekly sync', hostId: 'u1', hostName: 'Alex Rivera',
     startTime: Date.now() + 5 * 3600 * 1000, endTime: Date.now() + 5.5 * 3600 * 1000, timezone: 'America/New_York',
     recurrence: 'weekly', participantIds: ['u1', 'u2'], participantNames: ['Alex Rivera', 'Maya Chen'],
-    type: 'video', waitingRoom: false, autoRecord: false, meetingId: '1on1-maya', joinLink: 'https://brixstac.io/join/1on1-maya', status: 'upcoming',
+    type: 'video', waitingRoom: false, autoRecord: false, meetingId: '1on1-maya', joinLink: 'https://brixos.io/join/1on1-maya', status: 'upcoming',
   },
   {
     id: 'sched-3', title: 'Customer Demo — Acme Corp', description: 'Product walkthrough for Acme Corp team', hostId: 'u1', hostName: 'Alex Rivera',
     startTime: Date.now() + 24 * 3600 * 1000, endTime: Date.now() + 25 * 3600 * 1000, timezone: 'America/Los_Angeles',
     recurrence: 'once', participantIds: ['u1', 'u3', 'u5'], participantNames: ['Alex Rivera', 'Jordan Kim', 'Riley Patel'],
-    type: 'video', waitingRoom: true, autoRecord: true, meetingId: 'demo-acme', joinLink: 'https://brixstac.io/join/demo-acme', status: 'upcoming',
+    type: 'video', waitingRoom: true, autoRecord: true, meetingId: 'demo-acme', joinLink: 'https://brixos.io/join/demo-acme', status: 'upcoming',
   },
 ];
 
@@ -139,7 +139,7 @@ const MOCK_RECENT: RecentMeeting[] = [
 
 const MOCK_RECORDINGS_DISPLAY = [
   { id: 'rec-1', title: 'Weekly All-Hands — May 2026', date: Date.now() - 7 * 86400000, durationSecs: 3420, participantCount: 12, color: '#5b5fc7' },
-  { id: 'rec-2', title: 'Design Review — Dashboard v3', date: Date.now() - 3 * 86400000, durationSecs: 2160, participantCount: 5, color: '#D97757' },
+  { id: 'rec-2', title: 'Design Review — Dashboard v3', date: Date.now() - 3 * 86400000, durationSecs: 2160, participantCount: 5, color: '#5b5fc7' },
   { id: 'rec-3', title: 'Sprint 14 Retrospective', date: Date.now() - 86400000, durationSecs: 1800, participantCount: 8, color: '#16a34a' },
 ];
 
@@ -422,7 +422,7 @@ function DashboardView({
           <button
             onClick={() => setShowNewMeetingModal(true)}
             className="flex items-center gap-2 px-4 py-2 rounded-lg text-white font-medium text-sm hover:opacity-90 active:scale-95 transition-all"
-            style={{ background: '#D97757' }}
+            style={{ background: '#5b5fc7' }}
           >
             <Plus size={16} /> New Meeting
           </button>
@@ -444,7 +444,7 @@ function DashboardView({
             <button
               onClick={() => setShowNewMeetingModal(true)}
               className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium"
-              style={{ background: '#D97757' }}
+              style={{ background: '#5b5fc7' }}
             >
               <Video size={16} /> Start Now
             </button>
@@ -456,7 +456,7 @@ function DashboardView({
               <input
                 value={joinLink}
                 onChange={e => setJoinLink(e.target.value)}
-                placeholder="https://brixstac.io/join/..."
+                placeholder="https://brixos.io/join/..."
                 className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-orange-400"
               />
               <button
@@ -493,7 +493,7 @@ function DashboardView({
               key={t.key}
               onClick={() => setDashTab(t.key)}
               className={`px-4 py-2 text-sm font-medium rounded-t transition-colors ${dashTab === t.key ? 'border-b-2 text-orange-600' : 'text-gray-500 hover:text-gray-700'}`}
-              style={{ borderColor: dashTab === t.key ? '#D97757' : 'transparent' }}
+              style={{ borderColor: dashTab === t.key ? '#5b5fc7' : 'transparent' }}
             >
               {t.label}
             </button>
@@ -529,7 +529,7 @@ function DashboardView({
                 <button
                   onClick={() => handleJoinMeeting(m.title)}
                   className="w-full py-2 rounded-lg text-white text-sm font-medium"
-                  style={{ background: '#D97757' }}
+                  style={{ background: '#5b5fc7' }}
                 >
                   Join
                 </button>
@@ -562,7 +562,7 @@ function DashboardView({
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={() => handleJoinMeeting(m.title)} className="px-3 py-1.5 text-xs font-medium rounded-lg text-white" style={{ background: '#D97757' }}>Join</button>
+                  <button onClick={() => handleJoinMeeting(m.title)} className="px-3 py-1.5 text-xs font-medium rounded-lg text-white" style={{ background: '#5b5fc7' }}>Join</button>
                   <button className="px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50">Edit</button>
                   <button className="px-3 py-1.5 text-xs font-medium rounded-lg border border-red-200 text-red-500 hover:bg-red-50">Cancel</button>
                 </div>
@@ -676,9 +676,9 @@ function DashboardView({
                 </div>
                 <div className="flex items-center gap-2 bg-gray-50 rounded-lg p-3">
                   <Link size={14} className="text-gray-400 flex-shrink-0" />
-                  <span className="text-xs text-gray-500 flex-1 truncate">https://brixstac.io/join/room-instant</span>
+                  <span className="text-xs text-gray-500 flex-1 truncate">https://brixos.io/join/room-instant</span>
                   <button
-                    onClick={() => handleCopy('https://brixstac.io/join/room-instant', 'new-modal')}
+                    onClick={() => handleCopy('https://brixos.io/join/room-instant', 'new-modal')}
                     className="text-xs text-orange-500 hover:text-orange-600 font-medium"
                   >
                     {copiedId === 'new-modal' ? 'Copied!' : 'Copy'}
@@ -690,7 +690,7 @@ function DashboardView({
                 <button
                   onClick={handleStartNewMeeting}
                   className="flex-1 py-2.5 rounded-lg text-white text-sm font-medium"
-                  style={{ background: '#D97757' }}
+                  style={{ background: '#5b5fc7' }}
                 >
                   Start Now
                 </button>
@@ -779,7 +779,7 @@ function LobbyView({ meetingTitle, setMeetingTitle, localStream, muted, cameraOf
   const mockDevices = ['Default', 'Camera 1', 'Camera 2'];
 
   return (
-    <div className="h-full flex items-center justify-center" style={{ background: '#1a1a2e' }}>
+    <div className="h-full flex items-center justify-center" style={{ background: '#26201A' }}>
       <div className="flex gap-8 w-full max-w-4xl px-6">
         {/* Camera Preview */}
         <div className="flex-1">
@@ -819,7 +819,7 @@ function LobbyView({ meetingTitle, setMeetingTitle, localStream, muted, cameraOf
                   key={b.key}
                   onClick={() => setSelectedBg(b.key)}
                   className="flex-1 py-1.5 rounded-lg text-xs font-medium transition-all"
-                  style={{ background: selectedBg === b.key ? '#D97757' : 'rgba(255,255,255,0.1)', color: selectedBg === b.key ? '#fff' : '#9ca3af' }}
+                  style={{ background: selectedBg === b.key ? '#5b5fc7' : 'rgba(255,255,255,0.1)', color: selectedBg === b.key ? '#fff' : '#9ca3af' }}
                 >
                   {b.label}
                 </button>
@@ -912,7 +912,7 @@ function LobbyView({ meetingTitle, setMeetingTitle, localStream, muted, cameraOf
             <button
               onClick={onJoin}
               className="w-full py-3 rounded-xl text-white font-semibold text-sm"
-              style={{ background: '#D97757' }}
+              style={{ background: '#5b5fc7' }}
             >
               Join Now
             </button>
@@ -1085,9 +1085,9 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
   }, [store]);
 
   return (
-    <div className="h-full flex flex-col select-none overflow-hidden" style={{ background: '#1a1a2e' }}>
+    <div className="h-full flex flex-col select-none overflow-hidden" style={{ background: '#26201A' }}>
       {/* Top Bar */}
-      <div className="flex items-center px-4 py-2 z-10 flex-shrink-0" style={{ background: '#0d0d1a' }}>
+      <div className="flex items-center px-4 py-2 z-10 flex-shrink-0" style={{ background: '#181410' }}>
         <span className="font-semibold text-white text-sm truncate max-w-xs">{meetingTitle}</span>
         <div className="flex items-center gap-3 ml-4">
           <span className="text-xs text-gray-400 font-mono">{formatDuration(elapsed)}</span>
@@ -1137,7 +1137,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
               exit={{ x: 320 }}
               transition={{ type: 'spring', damping: 25, stiffness: 250 }}
               className="w-80 flex flex-col border-l flex-shrink-0"
-              style={{ background: '#12122a', borderColor: '#ffffff15' }}
+              style={{ background: '#1F1812', borderColor: '#ffffff15' }}
             >
               <div className="flex border-b flex-shrink-0" style={{ borderColor: '#ffffff15' }}>
                 {(['chat', 'participants', 'qa'] as const).map(tab => (
@@ -1180,7 +1180,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                         placeholder="Type a message..."
                         className="flex-1 bg-white/10 text-white text-sm px-3 py-2 rounded-lg border border-white/10 outline-none focus:border-orange-400 placeholder-gray-500"
                       />
-                      <button onClick={sendMessage} className="p-2 rounded-lg" style={{ background: '#D97757' }}><Send size={16} className="text-white" /></button>
+                      <button onClick={sendMessage} className="p-2 rounded-lg" style={{ background: '#5b5fc7' }}><Send size={16} className="text-white" /></button>
                     </div>
                   </div>
                 </div>
@@ -1201,7 +1201,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                           <div className="flex items-center gap-1.5">
                             <span className="text-sm text-white font-medium truncate">{p.name}</span>
                             {p.role !== 'participant' && (
-                              <span className="text-xs px-1 rounded" style={{ background: '#5b5fc722', color: '#a5b4fc' }}>{p.role}</span>
+                              <span className="text-xs px-1 rounded" style={{ background: '#5b5fc722', color: '#EBB59C' }}>{p.role}</span>
                             )}
                           </div>
                         </div>
@@ -1267,7 +1267,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
       </div>
 
       {/* Control Bar */}
-      <div className="flex-shrink-0 px-4 py-3 flex items-center justify-center gap-2 flex-wrap" style={{ background: '#0d0d1a' }}>
+      <div className="flex-shrink-0 px-4 py-3 flex items-center justify-center gap-2 flex-wrap" style={{ background: '#181410' }}>
         <ControlButton icon={muted ? <MicOff size={18} /> : <Mic size={18} />} label={muted ? 'Unmute' : 'Mute'} active={muted} activeColor="#c4314b" onClick={toggleMute} />
         <ControlButton icon={cameraOff ? <VideoOff size={18} /> : <Video size={18} />} label={cameraOff ? 'Start Video' : 'Stop Video'} active={cameraOff} activeColor="#c4314b" onClick={toggleCamera} />
         <ControlButton
@@ -1290,7 +1290,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 10 }}
                 className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex gap-1 p-2 rounded-2xl shadow-xl z-50"
-                style={{ background: '#1a1a2e', border: '1px solid #ffffff15' }}
+                style={{ background: '#26201A', border: '1px solid #ffffff15' }}
               >
                 {REACTIONS_EMOJI.map(e => (
                   <button key={e} onClick={() => addFloatingReaction(e)} className="text-xl hover:scale-125 transition-transform w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white/10">
@@ -1312,7 +1312,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 5 }}
                 className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-48 rounded-xl shadow-xl overflow-hidden z-50"
-                style={{ background: '#1a1a2e', border: '1px solid #ffffff15' }}
+                style={{ background: '#26201A', border: '1px solid #ffffff15' }}
               >
                 {[
                   { label: 'Polls', icon: <BarChart2 size={14} />, action: () => { setShowPollModal(true); setShowMoreMenu(false); } },
@@ -1348,7 +1348,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 5 }}
                 className="absolute bottom-full mb-2 right-0 w-44 rounded-xl shadow-xl overflow-hidden z-50"
-                style={{ background: '#1a1a2e', border: '1px solid #ffffff15' }}
+                style={{ background: '#26201A', border: '1px solid #ffffff15' }}
               >
                 <button onClick={() => { hangup(); onLeave(); }} className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-200 hover:bg-white/10">
                   <LogOut size={14} className="text-yellow-400" /> Leave Meeting
@@ -1425,7 +1425,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             className="fixed top-16 left-4 z-50 flex items-center gap-2 px-4 py-2.5 rounded-xl shadow-lg"
-            style={{ background: '#1a1a2e', border: '1px solid #ffffff20' }}
+            style={{ background: '#26201A', border: '1px solid #ffffff20' }}
           >
             <Hand size={16} className="text-yellow-400" />
             <span className="text-sm text-white font-medium">{handRaiseToastName} raised their hand</span>
@@ -1456,7 +1456,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               className="w-full max-w-md rounded-2xl p-6 shadow-2xl"
-              style={{ background: '#1a1a2e', border: '1px solid #ffffff15' }}
+              style={{ background: '#26201A', border: '1px solid #ffffff15' }}
             >
               <div className="flex items-center justify-between mb-5">
                 <h3 className="text-lg font-bold text-white">Create Poll</h3>
@@ -1515,7 +1515,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                     }
                   }}
                   className="flex-1 py-2.5 rounded-lg text-white text-sm font-medium"
-                  style={{ background: '#D97757' }}
+                  style={{ background: '#5b5fc7' }}
                 >
                   Launch Poll
                 </button>
@@ -1534,7 +1534,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               className="w-full max-w-lg rounded-2xl p-6 shadow-2xl"
-              style={{ background: '#1a1a2e', border: '1px solid #ffffff15' }}
+              style={{ background: '#26201A', border: '1px solid #ffffff15' }}
             >
               <div className="flex items-center justify-between mb-5">
                 <h3 className="text-lg font-bold text-white">Breakout Rooms</h3>
@@ -1575,7 +1575,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                 <button
                   onClick={() => { store.createBreakoutRooms(breakoutCount, MOCK_PARTICIPANTS.map(p => p.id)); setShowBreakoutModal(false); }}
                   className="flex-1 py-2.5 rounded-lg text-white text-sm font-medium"
-                  style={{ background: '#D97757' }}
+                  style={{ background: '#5b5fc7' }}
                 >
                   Open Rooms
                 </button>
@@ -1594,7 +1594,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               className="w-full max-w-sm rounded-2xl p-6 shadow-2xl"
-              style={{ background: '#1a1a2e', border: '1px solid #ffffff15' }}
+              style={{ background: '#26201A', border: '1px solid #ffffff15' }}
             >
               <div className="flex items-center justify-between mb-5">
                 <h3 className="text-lg font-bold text-white">Settings</h3>
@@ -1702,7 +1702,7 @@ function VideoTile({ participant: p, isSpotlighted, onSpotlight, isLocal, localS
     <div
       className={`relative rounded-xl overflow-hidden aspect-video cursor-pointer group ${isSpotlighted ? 'col-span-2 row-span-2' : ''}`}
       style={{
-        background: '#0d0d1a',
+        background: '#181410',
         boxShadow: p.isSpeaking ? '0 0 0 3px #16a34a' : 'none',
         transition: 'box-shadow 0.2s',
       }}
@@ -1756,7 +1756,7 @@ function WhiteboardOverlay({ onClose }: { onClose: () => void }) {
   const [redoStack, setRedoStack] = useState<DrawHistoryEntry[]>([]);
   const lastPoint = useRef<DrawPoint | null>(null);
 
-  const COLORS = ['#000000', '#c4314b', '#D97757', '#eab308', '#16a34a', '#5b5fc7'];
+  const COLORS = ['#000000', '#c4314b', '#5b5fc7', '#eab308', '#16a34a', '#5b5fc7'];
   const SIZES = [2, 5, 10];
 
   const getCtx = useCallback(() => canvasRef.current?.getContext('2d') ?? null, []);
@@ -2007,7 +2007,7 @@ function ScheduleView({ onScheduled, onCancel, store }: ScheduleViewProps) {
                 key={r.key}
                 onClick={() => setRecurrence(r.key)}
                 className="flex-1 py-2 rounded-lg text-sm font-medium border transition-all"
-                style={{ borderColor: recurrence === r.key ? '#D97757' : '#d1d5db', color: recurrence === r.key ? '#D97757' : '#4b5563', background: recurrence === r.key ? '#fff7ed' : 'white' }}
+                style={{ borderColor: recurrence === r.key ? '#5b5fc7' : '#d1d5db', color: recurrence === r.key ? '#5b5fc7' : '#4b5563', background: recurrence === r.key ? '#fff7ed' : 'white' }}
               >
                 {r.label}
               </button>
@@ -2024,7 +2024,7 @@ function ScheduleView({ onScheduled, onCancel, store }: ScheduleViewProps) {
                 key={key}
                 onClick={() => setCallType(key as 'video' | 'audio')}
                 className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl border text-sm font-medium transition-all"
-                style={{ borderColor: callType === key ? '#D97757' : '#d1d5db', color: callType === key ? '#D97757' : '#4b5563', background: callType === key ? '#fff7ed' : 'white' }}
+                style={{ borderColor: callType === key ? '#5b5fc7' : '#d1d5db', color: callType === key ? '#5b5fc7' : '#4b5563', background: callType === key ? '#fff7ed' : 'white' }}
               >
                 <Icon size={16} /> {label}
               </button>
@@ -2117,7 +2117,7 @@ function ScheduleView({ onScheduled, onCancel, store }: ScheduleViewProps) {
             onClick={handleSchedule}
             disabled={!title.trim()}
             className="flex-1 py-3 rounded-xl text-white text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
-            style={{ background: '#D97757' }}
+            style={{ background: '#5b5fc7' }}
           >
             Schedule Meeting
           </button>

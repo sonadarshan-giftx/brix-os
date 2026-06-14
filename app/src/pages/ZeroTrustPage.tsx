@@ -12,14 +12,14 @@ import {
 // ── Theme constants ───────────────────────────────────────────────────────────
 
 const T = {
-  bg:       '#0f0f1a',
-  card:     '#1a1a2e',
-  border:   '#2a2a4a',
+  bg:       '#0d0e1a',
+  card:     '#13152b',
+  border:   '#1e2140',
   green:    '#00ff88',
   red:      '#ff4444',
   yellow:   '#ffbb00',
   blue:     '#4488ff',
-  purple:   '#8855ff',
+  purple:   '#7c7ff0',
   text:     '#e0e0f0',
   muted:    '#7070a0',
   mono:     "'Fira Code', 'JetBrains Mono', 'Courier New', monospace",

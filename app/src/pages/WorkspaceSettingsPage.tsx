@@ -60,11 +60,11 @@ interface Member {
 }
 
 const mockMembers: Member[] = [
-  { id: "1", name: "Alex Morgan", email: "alex@brixstac.io", role: "Owner", status: "Active" },
-  { id: "2", name: "Sam Rivera", email: "sam@brixstac.io", role: "Manager", status: "Active" },
-  { id: "3", name: "Jordan Lee", email: "jordan@brixstac.io", role: "Member", status: "Active" },
-  { id: "4", name: "Taylor Chen", email: "taylor@brixstac.io", role: "Member", status: "Invited" },
-  { id: "5", name: "Casey Brooks", email: "casey@brixstac.io", role: "Member", status: "Active" },
+  { id: "1", name: "Alex Morgan", email: "alex@brixos.io", role: "Owner", status: "Active" },
+  { id: "2", name: "Sam Rivera", email: "sam@brixos.io", role: "Manager", status: "Active" },
+  { id: "3", name: "Jordan Lee", email: "jordan@brixos.io", role: "Member", status: "Active" },
+  { id: "4", name: "Taylor Chen", email: "taylor@brixos.io", role: "Member", status: "Invited" },
+  { id: "5", name: "Casey Brooks", email: "casey@brixos.io", role: "Member", status: "Active" },
 ];
 
 const timezones = [
@@ -125,7 +125,7 @@ export default function WorkspaceSettingsPage() {
   const [inviteRole, setInviteRole] = useState<"Member" | "Manager">("Member");
 
   // Billing state
-  const [billingEmail, setBillingEmail] = useState("billing@brixstac.io");
+  const [billingEmail, setBillingEmail] = useState("billing@brixos.io");
 
   // Security state
   const [require2FA, setRequire2FA] = useState(false);
@@ -228,7 +228,7 @@ export default function WorkspaceSettingsPage() {
                     onClick={() => setActiveTab(tab.id)}
                     className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors"
                     style={{
-                      background: isActive ? "rgba(91, 95, 199, 0.08)" : "transparent",
+                      background: isActive ? "rgba(91,95,199,0.08)" : "transparent",
                       color: isActive ? "#5b5fc7" : "#616161",
                     }}
                   >
@@ -272,7 +272,7 @@ export default function WorkspaceSettingsPage() {
                       </label>
                       <div className="relative">
                         <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm" style={{ color: "#616161" }}>
-                          brixstac.io/
+                          brixos.io/
                         </span>
                         <input
                           type="text"
@@ -488,7 +488,7 @@ export default function WorkspaceSettingsPage() {
                               {member.role === "Owner" ? (
                                 <span
                                   className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium"
-                                  style={{ background: "rgba(91, 95, 199, 0.1)", color: "#5b5fc7" }}
+                                  style={{ background: "rgba(91,95,199,0.1)", color: "#5b5fc7" }}
                                 >
                                   <CrownPlaceholder />
                                   Owner
@@ -514,7 +514,7 @@ export default function WorkspaceSettingsPage() {
                                     member.status === "Active"
                                       ? "rgba(35, 123, 75, 0.1)"
                                       : member.status === "Invited"
-                                      ? "rgba(91, 95, 199, 0.1)"
+                                      ? "rgba(91,95,199,0.1)"
                                       : "#f5f5f3",
                                   color:
                                     member.status === "Active"
@@ -752,7 +752,7 @@ export default function WorkspaceSettingsPage() {
                       <div className="flex items-start gap-3">
                         <div
                           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-                          style={{ background: "rgba(91, 95, 199, 0.08)" }}
+                          style={{ background: "rgba(91,95,199,0.08)" }}
                         >
                           <Lock size={18} style={{ color: "#5b5fc7" }} />
                         </div>
@@ -772,7 +772,7 @@ export default function WorkspaceSettingsPage() {
                       <div className="flex items-start gap-3">
                         <div
                           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-                          style={{ background: "rgba(91, 95, 199, 0.08)" }}
+                          style={{ background: "rgba(91,95,199,0.08)" }}
                         >
                           <Shield size={18} style={{ color: "#5b5fc7" }} />
                         </div>
@@ -792,7 +792,7 @@ export default function WorkspaceSettingsPage() {
                       <div className="flex items-start gap-3">
                         <div
                           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-                          style={{ background: "rgba(91, 95, 199, 0.08)" }}
+                          style={{ background: "rgba(91,95,199,0.08)" }}
                         >
                           <Clock size={18} style={{ color: "#5b5fc7" }} />
                         </div>
@@ -904,7 +904,7 @@ export default function WorkspaceSettingsPage() {
                           }
                           className="mt-4 w-full rounded-lg px-4 py-2 text-sm font-medium transition-colors"
                           style={{
-                            background: integration.connected ? "#fef2f2" : "rgba(91, 95, 199, 0.08)",
+                            background: integration.connected ? "#fef2f2" : "rgba(91,95,199,0.08)",
                             color: integration.connected ? "#dc2626" : "#5b5fc7",
                             borderRadius: "12px",
                           }}

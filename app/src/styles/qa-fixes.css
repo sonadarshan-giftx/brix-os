@@ -20,7 +20,7 @@
 }
 .app-rail-item:hover,
 [data-rail-item]:hover {
-  background-color: rgba(91, 95, 199, 0.08) !important;
+  background-color: rgba(217,119,87, 0.08) !important;
   transform: translateX(1px);
 }
 
@@ -43,8 +43,8 @@
 }
 .stat-card:hover,
 [data-stat-card]:hover {
-  background-color: rgba(91, 95, 199, 0.04) !important;
-  border-color: #5b5fc7 !important;
+  background-color: rgba(217,119,87, 0.04) !important;
+  border-color: #D97757 !important;
   transform: translateY(-1px);
 }
 
@@ -66,8 +66,8 @@ button:active:not(:disabled),
 }
 
 /* Primary button hover */
-button[style*="backgroundColor: #5b5fc7"]:hover,
-button[style*="background: #5b5fc7"]:hover {
+button[style*="backgroundColor: #D97757"]:hover,
+button[style*="background: #D97757"]:hover {
   filter: brightness(1.08) !important;
 }
 
@@ -90,7 +90,7 @@ button[style*="background: #c4314b"]:hover {
 }
 .tab-button:hover,
 [data-tab]:hover {
-  background-color: rgba(91, 95, 199, 0.06) !important;
+  background-color: rgba(217,119,87, 0.06) !important;
 }
 
 /* ── 7. APP CARD HOVER ── */
@@ -102,7 +102,7 @@ button[style*="background: #c4314b"]:hover {
 [data-app-card]:hover {
   transform: translateY(-3px) !important;
   box-shadow: 0 12px 32px rgba(0,0,0,0.1) !important;
-  border-color: #5b5fc7 !important;
+  border-color: #D97757 !important;
 }
 
 /* ── 8. APP CONNECT BUTTON HOVER ── */
@@ -155,7 +155,7 @@ button[style*="background: #c4314b"]:hover {
   transition: background-color 0.12s ease, color 0.12s ease !important;
 }
 .settings-menu-item:hover {
-  background-color: rgba(91, 95, 199, 0.08) !important;
+  background-color: rgba(217,119,87, 0.08) !important;
 }
 
 /* ── 14. AVATAR HOVER ── */
@@ -202,7 +202,7 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 [role="button"]:focus-visible {
-  outline: 2px solid #5b5fc7 !important;
+  outline: 2px solid #D97757 !important;
   outline-offset: 2px !important;
   border-radius: 4px !important;
 }
@@ -223,8 +223,8 @@ select:focus-visible,
   animation: agentPulse 2s ease-in-out infinite !important;
 }
 @keyframes agentPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(91, 95, 199, 0.2); }
-  50%      { box-shadow: 0 0 0 8px rgba(91, 95, 199, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217,119,87, 0.2); }
+  50%      { box-shadow: 0 0 0 8px rgba(217,119,87, 0); }
 }
 
 /* ── 22. BADGE ANIMATION ── */
@@ -265,10 +265,10 @@ html {
   transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
 }
 .search-input:hover {
-  border-color: #5b5fc7 !important;
+  border-color: #D97757 !important;
 }
 .search-input:focus {
-  box-shadow: 0 0 0 3px rgba(91, 95, 199, 0.15) !important;
+  box-shadow: 0 0 0 3px rgba(217,119,87, 0.15) !important;
 }
 
 /* ── 27. CHECKBOX/RADIO TRANSITION ── */
@@ -305,7 +305,7 @@ a:hover {
   transition: background-color 0.12s ease, padding-left 0.15s ease !important;
 }
 .context-list-item:hover {
-  background-color: rgba(91, 95, 199, 0.06) !important;
+  background-color: rgba(217,119,87, 0.06) !important;
   padding-left: 4px;
 }
 
@@ -367,7 +367,7 @@ a:hover {
   transition: background-color 0.12s ease, color 0.12s ease !important;
 }
 .calendar-day-cell:hover:not(.calendar-day-selected):not(.calendar-day-today) {
-  background-color: rgba(91, 95, 199, 0.06) !important;
+  background-color: rgba(217,119,87, 0.06) !important;
 }
 
 /* ── 38. CALENDAR TODAY HIGHLIGHT ── */
@@ -375,8 +375,8 @@ a:hover {
   animation: todayPulse 3s ease-in-out infinite !important;
 }
 @keyframes todayPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(91, 95, 199, 0.2); }
-  50%      { box-shadow: 0 0 0 4px rgba(91, 95, 199, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217,119,87, 0.2); }
+  50%      { box-shadow: 0 0 0 4px rgba(217,119,87, 0); }
 }
 
 /* ── 39. SECURITY SCORE RING ── */
@@ -407,7 +407,7 @@ a:hover {
   transition: background-color 0.12s ease !important;
 }
 .data-table-row:hover {
-  background-color: rgba(91, 95, 199, 0.04) !important;
+  background-color: rgba(217,119,87, 0.04) !important;
 }
 
 /* ── 43. KANBAN CARD HOVER ── */
@@ -439,7 +439,7 @@ a:hover {
   transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease !important;
 }
 .pagination-btn:hover:not(.pagination-active) {
-  background-color: rgba(91, 95, 199, 0.08) !important;
+  background-color: rgba(217,119,87, 0.08) !important;
 }
 
 /* ── 47. FILE UPLOAD DROPZONE ── */
@@ -448,8 +448,8 @@ a:hover {
 }
 .dropzone:hover,
 .dropzone.drag-over {
-  border-color: #5b5fc7 !important;
-  background-color: rgba(91, 95, 199, 0.04) !important;
+  border-color: #D97757 !important;
+  background-color: rgba(217,119,87, 0.04) !important;
   transform: scale(1.01);
 }
 
@@ -458,7 +458,7 @@ a:hover {
   transition: background-color 0.1s ease, color 0.1s ease !important;
 }
 .menu-item:hover {
-  background-color: rgba(91, 95, 199, 0.08) !important;
+  background-color: rgba(217,119,87, 0.08) !important;
 }
 
 /* ── 49. SLIDER/THUMB ── */
@@ -474,7 +474,7 @@ input[type="range"]:hover {
   transition: border-color 0.15s ease !important;
 }
 .code-block:hover {
-  border-color: #5b5fc7 !important;
+  border-color: #D97757 !important;
 }
 
 /* ════════════════════════════════════════════
@@ -507,7 +507,7 @@ button:disabled,
    SELECTION COLOR
    ════════════════════════════════════════════ */
 ::selection {
-  background-color: rgba(91, 95, 199, 0.2);
+  background-color: rgba(217,119,87, 0.2);
   color: inherit;
 }
 
@@ -528,7 +528,7 @@ button:disabled,
 
 /* ── FOCUS VISIBLE (keyboard only) ── */
 .focus-ring:focus-visible {
-  outline: 2px solid #5b5fc7 !important;
+  outline: 2px solid #D97757 !important;
   outline-offset: 2px !important;
 }
 

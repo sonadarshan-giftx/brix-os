@@ -188,7 +188,7 @@ function GitPullRequestIcon({ size, color }: { size: number; color: string }) {
 
 /* ═══════════════════ PROJECTS PAGE ═══════════════════ */
 export default function ProjectsPage() {
-  useEffect(() => { document.title = "Projects" + " - Brixstac"; }, []);
+  useEffect(() => { document.title = "Projects" + " - BrixOS"; }, []);
   const selectedProjectId = useStore((s) => s.selectedProjectId);
   const selectProject = useStore((s) => s.selectProject);
 
@@ -876,7 +876,7 @@ function MissionTab({ project }: { project: Project }) {
                   type="monotone"
                   dataKey="actual"
                   stroke="#5b5fc7"
-                  fill="rgba(91, 95, 199, 0.1)"
+                  fill="rgba(91,95,199,0.1)"
                   strokeWidth={2}
                   name="Actual"
                 />
@@ -1238,7 +1238,7 @@ function PlanningOwnerTab({ project, milestones }: { project: Project; milestone
               </div>
               <div className="mt-3 flex items-center gap-2 rounded p-2" style={{ backgroundColor: '#e8eaf6' }}>
                 <Sparkles size={14} color="#5b5fc7" />
-                <span style={{ fontSize: 12, color: '#3c3489' }}>{'AI suggested approach based on project scope'}</span>
+                <span style={{ fontSize: 12, color: '#9E4A28' }}>{'AI suggested approach based on project scope'}</span>
               </div>
             </Card>
 
@@ -2271,7 +2271,7 @@ function SprintsTab({ project }: { project: Project }) {
                             type="monotone"
                             dataKey="actual"
                             stroke="#5b5fc7"
-                            fill="rgba(91, 95, 199, 0.1)"
+                            fill="rgba(91,95,199,0.1)"
                             strokeWidth={2}
                             name="Actual"
                           />
@@ -2391,7 +2391,7 @@ function BudgetTab({ project }: { project: Project }) {
       <Card>
         <div className="flex items-center gap-2">
           <Sparkles size={14} color="#5b5fc7" />
-          <span style={{ fontSize: 13, color: '#3c3489' }}>
+          <span style={{ fontSize: 13, color: '#9E4A28' }}>
             At current spend rate, you&apos;ll finish{' '}
             <strong>{totalSpent < totalBudgeted * 0.9 ? '8% under budget' : 'on budget'}</strong> — reallocate Design surplus to
             Engineering buffer.

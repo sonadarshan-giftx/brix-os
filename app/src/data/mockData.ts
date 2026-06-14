@@ -404,7 +404,7 @@ export const teams: Team[] = [
     id: 'team-engineering',
     name: 'Engineering',
     icon: 'code',
-    color: '#5b5fc7',
+    color: '#D97757',
     memberIds: ['emp-maya', 'emp-raj', 'emp-aria', 'emp-sage', 'emp-echo'],
     channels: [
       { id: 'ch-eng-general', name: '#general', type: 'public' },

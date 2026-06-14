@@ -113,7 +113,7 @@ export default function LoginPage() {
       {/* ── Left panel: Branding ── */}
       <div style={{
         width: '45%', flexShrink: 0,
-        background: `linear-gradient(160deg, ${BRAND_DARK} 0%, #2d2f5e 50%, #1e1f42 100%)`,
+        background: `linear-gradient(160deg, ${BRAND_DARK} 0%, #3A2317 50%, #241410 100%)`,
         display: 'flex', flexDirection: 'column',
         padding: '48px 52px',
         position: 'relative', overflow: 'hidden',
@@ -122,7 +122,7 @@ export default function LoginPage() {
       >
         {/* Background glows */}
         <div style={{ position: 'absolute', top: -120, left: -120, width: 400, height: 400, borderRadius: '50%', background: `${BRAND}20`, filter: 'blur(80px)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: -80, right: -80, width: 300, height: 300, borderRadius: '50%', background: '#7c3aed18', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: -80, right: -80, width: 300, height: 300, borderRadius: '50%', background: '#46477518', filter: 'blur(60px)', pointerEvents: 'none' }} />
 
         {/* Logo */}
         <button
@@ -164,7 +164,7 @@ export default function LoginPage() {
             margin: '0 0 16px',
           }}>
             The OS for<br />
-            <span style={{ background: 'linear-gradient(135deg, #a5b4fc, #818cf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            <span style={{ background: 'linear-gradient(135deg, #EBB59C, #E89B7D)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               modern teams
             </span>
           </h1>
@@ -518,7 +518,7 @@ function PrimaryBtn({ children, onClick, type = 'button', disabled }: {
       style={{
         width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
         padding: '13px', borderRadius: 10, border: 'none', cursor: disabled ? 'not-allowed' : 'pointer',
-        background: disabled ? '#a1a1aa' : `linear-gradient(135deg, #6366f1, #5b5fc7)`,
+        background: disabled ? '#a1a1aa' : `linear-gradient(135deg, #5b5fc7, #5b5fc7)`,
         color: '#fff', fontSize: 14, fontWeight: 700, letterSpacing: '-0.01em',
         boxShadow: disabled ? 'none' : '0 4px 14px rgba(91,95,199,0.35)',
         transition: 'all 0.15s', fontFamily: 'inherit',

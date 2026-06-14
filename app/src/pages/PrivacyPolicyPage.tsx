@@ -117,7 +117,7 @@ export default function PrivacyPolicyPage() {
               transition: "background 0.2s",
               fontFamily: "Inter, sans-serif",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#4a4eb5")}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#464775")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "#5b5fc7")}
           >
             <Download size={16} />
@@ -149,7 +149,7 @@ export default function PrivacyPolicyPage() {
               </h2>
             </div>
             <p style={{ margin: 0, color: "#616161", fontSize: "15px" }}>
-              Brixstac ("we," "us," or "our") is committed to protecting your privacy. This
+              BrixOS ("we," "us," or "our") is committed to protecting your privacy. This
               Privacy Policy explains how we collect, use, disclose, and safeguard your
               information when you use our SaaS platform and related services (collectively,
               the "Services"). Please read this policy carefully. By using our Services, you
@@ -437,8 +437,8 @@ export default function PrivacyPolicyPage() {
             </ul>
             <p style={{ margin: "12px 0 0", color: "#616161", fontSize: "15px" }}>
               To exercise these rights, contact us at{" "}
-              <a href="mailto:privacy@brixstac.com" style={{ color: "#5b5fc7" }}>
-                privacy@brixstac.com
+              <a href="mailto:privacy@brixos.io" style={{ color: "#5b5fc7" }}>
+                privacy@brixos.io
               </a>
               .
             </p>
@@ -565,12 +565,12 @@ export default function PrivacyPolicyPage() {
             >
               <p style={{ margin: "0 0 6px", fontSize: "15px", color: "#242424" }}>
                 <strong>Email:</strong>{" "}
-                <a href="mailto:privacy@brixstac.com" style={{ color: "#5b5fc7" }}>
-                  privacy@brixstac.com
+                <a href="mailto:privacy@brixos.io" style={{ color: "#5b5fc7" }}>
+                  privacy@brixos.io
                 </a>
               </p>
               <p style={{ margin: "0 0 6px", fontSize: "15px", color: "#242424" }}>
-                <strong>Address:</strong> Brixstac, Inc. 123 Innovation Drive, Suite 400, San
+                <strong>Address:</strong> BrixOS, Inc. 123 Innovation Drive, Suite 400, San
                 Francisco, CA 94105, USA
               </p>
               <p style={{ margin: 0, fontSize: "15px", color: "#242424" }}>

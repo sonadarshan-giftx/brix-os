@@ -68,10 +68,10 @@ export default function TermsOfServicePage() {
               </h2>
             </div>
             <p style={{ margin: 0, color: "#616161", fontSize: "15px" }}>
-              By accessing or using the Brixstac platform and services ("Services"), you agree
+              By accessing or using the BrixOS platform and services ("Services"), you agree
               to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms,
               you may not access or use the Services. These Terms constitute a legally binding
-              agreement between you and Brixstac, Inc. ("Brixstac," "we," "us," or "our").
+              agreement between you and BrixOS, Inc. ("BrixOS," "we," "us," or "our").
             </p>
           </section>
 
@@ -84,7 +84,7 @@ export default function TermsOfServicePage() {
               </h2>
             </div>
             <p style={{ margin: 0, color: "#616161", fontSize: "15px" }}>
-              Brixstac provides a cloud-based software-as-a-service platform for project management,
+              BrixOS provides a cloud-based software-as-a-service platform for project management,
               team collaboration, AI-powered workflow automation, and related productivity tools.
               We reserve the right to modify, suspend, or discontinue any aspect of the Services
               at any time, with or without notice. We will not be liable to you or any third party
@@ -232,10 +232,10 @@ export default function TermsOfServicePage() {
             <p style={{ margin: "0 0 12px", color: "#616161", fontSize: "15px" }}>
               All content, features, and functionality of the Services, including but not limited
               to software, text, graphics, logos, icons, images, and source code, are owned by
-              Brixstac and protected by intellectual property laws. You are granted a limited,
+              BrixOS and protected by intellectual property laws. You are granted a limited,
               non-exclusive, non-transferable license to use the Services in accordance with these
               Terms. You retain ownership of any data you upload to the Services. You grant
-              Brixstac a license to use such data solely as necessary to provide and improve the
+              BrixOS a license to use such data solely as necessary to provide and improve the
               Services.
             </p>
           </section>
@@ -287,7 +287,7 @@ export default function TermsOfServicePage() {
               </h2>
             </div>
             <p style={{ margin: "0 0 12px", color: "#616161", fontSize: "15px" }}>
-              To the maximum extent permitted by applicable law, Brixstac and its affiliates,
+              To the maximum extent permitted by applicable law, BrixOS and its affiliates,
               officers, employees, agents, and licensors shall not be liable for any indirect,
               incidental, special, consequential, or punitive damages, including loss of
               profits, data, or goodwill, arising out of or in connection with your use of the
@@ -306,7 +306,7 @@ export default function TermsOfServicePage() {
               </h2>
             </div>
             <p style={{ margin: 0, color: "#616161", fontSize: "15px" }}>
-              You agree to indemnify, defend, and hold harmless Brixstac and its affiliates,
+              You agree to indemnify, defend, and hold harmless BrixOS and its affiliates,
               officers, employees, and agents from and against any claims, liabilities, damages,
               losses, and expenses (including reasonable attorneys' fees) arising out of or in
               any way connected with your access to or use of the Services, your violation of
@@ -370,12 +370,12 @@ export default function TermsOfServicePage() {
             >
               <p style={{ margin: "0 0 6px", fontSize: "15px", color: "#242424" }}>
                 <strong>Email:</strong>{" "}
-                <a href="mailto:legal@brixstac.com" style={{ color: "#5b5fc7" }}>
-                  legal@brixstac.com
+                <a href="mailto:legal@brixos.io" style={{ color: "#5b5fc7" }}>
+                  legal@brixos.io
                 </a>
               </p>
               <p style={{ margin: "0 0 6px", fontSize: "15px", color: "#242424" }}>
-                <strong>Address:</strong> Brixstac, Inc. 123 Innovation Drive, Suite 400, San
+                <strong>Address:</strong> BrixOS, Inc. 123 Innovation Drive, Suite 400, San
                 Francisco, CA 94105, USA
               </p>
               <p style={{ margin: 0, fontSize: "15px", color: "#242424" }}>

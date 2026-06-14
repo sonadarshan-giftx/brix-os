@@ -435,7 +435,7 @@ export function showToast(
   const colors: Record<string, string> = {
     success: '#237b4b',
     error: '#c4314b',
-    info: '#5b5fc7',
+    info: '#D97757',
     warning: '#ffaa44',
   };
   toast.style.backgroundColor = colors[type] || colors.info;

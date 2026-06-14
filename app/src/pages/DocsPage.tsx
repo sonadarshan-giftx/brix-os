@@ -68,7 +68,7 @@ type ParagraphStyle = 'Normal' | 'H1' | 'H2' | 'H3' | 'Code Block' | 'Quote';
 
 const SPACES: DocSpace[] = [
   { id: 'eng', name: 'Engineering Docs', initials: 'ED', color: '#3b82f6' },
-  { id: 'prod', name: 'Product Wiki', initials: 'PW', color: '#8b5cf6' },
+  { id: 'prod', name: 'Product Wiki', initials: 'PW', color: '#5b5fc7' },
   { id: 'onboard', name: 'Onboarding', initials: 'OB', color: '#10b981' },
   { id: 'arch', name: 'Architecture', initials: 'AR', color: '#f59e0b' },
   { id: 'api', name: 'API Reference', initials: 'API', color: '#ef4444' },
@@ -319,13 +319,13 @@ function CodeBlock({ code, lang }: { code: string; lang: string }) {
   };
   return (
     <div className="rounded-lg overflow-hidden my-4 border border-gray-700">
-      <div className="flex items-center justify-between bg-[#2a2a3e] px-4 py-2">
+      <div className="flex items-center justify-between bg-[#352B21] px-4 py-2">
         <span className="text-xs text-gray-400 font-mono">{lang}</span>
         <button onClick={copy} className="text-xs text-gray-400 hover:text-white flex items-center gap-1 transition-colors">
           {copied ? <><Check size={12} /> Copied</> : <><Copy size={12} /> Copy</>}
         </button>
       </div>
-      <pre className="bg-[#1e1e2e] text-gray-100 p-4 overflow-x-auto text-sm font-mono leading-relaxed">
+      <pre className="bg-[#29221B] text-gray-100 p-4 overflow-x-auto text-sm font-mono leading-relaxed">
         <code>{code}</code>
       </pre>
     </div>
@@ -729,7 +729,7 @@ function SearchResults({ query, onSelect }: { query: string; onSelect: (id: stri
       p.labels.some(l => l.includes(query.toLowerCase()))
   );
   return (
-    <div className="absolute left-2 right-2 top-full mt-1 bg-[#2a2a3e] border border-white/20 rounded-lg shadow-xl z-50 overflow-hidden">
+    <div className="absolute left-2 right-2 top-full mt-1 bg-[#352B21] border border-white/20 rounded-lg shadow-xl z-50 overflow-hidden">
       {results.length === 0 ? (
         <p className="text-white/50 text-sm p-4">No results for "{query}"</p>
       ) : (
@@ -1064,7 +1064,7 @@ export default function DocsPage() {
   return (
     <div className="flex h-screen bg-[#f5f5f3] overflow-hidden">
       {/* ── Left Sidebar ── */}
-      <div className="w-70 bg-[#1e1e2e] flex flex-col flex-shrink-0" style={{ width: 280 }}>
+      <div className="w-70 bg-[#29221B] flex flex-col flex-shrink-0" style={{ width: 280 }}>
         {/* Spaces header */}
         <div className="p-4 border-b border-white/10">
           <div className="relative mb-3">

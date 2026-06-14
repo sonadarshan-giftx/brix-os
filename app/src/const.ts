@@ -170,7 +170,7 @@ export const FEATURE_FLAGS = {
 export const THEME = {
   STORAGE_KEY: 'brixstac-theme',
   ACCENT_COLORS: [
-    { name: 'Royal', value: '#5b5fc7' },
+    { name: 'Royal', value: '#D97757' },
     { name: 'Crimson', value: '#c4314b' },
     { name: 'Forest', value: '#237b4b' },
     { name: 'Azure', value: '#0078d4' },

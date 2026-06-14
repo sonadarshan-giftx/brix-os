@@ -10,9 +10,9 @@
     --brand-primary: #5b5fc7;
     --brand-deep: #464775;
     --brand-deeper: #3a3d6b;
-    --brand-text-on-light: #3c3489;
-    --brand-light: #eef0fc;
-    --brand-glow: rgba(91, 95, 199, 0.15);
+    --brand-text-on-light: #4338ca;
+    --brand-light: #eef2ff;
+    --brand-glow: rgba(91,95,199,0.15);
 
     /* ── Surfaces ── */
     --surface-primary: #ffffff;
@@ -22,11 +22,11 @@
     --surface-rail: #f0f0f1;
     --surface-hover: #ececee;
     --surface-active: #e2e2e6;
-    --surface-selected: #eef0fc;
+    --surface-selected: #eef2ff;
     --surface-border: #e2e2e6;
     --surface-divider: #ebebed;
     --surface-overlay: rgba(0, 0, 0, 0.04);
-    --surface-dark: #1a1a2e;
+    --surface-dark: #0d0e1a;
 
     /* ── Op (shell) aliases ── */
     --op-bg-primary: #ffffff;
@@ -57,7 +57,7 @@
     --status-busy: #ef4444;
     --status-away: #f59e0b;
     --status-offline: #71717a;
-    --status-ai: #7c3aed;
+    --status-ai: #5b5fc7;
 
     /* ── Chart Colors ── */
     --chart-line-1: #5b5fc7;
@@ -102,10 +102,10 @@
 
   /* ── Dark Mode ── */
   .dark {
-    --brand-primary: #818cf8;
-    --brand-deep: #4f52a0;
-    --brand-light: #1e1b4b;
-    --brand-glow: rgba(129, 140, 248, 0.12);
+    --brand-primary: #7c7ff0;
+    --brand-deep: #5b5fc7;
+    --brand-light: #1e1f42;
+    --brand-glow: rgba(124,127,240,0.12);
 
     --surface-primary: #09090b;
     --surface-base: #0f0f12;
@@ -114,7 +114,7 @@
     --surface-rail: #141417;
     --surface-hover: #27272a;
     --surface-active: #3f3f46;
-    --surface-selected: #1e1b4b;
+    --surface-selected: #1e1f42;
     --surface-border: #27272a;
     --surface-divider: #1f1f23;
     --surface-dark: #000000;
@@ -123,13 +123,13 @@
     --op-bg-secondary: #111114;
     --op-rail-bg: #0d0d10;
     --op-border: #27272a;
-    --op-accent: #818cf8;
+    --op-accent: #7c7ff0;
 
     --text-primary: #fafafa;
     --text-secondary: #a1a1aa;
     --text-tertiary: #52525b;
     --text-inverse: #09090b;
-    --text-brand: #818cf8;
+    --text-brand: #7c7ff0;
     --text-danger: #f87171;
     --text-success: #4ade80;
     --text-warning: #fbbf24;
@@ -224,7 +224,7 @@
 
   /* Gradient text */
   .gradient-text {
-    background: linear-gradient(135deg, #5b5fc7, #7c3aed);
+    background: linear-gradient(135deg, #5b5fc7, #7c7ff0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

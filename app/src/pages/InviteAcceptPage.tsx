@@ -39,7 +39,7 @@ function useToast() {
 
 /* Mock workspace lookup by invite token */
 function getWorkspaceByToken(token: string) {
-  const workspaces = JSON.parse(localStorage.getItem("brixstac_workspaces") || "[]");
+  const workspaces = JSON.parse(localStorage.getItem("brixos_workspaces") || "[]");
   // In a real app, the token maps to a specific workspace. Mock fallback:
   if (workspaces.length > 0) {
     return workspaces[0];
@@ -57,7 +57,7 @@ function getWorkspaceByToken(token: string) {
 
 /* Check login state from localStorage mock */
 function isLoggedIn() {
-  return !!localStorage.getItem("brixstac_user");
+  return !!localStorage.getItem("brixos_user");
 }
 
 export default function InviteAcceptPage() {
@@ -87,13 +87,13 @@ export default function InviteAcceptPage() {
 
   const handleJoin = () => {
     // Add user to workspace (mock)
-    const existing = JSON.parse(localStorage.getItem("brixstac_workspaces") || "[]");
+    const existing = JSON.parse(localStorage.getItem("brixos_workspaces") || "[]");
     const updated = existing.map((w: any) =>
       w.id === workspace?.id
         ? { ...w, memberCount: (w.memberCount || 0) + 1 }
         : w
     );
-    localStorage.setItem("brixstac_workspaces", JSON.stringify(updated));
+    localStorage.setItem("brixos_workspaces", JSON.stringify(updated));
     showToast(`You joined ${workspace?.name || "the workspace"}`, "success");
     setTimeout(() => navigate("/projects"), 800);
   };
@@ -117,13 +117,13 @@ export default function InviteAcceptPage() {
     }
 
     // Mock create account
-    localStorage.setItem("brixstac_user", JSON.stringify({ name, email }));
+    localStorage.setItem("brixos_user", JSON.stringify({ name, email }));
     setLoggedIn(true);
     showToast("Account created successfully", "success");
   };
 
   const handleLogin = () => {
-    localStorage.setItem("brixstac_user", JSON.stringify({ name: "Demo User", email: "demo@brixstac.io" }));
+    localStorage.setItem("brixos_user", JSON.stringify({ name: "Demo User", email: "demo@brixos.io" }));
     setLoggedIn(true);
     showToast("Logged in successfully", "success");
   };
@@ -162,7 +162,7 @@ export default function InviteAcceptPage() {
             <Building2 size={18} color="#ffffff" />
           </div>
           <span className="text-base font-semibold" style={{ color: "#242424" }}>
-            Brixstac
+            BrixOS
           </span>
         </div>
       </div>
@@ -175,7 +175,7 @@ export default function InviteAcceptPage() {
         >
           <div
             className="mx-auto flex h-14 w-14 items-center justify-center rounded-full"
-            style={{ background: "rgba(91, 95, 199, 0.08)" }}
+            style={{ background: "rgba(91,95,199,0.08)" }}
           >
             <Mail size={24} style={{ color: "#5b5fc7" }} />
           </div>
@@ -252,7 +252,7 @@ export default function InviteAcceptPage() {
                 Create account to join
               </h2>
               <p className="mt-1 text-xs" style={{ color: "#616161" }}>
-                Set up your Brixstac account to accept the invitation
+                Set up your BrixOS account to accept the invitation
               </p>
 
               <div className="mt-4 space-y-3">

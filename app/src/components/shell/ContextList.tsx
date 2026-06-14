@@ -235,7 +235,7 @@ function ChatList({ searchQuery }: { searchQuery: string }) {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1">
                       <span className="truncate text-xs font-semibold" style={{ color: '#252422' }}>{emp.name}</span>
-                      {emp.kind === 'ai' && <span className="rounded px-1 py-0.5 text-[7px] font-bold" style={{ backgroundColor: '#f3e8ff', color: '#7c3aed' }}>AI</span>}
+                      {emp.kind === 'ai' && <span className="rounded px-1 py-0.5 text-[7px] font-bold" style={{ backgroundColor: '#f3e8ff', color: '#464775' }}>AI</span>}
                     </div>
                     <span className="truncate text-[10px]" style={{ color: '#767676' }}>{emp.title}</span>
                   </div>
@@ -251,7 +251,7 @@ function ChatList({ searchQuery }: { searchQuery: string }) {
         <>
           <div className="flex items-center gap-1 px-3 py-1"><Users size={10} style={{ color: '#767676' }} /><span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: '#767676' }}>Team Groups</span></div>
           {filteredGroups.length === 0 ? <EmptySearchResult /> : filteredGroups.map((g) => {
-            const groupColors: Record<string, string> = { team: '#5b5fc7', leadership: '#c4314b', ai: '#7c3aed', company: '#237b4b' };
+            const groupColors: Record<string, string> = { team: '#5b5fc7', leadership: '#c4314b', ai: '#464775', company: '#237b4b' };
             const color = groupColors[g.type] || '#5b5fc7';
             return (
               <KeyboardListItem
@@ -266,7 +266,7 @@ function ChatList({ searchQuery }: { searchQuery: string }) {
                   <span className="truncate text-xs font-semibold" style={{ color: '#252422' }}>{g.name}</span>
                   <div className="flex items-center gap-1">
                     <span className="text-[9px]" style={{ color: '#767676' }}>{g.memberCount} members</span>
-                    {g.type === 'ai' && <span className="rounded px-1 py-0.5 text-[7px] font-bold" style={{ backgroundColor: '#f3e8ff', color: '#7c3aed' }}>AI</span>}
+                    {g.type === 'ai' && <span className="rounded px-1 py-0.5 text-[7px] font-bold" style={{ backgroundColor: '#f3e8ff', color: '#464775' }}>AI</span>}
                   </div>
                 </div>
                 <CircleDot size={10} style={{ color, flexShrink: 0 }} />
@@ -399,7 +399,7 @@ function CallsList({ searchQuery }: { searchQuery: string }) {
               </div>
             </div>
             {call.aiAttendants.length > 0 && (
-              <span className="mt-1 flex items-center gap-0.5 text-[9px] font-semibold" style={{ color: '#7c3aed' }}>
+              <span className="mt-1 flex items-center gap-0.5 text-[9px] font-semibold" style={{ color: '#464775' }}>
                 <Sparkles size={8} /> {call.aiAttendants.length} AI attending
               </span>
             )}

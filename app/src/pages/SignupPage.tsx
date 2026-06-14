@@ -161,7 +161,7 @@ export default function SignupPage() {
             Create your account
           </h1>
           <p className="mt-1 text-sm" style={{ color: '#616161' }}>
-            Get started with Brixstac
+            Get started with BrixOS
           </p>
         </div>
 

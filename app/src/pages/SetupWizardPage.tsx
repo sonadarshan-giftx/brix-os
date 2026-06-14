@@ -132,7 +132,7 @@ export default function SetupWizardPage() {
           <Zap size={22} color="#fff" />
         </div>
         <div>
-          <span className="text-lg font-bold text-white">Brixstac</span>
+          <span className="text-lg font-bold text-white">BrixOS</span>
           <span className="ml-2 rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider" style={{ backgroundColor: '#1a1a1a', color: '#a0a0a0' }}>
             Enterprise
           </span>
@@ -164,7 +164,7 @@ export default function SetupWizardPage() {
             </h1>
             <p className="mb-6 text-sm" style={{ color: '#888' }}>
               {step === 1 && 'Configure your company workspace on this instance.'}
-              {step === 2 && 'Enter the license key provided by Brixstac sales.'}
+              {step === 2 && 'Enter the license key provided by BrixOS sales.'}
               {step === 3 && 'Create the owner account for this instance.'}
               {step === 4 && 'Review settings and activate the instance.'}
             </p>
@@ -251,7 +251,7 @@ export default function SetupWizardPage() {
                 />
               </div>
               <p className="mt-1 text-[11px]" style={{ color: '#666' }}>
-                Contact sales@brixstac.io if you need a license key.
+                Contact sales@brixos.io if you need a license key.
               </p>
             </div>
 
@@ -471,7 +471,7 @@ export default function SetupWizardPage() {
       </div>
 
       <p className="mt-6 text-center text-[11px]" style={{ color: '#444' }}>
-        Brixstac Enterprise — Air-gapped, single-tenant deployment.
+        BrixOS Enterprise — Air-gapped, single-tenant deployment.
         Zero shared infrastructure. Complete data isolation.
       </p>
     </div>

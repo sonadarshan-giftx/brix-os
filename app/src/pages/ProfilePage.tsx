@@ -144,7 +144,7 @@ function ProfileHeader({ employee, isAi }: { employee: typeof employees[0]; isAi
               fontSize: 11,
               height: 20,
               lineHeight: '20px',
-              backgroundColor: 'rgba(91, 95, 199, 0.15)',
+              backgroundColor: 'rgba(91,95,199,0.15)',
               color: '#5b5fc7',
             }}
           >
