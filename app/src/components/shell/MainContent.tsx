@@ -20,6 +20,7 @@ const AIGatewayPage = lazy(() => import('@/pages/AIGateway'));
 const DocsPage = lazy(() => import('@/pages/DocsPage'));
 const AIEmployeesPage = lazy(() => import('@/pages/AIEmployeesPage'));
 const AnalyticsPage = lazy(() => import('@/pages/AnalyticsPage'));
+const HomePage = lazy(() => import('@/pages/Home'));
 
 interface MainContentProps {
   id?: string;
@@ -85,7 +86,7 @@ export function MainContent({ id = 'main-content' }: MainContentProps) {
       const item = hash.replace('#/', '');
       if (item && item !== activeRailItem) {
         const setItem = useStore.getState().setActiveRailItem;
-        if (['projects', 'teams', 'chat', 'calls', 'calendar', 'approvals', 'security', 'apps', 'profile', 'ai-gateway', 'docs', 'ai-employees', 'analytics'].includes(item)) {
+        if (['home', 'projects', 'teams', 'chat', 'calls', 'calendar', 'approvals', 'security', 'apps', 'profile', 'ai-gateway', 'docs', 'ai-employees', 'analytics'].includes(item)) {
           setItem(item);
         }
       }
@@ -179,6 +180,7 @@ function BreadcrumbNav({ activeItem }: { activeItem: string }) {
   const setActiveRailItem = useStore((s) => s.setActiveRailItem);
 
   const labels: Record<string, string> = {
+    home: 'Dashboard',
     projects: 'Projects',
     teams: 'Teams',
     chat: 'Chat',
@@ -199,25 +201,24 @@ function BreadcrumbNav({ activeItem }: { activeItem: string }) {
 
   return (
     <nav
-      className="flex flex-shrink-0 items-center gap-1 border-b px-4 py-2.5" style={{
-        borderColor: 'var(--op-border, #e1e1e1)',
-        backgroundColor: 'var(--op-bg-secondary, #f5f5f3)',
-      }}>
+      className="flex flex-shrink-0 items-center gap-1.5 border-b px-4"
+      style={{
+        height: 36,
+        borderColor: 'var(--op-border, #e2e2e6)',
+        backgroundColor: 'var(--op-bg-secondary, #f4f4f5)',
+      }}
+    >
       <button
-        onClick={() => setActiveRailItem('projects')}
-        className="flex items-center gap-0.5 rounded"
-        style={{ fontSize: 11, color: '#5b5fc7', background: 'transparent', border: 'none', cursor: 'pointer' }}
+        onClick={() => setActiveRailItem('home')}
+        className="flex items-center gap-1 rounded"
+        style={{ fontSize: 11, color: '#5b5fc7', background: 'transparent', border: 'none', cursor: 'pointer', fontWeight: 600 }}
         aria-label="Home"
       >
         <Home size={10} />
-        <span className="font-medium">Brixstac</span>
+        <span>BrixOS</span>
       </button>
-      <ChevronRight size={10} style={{ color: '#767676' }} />
-      <span
-        className="font-semibold"
-        style={{ fontSize: 11, color: '#242424' }}
-        aria-current="page"
-      >
+      <ChevronRight size={10} style={{ color: 'var(--text-tertiary, #a1a1aa)' }} />
+      <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-primary, #18181b)' }} aria-current="page">
         {labels[activeItem] || activeItem}
       </span>
     </nav>
@@ -229,6 +230,8 @@ function BreadcrumbNav({ activeItem }: { activeItem: string }) {
  */
 function SurfaceRouter({ activeItem }: { activeItem: string }) {
   switch (activeItem) {
+    case 'home':
+      return <HomePage />;
     case 'projects':
       return <ProjectsPage />;
     case 'teams':

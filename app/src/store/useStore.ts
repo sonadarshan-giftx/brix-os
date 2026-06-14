@@ -524,7 +524,7 @@ export const useStore = create<AppState>()(
           approvals: initialApprovals,
 
           // ── Navigation ──
-          activeRailItem: 'projects',
+          activeRailItem: 'home',
 
           // ── Scope / Selection ──
           activeScope: null,

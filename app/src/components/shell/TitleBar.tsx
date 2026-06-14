@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Search, Bell, ChevronDown, Settings, LogOut, User, X, Menu, HelpCircle } from 'lucide-react';
+import { Search, Bell, ChevronDown, Settings, LogOut, User, X, Menu, HelpCircle, Zap } from 'lucide-react';
 import { useStore } from '@/store/useStore';
 import { showToast } from '@/utils/helpers';
 import { authApi } from '@/utils/api';
@@ -11,19 +11,9 @@ interface TitleBarProps {
   onRailCollapseToggle?: () => void;
 }
 
-/**
- * TitleBar — Top app header with company switcher, search, notifications, and user menu
- *
- * Features:
- * - Company dropdown with selection
- * - Global search (Ctrl+K opens command palette)
- * - Notification bell with live badge + mark all read
- * - User profile dropdown with navigation actions
- * - Proper z-index management (only one dropdown at a time)
- * - Keyboard shortcuts (Ctrl+K for search)
- * - Tooltips on icon buttons
- */
-export function TitleBar({ onMenuToggle }: TitleBarProps) {  const currentUser = useStore((s) => s.currentUser);
+export function TitleBar({ onMenuToggle }: TitleBarProps) {
+  const currentUser = useStore((s) => s.currentUser);
+  const workspace = useStore((s) => s.workspace);
   const openSettings = useStore((s) => s.openSettings);
   const notifications = useStore((s) => s.notifications);
   const markNotificationRead = useStore((s) => s.markNotificationRead);
@@ -33,437 +23,391 @@ export function TitleBar({ onMenuToggle }: TitleBarProps) {  const currentUser =
 
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [showCompanySwitcher, setShowCompanySwitcher] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [currentCompany, setCurrentCompany] = useState('Acme Software');
 
   const notifRef = useRef<HTMLDivElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
-  const companyRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
 
-  // Close all dropdowns helper
-  const closeAllDropdowns = useCallback(() => {
+  const closeAll = useCallback(() => {
     setShowNotifications(false);
     setShowUserMenu(false);
-    setShowCompanySwitcher(false);
     setShowSearch(false);
   }, []);
 
-  // Toggle helpers that close others
-  const toggleNotifications = () => {
-    setShowUserMenu(false);
-    setShowCompanySwitcher(false);
-    setShowNotifications((prev) => !prev);
-  };
-  const toggleUserMenu = () => {
-    setShowNotifications(false);
-    setShowCompanySwitcher(false);
-    setShowUserMenu((prev) => !prev);
-  };
-  const toggleCompanySwitcher = () => {
-    setShowNotifications(false);
-    setShowUserMenu(false);
-    setShowCompanySwitcher((prev) => !prev);
-  };
-
-  // Click outside to close
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      const target = e.target as Node;
-      if (notifRef.current && !notifRef.current.contains(target)) setShowNotifications(false);
-      if (userMenuRef.current && !userMenuRef.current.contains(target)) setShowUserMenu(false);
-      if (companyRef.current && !companyRef.current.contains(target)) setShowCompanySwitcher(false);
+      const t = e.target as Node;
+      if (notifRef.current && !notifRef.current.contains(t)) setShowNotifications(false);
+      if (userMenuRef.current && !userMenuRef.current.contains(t)) setShowUserMenu(false);
     };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  // Keyboard shortcut: Ctrl+K opens search/command palette
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
-        closeAllDropdowns();
+        closeAll();
         setShowSearch(true);
         setTimeout(() => searchRef.current?.focus(), 50);
       }
-      if (e.key === 'Escape') {
-        closeAllDropdowns();
-      }
+      if (e.key === 'Escape') closeAll();
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [closeAllDropdowns]);
+  }, [closeAll]);
 
-  // Mark all notifications as read
-  const handleMarkAllRead = () => {
-    notifications.forEach((n) => {
-      if (!n.read) markNotificationRead(n.id);
-    });
-  };
+  const handleMarkAllRead = () => notifications.forEach((n) => { if (!n.read) markNotificationRead(n.id); });
 
-  // Mark single notification as read
-  const handleNotifClick = (id: string) => {
-    markNotificationRead(id);
-    setShowNotifications(false);
-  };
-
-  // Company options
-  const companies = ['Acme Software', 'Brixstac Labs', 'Beta Corp', 'Demo Org'];
-
-  // Sign out handler
   const handleSignOut = async () => {
     setShowUserMenu(false);
     const refreshToken = useStore.getState().refreshToken;
-    // Revoke refresh token on the server (best-effort)
-    if (refreshToken) {
-      authApi.logout(refreshToken).catch(() => {/* ignore */});
-    }
-    // Reset store
+    if (refreshToken) authApi.logout(refreshToken).catch(() => {});
     logout();
-    // Clear localStorage
     localStorage.clear();
-    showToast("Signed out successfully", "success");
-    // Navigate to landing page (HashRouter)
+    showToast('Signed out successfully', 'success');
     setTimeout(() => { window.location.href = '/'; }, 300);
   };
 
-  // Navigate to profile
-  const handleProfileClick = () => {
-    setShowUserMenu(false);
-    setActiveRailItem('profile');
-  };
-
-  // Search submit
-  const handleSearchSubmit = () => {
-    if (searchQuery.trim()) {
-      // Could trigger global search, for now navigate to chat
-      setActiveRailItem('chat');
-      setShowSearch(false);
-      setSearchQuery('');
-    }
-  };
+  const workspaceName = workspace?.name || 'BrixOS';
 
   return (
-    <div
-      className="relative z-50 flex w-full flex-shrink-0 items-center justify-between px-3 select-none"
-      style={{ height: 44, backgroundColor: '#464775' }}
-      role="banner"
-    >
-      {/* Left: Menu toggle (mobile) + Logo + App name */}
-      <div className="flex items-center gap-2">
-        {onMenuToggle && (
-          <button
-            onClick={onMenuToggle}
-            className="mr-1 flex cursor-pointer items-center justify-center rounded md:hidden"
-            style={{ width: 44, height: 44, minWidth: 44, minHeight: 44, background: 'transparent', border: 'none' }}
-            aria-label={"Toggle navigation menu"}
-            title={"Toggle menu"}
-          >
-            <Menu size={18} color="white" />
-          </button>
-        )}
-        {/* Logo mark - hexagonal "I" as inline SVG */}
-        <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-          <path
-            d="M16 2L28 9v14L16 30 4 23V9l12-7z"
-            fill="#5b5fc7"
-            stroke="white"
-            strokeWidth="1.5"
-          />
-          <text
-            x="16"
-            y="20"
-            textAnchor="middle"
-            fill="white"
-            fontSize="14"
-            fontWeight="700"
-            fontFamily="Segoe UI, sans-serif"
-          >
-            I
-          </text>
-        </svg>
-        <span
-          className="font-semibold"
-          style={{ fontSize: 14, color: '#ffffff', fontWeight: 600 }}
-        >
-          Brixstac
-        </span>
-      </div>
+    <>
+      <div
+        className="relative z-50 flex w-full flex-shrink-0 items-center justify-between px-4 select-none"
+        style={{
+          height: 48,
+          background: 'linear-gradient(135deg, #3a3d6b 0%, #464775 50%, #4a4e82 100%)',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+        }}
+        role="banner"
+      >
+        {/* Left: Logo + Brand */}
+        <div className="flex items-center gap-3">
+          {onMenuToggle && (
+            <button
+              onClick={onMenuToggle}
+              className="mr-1 flex cursor-pointer items-center justify-center rounded-lg md:hidden"
+              style={{ width: 36, height: 36, background: 'rgba(255,255,255,0.1)', border: 'none' }}
+              aria-label="Toggle navigation"
+            >
+              <Menu size={16} color="white" />
+            </button>
+          )}
 
-      {/* Center: Company breadcrumb switcher */}
-      <div className="absolute left-1/2 -translate-x-1/2" ref={companyRef}>
+          {/* Logo mark */}
+          <div style={{
+            width: 28, height: 28,
+            background: 'linear-gradient(135deg, #7c7ff0, #5b5fc7)',
+            borderRadius: 8,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 2px 8px rgba(91,95,199,0.5)',
+            flexShrink: 0,
+          }}>
+            <Zap size={15} color="#fff" strokeWidth={2.5} />
+          </div>
+
+          <span style={{
+            fontSize: 15,
+            fontWeight: 700,
+            color: '#ffffff',
+            letterSpacing: '-0.01em',
+            fontFamily: "'Inter', sans-serif",
+          }}>
+            BrixOS
+          </span>
+
+          {/* Workspace pill */}
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 5,
+            background: 'rgba(255,255,255,0.1)',
+            borderRadius: 20,
+            padding: '3px 10px 3px 8px',
+            border: '1px solid rgba(255,255,255,0.12)',
+            cursor: 'default',
+          }}>
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e' }} />
+            <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.85)', fontWeight: 500 }}>
+              {workspaceName}
+            </span>
+          </div>
+        </div>
+
+        {/* Center: Global search trigger */}
         <button
-          className="flex cursor-pointer items-center gap-1"
-          style={{ fontSize: 13, color: 'rgba(255,255,255,0.9)', background: 'transparent', border: 'none' }}
-          onClick={toggleCompanySwitcher}
-          aria-label={`Current company: ${currentCompany}. Click to switch.`}
-          aria-expanded={showCompanySwitcher}
-          title="Switch company"
+          onClick={() => { closeAll(); setShowSearch(true); setTimeout(() => searchRef.current?.focus(), 50); }}
+          style={{
+            position: 'absolute', left: '50%', transform: 'translateX(-50%)',
+            display: 'flex', alignItems: 'center', gap: 8,
+            background: 'rgba(255,255,255,0.10)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: 8,
+            padding: '6px 14px',
+            cursor: 'text',
+            width: 260,
+            transition: 'background 0.15s',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.16)')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.10)')}
+          aria-label="Search (⌘K)"
         >
-          <span>{currentCompany}</span>
-          <ChevronDown size={14} style={{ color: 'rgba(255,255,255,0.6)' }} />
+          <Search size={13} color="rgba(255,255,255,0.5)" />
+          <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', flex: 1, textAlign: 'left' }}>
+            Search anything…
+          </span>
+          <span style={{
+            fontSize: 10, fontWeight: 600,
+            color: 'rgba(255,255,255,0.35)',
+            background: 'rgba(255,255,255,0.1)',
+            borderRadius: 4, padding: '1px 5px',
+          }}>⌘K</span>
         </button>
 
-        {showCompanySwitcher && (
-          <>
-            <div className="fixed inset-0" onClick={() => setShowCompanySwitcher(false)} />
-            <div
-              className="absolute left-1/2 top-full mt-1 -translate-x-1/2 rounded-md border bg-white shadow-lg"
-              style={{ width: 200, borderColor: '#e1e1e1', zIndex: 100 }}
+        {/* Right: Actions + User */}
+        <div className="flex items-center gap-1">
+          {/* Notifications */}
+          <div className="relative" ref={notifRef}>
+            <TitleBtn
+              aria-label={`Notifications${unreadNotifications > 0 ? `, ${unreadNotifications} unread` : ''}`}
+              onClick={() => { setShowUserMenu(false); setShowNotifications((p) => !p); }}
             >
-              <div className="px-3 py-2" style={{ borderBottom: '1px solid #e1e1e1' }}>
-                <span style={{ fontSize: 11, fontWeight: 600, color: '#616161' }}>Switch Company</span>
-              </div>
-              {companies.map((c) => (
-                <button
-                  key={c}
-                  className="flex w-full cursor-pointer items-center justify-between px-3 py-2 text-left"
-                  style={{
-                    fontSize: 12,
-                    border: 'none',
-                    background: currentCompany === c ? '#f0f0fa' : 'transparent',
-                  }}
-                  onClick={() => { setCurrentCompany(c); setShowCompanySwitcher(false); }}
-                  onMouseEnter={(e) => { if (currentCompany !== c) e.currentTarget.style.backgroundColor = '#f0f0f0'; }}
-                  onMouseLeave={(e) => { if (currentCompany !== c) e.currentTarget.style.backgroundColor = 'transparent'; }}
-                >
-                  <span style={{ color: '#242424' }}>{c}</span>
-                  {currentCompany === c && <span style={{ color: '#5b5fc7', fontSize: 11, fontWeight: 600 }}>Active</span>}
-                </button>
-              ))}
+              <Bell size={17} color="rgba(255,255,255,0.85)" />
+              {unreadNotifications > 0 && (
+                <span style={{
+                  position: 'absolute', top: 6, right: 6,
+                  width: 14, height: 14, borderRadius: '50%',
+                  background: '#ef4444',
+                  fontSize: 9, fontWeight: 700, color: '#fff',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  border: '1.5px solid #464775',
+                }}>
+                  {unreadNotifications > 9 ? '9+' : unreadNotifications}
+                </span>
+              )}
+            </TitleBtn>
+            {showNotifications && (
+              <Dropdown width={320} onClose={() => setShowNotifications(false)}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', borderBottom: '1px solid var(--surface-border)' }}>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)' }}>Notifications</span>
+                  {unreadNotifications > 0 && (
+                    <button onClick={handleMarkAllRead} style={{ fontSize: 11, color: 'var(--brand-primary)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600 }}>
+                      Mark all read
+                    </button>
+                  )}
+                </div>
+                <div style={{ maxHeight: 320, overflowY: 'auto' }}>
+                  {notifications.length === 0 ? (
+                    <div style={{ padding: '24px 16px', textAlign: 'center', fontSize: 12, color: 'var(--text-tertiary)' }}>
+                      You're all caught up ✓
+                    </div>
+                  ) : (
+                    notifications.slice(0, 10).map((n) => (
+                      <button
+                        key={n.id}
+                        onClick={() => { markNotificationRead(n.id); setShowNotifications(false); }}
+                        style={{
+                          width: '100%', textAlign: 'left',
+                          padding: '10px 16px',
+                          borderBottom: '1px solid var(--surface-divider)',
+                          background: n.read ? 'transparent' : 'var(--brand-light)',
+                          border: 'none', cursor: 'pointer',
+                          display: 'flex', alignItems: 'flex-start', gap: 10,
+                        }}
+                        onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--surface-hover)')}
+                        onMouseLeave={(e) => (e.currentTarget.style.background = n.read ? 'transparent' : 'var(--brand-light)')}
+                      >
+                        {!n.read && <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--brand-primary)', marginTop: 4, flexShrink: 0 }} />}
+                        <p style={{ fontSize: 12, color: 'var(--text-primary)', lineHeight: 1.5, margin: 0 }}>{n.message}</p>
+                      </button>
+                    ))
+                  )}
+                </div>
+              </Dropdown>
+            )}
+          </div>
+
+          {/* Settings */}
+          <TitleBtn onClick={() => openSettings()} aria-label="Settings">
+            <Settings size={17} color="rgba(255,255,255,0.85)" />
+          </TitleBtn>
+
+          {/* Divider */}
+          <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,0.15)', margin: '0 4px' }} />
+
+          {/* User avatar */}
+          {currentUser ? (
+            <div className="relative" ref={userMenuRef}>
+              <button
+                onClick={() => { setShowNotifications(false); setShowUserMenu((p) => !p); }}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 8,
+                  background: showUserMenu ? 'rgba(255,255,255,0.15)' : 'transparent',
+                  border: 'none', borderRadius: 8, padding: '4px 8px 4px 4px',
+                  cursor: 'pointer', transition: 'background 0.15s',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = showUserMenu ? 'rgba(255,255,255,0.15)' : 'transparent')}
+                aria-label={`User menu: ${currentUser.name}`}
+              >
+                <Avatar src={currentUser.avatar} alt={currentUser.name || 'User'} size="sm" status={currentUser.status || 'offline'} />
+                <span style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.9)', maxWidth: 80, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {currentUser.name?.split(' ')[0] || 'User'}
+                </span>
+                <ChevronDown size={12} color="rgba(255,255,255,0.5)" />
+              </button>
+              {showUserMenu && (
+                <Dropdown width={230} onClose={() => setShowUserMenu(false)}>
+                  <div style={{ padding: '12px 16px', borderBottom: '1px solid var(--surface-border)', display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <Avatar src={currentUser.avatar} alt={currentUser.name || 'User'} size="md" />
+                    <div>
+                      <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>{currentUser.name}</p>
+                      <p style={{ fontSize: 11, color: 'var(--text-secondary)', margin: '2px 0 0' }}>{currentUser.email}</p>
+                      <span style={{
+                        display: 'inline-block', marginTop: 4,
+                        fontSize: 10, fontWeight: 700,
+                        padding: '1px 7px', borderRadius: 999,
+                        background: currentUser.role === 'Owner' ? '#fef2f2' : '#eff6ff',
+                        color: currentUser.role === 'Owner' ? '#dc2626' : '#2563eb',
+                      }}>
+                        {currentUser.role === 'Owner' ? 'CEO' : currentUser.role}
+                      </span>
+                    </div>
+                  </div>
+                  <div style={{ padding: '6px 0' }}>
+                    <MenuItem icon={<User size={14} />} label="My Profile" onClick={() => { setShowUserMenu(false); setActiveRailItem('profile'); }} />
+                    <MenuItem icon={<Settings size={14} />} label="Settings" shortcut="⌘," onClick={() => { setShowUserMenu(false); openSettings(); }} />
+                    <MenuItem icon={<HelpCircle size={14} />} label="Help & Support" onClick={() => setShowUserMenu(false)} />
+                    <div style={{ height: 1, background: 'var(--surface-border)', margin: '6px 0' }} />
+                    <MenuItem icon={<LogOut size={14} />} label="Sign out" onClick={handleSignOut} danger />
+                  </div>
+                </Dropdown>
+              )}
             </div>
-          </>
-        )}
+          ) : (
+            <a href="/#/login" style={{ padding: '6px 14px', borderRadius: 7, background: 'rgba(255,255,255,0.15)', color: '#fff', fontSize: 13, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)' }}>
+              Sign In
+            </a>
+          )}
+        </div>
       </div>
 
-      {/* Right: Search, Notifications, User */}
-      <div className="flex items-center gap-1">
-        {/* Search button */}
-        <button
-          aria-label="Search (Ctrl+K)"
-          title={"Search (Ctrl+K)"}
-          className="flex cursor-pointer items-center justify-center rounded"
-          style={{ width: 44, height: 44, minWidth: 44, minHeight: 44, background: 'transparent', border: 'none' }}
-          onClick={() => { closeAllDropdowns(); setShowSearch(true); setTimeout(() => searchRef.current?.focus(), 50); }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.1)')}
-          onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+      {/* Global search overlay */}
+      {showSearch && (
+        <div
+          className="fixed inset-0 z-[200] flex items-start justify-center"
+          style={{ paddingTop: '14vh', background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(4px)' }}
+          onClick={() => setShowSearch(false)}
         >
-          <Search size={18} color="white" />
-        </button>
-
-        {/* Inline search overlay */}
-        {showSearch && (
-          <div className="fixed inset-0 z-[60] flex items-start justify-center pt-[15vh]" style={{ backgroundColor: 'rgba(0,0,0,0.3)' }} onClick={() => setShowSearch(false)}>
-            <div
-              className="flex w-full max-w-[480px] items-center gap-2 rounded-lg border bg-white px-4 py-3 shadow-2xl"
-              style={{ borderColor: '#e1e1e1' }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Search size={18} style={{ color: '#767676' }} />
+          <div
+            className="animate-slide-down w-full max-w-[560px]"
+            style={{ background: 'var(--surface-raised)', borderRadius: 14, boxShadow: 'var(--shadow-xl)', border: '1px solid var(--surface-border)', overflow: 'hidden' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 18px', borderBottom: '1px solid var(--surface-border)' }}>
+              <Search size={18} color="var(--text-tertiary)" />
               <input
                 ref={searchRef}
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => { if (e.key === 'Enter') handleSearchSubmit(); if (e.key === 'Escape') setShowSearch(false); }}
-                placeholder={"Search people, projects, messages..."}
-                className="flex-1 text-sm outline-none"
-                style={{ color: '#242424' }}
+                onKeyDown={(e) => { if (e.key === 'Escape') setShowSearch(false); }}
+                placeholder="Search people, projects, messages, docs…"
+                style={{
+                  flex: 1, fontSize: 15, border: 'none', outline: 'none',
+                  background: 'transparent', color: 'var(--text-primary)',
+                  fontFamily: 'var(--font-sans)',
+                }}
               />
-              <button onClick={() => setShowSearch(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
-                <X size={14} style={{ color: '#767676' }} />
+              <button onClick={() => setShowSearch(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>
+                <X size={14} color="var(--text-tertiary)" />
               </button>
             </div>
+            <div style={{ padding: '8px 0 8px' }}>
+              {['Projects', 'Chat messages', 'Team members', 'Documents', 'Analytics'].map((s) => (
+                <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 18px', cursor: 'pointer' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--surface-hover)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                >
+                  <Search size={13} color="var(--text-tertiary)" />
+                  <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Search in {s}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        )}
-
-        {/* Notifications */}
-        <div className="relative" ref={notifRef}>
-          <button
-            aria-label={`Notifications${unreadNotifications > 0 ? `, ${unreadNotifications} unread` : ''}`}
-            title="Notifications"
-            className="relative flex cursor-pointer items-center justify-center rounded"
-            style={{ width: 44, height: 44, minWidth: 44, minHeight: 44, background: 'transparent', border: 'none' }}
-            onClick={toggleNotifications}
-            aria-expanded={showNotifications}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.1)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
-          >
-            <Bell size={18} color="white" />
-            {/* Live badge synced with actual notifications */}
-            {unreadNotifications > 0 && (
-              <span
-                className="absolute top-0 right-0 flex items-center justify-center rounded-full font-bold text-white"
-                style={{
-                  width: 16,
-                  height: 16,
-                  fontSize: 10,
-                  backgroundColor: '#c4314b',
-                  transform: 'translate(2px, -2px)',
-                }}
-                aria-hidden="true"
-              >
-                {unreadNotifications > 99 ? '99+' : unreadNotifications}
-              </span>
-            )}
-          </button>
-          {showNotifications && (
-            <>
-              <div className="fixed inset-0" onClick={() => setShowNotifications(false)} />
-              <div
-                className="absolute right-0 top-full mt-1 rounded-md border bg-white shadow-lg"
-                style={{ width: 320, borderColor: '#e1e1e1', zIndex: 100 }}
-                role="dialog"
-                aria-label="Notifications"
-              >
-                <div className="flex items-center justify-between px-3" style={{ height: 40, borderBottom: '1px solid #e1e1e1' }}>
-                  <span style={{ fontSize: 13, fontWeight: 600 }}>Notifications</span>
-                  {unreadNotifications > 0 && (
-                    <button
-                      onClick={handleMarkAllRead}
-                      style={{ fontSize: 11, color: '#5b5fc7', cursor: 'pointer', background: 'transparent', border: 'none' }}
-                      onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'underline')}
-                      onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                    >
-                      Mark all read
-                    </button>
-                  )}
-                </div>
-                <div style={{ maxHeight: 300, overflowY: 'auto' }}>
-                  {notifications.length === 0 ? (
-                    <div className="px-3 py-6 text-center" style={{ fontSize: 12, color: '#767676' }}>No notifications</div>
-                  ) : (
-                    notifications.map((n) => (
-                      <button
-                        key={n.id}
-                        className="w-full cursor-pointer px-3 py-2 text-left"
-                        style={{
-                          borderBottom: '1px solid #f0f0f0',
-                          backgroundColor: n.read ? 'transparent' : '#f5f5f3',
-                          border: 'none',
-                          display: 'block',
-                        }}
-                        onClick={() => handleNotifClick(n.id)}
-                        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f0f0f0')}
-                        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = n.read ? 'transparent' : '#f5f5f3')}
-                      >
-                        <p style={{ fontSize: 12, color: '#242424' }}>{n.message}</p>
-                        {!n.read && <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#5b5fc7' }} />}
-                      </button>
-                    ))
-                  )}
-                </div>
-              </div>
-            </>
-          )}
         </div>
-
-        {/* User avatar */}
-        {currentUser ? (
-        <div className="relative ml-1" ref={userMenuRef}>
-          <button
-            className="flex cursor-pointer items-center justify-center rounded-full"
-            style={{ width: 44, height: 44, minWidth: 44, minHeight: 44, border: 'none', background: 'transparent', padding: 0 }}
-            onClick={toggleUserMenu}
-            aria-label={`User menu: ${currentUser?.name || 'User'}`}
-            aria-expanded={showUserMenu}
-            title={`${currentUser?.name || 'User'} — ${currentUser?.role || 'Member'}`}
-          >
-            <Avatar
-              src={currentUser?.avatar}
-              alt={currentUser?.name || 'User'}
-              size="md"
-              status={currentUser?.status || 'offline'}
-            />
-          </button>
-          {showUserMenu && (
-            <>
-              <div className="fixed inset-0" onClick={() => setShowUserMenu(false)} />
-              <div
-                className="absolute right-0 top-full mt-1 rounded-md border bg-white shadow-lg"
-                style={{ width: 220, borderColor: '#e1e1e1', zIndex: 100 }}
-                role="menu"
-              >
-                {/* User info header */}
-                <div className="flex items-center gap-2 px-3 py-2" style={{ borderBottom: '1px solid #e1e1e1' }}>
-                  <Avatar src={currentUser?.avatar} alt={currentUser?.name || 'User'} size="sm" />
-                  <div>
-                    <p style={{ fontSize: 13, fontWeight: 600 }}>{currentUser?.name || 'User'}</p>
-                    <p style={{ fontSize: 11, color: '#616161' }}>{currentUser?.email || ''}</p>
-                  </div>
-                </div>
-
-                {/* Role info display */}
-                <div className="px-3 py-1.5" style={{ borderBottom: '1px solid #e1e1e1' }}>
-                  <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: '#767676' }}>Your Role</p>
-                  <p className="text-xs font-medium" style={{ color: '#242424' }}>
-                    {currentUser?.role === 'Owner' ? 'Owner / CEO' : currentUser?.role === 'Manager' ? 'Manager' : 'Member'}
-                    <span className="ml-1 text-[10px]" style={{ color: '#767676' }}>— Assigned by admin</span>
-                  </p>
-                </div>
-
-                {/* Menu items */}
-                <div className="py-1" role="none">
-                  <UserMenuItem
-                    icon={<User size={14} />}
-                    label={"Profile"}
-                    onClick={handleProfileClick}
-                  />
-                  <UserMenuItem
-                    icon={<Settings size={14} />}
-                    label={"Settings"}
-                    onClick={() => { setShowUserMenu(false); openSettings(); }}
-                    shortcut="Ctrl+,"
-                  />
-                  <UserMenuItem
-                    icon={<HelpCircle size={14} />}
-                    label={"Help & Support"}
-                    onClick={() => setShowUserMenu(false)}
-                  />
-                  <div style={{ borderTop: '1px solid #e1e1e1', margin: '4px 0' }} />
-                  <UserMenuItem
-                    icon={<LogOut size={14} />}
-                    label={"Sign out"}
-                    onClick={handleSignOut}
-                    danger
-                  />
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-        ) : (
-          <a
-            href="/#/login"
-            className="ml-2 flex items-center justify-center rounded text-sm font-medium"
-            style={{ width: 'auto', height: 44, padding: '0 12px', color: '#fff', textDecoration: 'none' }}
-          >
-            Sign In
-          </a>
-        )}
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 
-// ── Sub-components ───────────────────────────────────────────
+/* ── Sub-components ── */
 
-function UserMenuItem({ icon, label, onClick, shortcut, danger }: { icon: React.ReactNode; label: string; onClick: () => void; shortcut?: string; danger?: boolean }) {
+function TitleBtn({ children, onClick, 'aria-label': ariaLabel }: { children: React.ReactNode; onClick: () => void; 'aria-label'?: string }) {
   return (
     <button
-      role="menuitem"
-      className="flex w-full cursor-pointer items-center gap-2 px-3 text-left"
-      style={{ fontSize: 12, border: 'none', background: 'transparent', color: danger ? '#c4314b' : '#242424', minHeight: 44 }}
       onClick={onClick}
-      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f0f0f0')}
-      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+      aria-label={ariaLabel}
+      style={{
+        position: 'relative',
+        width: 36, height: 36, borderRadius: 8,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: 'transparent', border: 'none', cursor: 'pointer',
+        transition: 'background 0.12s',
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
+      onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
     >
-      <span style={{ color: danger ? '#c4314b' : '#616161' }}>{icon}</span>
-      <span className="flex-1">{label}</span>
-      {shortcut && <span style={{ fontSize: 10, color: '#767676' }}>{shortcut}</span>}
+      {children}
+    </button>
+  );
+}
+
+function Dropdown({ children, width, onClose }: { children: React.ReactNode; width: number; onClose: () => void }) {
+  return (
+    <>
+      <div className="fixed inset-0 z-[90]" onClick={onClose} />
+      <div
+        className="absolute right-0 top-full animate-slide-down"
+        style={{
+          marginTop: 8, width, zIndex: 100,
+          background: 'var(--surface-raised)',
+          borderRadius: 12,
+          border: '1px solid var(--surface-border)',
+          boxShadow: 'var(--shadow-lg)',
+          overflow: 'hidden',
+        }}
+      >
+        {children}
+      </div>
+    </>
+  );
+}
+
+function MenuItem({ icon, label, onClick, shortcut, danger }: {
+  icon: React.ReactNode; label: string; onClick: () => void; shortcut?: string; danger?: boolean;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        width: '100%', textAlign: 'left', border: 'none',
+        background: 'transparent', cursor: 'pointer',
+        display: 'flex', alignItems: 'center', gap: 10,
+        padding: '8px 16px',
+        color: danger ? 'var(--text-danger)' : 'var(--text-primary)',
+        fontSize: 13, fontWeight: 500,
+        transition: 'background 0.1s',
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.background = danger ? '#fef2f2' : 'var(--surface-hover)')}
+      onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+    >
+      <span style={{ color: danger ? 'var(--text-danger)' : 'var(--text-secondary)', flexShrink: 0 }}>{icon}</span>
+      <span style={{ flex: 1 }}>{label}</span>
+      {shortcut && <span style={{ fontSize: 11, color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)' }}>{shortcut}</span>}
     </button>
   );
 }

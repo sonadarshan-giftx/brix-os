@@ -3,26 +3,14 @@ import { useNavigate } from 'react-router';
 import { useStore } from '@/store/useStore';
 import { authApi, workspaceApi } from '@/utils/api';
 import {
-  Zap,
-  ArrowRight,
-  Building2,
-  Mail,
-  ChevronLeft,
-  CheckCircle2,
-  AlertCircle,
-  Eye,
-  EyeOff,
+  Zap, ArrowRight, Mail, ChevronLeft,
+  CheckCircle2, AlertCircle, Eye, EyeOff,
+  MessageSquare, FolderKanban, Bot, Shield,
+  Users, Lock, Copy,
 } from 'lucide-react';
 
-/* ═══════════════════════════════════════════
-   Login — Real API Sign In
-   Flow:
-   1. Enter work email
-   2. Enter password → POST /api/auth/login
-   3. Load workspaces → GET /api/workspaces
-   4. If multiple workspaces, pick one
-   5. Redirect to /projects
-   ═══════════════════════════════════════════ */
+const BRAND = '#5b5fc7';
+const BRAND_DARK = '#464775';
 
 function makeInitials(name: string): string {
   const parts = name.trim().split(/\s+/);
@@ -30,19 +18,27 @@ function makeInitials(name: string): string {
   return name.slice(0, 2).toUpperCase();
 }
 
+/* ── Feature list shown on left panel ── */
+const FEATURES = [
+  { icon: MessageSquare, text: 'Real-time messaging & video calls' },
+  { icon: FolderKanban,  text: 'Project management with AI sprints' },
+  { icon: Bot,           text: 'AI employees that actually work' },
+  { icon: Shield,        text: 'Zero-trust enterprise security' },
+  { icon: Users,         text: 'Full team & org chart management' },
+];
+
 export default function LoginPage() {
   const navigate = useNavigate();
 
   type Step = 'email' | 'password' | 'workspaces' | 'success';
   const [step, setStep] = useState<Step>('email');
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [workspaces, setWorkspaces] = useState<any[]>([]);
-  const [selectedWorkspace, setSelectedWorkspace] = useState<any | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [copied, setCopied] = useState(false);
 
   const handleEmailSubmit = () => {
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -55,51 +51,25 @@ export default function LoginPage() {
 
   const handlePasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!password.trim()) {
-      setError('Please enter your password');
-      return;
-    }
-
+    if (!password.trim()) { setError('Please enter your password'); return; }
     setError('');
     setLoading(true);
-
     try {
-      // Step 1: Authenticate
       const loginRes = await authApi.login({ email: email.trim().toLowerCase(), password });
-
       const { user: apiUser, accessToken, refreshToken } = loginRes;
-
-      // Map API user → store Employee format
       const storeUser = {
-        id: apiUser.id,
-        name: apiUser.name,
-        email: apiUser.email,
-        role: apiUser.role,
-        initials: makeInitials(apiUser.name),
-        avatar: apiUser.avatar || null,
-        status: 'online' as const,
-        bio: '',
-        emailVerified: apiUser.emailVerified,
+        id: apiUser.id, name: apiUser.name, email: apiUser.email, role: apiUser.role,
+        initials: makeInitials(apiUser.name), avatar: apiUser.avatar || null,
+        status: 'online' as const, bio: '', emailVerified: apiUser.emailVerified,
       };
-
-      // Step 2: Load workspaces
       let userWorkspaces: any[] = [];
-      try {
-        userWorkspaces = await workspaceApi.list(accessToken);
-      } catch {
-        // Non-fatal — user might have no workspace yet
-      }
-
-      // Store user + tokens
+      try { userWorkspaces = await workspaceApi.list(accessToken); } catch {}
       useStore.getState().setCurrentUser(storeUser as any, accessToken, refreshToken);
-
       if (userWorkspaces.length > 0) {
-        // Store first workspace (or let user pick if multiple)
         if (userWorkspaces.length === 1) {
           useStore.getState().setWorkspace(userWorkspaces[0]);
           useStore.getState().createWorkspace(userWorkspaces[0]);
         } else {
-          // Store all, let user pick
           useStore.setState((s: any) => { s.workspaces = userWorkspaces; });
           setWorkspaces(userWorkspaces);
           setStep('workspaces');
@@ -107,342 +77,469 @@ export default function LoginPage() {
           return;
         }
       }
-
       useStore.getState().setOnboardingComplete(true);
       setStep('success');
-      setTimeout(() => navigate('/projects', { replace: true }), 800);
+      setTimeout(() => navigate('/projects', { replace: true }), 900);
     } catch (err: any) {
       setLoading(false);
-      if (err.status === 401) {
-        setError('Incorrect email or password. Please try again.');
-      } else if (err.status === 403) {
-        if (err.message?.includes('suspended') || err.message?.includes('deactivated')) {
-          setError('Your account has been suspended. Contact your workspace admin.');
-        } else {
-          setError('Please verify your email before signing in. Check your inbox for the verification code.');
-        }
-      } else if (err.status === 404) {
-        setError('No account found with this email. Have you signed up?');
-      } else {
-        setError('Something went wrong. Please try again.');
-      }
+      if (err.status === 401) setError('Incorrect email or password. Please try again.');
+      else if (err.status === 403) setError('Please verify your email before signing in.');
+      else if (err.status === 404) setError('No account found with this email.');
+      else setError('Something went wrong. Please try again.');
     }
   };
 
   const handleWorkspacePick = (ws: any) => {
-    setSelectedWorkspace(ws);
     useStore.getState().setWorkspace(ws);
     useStore.getState().setOnboardingComplete(true);
     setStep('success');
-    setTimeout(() => navigate('/projects', { replace: true }), 800);
+    setTimeout(() => navigate('/projects', { replace: true }), 900);
   };
 
-  const goBack = () => {
-    setError('');
-    if (step === 'password') setStep('email');
-    else if (step === 'workspaces') setStep('password');
+  const fillDemo = () => {
+    setEmail('investor@brixos.io');
+    setPassword('InvestorDemo2024!');
+    setStep('password');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
-
-  const stepIndex = { email: 0, password: 1, workspaces: 2, success: 2 };
-  const currentStepIndex = stepIndex[step];
 
   return (
-    <div
-      className="flex min-h-screen flex-col items-center justify-center px-4"
-      style={{ backgroundColor: '#f5f5f3', fontFamily: 'Inter, system-ui, sans-serif' }}
-    >
-      {/* Top bar */}
-      <div className="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4">
+    <div style={{
+      minHeight: '100vh', display: 'flex',
+      fontFamily: "'Inter', -apple-system, sans-serif",
+      overflow: 'hidden',
+    }}>
+      {/* ── Left panel: Branding ── */}
+      <div style={{
+        width: '45%', flexShrink: 0,
+        background: `linear-gradient(160deg, ${BRAND_DARK} 0%, #2d2f5e 50%, #1e1f42 100%)`,
+        display: 'flex', flexDirection: 'column',
+        padding: '48px 52px',
+        position: 'relative', overflow: 'hidden',
+      }}
+        className="hidden lg:flex"
+      >
+        {/* Background glows */}
+        <div style={{ position: 'absolute', top: -120, left: -120, width: 400, height: 400, borderRadius: '50%', background: `${BRAND}20`, filter: 'blur(80px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: -80, right: -80, width: 300, height: 300, borderRadius: '50%', background: '#7c3aed18', filter: 'blur(60px)', pointerEvents: 'none' }} />
+
+        {/* Logo */}
         <button
           onClick={() => navigate('/', { replace: true })}
-          className="flex items-center gap-2"
+          style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0, marginBottom: 'auto' }}
         >
-          <div
-            className="flex items-center justify-center rounded-lg"
-            style={{ width: 32, height: 32, backgroundColor: '#5b5fc7' }}
-          >
-            <Zap size={18} color="#fff" />
+          <div style={{
+            width: 36, height: 36,
+            background: 'linear-gradient(135deg, #7c7ff0, #5b5fc7)',
+            borderRadius: 10,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 4px 16px rgba(91,95,199,0.5)',
+          }}>
+            <Zap size={18} color="#fff" strokeWidth={2.5} />
           </div>
-          <span className="text-base font-semibold" style={{ color: '#1A1209', fontFamily: "'JetBrains Mono', monospace" }}>Brix OS</span>
+          <span style={{ fontSize: 20, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em' }}>
+            BrixOS
+          </span>
         </button>
 
-        <a
-          href="/#/start"
-          className="text-sm hover:underline"
-          style={{ color: '#616161' }}
-        >
-          Create a workspace →
-        </a>
-      </div>
+        {/* Main headline */}
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            background: 'rgba(255,255,255,0.08)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: 999, padding: '4px 12px',
+            marginBottom: 24, width: 'fit-content',
+          }}>
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e' }} />
+            <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+              Investor Demo
+            </span>
+          </div>
 
-      <div
-        className="w-full max-w-[440px] rounded-2xl px-8 py-10"
-        style={{ backgroundColor: '#fff', boxShadow: '0 8px 40px rgba(0,0,0,0.08)' }}
-      >
-        {/* Step dots */}
-        <div className="mb-6 flex items-center gap-2">
-          {[0, 1, 2].map((i) => (
-            <div key={i} className="flex items-center gap-2">
-              <div
-                className="flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold transition-all"
+          <h1 style={{
+            fontSize: 38, fontWeight: 900, color: '#fff',
+            lineHeight: 1.1, letterSpacing: '-0.03em',
+            margin: '0 0 16px',
+          }}>
+            The OS for<br />
+            <span style={{ background: 'linear-gradient(135deg, #a5b4fc, #818cf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              modern teams
+            </span>
+          </h1>
+
+          <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, margin: '0 0 36px', maxWidth: 340 }}>
+            Replace 12 tools with one unified platform. Chat, projects, AI agents, calls, docs and security — all in one.
+          </p>
+
+          {/* Feature list */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 40 }}>
+            {FEATURES.map(({ icon: Icon, text }) => (
+              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{
+                  width: 32, height: 32, borderRadius: 8, flexShrink: 0,
+                  background: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  <Icon size={14} color="rgba(255,255,255,0.7)" />
+                </div>
+                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.4 }}>{text}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Demo credentials card */}
+          <div style={{
+            background: 'rgba(255,255,255,0.06)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: 12, padding: '16px 18px',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <Lock size={12} color="rgba(255,255,255,0.4)" />
+                <span style={{ fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                  Demo Credentials
+                </span>
+              </div>
+              <button
+                onClick={fillDemo}
                 style={{
-                  backgroundColor: i <= currentStepIndex ? '#5b5fc7' : '#e1e1e1',
-                  color: i <= currentStepIndex ? '#fff' : '#a0a0a0',
+                  display: 'flex', alignItems: 'center', gap: 5,
+                  background: copied ? 'rgba(34,197,94,0.15)' : 'rgba(255,255,255,0.1)',
+                  border: `1px solid ${copied ? 'rgba(34,197,94,0.3)' : 'rgba(255,255,255,0.15)'}`,
+                  borderRadius: 6, padding: '3px 10px',
+                  cursor: 'pointer', transition: 'all 0.2s',
                 }}
               >
-                {i < currentStepIndex ? <CheckCircle2 size={12} /> : i + 1}
-              </div>
-              {i < 2 && (
-                <div
-                  className="h-px w-8 transition-all"
-                  style={{ backgroundColor: i < currentStepIndex ? '#5b5fc7' : '#e1e1e1' }}
-                />
-              )}
+                <Copy size={10} color={copied ? '#22c55e' : 'rgba(255,255,255,0.5)'} />
+                <span style={{ fontSize: 10, fontWeight: 600, color: copied ? '#22c55e' : 'rgba(255,255,255,0.5)' }}>
+                  {copied ? 'Filled!' : 'Use demo'}
+                </span>
+              </button>
             </div>
-          ))}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', width: 56, flexShrink: 0 }}>Email</span>
+                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.75)', fontFamily: 'monospace' }}>investor@brixos.io</span>
+              </div>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', width: 56, flexShrink: 0 }}>Password</span>
+                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.75)', fontFamily: 'monospace' }}>InvestorDemo2024!</span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        {/* ── STEP 1: EMAIL ── */}
-        {step === 'email' && (
-          <>
-            <div className="mb-6 flex justify-center">
-              <div
-                className="flex items-center justify-center rounded-xl"
-                style={{ width: 56, height: 56, backgroundColor: '#5b5fc7' }}
-              >
-                <Building2 size={28} color="#fff" />
-              </div>
-            </div>
+      {/* ── Right panel: Form ── */}
+      <div style={{
+        flex: 1, display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
+        background: '#fafafa',
+        padding: '32px 24px',
+        minHeight: '100vh',
+      }}>
+        {/* Mobile logo */}
+        <button
+          onClick={() => navigate('/', { replace: true })}
+          className="lg:hidden"
+          style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'none', border: 'none', cursor: 'pointer', marginBottom: 32 }}
+        >
+          <div style={{ width: 32, height: 32, background: BRAND, borderRadius: 9, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Zap size={16} color="#fff" strokeWidth={2.5} />
+          </div>
+          <span style={{ fontSize: 18, fontWeight: 800, color: '#18181b', letterSpacing: '-0.02em' }}>BrixOS</span>
+        </button>
 
-            <h1 className="mb-1 text-center text-xl font-bold" style={{ color: '#1A1209' }}>
-              Sign in to Brix OS
-            </h1>
-            <p className="mb-6 text-center text-sm" style={{ color: '#616161' }}>
-              Enter your work email to continue
-            </p>
+        <div style={{ width: '100%', maxWidth: 400 }}>
+          {/* Step: Email */}
+          {step === 'email' && (
+            <div style={{ animation: 'slideUp 0.25s ease' }}>
+              <h1 style={{ fontSize: 26, fontWeight: 800, color: '#18181b', letterSpacing: '-0.02em', margin: '0 0 8px' }}>
+                Welcome back
+              </h1>
+              <p style={{ fontSize: 14, color: '#71717a', margin: '0 0 32px' }}>
+                Sign in to your BrixOS workspace
+              </p>
 
-            {error && (
-              <div
-                className="mb-4 flex items-start gap-2 rounded-lg p-3 text-sm"
-                style={{ backgroundColor: '#fde8ec', color: '#c4314b' }}
-              >
-                <AlertCircle size={16} className="mt-0.5 shrink-0" />
-                <span>{error}</span>
-              </div>
-            )}
+              {error && <ErrorBanner message={error} />}
 
-            <div className="space-y-4">
-              <div>
-                <label className="mb-1 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#616161' }}>
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#3f3f46', marginBottom: 6 }}>
                   Work Email
                 </label>
-                <div className="flex items-center gap-2 rounded-lg border px-3 py-2.5" style={{ borderColor: '#d1d1d1' }}>
-                  <Mail size={16} color="#a0a0a0" />
+                <div style={{
+                  display: 'flex', alignItems: 'center', gap: 10,
+                  border: '1.5px solid #e4e4e7', borderRadius: 10,
+                  padding: '11px 14px', background: '#fff',
+                  transition: 'border-color 0.15s',
+                }}
+                  onFocusCapture={(e) => (e.currentTarget.style.borderColor = BRAND)}
+                  onBlurCapture={(e) => (e.currentTarget.style.borderColor = '#e4e4e7')}
+                >
+                  <Mail size={15} color="#a1a1aa" />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@company.com"
-                    className="w-full text-sm outline-none"
-                    style={{ background: 'transparent' }}
                     autoFocus
                     onKeyDown={(e) => e.key === 'Enter' && handleEmailSubmit()}
+                    style={{ flex: 1, fontSize: 14, border: 'none', outline: 'none', background: 'transparent', color: '#18181b', fontFamily: 'inherit' }}
                   />
                 </div>
               </div>
 
+              <PrimaryBtn onClick={handleEmailSubmit}>
+                Continue <ArrowRight size={16} />
+              </PrimaryBtn>
+
+              {/* Mobile demo creds */}
               <button
-                onClick={handleEmailSubmit}
-                className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90"
-                style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
+                onClick={fillDemo}
+                className="lg:hidden"
+                style={{
+                  width: '100%', marginTop: 12,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                  padding: '11px', borderRadius: 10,
+                  border: '1.5px dashed #d4d4d8',
+                  background: 'transparent', cursor: 'pointer',
+                  fontSize: 13, fontWeight: 600, color: '#71717a',
+                }}
               >
-                Continue
-                <ArrowRight size={16} />
+                <Lock size={13} />
+                Use demo credentials
               </button>
+
+              <p style={{ textAlign: 'center', fontSize: 12, color: '#71717a', marginTop: 20 }}>
+                Don't have an account?{' '}
+                <a href="/#/start" style={{ color: BRAND, fontWeight: 600, textDecoration: 'none' }}>
+                  Create workspace
+                </a>
+              </p>
             </div>
+          )}
 
-            <p className="mt-6 text-center text-xs" style={{ color: '#616161' }}>
-              New to Brix OS?{' '}
-              <a href="/#/start" className="font-medium hover:underline" style={{ color: '#5b5fc7' }}>
-                Create a workspace
-              </a>
-            </p>
-          </>
-        )}
-
-        {/* ── STEP 2: PASSWORD ── */}
-        {step === 'password' && (
-          <>
-            <button
-              onClick={goBack}
-              className="mb-4 flex items-center gap-1 text-sm hover:underline"
-              style={{ color: '#616161' }}
-            >
-              <ChevronLeft size={16} /> Back
-            </button>
-
-            <div
-              className="mb-6 flex items-center gap-3 rounded-xl p-3"
-              style={{ backgroundColor: '#faf9f6', border: '1px solid #e8e8e8' }}
-            >
-              <div
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
-                style={{ backgroundColor: '#5b5fc7' }}
-              >
-                <Mail size={18} color="#fff" />
-              </div>
-              <div className="overflow-hidden">
-                <p className="truncate text-sm font-semibold" style={{ color: '#1A1209' }}>{email}</p>
-                <p className="text-xs" style={{ color: '#616161' }}>Signing in</p>
-              </div>
-            </div>
-
-            <h1 className="mb-1 text-xl font-bold" style={{ color: '#1A1209' }}>
-              Enter your password
-            </h1>
-            <p className="mb-6 text-sm" style={{ color: '#616161' }}>
-              Welcome back! Enter your password to continue.
-            </p>
-
-            {error && (
-              <div
-                className="mb-4 flex items-start gap-2 rounded-lg p-3 text-sm"
-                style={{ backgroundColor: '#fde8ec', color: '#c4314b' }}
-              >
-                <AlertCircle size={16} className="mt-0.5 shrink-0" />
-                <span>{error}</span>
-              </div>
-            )}
-
-            <form onSubmit={handlePasswordSubmit} className="space-y-4">
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <label className="block text-xs font-semibold uppercase tracking-wider" style={{ color: '#616161' }}>
-                    Password
-                  </label>
-                  <a href="/#/forgot-password" className="text-xs hover:underline" style={{ color: '#5b5fc7' }}>
-                    Forgot password?
-                  </a>
-                </div>
-                <div className="flex items-center gap-2 rounded-lg border px-3 py-2.5" style={{ borderColor: '#d1d1d1' }}>
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Your password"
-                    className="w-full text-sm outline-none"
-                    style={{ background: 'transparent' }}
-                    autoFocus
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    style={{ color: '#a0a0a0' }}
-                  >
-                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
-                </div>
-              </div>
-
+          {/* Step: Password */}
+          {step === 'password' && (
+            <div style={{ animation: 'slideUp 0.25s ease' }}>
               <button
-                type="submit"
-                disabled={loading}
-                className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90 disabled:opacity-60"
-                style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
+                onClick={() => { setError(''); setStep('email'); }}
+                style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'none', border: 'none', cursor: 'pointer', color: '#71717a', fontSize: 13, fontWeight: 500, marginBottom: 24, padding: 0 }}
               >
-                {loading ? (
-                  <span className="flex items-center gap-2">
-                    <span
-                      style={{
-                        width: 16, height: 16,
-                        border: '2px solid rgba(255,255,255,0.3)',
-                        borderTopColor: '#fff',
-                        borderRadius: '50%',
-                        display: 'inline-block',
-                        animation: 'spin 0.7s linear infinite',
-                      }}
+                <ChevronLeft size={16} /> Back
+              </button>
+
+              {/* Email pill */}
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: 10,
+                background: '#f4f4f5', borderRadius: 10, padding: '10px 14px',
+                marginBottom: 28,
+              }}>
+                <div style={{ width: 32, height: 32, borderRadius: 8, background: BRAND, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Mail size={15} color="#fff" />
+                </div>
+                <div>
+                  <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: '#18181b' }}>{email}</p>
+                  <p style={{ margin: 0, fontSize: 11, color: '#71717a' }}>Signing in to BrixOS</p>
+                </div>
+              </div>
+
+              <h1 style={{ fontSize: 24, fontWeight: 800, color: '#18181b', letterSpacing: '-0.02em', margin: '0 0 6px' }}>
+                Enter your password
+              </h1>
+              <p style={{ fontSize: 14, color: '#71717a', margin: '0 0 28px' }}>
+                Welcome back! Secure your session.
+              </p>
+
+              {error && <ErrorBanner message={error} />}
+
+              <form onSubmit={handlePasswordSubmit}>
+                <div style={{ marginBottom: 20 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+                    <label style={{ fontSize: 12, fontWeight: 600, color: '#3f3f46' }}>Password</label>
+                    <a href="/#/forgot-password" style={{ fontSize: 12, color: BRAND, fontWeight: 500, textDecoration: 'none' }}>
+                      Forgot password?
+                    </a>
+                  </div>
+                  <div style={{
+                    display: 'flex', alignItems: 'center', gap: 10,
+                    border: '1.5px solid #e4e4e7', borderRadius: 10,
+                    padding: '11px 14px', background: '#fff',
+                    transition: 'border-color 0.15s',
+                  }}
+                    onFocusCapture={(e) => (e.currentTarget.style.borderColor = BRAND)}
+                    onBlurCapture={(e) => (e.currentTarget.style.borderColor = '#e4e4e7')}
+                  >
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Your password"
+                      autoFocus
+                      required
+                      style={{ flex: 1, fontSize: 14, border: 'none', outline: 'none', background: 'transparent', color: '#18181b', fontFamily: 'inherit' }}
                     />
-                    Signing in...
-                  </span>
-                ) : (
-                  <>Sign In <ArrowRight size={16} /></>
-                )}
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#a1a1aa', padding: 0 }}
+                    >
+                      {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                    </button>
+                  </div>
+                </div>
+
+                <PrimaryBtn type="submit" disabled={loading}>
+                  {loading ? (
+                    <>
+                      <span style={{
+                        width: 15, height: 15,
+                        border: '2px solid rgba(255,255,255,0.3)',
+                        borderTopColor: '#fff', borderRadius: '50%',
+                        animation: 'spin 0.7s linear infinite', display: 'inline-block',
+                      }} />
+                      Signing in…
+                    </>
+                  ) : (
+                    <>Sign In <ArrowRight size={16} /></>
+                  )}
+                </PrimaryBtn>
+              </form>
+
+              <p style={{ textAlign: 'center', fontSize: 12, color: '#71717a', marginTop: 20 }}>
+                Don't have an account?{' '}
+                <a href="/#/start" style={{ color: BRAND, fontWeight: 600, textDecoration: 'none' }}>Create workspace</a>
+              </p>
+            </div>
+          )}
+
+          {/* Step: Pick workspace */}
+          {step === 'workspaces' && (
+            <div style={{ animation: 'slideUp 0.25s ease' }}>
+              <button
+                onClick={() => { setError(''); setStep('password'); }}
+                style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'none', border: 'none', cursor: 'pointer', color: '#71717a', fontSize: 13, marginBottom: 24, padding: 0 }}
+              >
+                <ChevronLeft size={16} /> Back
               </button>
-            </form>
-
-            <p className="mt-4 text-center text-xs" style={{ color: '#616161' }}>
-              Don&apos;t have an account?{' '}
-              <a href="/#/start" className="font-medium hover:underline" style={{ color: '#5b5fc7' }}>
-                Create workspace
-              </a>
-            </p>
-
-            <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-          </>
-        )}
-
-        {/* ── STEP 3: PICK WORKSPACE (multiple) ── */}
-        {step === 'workspaces' && (
-          <>
-            <button
-              onClick={goBack}
-              className="mb-4 flex items-center gap-1 text-sm hover:underline"
-              style={{ color: '#616161' }}
-            >
-              <ChevronLeft size={16} /> Back
-            </button>
-
-            <h1 className="mb-1 text-xl font-bold" style={{ color: '#1A1209' }}>
-              Select your workspace
-            </h1>
-            <p className="mb-6 text-sm" style={{ color: '#616161' }}>
-              You are a member of {workspaces.length} workspaces. Pick one to continue.
-            </p>
-
-            <div className="space-y-3">
-              {workspaces.map((ws) => (
-                <button
-                  key={ws.id}
-                  onClick={() => handleWorkspacePick(ws)}
-                  className="flex w-full items-center gap-3 rounded-xl border p-4 text-left transition-all hover:border-[#5b5fc7]"
-                  style={{ borderColor: '#d1d1d1', backgroundColor: '#fff' }}
-                >
-                  <div
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-sm font-bold text-white"
-                    style={{ backgroundColor: '#5b5fc7' }}
+              <h1 style={{ fontSize: 24, fontWeight: 800, color: '#18181b', letterSpacing: '-0.02em', margin: '0 0 8px' }}>
+                Select workspace
+              </h1>
+              <p style={{ fontSize: 14, color: '#71717a', margin: '0 0 28px' }}>
+                You're a member of {workspaces.length} workspaces.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {workspaces.map((ws) => (
+                  <button
+                    key={ws.id}
+                    onClick={() => handleWorkspacePick(ws)}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 12,
+                      padding: '14px 16px', borderRadius: 12, width: '100%', textAlign: 'left',
+                      border: '1.5px solid #e4e4e7', background: '#fff', cursor: 'pointer',
+                      transition: 'all 0.15s',
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = BRAND; e.currentTarget.style.background = '#f5f5ff'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e4e4e7'; e.currentTarget.style.background = '#fff'; }}
                   >
-                    {ws.name?.[0]?.toUpperCase() || 'W'}
-                  </div>
-                  <div className="flex-1 overflow-hidden">
-                    <p className="truncate text-sm font-semibold" style={{ color: '#1A1209' }}>{ws.name}</p>
-                    <p className="text-xs" style={{ color: '#616161' }}>{ws.memberCount} member{ws.memberCount !== 1 ? 's' : ''}</p>
-                  </div>
-                  <ArrowRight size={16} color="#a0a0a0" />
-                </button>
-              ))}
+                    <div style={{ width: 38, height: 38, borderRadius: 10, background: BRAND, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 14, fontWeight: 800, color: '#fff' }}>
+                      {ws.name?.[0]?.toUpperCase() || 'W'}
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ margin: 0, fontSize: 14, fontWeight: 700, color: '#18181b' }}>{ws.name}</p>
+                      <p style={{ margin: 0, fontSize: 12, color: '#71717a' }}>{ws.memberCount} members</p>
+                    </div>
+                    <ArrowRight size={15} color="#a1a1aa" />
+                  </button>
+                ))}
+              </div>
             </div>
-          </>
-        )}
+          )}
 
-        {/* ── STEP 4: SUCCESS ── */}
-        {step === 'success' && (
-          <div className="flex flex-col items-center py-6">
-            <div
-              className="mb-4 flex items-center justify-center rounded-full"
-              style={{ width: 64, height: 64, backgroundColor: '#e6f4ea' }}
-            >
-              <CheckCircle2 size={32} color="#237b4b" />
+          {/* Step: Success */}
+          {step === 'success' && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '32px 0', animation: 'slideUp 0.3s ease' }}>
+              <div style={{
+                width: 72, height: 72, borderRadius: '50%',
+                background: 'linear-gradient(135deg, #dcfce7, #bbf7d0)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                marginBottom: 20, boxShadow: '0 0 0 8px #f0fdf4',
+              }}>
+                <CheckCircle2 size={36} color="#16a34a" strokeWidth={2} />
+              </div>
+              <h2 style={{ fontSize: 22, fontWeight: 800, color: '#18181b', letterSpacing: '-0.02em', margin: '0 0 8px', textAlign: 'center' }}>
+                Welcome back!
+              </h2>
+              <p style={{ fontSize: 14, color: '#71717a', margin: 0, textAlign: 'center' }}>
+                Loading your workspace…
+              </p>
+              <div style={{ marginTop: 24, display: 'flex', gap: 4 }}>
+                {[0,1,2].map(i => (
+                  <div key={i} style={{
+                    width: 6, height: 6, borderRadius: '50%', background: BRAND,
+                    animation: `pulse 1.2s ease ${i * 0.2}s infinite`,
+                    opacity: 0.5,
+                  }} />
+                ))}
+              </div>
             </div>
-            <h2 className="mb-1 text-center text-lg font-bold" style={{ color: '#1A1209' }}>
-              Welcome back!
-            </h2>
-            <p className="text-center text-sm" style={{ color: '#616161' }}>
-              Redirecting to your workspace…
-            </p>
-          </div>
-        )}
+          )}
+        </div>
+
+        {/* Footer */}
+        <p style={{ position: 'fixed', bottom: 20, fontSize: 11, color: '#a1a1aa', textAlign: 'center' }}>
+          © 2025 BrixOS — Enterprise AI Collaboration Platform
+        </p>
       </div>
+
+      <style>{`
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+      `}</style>
+    </div>
+  );
+}
+
+/* ── Sub-components ── */
+
+function PrimaryBtn({ children, onClick, type = 'button', disabled }: {
+  children: React.ReactNode; onClick?: () => void;
+  type?: 'button' | 'submit'; disabled?: boolean;
+}) {
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      style={{
+        width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+        padding: '13px', borderRadius: 10, border: 'none', cursor: disabled ? 'not-allowed' : 'pointer',
+        background: disabled ? '#a1a1aa' : `linear-gradient(135deg, #6366f1, #5b5fc7)`,
+        color: '#fff', fontSize: 14, fontWeight: 700, letterSpacing: '-0.01em',
+        boxShadow: disabled ? 'none' : '0 4px 14px rgba(91,95,199,0.35)',
+        transition: 'all 0.15s', fontFamily: 'inherit',
+      }}
+      onMouseEnter={(e) => { if (!disabled) e.currentTarget.style.boxShadow = '0 6px 20px rgba(91,95,199,0.45)'; }}
+      onMouseLeave={(e) => { if (!disabled) e.currentTarget.style.boxShadow = '0 4px 14px rgba(91,95,199,0.35)'; }}
+    >
+      {children}
+    </button>
+  );
+}
+
+function ErrorBanner({ message }: { message: string }) {
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'flex-start', gap: 10,
+      background: '#fef2f2', border: '1px solid #fecaca',
+      borderRadius: 10, padding: '10px 14px', marginBottom: 18,
+    }}>
+      <AlertCircle size={15} color="#dc2626" style={{ marginTop: 1, flexShrink: 0 }} />
+      <span style={{ fontSize: 13, color: '#dc2626', lineHeight: 1.4 }}>{message}</span>
     </div>
   );
 }
