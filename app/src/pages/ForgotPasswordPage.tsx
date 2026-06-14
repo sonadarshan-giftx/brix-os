@@ -33,7 +33,7 @@ function Toast({
       ? '#237b4b'
       : type === 'error'
       ? '#c4314b'
-      : '#5b5fc7';
+      : '#D97757';
 
   return (
     <div
@@ -102,7 +102,7 @@ export default function ForgotPasswordPage() {
         <div className="mb-8 text-center">
           <div
             className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
-            style={{ backgroundColor: '#5b5fc7' }}
+            style={{ backgroundColor: '#D97757' }}
           >
             <ShieldCheck className="h-6 w-6 text-white" />
           </div>
@@ -182,7 +182,7 @@ export default function ForgotPasswordPage() {
               type="submit"
               disabled={loading}
               className="flex w-full items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium text-white transition-all disabled:cursor-not-allowed disabled:opacity-60"
-              style={{ backgroundColor: '#5b5fc7', borderRadius: '8px' }}
+              style={{ backgroundColor: '#D97757', borderRadius: '8px' }}
             >
               {loading ? (
                 <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -205,7 +205,7 @@ export default function ForgotPasswordPage() {
               navigate('/login');
             }}
             className="inline-flex items-center gap-1.5 text-sm font-medium hover:underline"
-            style={{ color: '#5b5fc7' }}
+            style={{ color: '#D97757' }}
           >
             <ArrowLeft className="h-4 w-4" />
             Back to login

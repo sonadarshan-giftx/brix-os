@@ -21,8 +21,8 @@ import {
 
 /* ── Demo data ── */
 const AGENTS = [
-  { id: 'dev', name: 'Dev Agent', role: 'Code Review & Generation', color: '#5b5fc7', icon: Code2, status: 'active', tasksToday: 12, tokens: '45.2K', cost: '$2.14', model: 'gpt-4' },
-  { id: 'pm', name: 'PM Agent', role: 'Sprint Planning', color: '#7c7ff0', icon: BarChart3, status: 'active', tasksToday: 8, tokens: '38.1K', cost: '$1.82', model: 'gpt-4' },
+  { id: 'dev', name: 'Dev Agent', role: 'Code Review & Generation', color: '#D97757', icon: Code2, status: 'active', tasksToday: 12, tokens: '45.2K', cost: '$2.14', model: 'gpt-4' },
+  { id: 'pm', name: 'PM Agent', role: 'Sprint Planning', color: '#E8946F', icon: BarChart3, status: 'active', tasksToday: 8, tokens: '38.1K', cost: '$1.82', model: 'gpt-4' },
   { id: 'qa', name: 'QA Agent', role: 'Quality Assurance', color: '#F59E0B', icon: Terminal, status: 'active', tasksToday: 15, tokens: '52.7K', cost: '$2.51', model: 'claude-3' },
   { id: 'devops', name: 'DevOps Agent', role: 'Infrastructure', color: '#EC4899', icon: Cpu, status: 'active', tasksToday: 6, tokens: '28.4K', cost: '$1.35', model: 'gpt-4-turbo' },
   { id: 'support', name: 'Support Agent', role: 'Customer Support', color: '#06B6D4', icon: MessageSquare, status: 'paused', tasksToday: 23, tokens: '67.3K', cost: '$3.21', model: 'claude-3' },
@@ -70,8 +70,8 @@ const COST_DATA = [
 ];
 
 const MODEL_USAGE = [
-  { name: 'GPT-4', value: 45, color: '#5b5fc7' },
-  { name: 'Claude 3', value: 30, color: '#7c7ff0' },
+  { name: 'GPT-4', value: 45, color: '#D97757' },
+  { name: 'Claude 3', value: 30, color: '#E8946F' },
   { name: 'BrixOS Custom', value: 15, color: '#10B981' },
   { name: 'GPT-4 Turbo', value: 10, color: '#06B6D4' },
 ];
@@ -95,13 +95,13 @@ function TabButton({ active, onClick, icon: Icon, label, count }: { active: bool
     <button
       onClick={onClick}
       className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
-        active ? 'bg-[#5b5fc7]/10 text-[#5b5fc7]' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+        active ? 'bg-[#D97757]/10 text-[#D97757]' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
       }`}
     >
       <Icon size={16} />
       {label}
       {count !== undefined && (
-        <span className={`ml-1 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${active ? 'bg-[#5b5fc7]/20 text-[#5b5fc7]' : 'bg-gray-100 text-gray-400'}`}>
+        <span className={`ml-1 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${active ? 'bg-[#D97757]/20 text-[#D97757]' : 'bg-gray-100 text-gray-400'}`}>
           {count}
         </span>
       )}
@@ -114,7 +114,7 @@ function StatCard({ icon: Icon, label, value, change, changeType, iconBg }: { ic
     <div className="rounded-xl bg-white border border-gray-100 p-5 hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between mb-3">
         <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: iconBg }}>
-          <Icon size={18} className="text-[#5b5fc7]" />
+          <Icon size={18} className="text-[#D97757]" />
         </div>
         <div className={`flex items-center gap-0.5 text-xs font-medium ${changeType === 'up' ? 'text-emerald-600' : changeType === 'down' ? 'text-red-500' : 'text-gray-400'}`}>
           {changeType === 'up' ? <ArrowUpRight size={12} /> : changeType === 'down' ? <ArrowDownRight size={12} /> : <Minus size={12} />}
@@ -194,8 +194,8 @@ export default function AIGatewayPage() {
         <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#5b5fc7]/10 flex items-center justify-center">
-                <BrainCircuit size={20} className="text-[#5b5fc7]" />
+              <div className="w-10 h-10 rounded-xl bg-[#D97757]/10 flex items-center justify-center">
+                <BrainCircuit size={20} className="text-[#D97757]" />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-gray-900">AI Gateway</h1>
@@ -243,16 +243,16 @@ export default function AIGatewayPage() {
                   <ResponsiveContainer width="100%" height={220}>
                     <AreaChart data={TOKEN_DATA}>
                       <defs>
-                        <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#5b5fc7" stopOpacity={0.2} /><stop offset="95%" stopColor="#5b5fc7" stopOpacity={0} /></linearGradient>
-                        <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#7c7ff0" stopOpacity={0.2} /><stop offset="95%" stopColor="#7c7ff0" stopOpacity={0} /></linearGradient>
+                        <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#D97757" stopOpacity={0.2} /><stop offset="95%" stopColor="#D97757" stopOpacity={0} /></linearGradient>
+                        <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#E8946F" stopOpacity={0.2} /><stop offset="95%" stopColor="#E8946F" stopOpacity={0} /></linearGradient>
                         <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#10B981" stopOpacity={0.2} /><stop offset="95%" stopColor="#10B981" stopOpacity={0} /></linearGradient>
                       </defs>
                       <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                       <XAxis dataKey="time" tick={{ fontSize: 11, fill: '#9ca3af' }} axisLine={false} tickLine={false} />
                       <YAxis tick={{ fontSize: 11, fill: '#9ca3af' }} axisLine={false} tickLine={false} />
                       <Tooltip contentStyle={{ borderRadius: 10, border: '1px solid #e5e7eb', fontSize: 12 }} />
-                      <Area type="monotone" dataKey="gpt4" stackId="1" stroke="#5b5fc7" fill="url(#g1)" strokeWidth={2} name="GPT-4" />
-                      <Area type="monotone" dataKey="claude" stackId="1" stroke="#7c7ff0" fill="url(#g2)" strokeWidth={2} name="Claude 3" />
+                      <Area type="monotone" dataKey="gpt4" stackId="1" stroke="#D97757" fill="url(#g1)" strokeWidth={2} name="GPT-4" />
+                      <Area type="monotone" dataKey="claude" stackId="1" stroke="#E8946F" fill="url(#g2)" strokeWidth={2} name="Claude 3" />
                       <Area type="monotone" dataKey="custom" stackId="1" stroke="#10B981" fill="url(#g3)" strokeWidth={2} name="BrixOS Custom" />
                     </AreaChart>
                   </ResponsiveContainer>
@@ -481,7 +481,7 @@ export default function AIGatewayPage() {
                         <div className="text-sm font-medium text-gray-900">{g.label}</div>
                         <div className="text-xs text-gray-400">{g.desc}</div>
                       </div>
-                      <span className="text-xs font-semibold text-[#5b5fc7] bg-[#5b5fc7]/5 rounded-full px-2.5 py-1">{g.value}</span>
+                      <span className="text-xs font-semibold text-[#D97757] bg-[#D97757]/5 rounded-full px-2.5 py-1">{g.value}</span>
                     </div>
                   ))}
                 </div>
@@ -501,15 +501,15 @@ export default function AIGatewayPage() {
                     placeholder="Search actions, targets, agents..."
                     value={search}
                     onChange={e => setSearch(e.target.value)}
-                    className="w-full pl-9 pr-4 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#5b5fc7]/30 focus:border-[#5b5fc7]"
+                    className="w-full pl-9 pr-4 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#D97757]/30 focus:border-[#D97757]"
                   />
                 </div>
                 <div className="flex items-center gap-2">
-                  <select value={filterAgent} onChange={e => setFilterAgent(e.target.value)} className="rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#5b5fc7]/30">
+                  <select value={filterAgent} onChange={e => setFilterAgent(e.target.value)} className="rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#D97757]/30">
                     <option value="all">All agents</option>
                     {AGENTS.map(a => <option key={a.id} value={a.name}>{a.name}</option>)}
                   </select>
-                  <select value={filterRisk} onChange={e => setFilterRisk(e.target.value)} className="rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#5b5fc7]/30">
+                  <select value={filterRisk} onChange={e => setFilterRisk(e.target.value)} className="rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#D97757]/30">
                     <option value="all">All risks</option>
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
@@ -546,7 +546,7 @@ export default function AIGatewayPage() {
                       >
                         <td className="px-6 py-3">
                           <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold" style={{ backgroundColor: AGENTS.find(a => a.name === row.agent)?.color || '#5b5fc7' }}>
+                            <div className="w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold" style={{ backgroundColor: AGENTS.find(a => a.name === row.agent)?.color || '#D97757' }}>
                               {row.agent[0]}
                             </div>
                             <span className="text-sm text-gray-900">{row.agent}</span>
@@ -591,7 +591,7 @@ export default function AIGatewayPage() {
                       <XAxis dataKey="day" tick={{ fontSize: 11, fill: '#9ca3af' }} axisLine={false} tickLine={false} />
                       <YAxis tick={{ fontSize: 11, fill: '#9ca3af' }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `$${v}`} />
                       <Tooltip contentStyle={{ borderRadius: 10, border: '1px solid #e5e7eb', fontSize: 12 }} formatter={(value: number) => [`$${value.toFixed(2)}`, 'Cost']} />
-                      <Bar dataKey="cost" fill="#5b5fc7" radius={[6, 6, 0, 0]} />
+                      <Bar dataKey="cost" fill="#D97757" radius={[6, 6, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>

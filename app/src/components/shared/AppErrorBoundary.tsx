@@ -38,7 +38,7 @@ export class AppErrorBoundary extends Component<Props, State> {
           </pre>
           <button
             onClick={() => { localStorage.clear(); window.location.reload(); }}
-            style={{ marginTop: 16, padding: '8px 16px', backgroundColor: '#5b5fc7', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 13 }}
+            style={{ marginTop: 16, padding: '8px 16px', backgroundColor: '#D97757', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 13 }}
           >
             Clear Data & Reload
           </button>

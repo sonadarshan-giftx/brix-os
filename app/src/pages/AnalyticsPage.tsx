@@ -30,8 +30,8 @@ const LAST_14_DAYS_MESSAGES = [
 ];
 
 const TOP_CHANNELS = [
-  { name: '#general', messages: 4821, color: '#5b5fc7' },
-  { name: '#engineering', messages: 3610, color: '#7c7ff0' },
+  { name: '#general', messages: 4821, color: '#D97757' },
+  { name: '#engineering', messages: 3610, color: '#E8946F' },
   { name: '#product', messages: 2944, color: '#16a34a' },
   { name: '#random', messages: 1987, color: '#0891b2' },
   { name: '#design', messages: 1542, color: '#ec4899' },
@@ -41,7 +41,7 @@ const TOP_CHANNELS = [
 ];
 
 const MOCK_USERS = [
-  { id: 'u1', name: 'Alex Rivera', avatar: 'AR', color: '#5b5fc7', messages: 1842, calls: 94, files: 37, lastActive: Date.now() - 12 * 60 * 1000 },
+  { id: 'u1', name: 'Alex Rivera', avatar: 'AR', color: '#D97757', messages: 1842, calls: 94, files: 37, lastActive: Date.now() - 12 * 60 * 1000 },
   { id: 'u2', name: 'Maya Chen', avatar: 'MC', color: '#0891b2', messages: 1534, calls: 78, files: 52, lastActive: Date.now() - 3 * 60 * 1000 },
   { id: 'u3', name: 'Jordan Kim', avatar: 'JK', color: '#16a34a', messages: 1201, calls: 61, files: 18, lastActive: Date.now() - 2 * 3600 * 1000 },
   { id: 'u4', name: 'Sam Torres', avatar: 'ST', color: '#c4314b', messages: 987, calls: 44, files: 29, lastActive: Date.now() - 6 * 3600 * 1000 },
@@ -446,7 +446,7 @@ export default function AnalyticsPage() {
             value={totalMessages.toLocaleString()}
             sub={`${msgTrendPct}% vs prev week`}
             trend={msgTrend}
-            color="#5b5fc7"
+            color="#D97757"
           />
           <StatCard
             icon={<Users size={18} />}
@@ -454,7 +454,7 @@ export default function AnalyticsPage() {
             value="8 / 10"
             sub="80% engagement rate"
             trend="up"
-            color="#5b5fc7"
+            color="#D97757"
           />
           <StatCard
             icon={<Clock size={18} />}
@@ -480,7 +480,7 @@ export default function AnalyticsPage() {
             data={LAST_14_DAYS_MESSAGES}
             valueKey="messages"
             labelKey="day"
-            color="#5b5fc7"
+            color="#D97757"
             label="Messages per Day (Last 14 Days)"
           />
           <HorizontalBarChart data={TOP_CHANNELS} />
@@ -491,7 +491,7 @@ export default function AnalyticsPage() {
             data={LAST_14_DAYS_MESSAGES}
             valueKey="calls"
             labelKey="day"
-            color="#5b5fc7"
+            color="#D97757"
             label="Call Minutes by Day (Last 14 Days)"
           />
           <ActivityHeatmap />

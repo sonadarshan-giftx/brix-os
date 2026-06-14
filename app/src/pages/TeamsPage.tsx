@@ -302,7 +302,7 @@ function showToast(message: string, type: 'success' | 'error' | 'info' = 'info')
   const toast = document.createElement('div');
   toast.id = 'teams-toast';
   toast.style.cssText = 'position:fixed;top:16px;right:16px;z-index:9999;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:500;color:#fff;animation:toastSlideIn 0.3s ease;';
-  toast.style.backgroundColor = type === 'success' ? '#237b4b' : type === 'error' ? '#c4314b' : '#5b5fc7';
+  toast.style.backgroundColor = type === 'success' ? '#237b4b' : type === 'error' ? '#c4314b' : '#D97757';
   toast.textContent = message;
   document.body.appendChild(toast);
   setTimeout(() => toast.remove(), 3000);
@@ -344,7 +344,7 @@ function TeamsListView({ onSelectTeam }: { onSelectTeam: (id: string) => void })
   const [editTeamId, setEditTeamId] = useState<string | null>(null);
   const [editTeamName, setEditTeamName] = useState('');
   const [newTeamName, setNewTeamName] = useState('');
-  const [newTeamColor, setNewTeamColor] = useState('#5b5fc7');
+  const [newTeamColor, setNewTeamColor] = useState('#D97757');
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [teamList, setTeamList] = useState<Team[]>(() => {
@@ -390,7 +390,7 @@ function TeamsListView({ onSelectTeam }: { onSelectTeam: (id: string) => void })
     };
     setTeamList([...teamList, newTeam]);
     setNewTeamName('');
-    setNewTeamColor('#5b5fc7');
+    setNewTeamColor('#D97757');
     setCreateTeamOpen(false);
     showToast(`Team "${trimmed}" created`, 'success');
   };
@@ -461,7 +461,7 @@ function TeamsListView({ onSelectTeam }: { onSelectTeam: (id: string) => void })
           <button
             onClick={() => setCreateTeamOpen(true)}
             className="inline-flex items-center gap-2 rounded px-3 font-medium text-white cursor-pointer"
-            style={{ height: 32, fontSize: 13, backgroundColor: '#5b5fc7' }}
+            style={{ height: 32, fontSize: 13, backgroundColor: '#D97757' }}
             aria-label="Create new team"
           >
             <Plus size={16} />
@@ -703,7 +703,7 @@ function TeamsListView({ onSelectTeam }: { onSelectTeam: (id: string) => void })
               />
               <label style={{ fontSize: 12, color: '#616161', display: 'block', marginBottom: 4, fontWeight: 500 }}>Color</label>
               <div className="flex gap-2 mb-4">
-                {['#5b5fc7', '#237b4b', '#c4314b', '#b56200', '#464775', '#0891b2'].map(c => (
+                {['#D97757', '#237b4b', '#c4314b', '#b56200', '#C4623E', '#0891b2'].map(c => (
                   <button
                     key={c}
                     onClick={() => setNewTeamColor(c)}
@@ -719,7 +719,7 @@ function TeamsListView({ onSelectTeam }: { onSelectTeam: (id: string) => void })
                   className="flex-1 cursor-pointer rounded py-2 text-sm font-medium text-white"
                   disabled={!newTeamName.trim() || newTeamName.trim().length < 2}
                   style={{
-                    backgroundColor: newTeamName.trim().length >= 2 ? '#5b5fc7' : '#d1d1d1',
+                    backgroundColor: newTeamName.trim().length >= 2 ? '#D97757' : '#d1d1d1',
                     border: 'none',
                     cursor: newTeamName.trim().length >= 2 ? 'pointer' : 'not-allowed',
                     opacity: newTeamName.trim().length >= 2 ? 1 : 0.6,
@@ -774,7 +774,7 @@ function TeamsListView({ onSelectTeam }: { onSelectTeam: (id: string) => void })
                   onClick={handleSaveEdit}
                   className="flex-1 cursor-pointer rounded py-2 text-sm font-medium text-white"
                   disabled={!editTeamName.trim() || editTeamName.trim().length < 2}
-                  style={{ backgroundColor: editTeamName.trim().length >= 2 ? '#5b5fc7' : '#d1d1d1', border: 'none', cursor: editTeamName.trim().length >= 2 ? 'pointer' : 'not-allowed' }}
+                  style={{ backgroundColor: editTeamName.trim().length >= 2 ? '#D97757' : '#d1d1d1', border: 'none', cursor: editTeamName.trim().length >= 2 ? 'pointer' : 'not-allowed' }}
                 >
                   Save
                 </button>
@@ -842,7 +842,7 @@ function TeamScopeView({ team, onBack }: { team: Team; onBack: () => void }) {
         <button
           onClick={onBack}
           className="mb-2 inline-flex items-center gap-1 font-medium"
-          style={{ fontSize: 12, color: '#5b5fc7' }}
+          style={{ fontSize: 12, color: '#D97757' }}
           aria-label="Back to all teams"
         >
           <ChevronLeft size={14} />
@@ -877,7 +877,7 @@ function TeamScopeView({ team, onBack }: { team: Team; onBack: () => void }) {
             <button
               onClick={() => setMeetNowOpen(true)}
               className="inline-flex items-center gap-1 rounded px-3 font-medium cursor-pointer"
-              style={{ height: 32, fontSize: 13, backgroundColor: '#5b5fc7', color: 'white', marginLeft: 8 }}
+              style={{ height: 32, fontSize: 13, backgroundColor: '#D97757', color: 'white', marginLeft: 8 }}
               aria-label="Start instant meeting"
             >
               <Video size={16} />
@@ -969,7 +969,7 @@ function TeamScopeView({ team, onBack }: { team: Team; onBack: () => void }) {
                   }}
                   className="flex-1 cursor-pointer rounded py-2 text-sm font-medium text-white"
                   disabled={!isValidChannelName}
-                  style={{ backgroundColor: isValidChannelName ? '#5b5fc7' : '#d1d1d1', border: 'none', cursor: isValidChannelName ? 'pointer' : 'not-allowed' }}
+                  style={{ backgroundColor: isValidChannelName ? '#D97757' : '#d1d1d1', border: 'none', cursor: isValidChannelName ? 'pointer' : 'not-allowed' }}
                 >
                   Create
                 </button>
@@ -1011,7 +1011,7 @@ function TeamScopeView({ team, onBack }: { team: Team; onBack: () => void }) {
                     }
                   }}
                   className="flex-1 cursor-pointer rounded py-2 text-sm font-medium text-white"
-                  style={{ backgroundColor: '#5b5fc7', border: 'none' }}
+                  style={{ backgroundColor: '#D97757', border: 'none' }}
                 >
                   Send Invite
                 </button>
@@ -1061,7 +1061,7 @@ function TeamScopeView({ team, onBack }: { team: Team; onBack: () => void }) {
                   }}
                   className="flex-1 cursor-pointer rounded py-2 text-sm font-medium text-white"
                   disabled={newEventTitle.trim().length < 2}
-                  style={{ backgroundColor: newEventTitle.trim().length >= 2 ? '#5b5fc7' : '#d1d1d1', border: 'none', cursor: newEventTitle.trim().length >= 2 ? 'pointer' : 'not-allowed' }}
+                  style={{ backgroundColor: newEventTitle.trim().length >= 2 ? '#D97757' : '#d1d1d1', border: 'none', cursor: newEventTitle.trim().length >= 2 ? 'pointer' : 'not-allowed' }}
                 >
                   Add Event
                 </button>
@@ -1105,7 +1105,7 @@ function TeamScopeView({ team, onBack }: { team: Team; onBack: () => void }) {
                     }
                   }}
                   className="flex-1 cursor-pointer rounded py-2 text-sm font-medium text-white"
-                  style={{ backgroundColor: '#5b5fc7', border: 'none' }}
+                  style={{ backgroundColor: '#D97757', border: 'none' }}
                 >
                   Post
                 </button>
@@ -1154,9 +1154,9 @@ function TeamOverviewTab({ team, members }: { team: Team; members: Employee[] })
       {/* Stats Row */}
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {[
-          { label: 'Sprint Velocity', value: `${velocity} pts`, sub: 'Trending up', icon: <Zap size={18} color="#5b5fc7" />, spark: true },
+          { label: 'Sprint Velocity', value: `${velocity} pts`, sub: 'Trending up', icon: <Zap size={18} color="#D97757" />, spark: true },
           { label: 'Task Completion', value: `${completion.done}/${completion.total}`, sub: 'This sprint', icon: <CheckSquare size={18} color="#237b4b" />, spark: false },
-          { label: 'Code Reviews', value: `${codeReviews}`, sub: '+15% vs last week', icon: <GitPullRequest size={18} color="#5b5fc7" />, spark: false },
+          { label: 'Code Reviews', value: `${codeReviews}`, sub: '+15% vs last week', icon: <GitPullRequest size={18} color="#D97757" />, spark: false },
           { label: 'Deploy Frequency', value: deployFreq, sub: 'On track', icon: <Rocket size={18} color="#237b4b" />, spark: false },
         ].map((stat, idx) => (
           <motion.div
@@ -1234,7 +1234,7 @@ function TeamOverviewTab({ team, members }: { team: Team; members: Employee[] })
                     initial={{ width: 0 }}
                     animate={{ width: `${(count / maxCount) * 100}%` }}
                     transition={{ duration: 0.5, delay: idx * 0.08, ease: easing }}
-                    style={{ height: '100%', backgroundColor: idx === 0 ? '#5b5fc7' : '#92c353', borderRadius: 4 }}
+                    style={{ height: '100%', backgroundColor: idx === 0 ? '#D97757' : '#92c353', borderRadius: 4 }}
                   />
                 </div>
                 <span className="flex-shrink-0" style={{ fontSize: 12, color: '#616161', width: 40, textAlign: 'right' }}>
@@ -1263,7 +1263,7 @@ function TeamChannelsTab({ team, members, channelList, setCreateChannelOpen }: {
         <button
           onClick={() => setCreateChannelOpen(true)}
           className="inline-flex items-center gap-1 rounded px-3 font-medium cursor-pointer"
-          style={{ height: 32, fontSize: 13, backgroundColor: '#5b5fc7', color: 'white' }}
+          style={{ height: 32, fontSize: 13, backgroundColor: '#D97757', color: 'white' }}
           aria-label="Create channel"
         >
           <Plus size={16} /> Create Channel
@@ -1273,7 +1273,7 @@ function TeamChannelsTab({ team, members, channelList, setCreateChannelOpen }: {
         <div className="text-center py-16">
           <Hash size={32} color="#d1d1d1" className="mx-auto mb-2" />
           <p className="text-sm" style={{ color: '#767676' }}>No channels yet</p>
-          <button onClick={() => setCreateChannelOpen(true)} className="mt-2 text-sm cursor-pointer" style={{ color: '#5b5fc7', background: 'none', border: 'none' }}>Create your first channel</button>
+          <button onClick={() => setCreateChannelOpen(true)} className="mt-2 text-sm cursor-pointer" style={{ color: '#D97757', background: 'none', border: 'none' }}>Create your first channel</button>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -1289,7 +1289,7 @@ function TeamChannelsTab({ team, members, channelList, setCreateChannelOpen }: {
               <Card className="cursor-pointer hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: ch.type === 'private' || ch.private ? '#fee2e2' : '#e0e7ff' }}>
-                    {ch.type === 'private' || ch.private ? <Lock size={18} style={{ color: '#c4314b' }} /> : <Globe size={18} style={{ color: '#5b5fc7' }} />}
+                    {ch.type === 'private' || ch.private ? <Lock size={18} style={{ color: '#c4314b' }} /> : <Globe size={18} style={{ color: '#D97757' }} />}
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
@@ -1329,7 +1329,7 @@ function TeamMembersTab({ team, members, setAddMemberOpen }: { team: Team; membe
         <button
           onClick={() => setAddMemberOpen(true)}
           className="inline-flex items-center gap-1 rounded px-3 font-medium cursor-pointer"
-          style={{ height: 32, fontSize: 13, backgroundColor: '#5b5fc7', color: 'white' }}
+          style={{ height: 32, fontSize: 13, backgroundColor: '#D97757', color: 'white' }}
           aria-label="Add member"
         >
           <Plus size={16} />
@@ -1341,7 +1341,7 @@ function TeamMembersTab({ team, members, setAddMemberOpen }: { team: Team; membe
         <div className="text-center py-16">
           <Users size={32} color="#d1d1d1" className="mx-auto mb-2" />
           <p className="text-sm" style={{ color: '#767676' }}>No members in this team yet</p>
-          <button onClick={() => setAddMemberOpen(true)} className="mt-2 text-sm cursor-pointer" style={{ color: '#5b5fc7', background: 'none', border: 'none' }}>Add your first member</button>
+          <button onClick={() => setAddMemberOpen(true)} className="mt-2 text-sm cursor-pointer" style={{ color: '#D97757', background: 'none', border: 'none' }}>Add your first member</button>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -1368,7 +1368,7 @@ function TeamMembersTab({ team, members, setAddMemberOpen }: { team: Team; membe
                         <div className="flex items-center gap-2">
                           <h3 style={{ fontSize: 14, fontWeight: 600, color: '#242424' }}>{member.name}</h3>
                           {member.kind === 'ai' && (
-                            <span className="rounded px-1 font-semibold" style={{ fontSize: 9, backgroundColor: 'rgba(91,95,199,0.15)', color: '#5b5fc7' }}>AI</span>
+                            <span className="rounded px-1 font-semibold" style={{ fontSize: 9, backgroundColor: 'rgba(217,119,87,0.15)', color: '#D97757' }}>AI</span>
                           )}
                         </div>
                         <p style={{ fontSize: 12, color: '#616161' }}>{member.title}</p>
@@ -1400,7 +1400,7 @@ function TeamMembersTab({ team, members, setAddMemberOpen }: { team: Team; membe
                     {member.kind === 'ai' && (member as any).skills && (
                       <div className="mt-3 flex flex-wrap gap-1">
                         {((member as any).skills || []).slice(0, 3).map((skill: string) => (
-                          <span key={skill} className="rounded-full px-2 font-medium" style={{ fontSize: 10, backgroundColor: '#e8eaf6', color: '#5b5fc7' }}>
+                          <span key={skill} className="rounded-full px-2 font-medium" style={{ fontSize: 10, backgroundColor: '#e8eaf6', color: '#D97757' }}>
                             {skill}
                           </span>
                         ))}
@@ -1418,7 +1418,7 @@ function TeamMembersTab({ team, members, setAddMemberOpen }: { team: Team; membe
                           className="mt-3 flex gap-2 overflow-hidden"
                           style={{ borderTop: '1px solid #e1e1e1', paddingTop: 12 }}
                         >
-                          <button onClick={() => showToast('info')} className="rounded px-2 py-1 font-medium cursor-pointer" style={{ fontSize: 11, backgroundColor: '#e8eaf6', color: '#5b5fc7', border: 'none' }}>
+                          <button onClick={() => showToast('info')} className="rounded px-2 py-1 font-medium cursor-pointer" style={{ fontSize: 11, backgroundColor: '#e8eaf6', color: '#D97757', border: 'none' }}>
                             View Profile
                           </button>
                           {member.kind === 'ai' && (
@@ -1519,8 +1519,8 @@ function TeamPostsTab({
             fontSize: 13,
             minHeight: 32,
             backgroundColor: selectedChannel === 'all' ? '#e8eaf6' : 'transparent',
-            color: selectedChannel === 'all' ? '#5b5fc7' : '#242424',
-            borderLeft: selectedChannel === 'all' ? '3px solid #5b5fc7' : '3px solid transparent',
+            color: selectedChannel === 'all' ? '#D97757' : '#242424',
+            borderLeft: selectedChannel === 'all' ? '3px solid #D97757' : '3px solid transparent',
             border: 'none',
           }}
         >
@@ -1536,8 +1536,8 @@ function TeamPostsTab({
               fontSize: 13,
               minHeight: 32,
               backgroundColor: ch.id === selectedChannel ? '#e8eaf6' : 'transparent',
-              color: ch.id === selectedChannel ? '#5b5fc7' : '#242424',
-              borderLeft: ch.id === selectedChannel ? '3px solid #5b5fc7' : '3px solid transparent',
+              color: ch.id === selectedChannel ? '#D97757' : '#242424',
+              borderLeft: ch.id === selectedChannel ? '3px solid #D97757' : '3px solid transparent',
               border: 'none',
             }}
           >
@@ -1556,7 +1556,7 @@ function TeamPostsTab({
           <button
             onClick={() => setNewPostOpen(true)}
             className="inline-flex items-center gap-1 rounded px-3 font-medium cursor-pointer"
-            style={{ height: 32, fontSize: 13, backgroundColor: '#5b5fc7', color: 'white' }}
+            style={{ height: 32, fontSize: 13, backgroundColor: '#D97757', color: 'white' }}
             aria-label="New post"
           >
             <Plus size={16} />
@@ -1611,7 +1611,7 @@ function TeamPostsTab({
               style={{
                 height: 28,
                 fontSize: 12,
-                backgroundColor: composerText.trim() ? '#5b5fc7' : '#e1e1e1',
+                backgroundColor: composerText.trim() ? '#D97757' : '#e1e1e1',
                 color: composerText.trim() ? 'white' : '#a0a0a0',
                 border: 'none',
               }}
@@ -1656,7 +1656,7 @@ function PostCard({
             {author?.name || 'Unknown'}
           </span>
           {author?.kind === 'ai' && (
-            <span className="rounded px-1 font-semibold" style={{ fontSize: 9, backgroundColor: 'rgba(91,95,199,0.15)', color: '#5b5fc7' }}>AI</span>
+            <span className="rounded px-1 font-semibold" style={{ fontSize: 9, backgroundColor: 'rgba(217,119,87,0.15)', color: '#D97757' }}>AI</span>
           )}
           <span style={{ fontSize: 11, color: '#767676' }}>
             {formatRelativeTime(post.timestamp)}
@@ -1697,7 +1697,7 @@ function PostCard({
           <button
             onClick={() => setExpandedPost(expandedPost === post.id ? null : post.id)}
             className="mt-2 flex items-center gap-1 font-medium cursor-pointer"
-            style={{ fontSize: 12, color: '#5b5fc7', background: 'none', border: 'none' }}
+            style={{ fontSize: 12, color: '#D97757', background: 'none', border: 'none' }}
           >
             <Reply size={14} />
             {post.replyCount} {post.replyCount === 1 ? 'reply' : 'replies'}
@@ -1786,7 +1786,7 @@ function TeamStandupsTab({ team, members }: { team: Team; members: Employee[] })
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
                       <span style={{ fontSize: 14, fontWeight: 600, color: '#242424' }}>{entry.employee.name}</span>
-                      {entry.employee.kind === 'ai' && <span className="rounded px-1 font-semibold" style={{ fontSize: 9, backgroundColor: 'rgba(91,95,199,0.15)', color: '#5b5fc7' }}>AI</span>}
+                      {entry.employee.kind === 'ai' && <span className="rounded px-1 font-semibold" style={{ fontSize: 9, backgroundColor: 'rgba(217,119,87,0.15)', color: '#D97757' }}>AI</span>}
                       {entry.submitted && <CheckCircle2 size={14} style={{ color: '#92c353' }} />}
                     </div>
                     <div className="mt-2 grid grid-cols-3 gap-3">
@@ -1826,7 +1826,7 @@ function TeamCalendarTab({ team, eventsList, setAddEventOpen }: { team: Team; ev
         <button
           onClick={() => setAddEventOpen(true)}
           className="inline-flex items-center gap-1 rounded px-3 font-medium cursor-pointer"
-          style={{ height: 32, fontSize: 13, backgroundColor: '#5b5fc7', color: 'white' }}
+          style={{ height: 32, fontSize: 13, backgroundColor: '#D97757', color: 'white' }}
           aria-label="Add event"
         >
           <Plus size={16} /> Add Event
@@ -1843,11 +1843,11 @@ function TeamCalendarTab({ team, eventsList, setAddEventOpen }: { team: Team; ev
             <motion.div key={idx} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.05, duration: 0.2 }}>
               <Card className="flex items-center gap-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: evt.type === 'planning' ? '#fef3c7' : evt.type === 'retro' ? '#f3e8ff' : '#e0e7ff' }}>
-                  <Calendar size={18} style={{ color: evt.type === 'planning' ? '#f59e0b' : evt.type === 'retro' ? '#5b5fc7' : '#5b5fc7' }} />
+                  <Calendar size={18} style={{ color: evt.type === 'planning' ? '#f59e0b' : evt.type === 'retro' ? '#D97757' : '#D97757' }} />
                 </div>
                 <div className="flex-1">
                   <span style={{ fontSize: 14, fontWeight: 600, color: '#242424' }}>{evt.title}</span>
-                  {evt.recurring && <span className="ml-2 rounded px-1 font-semibold" style={{ fontSize: 9, backgroundColor: '#e8eaf6', color: '#5b5fc7' }}>Recurring</span>}
+                  {evt.recurring && <span className="ml-2 rounded px-1 font-semibold" style={{ fontSize: 9, backgroundColor: '#e8eaf6', color: '#D97757' }}>Recurring</span>}
                 </div>
                 <span style={{ fontSize: 12, color: '#616161' }}>{evt.time}</span>
               </Card>
@@ -1889,10 +1889,10 @@ function TeamPerformanceTab({ team, members }: { team: Team; members: Employee[]
       {/* Summary Cards */}
       <div className="grid grid-cols-4 gap-3">
         {[
-          { label: 'Team Velocity', value: Math.round(metrics.reduce((s, m) => s + m.velocity, 0) / Math.max(metrics.length, 1)), unit: 'pts/sprint', color: '#5b5fc7' },
+          { label: 'Team Velocity', value: Math.round(metrics.reduce((s, m) => s + m.velocity, 0) / Math.max(metrics.length, 1)), unit: 'pts/sprint', color: '#D97757' },
           { label: 'Total Tickets', value: metrics.reduce((s, m) => s + m.ticketCount, 0), unit: 'completed', color: '#22c55e' },
           { label: 'PRs Merged', value: metrics.reduce((s, m) => s + m.prCount, 0), unit: 'this sprint', color: '#f59e0b' },
-          { label: 'Reviews Done', value: metrics.reduce((s, m) => s + m.reviewCount, 0), unit: 'across team', color: '#5b5fc7' },
+          { label: 'Reviews Done', value: metrics.reduce((s, m) => s + m.reviewCount, 0), unit: 'across team', color: '#D97757' },
         ].map((kpi) => (
           <div key={kpi.label} className="rounded-lg border p-3 text-center" style={{ borderColor: '#e1e1e1' }}>
             <p style={{ fontSize: 10, fontWeight: 600, color: '#767676', textTransform: 'uppercase' }}>{kpi.label}</p>
@@ -1927,7 +1927,7 @@ function TeamPerformanceTab({ team, members }: { team: Team; members: Employee[]
                     <Avatar size="xs" alt={m.employee.name} initials={m.employee.name.substring(0, 2)} isAi={m.employee.kind === 'ai'} status={m.employee.status} />
                     <span style={{ fontWeight: 600, color: '#242424' }}>{m.employee.name}</span>
                   </td>
-                  <td className="py-2 text-right font-bold" style={{ color: '#5b5fc7' }}>{m.velocity}</td>
+                  <td className="py-2 text-right font-bold" style={{ color: '#D97757' }}>{m.velocity}</td>
                   <td className="py-2 text-right" style={{ color: '#333' }}>{m.ticketCount}</td>
                   <td className="py-2 text-right" style={{ color: '#333' }}>{m.prCount}</td>
                   <td className="py-2 text-right" style={{ color: '#333' }}>{m.reviewCount}</td>
@@ -1971,7 +1971,7 @@ function TeamSettingsTab({ team, channelList, setChannelList, setCreateChannelOp
               type="text"
               value={teamName}
               onChange={e => setTeamName(e.target.value)}
-              className="w-full rounded border bg-transparent px-3 outline-none focus:border-[#5b5fc7]"
+              className="w-full rounded border bg-transparent px-3 outline-none focus:border-[#D97757]"
               style={{ height: 32, fontSize: 13, borderColor: '#d1d1d1', color: '#242424' }}
               aria-label="Team name"
             />
@@ -1981,7 +1981,7 @@ function TeamSettingsTab({ team, channelList, setChannelList, setCreateChannelOp
             <textarea
               value={description}
               onChange={e => setDescription(e.target.value)}
-              className="w-full resize-none rounded border bg-transparent px-3 py-2 outline-none focus:border-[#5b5fc7]"
+              className="w-full resize-none rounded border bg-transparent px-3 py-2 outline-none focus:border-[#D97757]"
               style={{ fontSize: 13, borderColor: '#d1d1d1', color: '#242424', minHeight: 60 }}
               aria-label="Team description"
             />
@@ -1989,7 +1989,7 @@ function TeamSettingsTab({ team, channelList, setChannelList, setCreateChannelOp
           <button
             onClick={handleSave}
             className="cursor-pointer rounded px-3 py-1.5 text-xs font-medium text-white"
-            style={{ backgroundColor: '#5b5fc7', border: 'none' }}
+            style={{ backgroundColor: '#D97757', border: 'none' }}
           >
             Save Changes
           </button>
@@ -2003,7 +2003,7 @@ function TeamSettingsTab({ team, channelList, setChannelList, setCreateChannelOp
           <button
             onClick={() => setCreateChannelOpen(true)}
             className="inline-flex items-center gap-1 rounded px-2 font-medium cursor-pointer"
-            style={{ height: 28, fontSize: 12, backgroundColor: '#5b5fc7', color: 'white' }}
+            style={{ height: 28, fontSize: 12, backgroundColor: '#D97757', color: 'white' }}
             aria-label="Add channel"
           >
             <Plus size={14} />
@@ -2052,7 +2052,7 @@ function TeamSettingsTab({ team, channelList, setChannelList, setCreateChannelOp
             { label: 'Archive messages after 90 days', checked: true },
           ].map((opt) => (
             <label key={opt.label} className="flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" defaultChecked={opt.checked} className="h-4 w-4 accent-[#5b5fc7]" aria-label={opt.label} />
+              <input type="checkbox" defaultChecked={opt.checked} className="h-4 w-4 accent-[#D97757]" aria-label={opt.label} />
               <span style={{ fontSize: 13, color: '#242424' }}>{opt.label}</span>
             </label>
           ))}

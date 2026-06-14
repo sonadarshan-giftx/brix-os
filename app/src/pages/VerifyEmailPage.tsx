@@ -32,7 +32,7 @@ function Toast({
       ? '#237b4b'
       : type === 'error'
       ? '#c4314b'
-      : '#5b5fc7';
+      : '#D97757';
 
   return (
     <div
@@ -208,7 +208,7 @@ export default function VerifyEmailPage() {
         <div className="mb-8 text-center">
           <div
             className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
-            style={{ backgroundColor: '#5b5fc7' }}
+            style={{ backgroundColor: '#D97757' }}
           >
             <Mail className="h-6 w-6 text-white" />
           </div>
@@ -239,10 +239,10 @@ export default function VerifyEmailPage() {
                 onPaste={handlePaste}
                 className="h-12 w-12 rounded-md border text-center text-lg font-semibold outline-none transition-all focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 sm:h-14 sm:w-14 sm:text-xl"
                 style={{
-                  borderColor: digit ? '#5b5fc7' : '#d1d1d1',
+                  borderColor: digit ? '#D97757' : '#d1d1d1',
                   color: '#242424',
                   borderRadius: '6px',
-                  caretColor: '#5b5fc7',
+                  caretColor: '#D97757',
                 }}
                 autoFocus={i === 0}
               />
@@ -254,7 +254,7 @@ export default function VerifyEmailPage() {
             type="submit"
             disabled={loading || !codeComplete}
             className="flex w-full items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium text-white transition-all disabled:cursor-not-allowed disabled:opacity-60"
-            style={{ backgroundColor: '#5b5fc7', borderRadius: '8px' }}
+            style={{ backgroundColor: '#D97757', borderRadius: '8px' }}
           >
             {loading ? (
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -276,7 +276,7 @@ export default function VerifyEmailPage() {
                 type="button"
                 onClick={handleResend}
                 className="inline-flex items-center gap-1 font-medium hover:underline"
-                style={{ color: '#5b5fc7' }}
+                style={{ color: '#D97757' }}
               >
                 <RefreshCw className="h-3.5 w-3.5" />
                 Resend code
@@ -300,7 +300,7 @@ export default function VerifyEmailPage() {
                 navigate('/signup');
               }}
               className="font-medium hover:underline"
-              style={{ color: '#5b5fc7' }}
+              style={{ color: '#D97757' }}
             >
               Sign up again
             </a>

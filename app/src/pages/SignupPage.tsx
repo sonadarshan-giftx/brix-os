@@ -37,7 +37,7 @@ function Toast({
       ? '#237b4b'
       : type === 'error'
       ? '#c4314b'
-      : '#5b5fc7';
+      : '#D97757';
 
   return (
     <div
@@ -153,7 +153,7 @@ export default function SignupPage() {
         <div className="mb-8 text-center">
           <div
             className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
-            style={{ backgroundColor: '#5b5fc7' }}
+            style={{ backgroundColor: '#D97757' }}
           >
             <ShieldCheck className="h-6 w-6 text-white" />
           </div>
@@ -418,8 +418,8 @@ export default function SignupPage() {
               }}
               className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors"
               style={{
-                borderColor: agreeTerms ? '#5b5fc7' : '#d1d1d1',
-                backgroundColor: agreeTerms ? '#5b5fc7' : '#ffffff',
+                borderColor: agreeTerms ? '#D97757' : '#d1d1d1',
+                backgroundColor: agreeTerms ? '#D97757' : '#ffffff',
                 borderRadius: '4px',
               }}
             >
@@ -427,11 +427,11 @@ export default function SignupPage() {
             </button>
             <span className="text-xs leading-relaxed" style={{ color: '#616161' }}>
               I agree to the{' '}
-              <a href="#" className="font-medium hover:underline" style={{ color: '#5b5fc7' }}>
+              <a href="#" className="font-medium hover:underline" style={{ color: '#D97757' }}>
                 Terms of Service
               </a>{' '}
               and{' '}
-              <a href="#" className="font-medium hover:underline" style={{ color: '#5b5fc7' }}>
+              <a href="#" className="font-medium hover:underline" style={{ color: '#D97757' }}>
                 Privacy Policy
               </a>
             </span>
@@ -447,7 +447,7 @@ export default function SignupPage() {
             type="submit"
             disabled={loading}
             className="flex w-full items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-medium text-white transition-all disabled:cursor-not-allowed disabled:opacity-60"
-            style={{ backgroundColor: '#5b5fc7', borderRadius: '8px' }}
+            style={{ backgroundColor: '#D97757', borderRadius: '8px' }}
           >
             {loading ? (
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -470,7 +470,7 @@ export default function SignupPage() {
               navigate('/login');
             }}
             className="font-medium hover:underline"
-            style={{ color: '#5b5fc7' }}
+            style={{ color: '#D97757' }}
           >
             Log in
           </a>

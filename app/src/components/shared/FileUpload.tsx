@@ -54,7 +54,7 @@ export function FileUpload({ onUpload, maxSize = 50, accept = '*' }: FileUploadP
         onDrop={handleDrop}
         className="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 transition-colors"
         style={{
-          borderColor: isDragging ? '#5b5fc7' : '#d1d1d1',
+          borderColor: isDragging ? '#D97757' : '#d1d1d1',
           backgroundColor: isDragging ? 'var(--surface-selected)' : 'var(--surface-hover)',
         }}
         onClick={() => document.getElementById('file-input')?.click()}
@@ -108,7 +108,7 @@ export function FileUpload({ onUpload, maxSize = 50, accept = '*' }: FileUploadP
             <button
               onClick={uploadFiles}
               className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded py-2 text-sm font-medium text-white"
-              style={{ backgroundColor: '#5b5fc7', border: 'none' }}
+              style={{ backgroundColor: '#D97757', border: 'none' }}
             >
               <Check size={14} /> Upload {files.length} file{files.length !== 1 ? 's' : ''}
             </button>

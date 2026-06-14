@@ -127,7 +127,7 @@ export default function SetupWizardPage() {
       <div className="mb-8 flex items-center gap-3">
         <div
           className="flex items-center justify-center rounded-lg"
-          style={{ width: 40, height: 40, backgroundColor: '#5b5fc7' }}
+          style={{ width: 40, height: 40, backgroundColor: '#D97757' }}
         >
           <Zap size={22} color="#fff" />
         </div>
@@ -149,7 +149,7 @@ export default function SetupWizardPage() {
             <div
               key={s}
               className="h-1 flex-1 rounded-full transition-all"
-              style={{ backgroundColor: s <= step ? '#5b5fc7' : '#2a2a2a' }}
+              style={{ backgroundColor: s <= step ? '#D97757' : '#2a2a2a' }}
             />
           ))}
         </div>
@@ -226,7 +226,7 @@ export default function SetupWizardPage() {
             <button
               onClick={handleStep1}
               className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90"
-              style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
+              style={{ backgroundColor: '#D97757', border: 'none', fontSize: 14 }}
             >
               Continue
               <ArrowRight size={16} />
@@ -255,9 +255,9 @@ export default function SetupWizardPage() {
               </p>
             </div>
 
-            <div className="rounded-lg p-4" style={{ backgroundColor: 'rgba(91,95,199,0.08)', border: '1px solid rgba(91,95,199,0.2)' }}>
+            <div className="rounded-lg p-4" style={{ backgroundColor: 'rgba(217,119,87,0.08)', border: '1px solid rgba(217,119,87,0.2)' }}>
               <div className="flex items-start gap-2">
-                <Shield size={14} color="#5b5fc7" className="mt-0.5 shrink-0" />
+                <Shield size={14} color="#D97757" className="mt-0.5 shrink-0" />
                 <p className="text-[11px]" style={{ color: '#888', lineHeight: 1.5 }}>
                   This license key is tied to your company domain and instance ID. It cannot be transferred. Offline validation is supported.
                 </p>
@@ -275,7 +275,7 @@ export default function SetupWizardPage() {
               <button
                 onClick={handleStep2}
                 className="flex-[2] flex cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90"
-                style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
+                style={{ backgroundColor: '#D97757', border: 'none', fontSize: 14 }}
               >
                 Continue
                 <ArrowRight size={16} />
@@ -349,7 +349,7 @@ export default function SetupWizardPage() {
               <button
                 onClick={handleStep3}
                 className="flex-[2] flex cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90"
-                style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
+                style={{ backgroundColor: '#D97757', border: 'none', fontSize: 14 }}
               >
                 Continue
                 <ArrowRight size={16} />
@@ -461,7 +461,7 @@ export default function SetupWizardPage() {
             <button
               onClick={() => navigate('/login')}
               className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90"
-              style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
+              style={{ backgroundColor: '#D97757', border: 'none', fontSize: 14 }}
             >
               Go to Login
               <ArrowRight size={16} />

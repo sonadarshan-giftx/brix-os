@@ -114,22 +114,22 @@ const INITIAL_MCP_APPS: McpApp[] = [
    Tier 2: Admin Apps
    ═══════════════════════════════════════════ */
 const ADMIN_APPS = [
-  { id: 'workforce', name: 'Workforce', icon: Users, desc: 'Employee directory and hiring', color: '#5b5fc7' },
+  { id: 'workforce', name: 'Workforce', icon: Users, desc: 'Employee directory and hiring', color: '#D97757' },
   { id: 'rules', name: 'Rules', icon: Shield, desc: 'Automation rules and policies', color: '#237b4b' },
   { id: 'reports', name: 'Reports', icon: BarChart3, desc: 'Analytics and dashboards', color: '#b56200' },
   { id: 'billing', name: 'Billing', icon: CreditCard, desc: 'Subscription and invoices', color: '#c4314b' },
-  { id: 'security', name: 'Security', icon: Lock, desc: 'SSO, MFA, and access control', color: '#464775' },
+  { id: 'security', name: 'Security', icon: Lock, desc: 'SSO, MFA, and access control', color: '#C4623E' },
   { id: 'code-workspace', name: 'Code Workspace', icon: Code2, desc: 'Repository management', color: '#1f1f1f' },
   { id: 'integrations', name: 'Integrations', icon: Plug, desc: 'Connected services', color: '#616161' },
   { id: 'branding', name: 'Branding', icon: Paintbrush, desc: 'Customize appearance', color: '#ec4899' },
-  { id: 'audit', name: 'Audit', icon: ClipboardCheck, desc: 'Compliance and audit log', color: '#5b5fc7' },
+  { id: 'audit', name: 'Audit', icon: ClipboardCheck, desc: 'Compliance and audit log', color: '#D97757' },
   { id: 'communication', name: 'Communication', icon: Megaphone, desc: 'Announcements and templates', color: '#0891b2' },
   { id: 'helpdesk', name: 'Helpdesk', icon: LifeBuoy, desc: 'Support portal config', color: '#059669' },
   { id: 'observability', name: 'Observability', icon: Eye, desc: 'Monitoring and alerts', color: '#dc2626' },
 ];
 
 /* ── Color palette for charts ── */
-const CHART_COLORS = ['#5b5fc7', '#92c353', '#ffaa44', '#c4314b', '#0891b2', '#5b5fc7', '#ec4899', '#616161'];
+const CHART_COLORS = ['#D97757', '#92c353', '#ffaa44', '#c4314b', '#0891b2', '#D97757', '#ec4899', '#616161'];
 
 /* ── Integration Log Type ── */
 interface IntegrationLog {
@@ -341,7 +341,7 @@ function McpCard({ app, compact, onConfigure }: { app: McpApp; compact: boolean;
         <span style={{ fontSize: 11, color: localApp.status === 'connected' ? '#237b4b' : '#616161' }}>
           {localApp.status === 'connected' ? 'Connected' : 'Available'}
         </span>
-        {isLoading && <Loader2 size={14} className="animate-spin" color="#5b5fc7" />}
+        {isLoading && <Loader2 size={14} className="animate-spin" color="#D97757" />}
         {localApp.status === 'connected' && !isLoading && (
           <div className="flex gap-1">
             <button onClick={onConfigure} className="cursor-pointer rounded" style={{ padding: '3px 8px', fontSize: 11, border: '1px solid #d1d1d1', background: '#fff', color: '#616161' }} aria-label={`Configure ${localApp.name}`}>
@@ -353,7 +353,7 @@ function McpCard({ app, compact, onConfigure }: { app: McpApp; compact: boolean;
           </div>
         )}
         {localApp.status === 'available' && !isLoading && (
-          <button onClick={handleConnect} className="cursor-pointer rounded" style={{ padding: '3px 12px', fontSize: 11, border: 'none', background: '#5b5fc7', color: '#fff' }} aria-label={`Connect ${localApp.name}`}>
+          <button onClick={handleConnect} className="cursor-pointer rounded" style={{ padding: '3px 12px', fontSize: 11, border: 'none', background: '#D97757', color: '#fff' }} aria-label={`Connect ${localApp.name}`}>
             Connect
           </button>
         )}
@@ -382,8 +382,8 @@ function McpCard({ app, compact, onConfigure }: { app: McpApp; compact: boolean;
       </div>
       {isLoading && (
         <div className="flex items-center gap-1" style={{ marginTop: 10 }}>
-          <Loader2 size={12} className="animate-spin" color="#5b5fc7" />
-          <span style={{ fontSize: 11, color: '#5b5fc7' }}>Connecting...</span>
+          <Loader2 size={12} className="animate-spin" color="#D97757" />
+          <span style={{ fontSize: 11, color: '#D97757' }}>Connecting...</span>
         </div>
       )}
       <div className="flex gap-2" style={{ marginTop: 10 }}>
@@ -397,7 +397,7 @@ function McpCard({ app, compact, onConfigure }: { app: McpApp; compact: boolean;
             </button>
           </>
         ) : !isLoading ? (
-          <button onClick={handleConnect} className="cursor-pointer rounded" style={{ padding: '3px 12px', fontSize: 11, border: 'none', background: '#5b5fc7', color: '#fff' }} aria-label={`Connect ${localApp.name}`}>
+          <button onClick={handleConnect} className="cursor-pointer rounded" style={{ padding: '3px 12px', fontSize: 11, border: 'none', background: '#D97757', color: '#fff' }} aria-label={`Connect ${localApp.name}`}>
             Connect
           </button>
         ) : null}
@@ -616,9 +616,9 @@ function ConfigureModal({ appName, onClose }: { appName: string; onClose: () => 
                   fontSize: 12,
                   fontWeight: 500,
                   border: 'none',
-                  borderBottom: activeTab === t.id ? '2px solid #5b5fc7' : '2px solid transparent',
+                  borderBottom: activeTab === t.id ? '2px solid #D97757' : '2px solid transparent',
                   background: 'transparent',
-                  color: activeTab === t.id ? '#5b5fc7' : '#616161',
+                  color: activeTab === t.id ? '#D97757' : '#616161',
                 }}
               >
                 {t.label}
@@ -682,9 +682,9 @@ function ConfigureModal({ appName, onClose }: { appName: string; onClose: () => 
                         padding: '4px 12px',
                         fontSize: 11,
                         fontWeight: 500,
-                        border: selectedEvents.includes(evt) ? '1px solid #5b5fc7' : '1px solid #d1d1d1',
+                        border: selectedEvents.includes(evt) ? '1px solid #D97757' : '1px solid #d1d1d1',
                         background: selectedEvents.includes(evt) ? '#f8f8ff' : '#fff',
-                        color: selectedEvents.includes(evt) ? '#5b5fc7' : '#616161',
+                        color: selectedEvents.includes(evt) ? '#D97757' : '#616161',
                       }}
                     >
                       {selectedEvents.includes(evt) && <Check size={10} style={{ display: 'inline', marginRight: 4 }} />}
@@ -707,7 +707,7 @@ function ConfigureModal({ appName, onClose }: { appName: string; onClose: () => 
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
-                          <Webhook size={14} color="#5b5fc7" />
+                          <Webhook size={14} color="#D97757" />
                           <span style={{ fontSize: 13, fontWeight: 600, color: '#242424' }}>{wh.url}</span>
                           <span className="rounded-full" style={{ padding: '1px 8px', fontSize: 10, fontWeight: 600, background: wh.status === 'active' ? 'rgba(146,195,83,0.15)' : 'rgba(138,138,138,0.15)', color: wh.status === 'active' ? '#237b4b' : '#8a8a8a' }}>
                             {wh.status === 'active' ? 'Active' : 'Inactive'}
@@ -741,7 +741,7 @@ function ConfigureModal({ appName, onClose }: { appName: string; onClose: () => 
                 <button
                   onClick={handleCreateKey}
                   className="flex cursor-pointer items-center gap-1 rounded px-3 text-white"
-                  style={{ fontSize: 12, height: 32, backgroundColor: '#5b5fc7', border: 'none' }}
+                  style={{ fontSize: 12, height: 32, backgroundColor: '#D97757', border: 'none' }}
                 >
                   <Plus size={14} aria-hidden="true" /> New Key
                 </button>
@@ -832,7 +832,7 @@ function ConfigureModal({ appName, onClose }: { appName: string; onClose: () => 
                 </Card>
                 <Card>
                   <p style={{ fontSize: 11, color: '#616161', textTransform: 'uppercase', fontWeight: 600 }}>Avg Latency</p>
-                  <p style={{ fontSize: 22, fontWeight: 600, color: '#5b5fc7', marginTop: 4 }}>45ms</p>
+                  <p style={{ fontSize: 22, fontWeight: 600, color: '#D97757', marginTop: 4 }}>45ms</p>
                 </Card>
                 <Card>
                   <p style={{ fontSize: 11, color: '#616161', textTransform: 'uppercase', fontWeight: 600 }}>Errors (24h)</p>
@@ -872,7 +872,7 @@ function ConfigureModal({ appName, onClose }: { appName: string; onClose: () => 
               onClick={handleSave}
               disabled={isSaving}
               className="flex cursor-pointer items-center gap-1 rounded px-4 py-2 text-white"
-              style={{ fontSize: 12, fontWeight: 500, background: '#5b5fc7', border: 'none', opacity: isSaving ? 0.7 : 1 }}
+              style={{ fontSize: 12, fontWeight: 500, background: '#D97757', border: 'none', opacity: isSaving ? 0.7 : 1 }}
             >
               {isSaving && <Loader2 size={14} className="animate-spin" aria-hidden="true" />}
               Save Changes
@@ -916,7 +916,7 @@ function WorkforceApp({ onBack }: { onBack: () => void }) {
         <button
           onClick={() => { setIsAdding(true); showToast('info'); }}
           className="flex cursor-pointer items-center gap-1 rounded"
-          style={{ padding: '6px 12px', fontSize: 12, fontWeight: 500, background: '#5b5fc7', color: '#fff', border: 'none' }}
+          style={{ padding: '6px 12px', fontSize: 12, fontWeight: 500, background: '#D97757', color: '#fff', border: 'none' }}
           aria-label="Add new hire"
         >
           <Plus size={14} aria-hidden="true" />
@@ -988,8 +988,8 @@ function WorkforceApp({ onBack }: { onBack: () => void }) {
                         padding: '1px 8px',
                         fontSize: 10,
                         fontWeight: 600,
-                        background: emp.kind === 'ai' ? 'rgba(91,95,199,0.15)' : 'rgba(146,195,83,0.15)',
-                        color: emp.kind === 'ai' ? '#5b5fc7' : '#237b4b',
+                        background: emp.kind === 'ai' ? 'rgba(217,119,87,0.15)' : 'rgba(146,195,83,0.15)',
+                        color: emp.kind === 'ai' ? '#D97757' : '#237b4b',
                       }}
                     >
                       {emp.kind === 'ai' ? 'AI' : 'Human'}
@@ -1035,8 +1035,8 @@ function EmployeeProfile({ emp, onBack }: { emp: Employee; onBack: () => void })
                   padding: '2px 10px',
                   fontSize: 11,
                   fontWeight: 600,
-                  background: emp.kind === 'ai' ? 'rgba(91,95,199,0.15)' : 'rgba(146,195,83,0.15)',
-                  color: emp.kind === 'ai' ? '#5b5fc7' : '#237b4b',
+                  background: emp.kind === 'ai' ? 'rgba(217,119,87,0.15)' : 'rgba(146,195,83,0.15)',
+                  color: emp.kind === 'ai' ? '#D97757' : '#237b4b',
                 }}
               >
                 {emp.kind === 'ai' ? 'AI Employee' : 'Human'}
@@ -1056,7 +1056,7 @@ function EmployeeProfile({ emp, onBack }: { emp: Employee; onBack: () => void })
                   <span style={{ fontSize: 12, color: '#242424', fontWeight: 500 }}>${emp.tokenBudget.toLocaleString()}/mo</span>
                 </div>
                 <div className="rounded-full" style={{ height: 6, background: '#e1e1e1' }}>
-                  <div className="rounded-full" style={{ height: 6, width: '65%', background: '#5b5fc7' }} />
+                  <div className="rounded-full" style={{ height: 6, width: '65%', background: '#D97757' }} />
                 </div>
               </div>
             )}
@@ -1091,7 +1091,7 @@ function EmployeeProfile({ emp, onBack }: { emp: Employee; onBack: () => void })
                         padding: '2px 10px',
                         fontSize: 11,
                         background: '#e8eaf6',
-                        color: '#5b5fc7',
+                        color: '#D97757',
                       }}
                     >
                       {t}
@@ -1137,7 +1137,7 @@ function RulesApp({ onBack }: { onBack: () => void }) {
         <button
           onClick={() => showToast('info')}
           className="flex cursor-pointer items-center gap-1 rounded"
-          style={{ padding: '6px 12px', fontSize: 12, fontWeight: 500, background: '#5b5fc7', color: '#fff', border: 'none' }}
+          style={{ padding: '6px 12px', fontSize: 12, fontWeight: 500, background: '#D97757', color: '#fff', border: 'none' }}
           aria-label="Create new rule"
         >
           <Plus size={14} aria-hidden="true" />
@@ -1206,7 +1206,7 @@ function RulesApp({ onBack }: { onBack: () => void }) {
                     style={{ border: 'none', background: 'transparent' }}
                     aria-label={rule.active ? 'Deactivate rule' : 'Activate rule'}
                   >
-                    {rule.active ? <ToggleRight size={22} color="#5b5fc7" /> : <ToggleLeft size={22} color="#a0a0a0" />}
+                    {rule.active ? <ToggleRight size={22} color="#D97757" /> : <ToggleLeft size={22} color="#a0a0a0" />}
                   </button>
                 </div>
                 <h3 style={{ fontSize: 15, fontWeight: 600, color: '#242424', marginTop: 8 }}>{rule.name}</h3>
@@ -1286,7 +1286,7 @@ function ReportsApp({ onBack }: { onBack: () => void }) {
         {/* KPI Row */}
         <div className="mb-4 grid grid-cols-4 gap-3">
           {[
-            { label: 'Total AI Cost', value: '$4,830', change: '+12%', color: '#5b5fc7' },
+            { label: 'Total AI Cost', value: '$4,830', change: '+12%', color: '#D97757' },
             { label: 'Avg Velocity', value: '36.6', change: '+4%', color: '#237b4b' },
             { label: 'Escape Rate', value: '3.2%', change: '-1.5%', color: '#b56200' },
             { label: 'Deploy Frequency', value: '4.2/day', change: '+8%', color: '#0891b2' },
@@ -1324,7 +1324,7 @@ function ReportsApp({ onBack }: { onBack: () => void }) {
                 <XAxis dataKey="name" tick={{ fontSize: 11 }} />
                 <YAxis tick={{ fontSize: 11 }} />
                 <Tooltip />
-                <Bar dataKey="cost" fill="#5b5fc7" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="cost" fill="#D97757" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </Card>
@@ -1341,7 +1341,7 @@ function ReportsApp({ onBack }: { onBack: () => void }) {
               <Tooltip />
               <Legend />
               <Area type="monotone" dataKey="planned" stroke="#d1d1d1" fill="#f0f0f0" strokeDasharray="4 4" name="Planned" />
-              <Area type="monotone" dataKey="velocity" stroke="#5b5fc7" fill="#e8eaf6" name="Actual" />
+              <Area type="monotone" dataKey="velocity" stroke="#D97757" fill="#e8eaf6" name="Actual" />
             </AreaChart>
           </ResponsiveContainer>
         </Card>
@@ -1373,7 +1373,7 @@ function BillingApp({ onBack }: { onBack: () => void }) {
             <div className="flex items-center gap-2" style={{ marginTop: 8 }}>
               <span
                 className="rounded"
-                style={{ padding: '3px 10px', fontSize: 13, fontWeight: 600, background: '#5b5fc7', color: '#fff' }}
+                style={{ padding: '3px 10px', fontSize: 13, fontWeight: 600, background: '#D97757', color: '#fff' }}
               >
                 Professional
               </span>
@@ -1384,7 +1384,7 @@ function BillingApp({ onBack }: { onBack: () => void }) {
             <div style={{ fontSize: 11, color: '#616161', textTransform: 'uppercase', fontWeight: 600 }}>Seats</div>
             <div style={{ fontSize: 22, fontWeight: 600, color: '#242424', marginTop: 6 }}>9 / 10</div>
             <div className="rounded-full" style={{ height: 6, background: '#e1e1e1', marginTop: 8 }}>
-              <div className="rounded-full" style={{ height: 6, width: '90%', background: '#5b5fc7' }} />
+              <div className="rounded-full" style={{ height: 6, width: '90%', background: '#D97757' }} />
             </div>
           </Card>
           <Card>
@@ -1449,7 +1449,7 @@ function BillingApp({ onBack }: { onBack: () => void }) {
                     </span>
                   </td>
                   <td style={{ padding: '8px' }}>
-                    <button onClick={() => showToast('success')} className="cursor-pointer" style={{ border: 'none', background: 'transparent', color: '#5b5fc7', fontSize: 12 }} aria-label={`Download ${inv.id}`}>
+                    <button onClick={() => showToast('success')} className="cursor-pointer" style={{ border: 'none', background: 'transparent', color: '#D97757', fontSize: 12 }} aria-label={`Download ${inv.id}`}>
                       Download
                     </button>
                   </td>
@@ -1576,7 +1576,7 @@ function SecurityApp({ onBack }: { onBack: () => void }) {
                   <td style={{ padding: '8px', fontSize: 12, color: '#616161', fontFamily: 'var(--font-mono)' }}>{s.ip}</td>
                   <td style={{ padding: '8px', fontSize: 12, color: '#616161' }}>{s.location}</td>
                   <td style={{ padding: '8px' }}>
-                    <span className="rounded-full" style={{ padding: '2px 8px', fontSize: 10, fontWeight: 600, background: s.status === 'Current' ? 'rgba(91,95,199,0.15)' : 'rgba(146,195,83,0.15)', color: s.status === 'Current' ? '#5b5fc7' : '#237b4b' }}>
+                    <span className="rounded-full" style={{ padding: '2px 8px', fontSize: 10, fontWeight: 600, background: s.status === 'Current' ? 'rgba(217,119,87,0.15)' : 'rgba(146,195,83,0.15)', color: s.status === 'Current' ? '#D97757' : '#237b4b' }}>
                       {s.status}
                     </span>
                   </td>
@@ -1611,7 +1611,7 @@ function SecurityApp({ onBack }: { onBack: () => void }) {
             <button
               onClick={createToken}
               className="flex cursor-pointer items-center gap-1 rounded"
-              style={{ padding: '4px 10px', fontSize: 11, fontWeight: 500, border: 'none', background: '#5b5fc7', color: '#fff' }}
+              style={{ padding: '4px 10px', fontSize: 11, fontWeight: 500, border: 'none', background: '#D97757', color: '#fff' }}
               aria-label="Create new API token"
             >
               <Plus size={12} aria-hidden="true" /> New Token
@@ -1779,7 +1779,7 @@ function IntegrationsApp({ onBack }: { onBack: () => void }) {
         <button
           onClick={() => setIsAddingCustom(true)}
           className="flex cursor-pointer items-center gap-1 rounded px-3 text-white"
-          style={{ fontSize: 12, height: 32, backgroundColor: '#5b5fc7', border: 'none' }}
+          style={{ fontSize: 12, height: 32, backgroundColor: '#D97757', border: 'none' }}
           aria-label="Add new integration"
         >
           <Plug size={14} aria-hidden="true" /> Add New
@@ -1801,9 +1801,9 @@ function IntegrationsApp({ onBack }: { onBack: () => void }) {
                 fontSize: 12,
                 fontWeight: 500,
                 border: 'none',
-                borderBottom: activeTab === t.id ? '2px solid #5b5fc7' : '2px solid transparent',
+                borderBottom: activeTab === t.id ? '2px solid #D97757' : '2px solid transparent',
                 background: 'transparent',
-                color: activeTab === t.id ? '#5b5fc7' : '#616161',
+                color: activeTab === t.id ? '#D97757' : '#616161',
               }}
             >
               {t.label}
@@ -1831,8 +1831,8 @@ function IntegrationsApp({ onBack }: { onBack: () => void }) {
       {/* Loading overlay */}
       {isLoading && (
         <div className="flex items-center justify-center gap-2" style={{ padding: '4px 20px' }}>
-          <Loader2 size={14} className="animate-spin" color="#5b5fc7" />
-          <span style={{ fontSize: 12, color: '#5b5fc7' }}>Processing...</span>
+          <Loader2 size={14} className="animate-spin" color="#D97757" />
+          <span style={{ fontSize: 12, color: '#D97757' }}>Processing...</span>
         </div>
       )}
 
@@ -1842,7 +1842,7 @@ function IntegrationsApp({ onBack }: { onBack: () => void }) {
           {[
             { label: 'Connected', value: services.filter((s) => s.status === 'connected').length, color: '#237b4b' },
             { label: 'Disconnected', value: services.filter((s) => s.status === 'disconnected').length, color: '#767676' },
-            { label: 'Categories', value: [...new Set(services.map((s) => s.category))].length, color: '#5b5fc7' },
+            { label: 'Categories', value: [...new Set(services.map((s) => s.category))].length, color: '#D97757' },
             { label: 'API Calls (24h)', value: '24.5K', color: '#0891b2' },
           ].map((kpi) => (
             <Card key={kpi.label}>
@@ -1880,7 +1880,7 @@ function IntegrationsApp({ onBack }: { onBack: () => void }) {
                 />
               </div>
               <div className="flex gap-2">
-                <button onClick={addCustomIntegration} className="cursor-pointer rounded px-4 py-1.5 text-xs font-medium text-white" style={{ background: '#5b5fc7', border: 'none' }}>Add Integration</button>
+                <button onClick={addCustomIntegration} className="cursor-pointer rounded px-4 py-1.5 text-xs font-medium text-white" style={{ background: '#D97757', border: 'none' }}>Add Integration</button>
                 <button onClick={() => { setIsAddingCustom(false); setCustomName(''); setCustomUrl(''); }} className="cursor-pointer rounded px-4 py-1.5 text-xs font-medium" style={{ border: '1px solid #d1d1d1', background: '#fff', color: '#616161' }}>Cancel</button>
               </div>
             </div>
@@ -1897,7 +1897,7 @@ function IntegrationsApp({ onBack }: { onBack: () => void }) {
                 <div key={svc.name} className="flex items-center justify-between rounded-lg border p-4" style={{ borderColor: '#e1e1e1', backgroundColor: '#fff' }}>
                   <div className="flex items-center gap-3">
                     <div className="flex items-center justify-center rounded" style={{ width: 40, height: 40, backgroundColor: svc.status === 'connected' ? '#e8eaf6' : '#f0f0f0' }}>
-                      <Plug size={18} color={svc.status === 'connected' ? '#5b5fc7' : '#a0a0a0'} />
+                      <Plug size={18} color={svc.status === 'connected' ? '#D97757' : '#a0a0a0'} />
                     </div>
                     <div>
                       <p style={{ fontSize: 14, fontWeight: 500, color: '#242424' }}>{svc.name}</p>
@@ -1914,7 +1914,7 @@ function IntegrationsApp({ onBack }: { onBack: () => void }) {
                       className="cursor-pointer rounded px-3 py-2" style={{
                         fontSize: 11,
                         border: svc.status === 'connected' ? '1px solid #c4314b' : 'none',
-                        backgroundColor: svc.status === 'connected' ? 'transparent' : '#5b5fc7',
+                        backgroundColor: svc.status === 'connected' ? 'transparent' : '#D97757',
                         color: svc.status === 'connected' ? '#c4314b' : '#fff',
                         opacity: isLoading ? 0.5 : 1,
                       }}>
@@ -2056,7 +2056,7 @@ function IntegrationsApp({ onBack }: { onBack: () => void }) {
    Branding App
    ═══════════════════════════════════════════ */
 function BrandingApp({ onBack }: { onBack: () => void }) {
-  const [primaryColor, setPrimaryColor] = useState('#5b5fc7');
+  const [primaryColor, setPrimaryColor] = useState('#D97757');
   const [companyName, setCompanyName] = useState('Acme Software');
   const [logoStyle, setLogoStyle] = useState('modern');
 
@@ -2091,7 +2091,7 @@ function BrandingApp({ onBack }: { onBack: () => void }) {
                         role="radio"
                         aria-checked={logoStyle === style}
                         className="flex-1 cursor-pointer rounded border py-2 capitalize"
-                        style={{ fontSize: 12, borderColor: logoStyle === style ? '#5b5fc7' : '#d1d1d1', backgroundColor: logoStyle === style ? '#f8f8ff' : '#fff', color: logoStyle === style ? '#5b5fc7' : '#242424' }}
+                        style={{ fontSize: 12, borderColor: logoStyle === style ? '#D97757' : '#d1d1d1', backgroundColor: logoStyle === style ? '#f8f8ff' : '#fff', color: logoStyle === style ? '#D97757' : '#242424' }}
                       >
                         {style}
                       </button>
@@ -2104,7 +2104,7 @@ function BrandingApp({ onBack }: { onBack: () => void }) {
             <Card>
               <h3 style={{ fontSize: 14, fontWeight: 600, color: '#242424', marginBottom: 12 }}>Primary Color</h3>
               <div className="flex gap-2">
-                {['#5b5fc7', '#237b4b', '#c4314b', '#b56200', '#0891b2', '#464775', '#ec4899', '#1f1f1f'].map((c) => (
+                {['#D97757', '#237b4b', '#c4314b', '#b56200', '#0891b2', '#C4623E', '#ec4899', '#1f1f1f'].map((c) => (
                   <button
                     key={c}
                     onClick={() => setPrimaryColor(c)}
@@ -2214,7 +2214,7 @@ function AuditApp({ onBack }: { onBack: () => void }) {
           {[{ id: 'all', label: 'All' }, { id: 'high', label: 'High' }, { id: 'medium', label: 'Medium' }, { id: 'low', label: 'Low' }].map((f) => (
             <button key={f.id} onClick={() => setFilter(f.id)}
               className="cursor-pointer rounded-full px-3 py-1"
-              style={{ fontSize: 12, border: filter === f.id ? '1px solid #5b5fc7' : '1px solid #e1e1e1', backgroundColor: filter === f.id ? '#f8f8ff' : '#fff', color: filter === f.id ? '#5b5fc7' : '#616161' }}
+              style={{ fontSize: 12, border: filter === f.id ? '1px solid #D97757' : '1px solid #e1e1e1', backgroundColor: filter === f.id ? '#f8f8ff' : '#fff', color: filter === f.id ? '#D97757' : '#616161' }}
               aria-pressed={filter === f.id}
             >
               {f.label}
@@ -2283,14 +2283,14 @@ function CommunicationApp({ onBack }: { onBack: () => void }) {
   return (
     <div className="flex h-full flex-col">
       <AppHeader title="Communication" onBack={onBack}>
-        <button onClick={addAnnouncement} className="flex items-center gap-1 rounded px-3 text-white" style={{ fontSize: 12, height: 32, backgroundColor: '#5b5fc7', border: 'none', cursor: 'pointer' }} aria-label="New announcement">
+        <button onClick={addAnnouncement} className="flex items-center gap-1 rounded px-3 text-white" style={{ fontSize: 12, height: 32, backgroundColor: '#D97757', border: 'none', cursor: 'pointer' }} aria-label="New announcement">
           <Megaphone size={14} aria-hidden="true" /> New Announcement
         </button>
       </AppHeader>
       <div className="flex-1 overflow-y-auto" style={{ padding: '0 20px 20px' }}>
         <div className="mb-4 grid grid-cols-3 gap-3">
           {[
-            { label: 'Templates', value: COM_TEMPLATES.length, color: '#5b5fc7' },
+            { label: 'Templates', value: COM_TEMPLATES.length, color: '#D97757' },
             { label: 'Announcements', value: announcements.length, color: '#237b4b' },
             { label: 'Channels', value: 8, color: '#0891b2' },
           ].map((kpi) => (
@@ -2322,9 +2322,9 @@ function CommunicationApp({ onBack }: { onBack: () => void }) {
           <h3 style={{ fontSize: 14, fontWeight: 600, color: '#242424', marginBottom: 12 }}>Recent Announcements</h3>
           <div className="space-y-3">
             {announcements.map((a) => (
-              <div key={a.id} className="rounded-lg border p-3" style={{ borderColor: a.pinned ? '#5b5fc7' : '#e1e1e1', backgroundColor: a.pinned ? '#f8f8ff' : '#fff' }}>
+              <div key={a.id} className="rounded-lg border p-3" style={{ borderColor: a.pinned ? '#D97757' : '#e1e1e1', backgroundColor: a.pinned ? '#f8f8ff' : '#fff' }}>
                 <div className="flex items-center gap-2" style={{ marginBottom: 4 }}>
-                  {a.pinned && <span className="rounded px-1.5 py-0.5 text-[9px] font-bold" style={{ backgroundColor: '#5b5fc7', color: '#fff' }}>PINNED</span>}
+                  {a.pinned && <span className="rounded px-1.5 py-0.5 text-[9px] font-bold" style={{ backgroundColor: '#D97757', color: '#fff' }}>PINNED</span>}
                   <span style={{ fontSize: 13, fontWeight: 500, color: '#242424' }}>{a.title}</span>
                 </div>
                 <p style={{ fontSize: 11, color: '#616161' }}>By {a.author} · {a.date}</p>
@@ -2352,7 +2352,7 @@ function HelpdeskApp({ onBack }: { onBack: () => void }) {
   return (
     <div className="flex h-full flex-col">
       <AppHeader title="Helpdesk" onBack={onBack}>
-        <button onClick={() => showToast('info')} className="flex items-center gap-1 rounded px-3 text-white" style={{ fontSize: 12, height: 32, backgroundColor: '#5b5fc7', border: 'none', cursor: 'pointer' }} aria-label="New ticket">
+        <button onClick={() => showToast('info')} className="flex items-center gap-1 rounded px-3 text-white" style={{ fontSize: 12, height: 32, backgroundColor: '#D97757', border: 'none', cursor: 'pointer' }} aria-label="New ticket">
           <Plus size={14} aria-hidden="true" /> New Ticket
         </button>
       </AppHeader>
@@ -2362,7 +2362,7 @@ function HelpdeskApp({ onBack }: { onBack: () => void }) {
             { label: 'Open', value: TICKETS.filter((t) => t.status === 'open').length, color: '#c4314b' },
             { label: 'In Progress', value: TICKETS.filter((t) => t.status === 'in-progress').length, color: '#b56200' },
             { label: 'Resolved (7d)', value: TICKETS.filter((t) => t.status === 'resolved').length, color: '#237b4b' },
-            { label: 'Avg Response', value: '12m', color: '#5b5fc7' },
+            { label: 'Avg Response', value: '12m', color: '#D97757' },
           ].map((kpi) => (
             <Card key={kpi.label}>
               <p style={{ fontSize: 11, color: '#616161', textTransform: 'uppercase', fontWeight: 600 }}>{kpi.label}</p>
@@ -2394,7 +2394,7 @@ function HelpdeskApp({ onBack }: { onBack: () => void }) {
                   <td style={{ padding: '8px' }}>
                     <span className="rounded-full px-2 py-0.5 text-[10px] font-semibold" style={{
                       backgroundColor: t.status === 'open' ? '#fee2e2' : t.status === 'in-progress' ? '#dbeafe' : '#dcfce7',
-                      color: t.status === 'open' ? '#c4314b' : t.status === 'in-progress' ? '#5b5fc7' : '#237b4b',
+                      color: t.status === 'open' ? '#c4314b' : t.status === 'in-progress' ? '#D97757' : '#237b4b',
                     }}>{t.status}</span>
                   </td>
                   <td style={{ padding: '8px', fontSize: 12, color: '#616161' }}>{t.assignee}</td>
@@ -2441,7 +2441,7 @@ function ObservabilityApp({ onBack }: { onBack: () => void }) {
         {/* KPIs */}
         <div className="mb-4 grid grid-cols-4 gap-3">
           {[
-            { label: 'Services', value: '12', color: '#5b5fc7' },
+            { label: 'Services', value: '12', color: '#D97757' },
             { label: 'Firing Alerts', value: alerts.filter((a) => a.status === 'firing').length, color: '#c4314b' },
             { label: 'Avg Latency (p99)', value: '142ms', color: '#237b4b' },
             { label: 'Error Rate', value: '0.02%', color: '#237b4b' },
@@ -2511,7 +2511,7 @@ function ObservabilityApp({ onBack }: { onBack: () => void }) {
                 <YAxis tick={{ fontSize: 11 }} />
                 <Tooltip />
                 <Legend />
-                <Area type="monotone" dataKey="api" stroke="#5b5fc7" fill="#e8eaf6" name="API Gateway" />
+                <Area type="monotone" dataKey="api" stroke="#D97757" fill="#e8eaf6" name="API Gateway" />
                 <Area type="monotone" dataKey="db" stroke="#0891b2" fill="#cffafe" name="Database" />
                 <Area type="monotone" dataKey="auth" stroke="#237b4b" fill="#dcfce7" name="Auth Service" />
               </AreaChart>
@@ -2657,7 +2657,7 @@ function CodeWorkspaceApp({ onBack }: { onBack: () => void }) {
               style={{
                 padding: '6px 12px',
                 background: '#1f1f1f',
-                borderTop: '2px solid #5b5fc7',
+                borderTop: '2px solid #D97757',
                 fontSize: 12,
                 color: '#e1e1e1',
               }}
@@ -2731,7 +2731,7 @@ function FileTreeNode({
             color="#616161"
             style={{ transform: expanded ? 'rotate(-90deg)' : 'rotate(0deg)', transition: 'transform 150ms' }}
           />
-          <FolderGit size={13} color="#5b5fc7" />
+          <FolderGit size={13} color="#D97757" />
           {node.name}
         </button>
         {expanded && node.children?.map((child) => (
@@ -2751,13 +2751,13 @@ function FileTreeNode({
         border: 'none',
         background: isSelected ? '#e8eaf6' : 'transparent',
         fontSize: 12,
-        color: isSelected ? '#5b5fc7' : '#242424',
+        color: isSelected ? '#D97757' : '#242424',
         textAlign: 'left',
       }}
       aria-selected={isSelected}
       aria-label={node.name}
     >
-      <FileCode2 size={13} color={isSelected ? '#5b5fc7' : '#a0a0a0'} />
+      <FileCode2 size={13} color={isSelected ? '#D97757' : '#a0a0a0'} />
       {node.name}
     </button>
   );

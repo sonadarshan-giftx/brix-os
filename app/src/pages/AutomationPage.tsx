@@ -67,7 +67,7 @@ export default function AutomationPage() {
             style={{
               height: 32,
               fontSize: 13,
-              backgroundColor: '#5b5fc7',
+              backgroundColor: '#D97757',
               color: '#ffffff',
               border: 'none',
             }}
@@ -114,7 +114,7 @@ function AutomationSurface() {
             style={{
               fontSize: 12,
               backgroundColor: autoTab === t.id ? '#e8eaf6' : '#f0f0f0',
-              color: autoTab === t.id ? '#5b5fc7' : '#616161',
+              color: autoTab === t.id ? '#D97757' : '#616161',
               border: 'none',
             }}
           >
@@ -175,7 +175,7 @@ function ActionsList() {
               className="flex items-center justify-center rounded flex-shrink-0"
               style={{ width: 40, height: 40, backgroundColor: '#e8eaf6' }}
             >
-              <Icon size={18} color="#5b5fc7" />
+              <Icon size={18} color="#D97757" />
             </div>
             <div className="flex-1 min-w-0">
               <div style={{ fontSize: 14, fontWeight: 600, color: '#242424' }}>{a.name}</div>
@@ -199,7 +199,7 @@ function ActionsList() {
               <span style={{ fontSize: 11, color: '#767676' }}>{a.lastRunTime}</span>
               <button
                 className="rounded px-2 cursor-pointer"
-                style={{ height: 28, fontSize: 12, backgroundColor: '#5b5fc7', color: '#ffffff', border: 'none' }}
+                style={{ height: 28, fontSize: 12, backgroundColor: '#D97757', color: '#ffffff', border: 'none' }}
               >
                 Run
               </button>
@@ -237,7 +237,7 @@ function PipelinesView() {
             </button>
             <button
               className="rounded px-2 cursor-pointer"
-              style={{ height: 28, fontSize: 12, backgroundColor: '#5b5fc7', color: '#ffffff', border: 'none' }}
+              style={{ height: 28, fontSize: 12, backgroundColor: '#D97757', color: '#ffffff', border: 'none' }}
             >
               <Play size={12} />
             </button>
@@ -253,7 +253,7 @@ function PipelinesView() {
                 style={{
                   minWidth: 140,
                   backgroundColor: node.status === 'done' ? '#e8eaf6' : '#f5f5f3',
-                  border: `2px solid ${node.status === 'done' ? '#5b5fc7' : '#d1d1d1'}`,
+                  border: `2px solid ${node.status === 'done' ? '#D97757' : '#d1d1d1'}`,
                 }}
               >
                 <div
@@ -261,7 +261,7 @@ function PipelinesView() {
                   style={{
                     width: 32,
                     height: 32,
-                    backgroundColor: node.status === 'done' ? '#5b5fc7' : '#a0a0a0',
+                    backgroundColor: node.status === 'done' ? '#D97757' : '#a0a0a0',
                   }}
                 >
                   {node.status === 'done' ? (
@@ -334,7 +334,7 @@ function CustomAppsView() {
           style={{
             height: 32,
             fontSize: 13,
-            backgroundColor: '#5b5fc7',
+            backgroundColor: '#D97757',
             color: '#ffffff',
             border: 'none',
           }}
@@ -399,7 +399,7 @@ function ConfiguratorSurface() {
         {/* Authority indicator */}
         <div
           className="flex items-center gap-2 mb-3 rounded p-2"
-          style={{ backgroundColor: '#e8eaf6', fontSize: 12, color: '#5b5fc7' }}
+          style={{ backgroundColor: '#e8eaf6', fontSize: 12, color: '#D97757' }}
         >
           <Shield size={14} />
           <span style={{ fontWeight: 600 }}>You have Owner access</span>
@@ -466,7 +466,7 @@ function ConfiguratorSurface() {
                           style={{
                             height: 36,
                             fontSize: 14,
-                            backgroundColor: '#5b5fc7',
+                            backgroundColor: '#D97757',
                             color: '#ffffff',
                             border: 'none',
                           }}
@@ -520,7 +520,7 @@ function ConfiguratorSurface() {
             style={{
               width: 36,
               height: 36,
-              backgroundColor: '#5b5fc7',
+              backgroundColor: '#D97757',
               color: '#ffffff',
               border: 'none',
             }}
@@ -555,7 +555,7 @@ function ConfiguratorSurface() {
                 className="flex items-center gap-2 rounded p-2"
                 style={{ fontSize: 12, color: '#242424' }}
               >
-                <Icon size={14} color="#5b5fc7" />
+                <Icon size={14} color="#D97757" />
                 <span>{tool.name}</span>
               </div>
             );
@@ -596,7 +596,7 @@ function PairSurface() {
           className="flex items-center justify-center rounded-full mb-4"
           style={{ width: 64, height: 64, backgroundColor: '#e8eaf6' }}
         >
-          <Code2 size={28} color="#5b5fc7" />
+          <Code2 size={28} color="#D97757" />
         </div>
         <h2 style={{ fontSize: 18, fontWeight: 600, color: '#242424', marginBottom: 8 }}>
           No Active Pair Session
@@ -609,7 +609,7 @@ function PairSurface() {
           style={{
             height: 36,
             fontSize: 14,
-            backgroundColor: '#5b5fc7',
+            backgroundColor: '#D97757',
             color: '#ffffff',
             border: 'none',
           }}
@@ -730,7 +730,7 @@ def format_ssn(ssn: str) -> str:
               className="rounded p-2"
               style={{ backgroundColor: '#f5f5f3', fontSize: 11, color: '#616161' }}
             >
-              <Sparkles size={12} color="#5b5fc7" style={{ display: 'inline', marginRight: 4 }} />
+              <Sparkles size={12} color="#D97757" style={{ display: 'inline', marginRight: 4 }} />
               I suggest adding validation for area numbers 666 and 900-999 which are invalid.
             </div>
           </Card>
@@ -798,7 +798,7 @@ def format_ssn(ssn: str) -> str:
               />
               <button
                 className="flex items-center justify-center rounded cursor-pointer"
-                style={{ width: 28, height: 28, backgroundColor: '#5b5fc7', color: '#ffffff', border: 'none' }}
+                style={{ width: 28, height: 28, backgroundColor: '#D97757', color: '#ffffff', border: 'none' }}
               >
                 <Send size={12} />
               </button>
@@ -815,7 +815,7 @@ def format_ssn(ssn: str) -> str:
    ═══════════════════════════════════════════════ */
 function ParticipantsRow() {
   const participants = [
-    { id: 'p1', name: 'Alex Chen', avatar: '/avatar-alex.jpg', color: '#5b5fc7', isAi: false },
+    { id: 'p1', name: 'Alex Chen', avatar: '/avatar-alex.jpg', color: '#D97757', isAi: false },
     { id: 'p2', name: 'Aria', avatar: '/avatar-aria.jpg', color: '#92c353', isAi: true },
   ];
 

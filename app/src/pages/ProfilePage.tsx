@@ -121,7 +121,7 @@ function ProfileHeader({ employee, isAi }: { employee: typeof employees[0]; isAi
             className="rounded px-1.5 font-bold text-white"
             style={{
               fontSize: 10,
-              backgroundColor: '#5b5fc7',
+              backgroundColor: '#D97757',
               height: 16,
               lineHeight: '16px',
             }}
@@ -144,8 +144,8 @@ function ProfileHeader({ employee, isAi }: { employee: typeof employees[0]; isAi
               fontSize: 11,
               height: 20,
               lineHeight: '20px',
-              backgroundColor: 'rgba(91,95,199,0.15)',
-              color: '#5b5fc7',
+              backgroundColor: 'rgba(217,119,87,0.15)',
+              color: '#D97757',
             }}
           >
             {employee.modelBinding.model}
@@ -161,7 +161,7 @@ function ProfileHeader({ employee, isAi }: { employee: typeof employees[0]; isAi
           style={{
             height: 28,
             fontSize: 12,
-            backgroundColor: '#5b5fc7',
+            backgroundColor: '#D97757',
             color: '#ffffff',
             border: 'none',
           }}
@@ -277,8 +277,8 @@ function AiProfileTab({ employee }: { employee: typeof employees[0] }) {
         <div className="flex items-center gap-3 mb-3">
           <div className="flex-1 rounded p-3" style={{ backgroundColor: '#e8eaf6' }}>
             <div className="flex items-center gap-2 mb-1">
-              <Cpu size={14} color="#5b5fc7" />
-              <span style={{ fontSize: 11, fontWeight: 600, color: '#5b5fc7' }}>PRIMARY</span>
+              <Cpu size={14} color="#D97757" />
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#D97757' }}>PRIMARY</span>
             </div>
             <div style={{ fontSize: 14, fontWeight: 600, color: '#242424' }}>Claude Opus 4.7</div>
             <div style={{ fontSize: 11, color: '#616161' }}>Anthropic · Full capability</div>
@@ -326,7 +326,7 @@ function AiProfileTab({ employee }: { employee: typeof employees[0] }) {
                 style={{ backgroundColor: '#f5f5f3' }}
               >
                 <div className="flex items-center gap-3">
-                  <Icon size={16} color="#5b5fc7" />
+                  <Icon size={16} color="#D97757" />
                   <span style={{ fontSize: 13, fontWeight: 500, color: '#242424' }}>{mcp.name}</span>
                 </div>
                 <span
@@ -507,7 +507,7 @@ function ToolAllowlistCard() {
                       style={{ backgroundColor: '#f5f5f3' }}
                     >
                       <div className="flex items-center gap-2">
-                        <Icon size={14} color={tool.enabled ? '#5b5fc7' : '#a0a0a0'} />
+                        <Icon size={14} color={tool.enabled ? '#D97757' : '#a0a0a0'} />
                         <div>
                           <span
                             style={{
@@ -528,7 +528,7 @@ function ToolAllowlistCard() {
                           width: 32,
                           height: 18,
                           borderRadius: 9,
-                          backgroundColor: tool.enabled ? '#5b5fc7' : '#d1d1d1',
+                          backgroundColor: tool.enabled ? '#D97757' : '#d1d1d1',
                           border: 'none',
                           position: 'relative',
                           transition: 'background-color 150ms',
@@ -617,7 +617,7 @@ function ConfigCascadeCard() {
             className="relative rounded p-3"
             style={{
               backgroundColor: layer.override ? '#e8eaf6' : '#f5f5f3',
-              borderLeft: layer.override ? '3px solid #5b5fc7' : '3px solid transparent',
+              borderLeft: layer.override ? '3px solid #D97757' : '3px solid transparent',
               marginLeft: idx * 12,
             }}
           >
@@ -627,7 +627,7 @@ function ConfigCascadeCard() {
                 style={{
                   width: 8,
                   height: 8,
-                  backgroundColor: '#5b5fc7',
+                  backgroundColor: '#D97757',
                   top: 8,
                   right: 8,
                 }}
@@ -647,9 +647,9 @@ function ConfigCascadeCard() {
       {/* Resolved summary */}
       <div
         className="mt-4 rounded p-3"
-        style={{ backgroundColor: '#e8eaf6', border: '1px solid #5b5fc7' }}
+        style={{ backgroundColor: '#e8eaf6', border: '1px solid #D97757' }}
       >
-        <h4 style={{ fontSize: 12, fontWeight: 600, color: '#5b5fc7', marginBottom: 6 }}>
+        <h4 style={{ fontSize: 12, fontWeight: 600, color: '#D97757', marginBottom: 6 }}>
           RESOLVED CONFIGURATION
         </h4>
         <div className="grid gap-1" style={{ gridTemplateColumns: '1fr 1fr', fontSize: 11 }}>
@@ -687,7 +687,7 @@ function AiPerformanceTab() {
   ];
 
   const costData = [
-    { category: 'LLM Tokens', amount: 1240, color: '#5b5fc7' },
+    { category: 'LLM Tokens', amount: 1240, color: '#D97757' },
     { category: 'Infrastructure', amount: 420, color: '#92c353' },
     { category: 'Other', amount: 187, color: '#ffaa44' },
   ];
@@ -736,7 +736,7 @@ function AiPerformanceTab() {
                   className="w-full rounded-t"
                   style={{
                     height: `${(w.tickets / 10) * 100}px`,
-                    backgroundColor: '#5b5fc7',
+                    backgroundColor: '#D97757',
                     minHeight: 4,
                   }}
                 />
@@ -791,7 +791,7 @@ function AiPerformanceTab() {
             {recentWork.map((rw) => (
               <tr key={rw.ticket} style={{ borderTop: '1px solid #f0f0f0' }}>
                 <td style={{ padding: '6px 0' }}>
-                  <span style={{ fontWeight: 600, color: '#5b5fc7' }}>{rw.ticket}</span>
+                  <span style={{ fontWeight: 600, color: '#D97757' }}>{rw.ticket}</span>
                   <span style={{ color: '#616161', marginLeft: 6 }}>{rw.title}</span>
                 </td>
                 <td style={{ padding: '6px 0' }}>
@@ -860,7 +860,7 @@ function HumanPerformanceTab({ employee }: { employee: typeof employees[0] }) {
             <span
               key={theme}
               className="rounded-full px-3 py-1"
-              style={{ fontSize: 12, backgroundColor: '#e8eaf6', color: '#5b5fc7', fontWeight: 500 }}
+              style={{ fontSize: 12, backgroundColor: '#e8eaf6', color: '#D97757', fontWeight: 500 }}
             >
               {theme}
             </span>
@@ -898,7 +898,7 @@ function SkillsTab({ employee, isAi }: { employee: typeof employees[0]; isAi: bo
                 style={{ backgroundColor: '#f5f5f3' }}
               >
                 <div className="flex items-center gap-3">
-                  <Layers size={16} color="#5b5fc7" />
+                  <Layers size={16} color="#D97757" />
                   <div>
                     <div style={{ fontSize: 13, fontWeight: 600, color: '#242424' }}>{sp.name}</div>
                     <div style={{ fontSize: 11, color: '#616161' }}>
@@ -939,7 +939,7 @@ function SkillsTab({ employee, isAi }: { employee: typeof employees[0]; isAi: bo
               style={{
                 height: 28,
                 fontSize: 12,
-                backgroundColor: '#5b5fc7',
+                backgroundColor: '#D97757',
                 color: '#ffffff',
                 border: 'none',
               }}
@@ -1027,9 +1027,9 @@ function SettingsTab({ employee, isAi }: { employee: typeof employees[0]; isAi: 
                   className="flex-1 rounded py-2 cursor-pointer"
                   style={{
                     fontSize: 12,
-                    border: style === 'Balanced' ? '1px solid #5b5fc7' : '1px solid #d1d1d1',
+                    border: style === 'Balanced' ? '1px solid #D97757' : '1px solid #d1d1d1',
                     backgroundColor: style === 'Balanced' ? '#e8eaf6' : '#ffffff',
-                    color: style === 'Balanced' ? '#5b5fc7' : '#242424',
+                    color: style === 'Balanced' ? '#D97757' : '#242424',
                   }}
                 >
                   {style}
@@ -1050,7 +1050,7 @@ function SettingsTab({ employee, isAi }: { employee: typeof employees[0]; isAi: 
               <div key={slider.label}>
                 <div className="flex items-center justify-between mb-1">
                   <span style={{ fontSize: 12, color: '#242424' }}>{slider.label}</span>
-                  <span style={{ fontSize: 12, fontWeight: 600, color: '#5b5fc7' }}>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: '#D97757' }}>
                     {slider.value} {slider.unit}
                   </span>
                 </div>
@@ -1061,7 +1061,7 @@ function SettingsTab({ employee, isAi }: { employee: typeof employees[0]; isAi: 
                   value={slider.value}
                   readOnly
                   className="w-full"
-                  style={{ accentColor: '#5b5fc7' }}
+                  style={{ accentColor: '#D97757' }}
                 />
               </div>
             ))}
@@ -1071,7 +1071,7 @@ function SettingsTab({ employee, isAi }: { employee: typeof employees[0]; isAi: 
         <Card padding="lg">
           <h3 style={{ fontSize: 16, fontWeight: 600, color: '#242424', marginBottom: 12 }}>Budget</h3>
           <div className="flex items-center gap-2">
-            <DollarSign size={16} color="#5b5fc7" />
+            <DollarSign size={16} color="#D97757" />
             <input
               type="number"
               value={2000}
@@ -1108,7 +1108,7 @@ function SettingsTab({ employee, isAi }: { employee: typeof employees[0]; isAi: 
                   width: 32,
                   height: 18,
                   borderRadius: 9,
-                  backgroundColor: '#5b5fc7',
+                  backgroundColor: '#D97757',
                   border: 'none',
                   position: 'relative',
                 }}
@@ -1133,7 +1133,7 @@ function SettingsTab({ employee, isAi }: { employee: typeof employees[0]; isAi: 
       <Card padding="lg">
         <h3 style={{ fontSize: 16, fontWeight: 600, color: '#242424', marginBottom: 12 }}>Calendar Sync</h3>
         <div className="flex items-center gap-3">
-          <Calendar size={16} color="#5b5fc7" />
+          <Calendar size={16} color="#D97757" />
           <span style={{ fontSize: 13, color: '#242424' }}>Google Calendar</span>
           <StatusChip status="online" label="Connected" />
         </div>
@@ -1143,7 +1143,7 @@ function SettingsTab({ employee, isAi }: { employee: typeof employees[0]; isAi: 
         <h3 style={{ fontSize: 16, fontWeight: 600, color: '#242424', marginBottom: 12 }}>Security</h3>
         <div className="flex items-center justify-between py-1">
           <div className="flex items-center gap-2">
-            <Shield size={16} color="#5b5fc7" />
+            <Shield size={16} color="#D97757" />
             <span style={{ fontSize: 13, color: '#242424' }}>Two-Factor Authentication</span>
           </div>
           <StatusChip status="online" label="Enabled" />
@@ -1186,7 +1186,7 @@ function MissionTab({ employee }: { employee: typeof employees[0] }) {
         <div className="space-y-2">
           {['TAX-152: SSN validation service', 'TAX-149: Audit logging', 'TAX-144: IRS API integration'].map((task) => (
             <div key={task} className="flex items-center gap-2">
-              <Check size={14} color="#5b5fc7" />
+              <Check size={14} color="#D97757" />
               <span style={{ fontSize: 13, color: '#242424' }}>{task}</span>
             </div>
           ))}
@@ -1244,7 +1244,7 @@ function ActivityTab({ employee }: { employee: typeof employees[0] }) {
             className="flex items-center justify-center rounded-full flex-shrink-0"
             style={{ width: 28, height: 28, backgroundColor: '#e8eaf6' }}
           >
-            <GitBranch size={12} color="#5b5fc7" />
+            <GitBranch size={12} color="#D97757" />
           </div>
           <div>
             <div style={{ fontSize: 13, color: '#242424' }}>{a.text}</div>
@@ -1278,14 +1278,14 @@ function TasksTab({ employee }: { employee: typeof employees[0] }) {
               style={{
                 width: 20,
                 height: 20,
-                backgroundColor: t.status === 'done' ? '#237b4b' : t.status === 'in-progress' ? '#5b5fc7' : '#d1d1d1',
+                backgroundColor: t.status === 'done' ? '#237b4b' : t.status === 'in-progress' ? '#D97757' : '#d1d1d1',
               }}
             >
               {t.status === 'done' && <Check size={12} color="#ffffff" />}
               {t.status === 'in-progress' && <Clock size={12} color="#ffffff" />}
             </div>
             <div>
-              <span style={{ fontSize: 11, fontWeight: 600, color: '#5b5fc7' }}>{t.id}</span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#D97757' }}>{t.id}</span>
               <span style={{ fontSize: 13, color: '#242424', marginLeft: 6 }}>{t.title}</span>
             </div>
           </div>
@@ -1306,7 +1306,7 @@ function ScheduleTab({ employee, isAi }: { employee: typeof employees[0]; isAi: 
       {isAi ? (
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <Clock size={16} color="#5b5fc7" />
+            <Clock size={16} color="#D97757" />
             <span style={{ fontSize: 14, fontWeight: 600, color: '#242424' }}>Working Hours: 24/7</span>
           </div>
           <p style={{ fontSize: 13, color: '#616161' }}>
@@ -1316,7 +1316,7 @@ function ScheduleTab({ employee, isAi }: { employee: typeof employees[0]; isAi: 
       ) : (
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <Clock size={16} color="#5b5fc7" />
+            <Clock size={16} color="#D97757" />
             <span style={{ fontSize: 14, fontWeight: 600, color: '#242424' }}>9 AM – 6 PM IST</span>
           </div>
           <p style={{ fontSize: 13, color: '#616161' }}>

@@ -320,7 +320,7 @@ export default function ApprovalsPage() {  useEffect(() => { document.title = "A
               padding: '4px 12px',
               fontSize: 12,
               fontWeight: 500,
-              background: '#5b5fc7',
+              background: '#D97757',
               color: '#fff',
               border: 'none',
             }}
@@ -341,8 +341,8 @@ export default function ApprovalsPage() {  useEffect(() => { document.title = "A
       {/* ── Loading indicator ── */}
       {isLoading && (
         <div className="flex items-center justify-center gap-2" style={{ padding: 4 }}>
-          <Loader2 size={14} className="animate-spin" color="#5b5fc7" />
-          <span style={{ fontSize: 12, color: '#5b5fc7' }}>Processing...</span>
+          <Loader2 size={14} className="animate-spin" color="#D97757" />
+          <span style={{ fontSize: 12, color: '#D97757' }}>Processing...</span>
         </div>
       )}
 
@@ -446,7 +446,7 @@ export default function ApprovalsPage() {  useEffect(() => { document.title = "A
                     <button
                       onClick={() => handleSaveEdit(selectedApproval.id)}
                       className="flex flex-1 cursor-pointer items-center justify-center gap-1 rounded"
-                      style={{ padding: '8px 0', fontSize: 13, fontWeight: 500, background: '#5b5fc7', color: '#fff', border: 'none' }}
+                      style={{ padding: '8px 0', fontSize: 13, fontWeight: 500, background: '#D97757', color: '#fff', border: 'none' }}
                     >
                       <Send size={14} aria-hidden="true" /> Save &amp; Send
                     </button>
@@ -507,7 +507,7 @@ export default function ApprovalsPage() {  useEffect(() => { document.title = "A
                     {selectedApproval.stage && (
                       <div className="flex items-center gap-2">
                         <span style={{ fontSize: 12, color: '#616161' }}>Stage: </span>
-                        <span className="rounded-full" style={{ padding: '2px 8px', fontSize: 10, background: '#e8eaf6', color: '#5b5fc7' }}>{selectedApproval.stage}</span>
+                        <span className="rounded-full" style={{ padding: '2px 8px', fontSize: 10, background: '#e8eaf6', color: '#D97757' }}>{selectedApproval.stage}</span>
                       </div>
                     )}
                   </div>
@@ -619,7 +619,7 @@ function ApprovalCard({
             ) : item.type === 'budget' ? (
               <BudgetIcon />
             ) : (
-              <CheckCircle2 size={18} color="#5b5fc7" />
+              <CheckCircle2 size={18} color="#D97757" />
             )}
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
@@ -678,7 +678,7 @@ function ApprovalCard({
               onClick={(e) => { e.stopPropagation(); onEditSend(); }}
               disabled={isLoading}
               className="cursor-pointer rounded"
-              style={{ padding: '4px 8px', fontSize: 11, border: '1px solid #5b5fc7', color: '#5b5fc7', background: 'transparent' }}
+              style={{ padding: '4px 8px', fontSize: 11, border: '1px solid #D97757', color: '#D97757', background: 'transparent' }}
               aria-label={`Edit ${item.title}`}
             >
               <Pencil size={12} aria-hidden="true" /> Edit
@@ -708,7 +708,7 @@ function ApprovalsAnalytics({ items }: { items: Approval[] }) {
     <div className="space-y-4">
       <div className="grid grid-cols-4 gap-3">
         {[
-          { label: 'Total', value: stats.total, color: '#5b5fc7' },
+          { label: 'Total', value: stats.total, color: '#D97757' },
           { label: 'Pending', value: stats.pending, color: '#f59e0b' },
           { label: 'Approved', value: stats.approved, color: '#237b4b' },
           { label: 'Rejected', value: stats.rejected, color: '#c4314b' },
@@ -722,7 +722,7 @@ function ApprovalsAnalytics({ items }: { items: Approval[] }) {
       <div className="grid grid-cols-2 gap-3">
         <Card>
           <p style={{ fontSize: 11, color: '#616161', textTransform: 'uppercase', fontWeight: 600 }}>Average Decision Time</p>
-          <p style={{ fontSize: 22, fontWeight: 600, color: '#5b5fc7', marginTop: 4 }}>{stats.avgDecisionTime}</p>
+          <p style={{ fontSize: 22, fontWeight: 600, color: '#D97757', marginTop: 4 }}>{stats.avgDecisionTime}</p>
         </Card>
         <Card>
           <p style={{ fontSize: 11, color: '#616161', textTransform: 'uppercase', fontWeight: 600 }}>Total Amount</p>
@@ -739,9 +739,9 @@ function ApprovalsAnalytics({ items }: { items: Approval[] }) {
 function CodeIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="1" y="1" width="16" height="16" rx="3" stroke="#5b5fc7" strokeWidth="1.5" fill="none" />
-      <path d="M6.5 6L4.5 9L6.5 12" stroke="#5b5fc7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      <path d="M11.5 6L13.5 9L11.5 12" stroke="#5b5fc7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <rect x="1" y="1" width="16" height="16" rx="3" stroke="#D97757" strokeWidth="1.5" fill="none" />
+      <path d="M6.5 6L4.5 9L6.5 12" stroke="#D97757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M11.5 6L13.5 9L11.5 12" stroke="#D97757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
     </svg>
   );
 }

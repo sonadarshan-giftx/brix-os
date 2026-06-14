@@ -66,7 +66,7 @@ export function TabsBar({ tabs, activeTab, onTabChange, className }: TabsBarProp
         style={{
           left: indicatorStyle.left,
           width: indicatorStyle.width,
-          backgroundColor: '#5b5fc7',
+          backgroundColor: '#D97757',
         }}
       />
     </div>

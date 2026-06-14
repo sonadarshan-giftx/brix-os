@@ -129,7 +129,7 @@ function SpinnerLoader({ label }: { label: string }) {
           width: 36,
           height: 36,
           border: '3px solid #e1e1e1',
-          borderTopColor: 'var(--op-accent, #5b5fc7)',
+          borderTopColor: 'var(--op-accent, #D97757)',
           borderRadius: '50%',
         }}
       />
@@ -177,7 +177,7 @@ function ProgressLoader({ label }: { label: string }) {
           className="progress-bar h-full rounded-full transition-all duration-300"
           style={{
             width: `${Math.min(progress, 100)}%`,
-            backgroundColor: 'var(--op-accent, #5b5fc7)',
+            backgroundColor: 'var(--op-accent, #D97757)',
           }}
         />
       </div>
@@ -205,7 +205,7 @@ function DotsLoader({ label }: { label: string }) {
             style={{
               width: 8,
               height: 8,
-              backgroundColor: 'var(--op-accent, #5b5fc7)',
+              backgroundColor: 'var(--op-accent, #D97757)',
               animationDelay: `${i * 150}ms`,
             }}
           />

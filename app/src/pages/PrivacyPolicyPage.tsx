@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage() {
   };
 
   const iconStyle: React.CSSProperties = {
-    color: "#5b5fc7",
+    color: "#D97757",
     flexShrink: 0,
     marginTop: "4px",
   };
@@ -106,7 +106,7 @@ export default function PrivacyPolicyPage() {
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              background: "#5b5fc7",
+              background: "#D97757",
               color: "#ffffff",
               border: "none",
               padding: "10px 18px",
@@ -117,8 +117,8 @@ export default function PrivacyPolicyPage() {
               transition: "background 0.2s",
               fontFamily: "Inter, sans-serif",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#464775")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "#5b5fc7")}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#C4623E")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#D97757")}
           >
             <Download size={16} />
             Download as PDF
@@ -181,7 +181,7 @@ export default function PrivacyPolicyPage() {
                   background: "#f8f8fb",
                   borderRadius: "8px",
                   padding: "16px 20px",
-                  borderLeft: "3px solid #5b5fc7",
+                  borderLeft: "3px solid #D97757",
                 }}
               >
                 <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 600, color: "#242424" }}>
@@ -197,7 +197,7 @@ export default function PrivacyPolicyPage() {
                   background: "#f8f8fb",
                   borderRadius: "8px",
                   padding: "16px 20px",
-                  borderLeft: "3px solid #5b5fc7",
+                  borderLeft: "3px solid #D97757",
                 }}
               >
                 <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 600, color: "#242424" }}>
@@ -213,7 +213,7 @@ export default function PrivacyPolicyPage() {
                   background: "#f8f8fb",
                   borderRadius: "8px",
                   padding: "16px 20px",
-                  borderLeft: "3px solid #5b5fc7",
+                  borderLeft: "3px solid #D97757",
                 }}
               >
                 <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 600, color: "#242424" }}>
@@ -229,7 +229,7 @@ export default function PrivacyPolicyPage() {
                   background: "#f8f8fb",
                   borderRadius: "8px",
                   padding: "16px 20px",
-                  borderLeft: "3px solid #5b5fc7",
+                  borderLeft: "3px solid #D97757",
                 }}
               >
                 <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 600, color: "#242424" }}>
@@ -437,7 +437,7 @@ export default function PrivacyPolicyPage() {
             </ul>
             <p style={{ margin: "12px 0 0", color: "#616161", fontSize: "15px" }}>
               To exercise these rights, contact us at{" "}
-              <a href="mailto:privacy@brixos.io" style={{ color: "#5b5fc7" }}>
+              <a href="mailto:privacy@brixos.io" style={{ color: "#D97757" }}>
                 privacy@brixos.io
               </a>
               .
@@ -560,12 +560,12 @@ export default function PrivacyPolicyPage() {
                 background: "#f8f8fb",
                 borderRadius: "8px",
                 padding: "20px",
-                borderLeft: "3px solid #5b5fc7",
+                borderLeft: "3px solid #D97757",
               }}
             >
               <p style={{ margin: "0 0 6px", fontSize: "15px", color: "#242424" }}>
                 <strong>Email:</strong>{" "}
-                <a href="mailto:privacy@brixos.io" style={{ color: "#5b5fc7" }}>
+                <a href="mailto:privacy@brixos.io" style={{ color: "#D97757" }}>
                   privacy@brixos.io
                 </a>
               </p>

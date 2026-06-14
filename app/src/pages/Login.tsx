@@ -9,8 +9,8 @@ import {
   Users, Lock, Copy,
 } from 'lucide-react';
 
-const BRAND = '#5b5fc7';
-const BRAND_DARK = '#464775';
+const BRAND = '#D97757';
+const BRAND_DARK = '#C4623E';
 
 function makeInitials(name: string): string {
   const parts = name.trim().split(/\s+/);
@@ -122,7 +122,7 @@ export default function LoginPage() {
       >
         {/* Background glows */}
         <div style={{ position: 'absolute', top: -120, left: -120, width: 400, height: 400, borderRadius: '50%', background: `${BRAND}20`, filter: 'blur(80px)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: -80, right: -80, width: 300, height: 300, borderRadius: '50%', background: '#46477518', filter: 'blur(60px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: -80, right: -80, width: 300, height: 300, borderRadius: '50%', background: '#C4623E18', filter: 'blur(60px)', pointerEvents: 'none' }} />
 
         {/* Logo */}
         <button
@@ -131,10 +131,10 @@ export default function LoginPage() {
         >
           <div style={{
             width: 36, height: 36,
-            background: 'linear-gradient(135deg, #7c7ff0, #5b5fc7)',
+            background: 'linear-gradient(135deg, #E8946F, #D97757)',
             borderRadius: 10,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 4px 16px rgba(91,95,199,0.5)',
+            boxShadow: '0 4px 16px rgba(217,119,87,0.5)',
           }}>
             <Zap size={18} color="#fff" strokeWidth={2.5} />
           </div>
@@ -518,13 +518,13 @@ function PrimaryBtn({ children, onClick, type = 'button', disabled }: {
       style={{
         width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
         padding: '13px', borderRadius: 10, border: 'none', cursor: disabled ? 'not-allowed' : 'pointer',
-        background: disabled ? '#a1a1aa' : `linear-gradient(135deg, #5b5fc7, #5b5fc7)`,
+        background: disabled ? '#a1a1aa' : `linear-gradient(135deg, #D97757, #D97757)`,
         color: '#fff', fontSize: 14, fontWeight: 700, letterSpacing: '-0.01em',
-        boxShadow: disabled ? 'none' : '0 4px 14px rgba(91,95,199,0.35)',
+        boxShadow: disabled ? 'none' : '0 4px 14px rgba(217,119,87,0.35)',
         transition: 'all 0.15s', fontFamily: 'inherit',
       }}
-      onMouseEnter={(e) => { if (!disabled) e.currentTarget.style.boxShadow = '0 6px 20px rgba(91,95,199,0.45)'; }}
-      onMouseLeave={(e) => { if (!disabled) e.currentTarget.style.boxShadow = '0 4px 14px rgba(91,95,199,0.35)'; }}
+      onMouseEnter={(e) => { if (!disabled) e.currentTarget.style.boxShadow = '0 6px 20px rgba(217,119,87,0.45)'; }}
+      onMouseLeave={(e) => { if (!disabled) e.currentTarget.style.boxShadow = '0 4px 14px rgba(217,119,87,0.35)'; }}
     >
       {children}
     </button>

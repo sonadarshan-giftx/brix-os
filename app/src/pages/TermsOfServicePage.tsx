@@ -16,7 +16,7 @@ import {
 
 export default function TermsOfServicePage() {
   const iconStyle: React.CSSProperties = {
-    color: "#5b5fc7",
+    color: "#D97757",
     flexShrink: 0,
     marginTop: "4px",
   };
@@ -137,7 +137,7 @@ export default function TermsOfServicePage() {
                   background: "#f8f8fb",
                   borderRadius: "8px",
                   padding: "16px 20px",
-                  borderLeft: "3px solid #5b5fc7",
+                  borderLeft: "3px solid #D97757",
                 }}
               >
                 <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 600, color: "#242424" }}>
@@ -154,7 +154,7 @@ export default function TermsOfServicePage() {
                   background: "#f8f8fb",
                   borderRadius: "8px",
                   padding: "16px 20px",
-                  borderLeft: "3px solid #5b5fc7",
+                  borderLeft: "3px solid #D97757",
                 }}
               >
                 <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 600, color: "#242424" }}>
@@ -171,7 +171,7 @@ export default function TermsOfServicePage() {
                   background: "#f8f8fb",
                   borderRadius: "8px",
                   padding: "16px 20px",
-                  borderLeft: "3px solid #5b5fc7",
+                  borderLeft: "3px solid #D97757",
                 }}
               >
                 <h3 style={{ margin: "0 0 6px", fontSize: "15px", fontWeight: 600, color: "#242424" }}>
@@ -365,12 +365,12 @@ export default function TermsOfServicePage() {
                 background: "#f8f8fb",
                 borderRadius: "8px",
                 padding: "20px",
-                borderLeft: "3px solid #5b5fc7",
+                borderLeft: "3px solid #D97757",
               }}
             >
               <p style={{ margin: "0 0 6px", fontSize: "15px", color: "#242424" }}>
                 <strong>Email:</strong>{" "}
-                <a href="mailto:legal@brixos.io" style={{ color: "#5b5fc7" }}>
+                <a href="mailto:legal@brixos.io" style={{ color: "#D97757" }}>
                   legal@brixos.io
                 </a>
               </p>

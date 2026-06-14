@@ -68,7 +68,7 @@ type ParagraphStyle = 'Normal' | 'H1' | 'H2' | 'H3' | 'Code Block' | 'Quote';
 
 const SPACES: DocSpace[] = [
   { id: 'eng', name: 'Engineering Docs', initials: 'ED', color: '#3b82f6' },
-  { id: 'prod', name: 'Product Wiki', initials: 'PW', color: '#5b5fc7' },
+  { id: 'prod', name: 'Product Wiki', initials: 'PW', color: '#D97757' },
   { id: 'onboard', name: 'Onboarding', initials: 'OB', color: '#10b981' },
   { id: 'arch', name: 'Architecture', initials: 'AR', color: '#f59e0b' },
   { id: 'api', name: 'API Reference', initials: 'API', color: '#ef4444' },
@@ -117,7 +117,7 @@ const RECENT_PAGES = [
 ];
 
 const MOCK_CONTRIBUTORS: Contributor[] = [
-  { name: 'Alex Chen', initials: 'AC', color: '#5b5fc7' },
+  { name: 'Alex Chen', initials: 'AC', color: '#D97757' },
   { name: 'Priya K', initials: 'PK', color: '#3b82f6' },
   { name: 'Ravi M', initials: 'RM', color: '#10b981' },
 ];
@@ -132,7 +132,7 @@ const MOCK_COMMENTS: Comment[] = [
     replies: [
       {
         id: 'c1r1',
-        author: { name: 'Alex Chen', initials: 'AC', color: '#5b5fc7' },
+        author: { name: 'Alex Chen', initials: 'AC', color: '#D97757' },
         content: 'Good point! I\'ll add that in the next update. We can reference the OpenTelemetry setup.',
         timestamp: '45 min ago',
         resolved: false,
@@ -288,7 +288,7 @@ function TreeItem({
     <button
       onClick={() => node.pageId && onSelect(node.pageId)}
       className={`flex items-center gap-1.5 w-full text-left px-2 py-1 rounded text-sm transition-colors ${
-        isSelected ? 'bg-[#5b5fc7]/30 text-white' : 'text-white/70 hover:bg-white/10 hover:text-white'
+        isSelected ? 'bg-[#D97757]/30 text-white' : 'text-white/70 hover:bg-white/10 hover:text-white'
       }`}
       style={{ paddingLeft: 8 + depth * 12 }}
     >
@@ -706,11 +706,11 @@ function TemplatesModal({ onClose, onSelect }: { onClose: () => void; onSelect: 
             <button
               key={t.id}
               onClick={() => onSelect(t.id)}
-              className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-[#5b5fc7] hover:bg-indigo-50 text-left transition-all group"
+              className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-[#D97757] hover:bg-indigo-50 text-left transition-all group"
             >
               <span className="text-2xl">{t.icon}</span>
               <div>
-                <p className="font-medium text-gray-900 group-hover:text-[#5b5fc7] transition-colors">{t.title}</p>
+                <p className="font-medium text-gray-900 group-hover:text-[#D97757] transition-colors">{t.title}</p>
                 <p className="text-sm text-gray-500 mt-0.5">{t.desc}</p>
               </div>
             </button>
@@ -769,7 +769,7 @@ function CommentThread({ comment, onResolve }: { comment: Comment; onResolve: (i
             </div>
             <p className="text-sm text-gray-700">{comment.content}</p>
             <div className="flex items-center gap-3 mt-2">
-              <button onClick={() => setShowReply(!showReply)} className="text-xs text-gray-400 hover:text-[#5b5fc7] flex items-center gap-1 transition-colors">
+              <button onClick={() => setShowReply(!showReply)} className="text-xs text-gray-400 hover:text-[#D97757] flex items-center gap-1 transition-colors">
                 <CornerDownRight size={12} /> Reply
               </button>
               <button className="text-xs text-gray-400 hover:text-blue-500 flex items-center gap-1 transition-colors">
@@ -811,12 +811,12 @@ function CommentThread({ comment, onResolve }: { comment: Comment; onResolve: (i
                 value={replyText}
                 onChange={e => setReplyText(e.target.value)}
                 placeholder="Write a reply..."
-                className="flex-1 border border-gray-200 rounded-lg p-2 text-sm resize-none focus:outline-none focus:border-[#5b5fc7] transition-colors"
+                className="flex-1 border border-gray-200 rounded-lg p-2 text-sm resize-none focus:outline-none focus:border-[#D97757] transition-colors"
                 rows={2}
               />
               <button
                 onClick={() => { setReplyText(''); setShowReply(false); }}
-                className="self-end px-3 py-2 bg-[#5b5fc7] text-white rounded-lg text-sm hover:bg-[#c4694a] transition-colors flex items-center gap-1"
+                className="self-end px-3 py-2 bg-[#D97757] text-white rounded-lg text-sm hover:bg-[#c4694a] transition-colors flex items-center gap-1"
               >
                 <Send size={13} />
               </button>
@@ -882,7 +882,7 @@ function RightPanel({ page, onClose }: { page: DocPage; onClose: () => void }) {
             {page.labels.map(l => (
               <span key={l} className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">{l}</span>
             ))}
-            <button className="text-xs text-gray-400 hover:text-[#5b5fc7] transition-colors">+ Add</button>
+            <button className="text-xs text-gray-400 hover:text-[#D97757] transition-colors">+ Add</button>
           </div>
         </div>
 
@@ -1179,7 +1179,7 @@ export default function DocsPage() {
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                 isEditing
                   ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  : 'bg-[#5b5fc7] text-white hover:bg-[#c4694a]'
+                  : 'bg-[#D97757] text-white hover:bg-[#c4694a]'
               }`}
             >
               {isEditing ? <><Eye size={14} /> View</> : <><Edit3 size={14} /> Edit</>}
@@ -1311,7 +1311,7 @@ export default function DocsPage() {
                         value={newComment}
                         onChange={e => setNewComment(e.target.value)}
                         placeholder="Add a comment... (use @mention to notify someone)"
-                        className="w-full border border-gray-200 rounded-xl p-3 text-sm resize-none focus:outline-none focus:border-[#5b5fc7] transition-colors"
+                        className="w-full border border-gray-200 rounded-xl p-3 text-sm resize-none focus:outline-none focus:border-[#D97757] transition-colors"
                         rows={3}
                       />
                       <div className="flex items-center justify-between mt-2">
@@ -1322,7 +1322,7 @@ export default function DocsPage() {
                         <button
                           disabled={!newComment.trim()}
                           onClick={() => setNewComment('')}
-                          className="px-4 py-1.5 bg-[#5b5fc7] text-white rounded-lg text-sm hover:bg-[#c4694a] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                          className="px-4 py-1.5 bg-[#D97757] text-white rounded-lg text-sm hover:bg-[#c4694a] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                         >
                           Comment
                         </button>

@@ -65,7 +65,7 @@ function Toast({ message, onClose }: { message: string; onClose: () => void }) {
 const categoriesData: Category[] = [
   {
     id: "getting-started",
-    icon: <Rocket size={22} color="#5b5fc7" />,
+    icon: <Rocket size={22} color="#D97757" />,
     title: "Getting Started",
     articles: [
       { id: "gs-1", title: "Creating your first workspace", content: "Learn how to set up your BrixOS workspace, invite team members, and configure your first project board in under 5 minutes." },
@@ -75,7 +75,7 @@ const categoriesData: Category[] = [
   },
   {
     id: "account-billing",
-    icon: <CreditCard size={22} color="#5b5fc7" />,
+    icon: <CreditCard size={22} color="#D97757" />,
     title: "Account & Billing",
     articles: [
       { id: "ab-1", title: "Managing your subscription", content: "Upgrade, downgrade, or cancel your subscription. Understand billing cycles and payment methods." },
@@ -86,7 +86,7 @@ const categoriesData: Category[] = [
   },
   {
     id: "projects-tasks",
-    icon: <FolderOpen size={22} color="#5b5fc7" />,
+    icon: <FolderOpen size={22} color="#D97757" />,
     title: "Projects & Tasks",
     articles: [
       { id: "pt-1", title: "Creating and organizing projects", content: "Best practices for project structure, templates, folder hierarchies, and tagging systems." },
@@ -96,7 +96,7 @@ const categoriesData: Category[] = [
   },
   {
     id: "ai-agents",
-    icon: <Bot size={22} color="#5b5fc7" />,
+    icon: <Bot size={22} color="#D97757" />,
     title: "AI Agents",
     articles: [
       { id: "ai-1", title: "Configuring your first AI agent", content: "Step-by-step guide to creating AI agents for task automation, data analysis, and content generation." },
@@ -106,7 +106,7 @@ const categoriesData: Category[] = [
   },
   {
     id: "team-management",
-    icon: <Users size={22} color="#5b5fc7" />,
+    icon: <Users size={22} color="#D97757" />,
     title: "Team Management",
     articles: [
       { id: "tm-1", title: "Role-based access control", content: "Configure admin, editor, viewer, and custom roles with granular permissions." },
@@ -117,7 +117,7 @@ const categoriesData: Category[] = [
   },
   {
     id: "security",
-    icon: <ShieldCheck size={22} color="#5b5fc7" />,
+    icon: <ShieldCheck size={22} color="#D97757" />,
     title: "Security",
     articles: [
       { id: "sec-1", title: "Enabling two-factor authentication", content: "Protect your account with 2FA using authenticator apps or security keys." },
@@ -128,7 +128,7 @@ const categoriesData: Category[] = [
   },
   {
     id: "integrations",
-    icon: <Plug size={22} color="#5b5fc7" />,
+    icon: <Plug size={22} color="#D97757" />,
     title: "Integrations",
     articles: [
       { id: "int-1", title: "Slack integration setup", content: "Receive notifications, create tasks, and run commands directly from Slack." },
@@ -138,7 +138,7 @@ const categoriesData: Category[] = [
   },
   {
     id: "api-developers",
-    icon: <Code size={22} color="#5b5fc7" />,
+    icon: <Code size={22} color="#D97757" />,
     title: "API & Developers",
     articles: [
       { id: "api-1", title: "Getting started with the API", content: "Generate API keys, understand rate limits, and make your first request." },
@@ -215,7 +215,7 @@ export default function HelpCenterPage() {
             style={{
               width: "56px",
               height: "56px",
-              background: "#5b5fc7",
+              background: "#D97757",
               borderRadius: "12px",
               display: "flex",
               alignItems: "center",
@@ -358,7 +358,7 @@ export default function HelpCenterPage() {
                           borderRadius: "6px",
                           cursor: "pointer",
                           fontSize: "14px",
-                          color: isExpanded ? "#5b5fc7" : "#616161",
+                          color: isExpanded ? "#D97757" : "#616161",
                           fontFamily: "Inter, sans-serif",
                           transition: "background 0.15s",
                         }}
@@ -417,7 +417,7 @@ export default function HelpCenterPage() {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "8px" }}>
-            <MessageSquare size={22} color="#5b5fc7" />
+            <MessageSquare size={22} color="#D97757" />
             <h2 style={{ fontSize: "20px", fontWeight: 600, margin: 0, color: "#242424" }}>
               Contact Support
             </h2>
@@ -556,7 +556,7 @@ export default function HelpCenterPage() {
                       display: "flex",
                       alignItems: "center",
                       gap: "8px",
-                      background: "#5b5fc7",
+                      background: "#D97757",
                       color: "#ffffff",
                       border: "none",
                       padding: "12px 24px",
@@ -567,8 +567,8 @@ export default function HelpCenterPage() {
                       fontFamily: "Inter, sans-serif",
                       transition: "background 0.2s",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = "#464775")}
-                    onMouseLeave={(e) => (e.currentTarget.style.background = "#5b5fc7")}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = "#C4623E")}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = "#D97757")}
                   >
                     <Send size={16} />
                     Submit Ticket

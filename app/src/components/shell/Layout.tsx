@@ -80,7 +80,7 @@ export function Layout() {
         {/* Skip to content link for accessibility */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:z-[9999] focus:rounded focus:bg-[#5b5fc7] focus:px-4 focus:py-2 focus:text-white focus:text-xs focus:font-semibold focus:top-1 focus:left-1 focus:outline-none"
+          className="sr-only focus:not-sr-only focus:fixed focus:z-[9999] focus:rounded focus:bg-[#D97757] focus:px-4 focus:py-2 focus:text-white focus:text-xs focus:font-semibold focus:top-1 focus:left-1 focus:outline-none"
         >
           Skip to main content
         </a>

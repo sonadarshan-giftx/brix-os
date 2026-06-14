@@ -177,7 +177,7 @@ export default function CreateWorkspacePage() {
             <div className="flex items-center gap-3">
               <div
                 className="flex h-9 w-9 items-center justify-center rounded-lg"
-                style={{ background: "#5b5fc7" }}
+                style={{ background: "#D97757" }}
               >
                 <Building2 size={20} color="#ffffff" />
               </div>
@@ -197,13 +197,13 @@ export default function CreateWorkspacePage() {
                 <div
                   className="h-2 w-full rounded-full transition-all duration-300"
                   style={{
-                    background: s <= step ? "#5b5fc7" : "#d1d1d1",
+                    background: s <= step ? "#D97757" : "#d1d1d1",
                     opacity: s < step ? 0.6 : 1,
                   }}
                 />
                 <p
                   className="mt-2 text-xs font-medium"
-                  style={{ color: s <= step ? "#5b5fc7" : "#616161" }}
+                  style={{ color: s <= step ? "#D97757" : "#616161" }}
                 >
                   {stepTitles[s - 1]}
                 </p>
@@ -234,14 +234,14 @@ export default function CreateWorkspacePage() {
               <div className="space-y-4">
                 <div>
                   <label className="mb-1.5 block text-sm font-medium" style={{ color: "#242424" }}>
-                    Workspace name <span style={{ color: "#5b5fc7" }}>*</span>
+                    Workspace name <span style={{ color: "#D97757" }}>*</span>
                   </label>
                   <input
                     type="text"
                     value={workspaceName}
                     onChange={(e) => setWorkspaceName(e.target.value)}
                     placeholder="Acme Corp"
-                    className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#5b5fc7] focus:ring-1 focus:ring-[#5b5fc7]"
+                    className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#D97757] focus:ring-1 focus:ring-[#D97757]"
                     style={{ borderColor: "#d1d1d1", color: "#242424", borderRadius: "12px" }}
                   />
                 </div>
@@ -279,19 +279,19 @@ export default function CreateWorkspacePage() {
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="What does your team work on?"
                     rows={3}
-                    className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#5b5fc7] focus:ring-1 focus:ring-[#5b5fc7]"
+                    className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#D97757] focus:ring-1 focus:ring-[#D97757]"
                     style={{ borderColor: "#d1d1d1", color: "#242424", borderRadius: "12px", resize: "vertical" }}
                   />
                 </div>
 
                 <div>
                   <label className="mb-1.5 block text-sm font-medium" style={{ color: "#242424" }}>
-                    Industry <span style={{ color: "#5b5fc7" }}>*</span>
+                    Industry <span style={{ color: "#D97757" }}>*</span>
                   </label>
                   <select
                     value={industry}
                     onChange={(e) => setIndustry(e.target.value)}
-                    className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#5b5fc7] focus:ring-1 focus:ring-[#5b5fc7]"
+                    className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#D97757] focus:ring-1 focus:ring-[#D97757]"
                     style={{ borderColor: "#d1d1d1", color: "#242424", borderRadius: "12px" }}
                   >
                     <option value="">Select an industry</option>
@@ -325,7 +325,7 @@ export default function CreateWorkspacePage() {
                   onChange={(e) => setInviteEmail(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && addInvitee()}
                   placeholder="colleague@company.com"
-                  className="flex-1 rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#5b5fc7] focus:ring-1 focus:ring-[#5b5fc7]"
+                  className="flex-1 rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#D97757] focus:ring-1 focus:ring-[#D97757]"
                   style={{ borderColor: "#d1d1d1", color: "#242424", borderRadius: "12px" }}
                 />
                 <select
@@ -341,7 +341,7 @@ export default function CreateWorkspacePage() {
                   onClick={addInvitee}
                   disabled={!inviteEmail.trim()}
                   className="flex items-center justify-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-medium text-white transition-opacity disabled:opacity-50"
-                  style={{ background: "#5b5fc7", borderRadius: "12px" }}
+                  style={{ background: "#D97757", borderRadius: "12px" }}
                 >
                   <Plus size={16} />
                   Add
@@ -364,7 +364,7 @@ export default function CreateWorkspacePage() {
                       <div className="flex items-center gap-3">
                         <div
                           className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium text-white"
-                          style={{ background: "#5b5fc7" }}
+                          style={{ background: "#D97757" }}
                         >
                           {inv.email[0].toUpperCase()}
                         </div>
@@ -428,16 +428,16 @@ export default function CreateWorkspacePage() {
                       onClick={() => setSelectedPlan(plan.name)}
                       className="relative flex flex-col items-start rounded-xl border p-5 text-left transition-all"
                       style={{
-                        borderColor: isSelected ? "#5b5fc7" : "#d1d1d1",
-                        background: isSelected ? "rgba(91,95,199,0.04)" : "#ffffff",
+                        borderColor: isSelected ? "#D97757" : "#d1d1d1",
+                        background: isSelected ? "rgba(217,119,87,0.04)" : "#ffffff",
                         borderRadius: "12px",
-                        boxShadow: isSelected ? "0 0 0 1px #5b5fc7" : "none",
+                        boxShadow: isSelected ? "0 0 0 1px #D97757" : "none",
                       }}
                     >
                       {plan.recommended && (
                         <span
                           className="absolute -top-2.5 left-4 rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white"
-                          style={{ background: "#5b5fc7" }}
+                          style={{ background: "#D97757" }}
                         >
                           Recommended
                         </span>
@@ -445,7 +445,7 @@ export default function CreateWorkspacePage() {
                       <div
                         className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg"
                         style={{
-                          background: isSelected ? "#5b5fc7" : "#f5f5f3",
+                          background: isSelected ? "#D97757" : "#f5f5f3",
                           color: isSelected ? "#ffffff" : "#616161",
                         }}
                       >
@@ -503,7 +503,7 @@ export default function CreateWorkspacePage() {
               onClick={() => setStep(step + 1)}
               disabled={step === 1 && !canProceedStep1}
               className="flex items-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-medium text-white transition-opacity disabled:opacity-50"
-              style={{ background: "#5b5fc7", borderRadius: "12px" }}
+              style={{ background: "#D97757", borderRadius: "12px" }}
             >
               Next
               <ArrowRight size={16} />
@@ -512,7 +512,7 @@ export default function CreateWorkspacePage() {
             <button
               onClick={handleCreate}
               className="flex items-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-medium text-white transition-opacity"
-              style={{ background: "#5b5fc7", borderRadius: "12px" }}
+              style={{ background: "#D97757", borderRadius: "12px" }}
             >
               <Check size={16} />
               Create Workspace

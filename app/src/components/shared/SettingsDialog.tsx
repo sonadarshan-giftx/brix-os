@@ -14,12 +14,12 @@ const themeOptions = [
 ];
 
 const accentColors = [
-  { color: '#5b5fc7', name: "Indigo" },
+  { color: '#D97757', name: "Indigo" },
   { color: '#237b4b', name: "Forest" },
   { color: '#c4314b', name: "Crimson" },
   { color: '#b56200', name: "Amber" },
   { color: '#0891b2', name: "Ocean" },
-  { color: '#464775', name: "Violet" },
+  { color: '#C4623E', name: "Violet" },
 ];
 
 const sections = [
@@ -37,7 +37,7 @@ function loadPersistedSettings(): { accentColor: string; fontSize: string } {
     const raw = localStorage.getItem('brixos-ui-settings');
     if (raw) return JSON.parse(raw);
   } catch { /* ignore */ }
-  return { accentColor: '#5b5fc7', fontSize: 'Default' };
+  return { accentColor: '#D97757', fontSize: 'Default' };
 }
 
 /** Save settings to localStorage */
@@ -378,12 +378,12 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
                     >
                       <section.icon
                         size={16}
-                        color={activeSection === section.id ? 'var(--op-accent, #5b5fc7)' : '#616161'}
+                        color={activeSection === section.id ? 'var(--op-accent, #D97757)' : '#616161'}
                       />
                       <span
                         style={{
                           fontSize: 13,
-                          color: activeSection === section.id ? 'var(--op-accent, #5b5fc7)' : '#242424',
+                          color: activeSection === section.id ? 'var(--op-accent, #D97757)' : '#242424',
                           fontWeight: activeSection === section.id ? 600 : 400,
                         }}
                       >
@@ -418,15 +418,15 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
                                 onClick={() => setTheme(option.id)}
                                 className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 p-4 transition-all"
                                 style={{
-                                  borderColor: isSelected ? 'var(--op-accent, #5b5fc7)' : '#e1e1e1',
+                                  borderColor: isSelected ? 'var(--op-accent, #D97757)' : '#e1e1e1',
                                   backgroundColor: isSelected ? '#f8f8ff' : '#ffffff',
                                 }}
                               >
-                                <Icon size={24} color={isSelected ? 'var(--op-accent, #5b5fc7)' : '#616161'} />
-                                <span style={{ fontSize: 13, fontWeight: isSelected ? 600 : 500, color: isSelected ? 'var(--op-accent, #5b5fc7)' : '#242424' }}>{option.label}</span>
+                                <Icon size={24} color={isSelected ? 'var(--op-accent, #D97757)' : '#616161'} />
+                                <span style={{ fontSize: 13, fontWeight: isSelected ? 600 : 500, color: isSelected ? 'var(--op-accent, #D97757)' : '#242424' }}>{option.label}</span>
                                 <span style={{ fontSize: 11, color: '#767676' }}>{option.desc}</span>
                                 {isSelected && (
-                                  <div className="flex items-center justify-center rounded-full" style={{ width: 20, height: 20, backgroundColor: 'var(--op-accent, #5b5fc7)', marginTop: 4 }}>
+                                  <div className="flex items-center justify-center rounded-full" style={{ width: 20, height: 20, backgroundColor: 'var(--op-accent, #D97757)', marginTop: 4 }}>
                                     <Check size={12} color="#fff" />
                                   </div>
                                 )}
@@ -475,9 +475,9 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
                                 className="flex-1 cursor-pointer rounded border py-1 text-center"
                                 style={{
                                   fontSize: 12,
-                                  borderColor: size === fontSize ? 'var(--op-accent, #5b5fc7)' : '#e1e1e1',
+                                  borderColor: size === fontSize ? 'var(--op-accent, #D97757)' : '#e1e1e1',
                                   backgroundColor: size === fontSize ? '#f8f8ff' : '#fff',
-                                  color: size === fontSize ? 'var(--op-accent, #5b5fc7)' : '#242424',
+                                  color: size === fontSize ? 'var(--op-accent, #D97757)' : '#242424',
                                 }}
                               >
                                 {size}
@@ -604,7 +604,7 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
                       </div>
                       <div className="mt-4 rounded p-3" style={{ backgroundColor: '#fef2f2', border: '1px solid #fecaca' }}>
                         <p style={{ fontSize: 12, color: '#c4314b', fontWeight: 500 }}>Active Sessions: 3 devices</p>
-                        <button style={{ fontSize: 11, color: 'var(--op-accent, #5b5fc7)', border: 'none', background: 'transparent', cursor: 'pointer', marginTop: 4 }}>
+                        <button style={{ fontSize: 11, color: 'var(--op-accent, #D97757)', border: 'none', background: 'transparent', cursor: 'pointer', marginTop: 4 }}>
                           Manage all sessions →
                         </button>
                       </div>
@@ -616,7 +616,7 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
                     <div className="space-y-4">
                       <h3 style={{ fontSize: 16, fontWeight: 600, color: '#242424', marginBottom: 4 }}>Account</h3>
                       <div className="flex items-center gap-3 rounded-lg p-3" style={{ backgroundColor: '#f8f8f8' }}>
-                        <div className="rounded-full" style={{ width: 48, height: 48, backgroundColor: 'var(--op-accent, #5b5fc7)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <div className="rounded-full" style={{ width: 48, height: 48, backgroundColor: 'var(--op-accent, #D97757)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                           <span style={{ color: '#fff', fontSize: 18, fontWeight: 600 }}>{accountName.charAt(0).toUpperCase()}</span>
                         </div>
                         <div>
@@ -745,7 +745,7 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
                     <button
                       onClick={handleSave}
                       className="flex cursor-pointer items-center gap-1 rounded px-3 py-1.5 text-xs font-medium"
-                      style={{ backgroundColor: 'var(--op-accent, #5b5fc7)', color: '#fff', border: 'none' }}
+                      style={{ backgroundColor: 'var(--op-accent, #D97757)', color: '#fff', border: 'none' }}
                     >
                       <Save size={12} /> Save Changes
                     </button>
@@ -789,7 +789,7 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
                   <button
                     onClick={handleSave}
                     className="cursor-pointer rounded px-3 py-1.5 text-xs font-medium"
-                    style={{ backgroundColor: 'var(--op-accent, #5b5fc7)', color: '#fff', border: 'none' }}
+                    style={{ backgroundColor: 'var(--op-accent, #D97757)', color: '#fff', border: 'none' }}
                   >
                     Save & Close
                   </button>
@@ -832,7 +832,7 @@ function ToggleRow({ label, desc, defaultOn, onToggle }: { label: string; desc: 
         className="cursor-pointer"
         style={{
           width: 48, height: 26, borderRadius: 13, border: 'none',
-          backgroundColor: on ? 'var(--op-accent, #5b5fc7)' : '#d1d1d1',
+          backgroundColor: on ? 'var(--op-accent, #D97757)' : '#d1d1d1',
           position: 'relative', transition: 'background-color 150ms',
           flexShrink: 0,
         }}
@@ -875,7 +875,7 @@ function EditableRow({ label, defaultValue, options }: { label: string; defaultV
         <button
           onClick={(e) => { e.stopPropagation(); setEditing(true); }}
           className="cursor-pointer rounded px-3 py-2 text-xs"
-          style={{ color: 'var(--op-accent, #5b5fc7)', backgroundColor: '#e8e8ff', border: 'none', minHeight: 36 }}
+          style={{ color: 'var(--op-accent, #D97757)', backgroundColor: '#e8e8ff', border: 'none', minHeight: 36 }}
         >
           {value}
         </button>

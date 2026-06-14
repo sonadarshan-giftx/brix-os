@@ -88,7 +88,7 @@ export function AiCopilot() {
             exit={{ scale: 0 }}
             onClick={() => setIsOpen(true)}
             className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-lg"
-            style={{ backgroundColor: '#5b5fc7' }}
+            style={{ backgroundColor: '#D97757' }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             title="AI Copilot"
@@ -113,7 +113,7 @@ export function AiCopilot() {
             {/* Header */}
             <div className="flex items-center justify-between border-b px-4 py-3" style={{ borderColor: '#e1e1e1', backgroundColor: '#fafafa' }}>
               <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full" style={{ backgroundColor: '#5b5fc7' }}>
+                <div className="flex h-8 w-8 items-center justify-center rounded-full" style={{ backgroundColor: '#D97757' }}>
                   <Sparkles size={16} color="white" />
                 </div>
                 <div>
@@ -128,14 +128,14 @@ export function AiCopilot() {
             <div className="flex-1 overflow-y-auto px-4 py-3">
               {messages.map((msg) => (
                 <div key={msg.id} className={`mb-3 flex gap-2.5 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                  <div className={`flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full ${msg.role === 'ai' ? '' : ''}`} style={{ backgroundColor: msg.role === 'ai' ? '#5b5fc7' : '#e0e7ff' }}>
-                    {msg.role === 'ai' ? <Bot size={14} color="white" /> : <User size={14} style={{ color: '#5b5fc7' }} />}
+                  <div className={`flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full ${msg.role === 'ai' ? '' : ''}`} style={{ backgroundColor: msg.role === 'ai' ? '#D97757' : '#e0e7ff' }}>
+                    {msg.role === 'ai' ? <Bot size={14} color="white" /> : <User size={14} style={{ color: '#D97757' }} />}
                   </div>
                   <div className={`max-w-[80%] rounded-xl px-3 py-2 text-sm leading-relaxed ${msg.role === 'ai' ? '' : ''}`} style={{
-                    backgroundColor: msg.role === 'ai' ? '#f8f8fb' : '#5b5fc7',
+                    backgroundColor: msg.role === 'ai' ? '#f8f8fb' : '#D97757',
                     color: msg.role === 'ai' ? '#333' : '#ffffff',
                     border: msg.role === 'ai' ? '1px solid #e1e1e1' : 'none',
-                    borderLeft: msg.role === 'ai' ? '3px solid #5b5fc7' : 'none',
+                    borderLeft: msg.role === 'ai' ? '3px solid #D97757' : 'none',
                   }}>
                     {msg.content.split('\n').map((line, i) => <div key={i}>{line}</div>)}
                   </div>
@@ -145,13 +145,13 @@ export function AiCopilot() {
               {/* Typing indicator */}
               {isTyping && (
                 <div className="mb-3 flex gap-2.5">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full" style={{ backgroundColor: '#5b5fc7' }}>
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full" style={{ backgroundColor: '#D97757' }}>
                     <Bot size={14} color="white" />
                   </div>
-                  <div className="flex items-center gap-1 rounded-xl px-3 py-2" style={{ backgroundColor: '#f8f8fb', border: '1px solid #e1e1e1', borderLeft: '3px solid #5b5fc7' }}>
-                    <span className="h-1.5 w-1.5 animate-bounce rounded-full" style={{ backgroundColor: '#5b5fc7', animationDelay: '0ms' }} />
-                    <span className="h-1.5 w-1.5 animate-bounce rounded-full" style={{ backgroundColor: '#5b5fc7', animationDelay: '150ms' }} />
-                    <span className="h-1.5 w-1.5 animate-bounce rounded-full" style={{ backgroundColor: '#5b5fc7', animationDelay: '300ms' }} />
+                  <div className="flex items-center gap-1 rounded-xl px-3 py-2" style={{ backgroundColor: '#f8f8fb', border: '1px solid #e1e1e1', borderLeft: '3px solid #D97757' }}>
+                    <span className="h-1.5 w-1.5 animate-bounce rounded-full" style={{ backgroundColor: '#D97757', animationDelay: '0ms' }} />
+                    <span className="h-1.5 w-1.5 animate-bounce rounded-full" style={{ backgroundColor: '#D97757', animationDelay: '150ms' }} />
+                    <span className="h-1.5 w-1.5 animate-bounce rounded-full" style={{ backgroundColor: '#D97757', animationDelay: '300ms' }} />
                   </div>
                 </div>
               )}
@@ -165,7 +165,7 @@ export function AiCopilot() {
                       key={action.label}
                       onClick={() => handleSend(action.prompt)}
                       className="flex items-center gap-1.5 rounded-lg border px-2.5 py-2 text-[11px] font-medium transition-colors hover:bg-gray-50"
-                      style={{ borderColor: '#e1e1e1', color: '#5b5fc7' }}
+                      style={{ borderColor: '#e1e1e1', color: '#D97757' }}
                     >
                       {action.icon} {action.label}
                     </button>
@@ -186,7 +186,7 @@ export function AiCopilot() {
                   className="flex-1 rounded-lg px-3 py-2 text-sm outline-none"
                   style={{ backgroundColor: '#f5f5f5', border: '1px solid #e1e1e1' }}
                 />
-                <button onClick={() => handleSend(input)} className="rounded-lg p-2 text-white hover:opacity-90" style={{ backgroundColor: '#5b5fc7' }}>
+                <button onClick={() => handleSend(input)} className="rounded-lg p-2 text-white hover:opacity-90" style={{ backgroundColor: '#D97757' }}>
                   <Send size={14} />
                 </button>
               </div>

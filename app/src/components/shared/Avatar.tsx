@@ -62,7 +62,7 @@ export function Avatar({
         ) : (
           <div
             className="flex h-full w-full items-center justify-center text-[11px] font-semibold"
-            style={{ color: '#5b5fc7', fontSize: Math.max(10, s * 0.35) }}
+            style={{ color: '#D97757', fontSize: Math.max(10, s * 0.35) }}
           >
             {initials || alt.charAt(0).toUpperCase()}
           </div>
@@ -85,7 +85,7 @@ export function Avatar({
             width: 14,
             height: 10,
             fontSize: 7,
-            backgroundColor: '#5b5fc7',
+            backgroundColor: '#D97757',
             fontFamily: 'var(--font-sans)',
           }}
         >

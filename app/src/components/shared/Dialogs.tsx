@@ -69,26 +69,26 @@ function CreateProjectDialog() {
           <div>
             <label className="mb-1 block text-xs font-semibold" style={{ color: '#242424' }}>Project Name</label>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. API Gateway Refactor"
-              className="w-full rounded border px-3 py-2 text-sm outline-none focus:border-[#5b5fc7]" style={{ borderColor: '#d1d1d1' }} required />
+              className="w-full rounded border px-3 py-2 text-sm outline-none focus:border-[#D97757]" style={{ borderColor: '#d1d1d1' }} required />
           </div>
           <div>
             <label className="mb-1 block text-xs font-semibold" style={{ color: '#242424' }}>Project Key</label>
             <input type="text" value={key} onChange={(e) => setKey(e.target.value.toUpperCase())} placeholder="e.g. API"
-              className="w-full rounded border px-3 py-2 text-sm outline-none focus:border-[#5b5fc7]" style={{ borderColor: '#d1d1d1' }} required maxLength={5} />
+              className="w-full rounded border px-3 py-2 text-sm outline-none focus:border-[#D97757]" style={{ borderColor: '#d1d1d1' }} required maxLength={5} />
           </div>
           <div>
             <label className="mb-1 block text-xs font-semibold" style={{ color: '#242424' }}>Description</label>
             <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="What is this project about?"
-              className="w-full resize-none rounded border px-3 py-2 text-sm outline-none focus:border-[#5b5fc7]" style={{ borderColor: '#d1d1d1', minHeight: 60 }} />
+              className="w-full resize-none rounded border px-3 py-2 text-sm outline-none focus:border-[#D97757]" style={{ borderColor: '#d1d1d1', minHeight: 60 }} />
           </div>
           <div>
             <label className="mb-1 block text-xs font-semibold" style={{ color: '#242424' }}>Budget ($)</label>
             <input type="number" value={budget} onChange={(e) => setBudget(e.target.value)}
-              className="w-full rounded border px-3 py-2 text-sm outline-none focus:border-[#5b5fc7]" style={{ borderColor: '#d1d1d1' }} />
+              className="w-full rounded border px-3 py-2 text-sm outline-none focus:border-[#D97757]" style={{ borderColor: '#d1d1d1' }} />
           </div>
           <div className="flex justify-end gap-2 pt-2">
             <button type="button" onClick={close} className="rounded px-4 py-2 text-sm font-medium" style={{ border: '1px solid #d1d1d1', background: '#fff', color: '#616161', cursor: 'pointer' }}>Cancel</button>
-            <button type="submit" className="rounded px-4 py-2 text-sm font-medium text-white" style={{ background: '#5b5fc7', border: 'none', cursor: 'pointer' }}>Create Project</button>
+            <button type="submit" className="rounded px-4 py-2 text-sm font-medium text-white" style={{ background: '#D97757', border: 'none', cursor: 'pointer' }}>Create Project</button>
           </div>
         </form>
       )}
@@ -130,7 +130,7 @@ function CreateTaskDialog() {
           <div>
             <label className="mb-1 block text-xs font-semibold" style={{ color: '#242424' }}>Title</label>
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="What needs to be done?"
-              className="w-full rounded border px-3 py-2 text-sm outline-none focus:border-[#5b5fc7]" style={{ borderColor: '#d1d1d1' }} required />
+              className="w-full rounded border px-3 py-2 text-sm outline-none focus:border-[#D97757]" style={{ borderColor: '#d1d1d1' }} required />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
@@ -155,7 +155,7 @@ function CreateTaskDialog() {
             <div>
               <label className="mb-1 block text-xs font-semibold" style={{ color: '#242424' }}>Estimate (pts)</label>
               <input type="number" value={estimate} onChange={(e) => setEstimate(e.target.value)} min="1" max="100"
-                className="w-full rounded border px-3 py-2 text-sm outline-none focus:border-[#5b5fc7]" style={{ borderColor: '#d1d1d1' }} />
+                className="w-full rounded border px-3 py-2 text-sm outline-none focus:border-[#D97757]" style={{ borderColor: '#d1d1d1' }} />
             </div>
             <div>
               <label className="mb-1 block text-xs font-semibold" style={{ color: '#242424' }}>Assignee</label>
@@ -169,7 +169,7 @@ function CreateTaskDialog() {
           </div>
           <div className="flex justify-end gap-2 pt-2">
             <button type="button" onClick={close} className="rounded px-4 py-2 text-sm font-medium" style={{ border: '1px solid #d1d1d1', background: '#fff', color: '#616161', cursor: 'pointer' }}>Cancel</button>
-            <button type="submit" className="rounded px-4 py-2 text-sm font-medium text-white" style={{ background: '#5b5fc7', border: 'none', cursor: 'pointer' }}>Create Task</button>
+            <button type="submit" className="rounded px-4 py-2 text-sm font-medium text-white" style={{ background: '#D97757', border: 'none', cursor: 'pointer' }}>Create Task</button>
           </div>
         </form>
       )}
@@ -217,7 +217,7 @@ function CreateBugDialog() {
                 <button key={s} type="button" onClick={() => setSeverity(s)}
                   className="flex-1 rounded py-2 text-xs font-semibold"
                   style={{
-                    background: severity === s ? (s === 'critical' ? '#c4314b' : s === 'high' ? '#f59e0b' : '#5b5fc7') : '#f0f0f0',
+                    background: severity === s ? (s === 'critical' ? '#c4314b' : s === 'high' ? '#f59e0b' : '#D97757') : '#f0f0f0',
                     color: severity === s ? '#fff' : '#616161',
                     border: 'none',
                     cursor: 'pointer',
@@ -267,7 +267,7 @@ function AssignTaskDialog() {
   return (
     <DialogOverlay onClose={close}>
       {submitted ? (
-        <SuccessState icon={<UserPlus size={48} color="#5b5fc7" />} title="Task Assigned" message="Team member notified and task added to their queue." />
+        <SuccessState icon={<UserPlus size={48} color="#D97757" />} title="Task Assigned" message="Team member notified and task added to their queue." />
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <DialogHeader icon={<UserPlus size={20} />} title="Assign Task" subtitle={project?.name || 'Select a project'} />
@@ -286,20 +286,20 @@ function AssignTaskDialog() {
               {humanEmployees.map((e) => (
                 <button key={e.id} type="button" onClick={() => setAssigneeId(e.id)}
                   className="flex w-full items-center gap-2 rounded border p-2 text-left"
-                  style={{ borderColor: assigneeId === e.id ? '#5b5fc7' : '#d1d1d1', background: assigneeId === e.id ? '#e8eaf6' : '#fff' }}>
-                  <div className="h-7 w-7 rounded-full" style={{ background: '#e8eaf6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 600, color: '#5b5fc7' }}>{e.name.substring(0, 2)}</div>
+                  style={{ borderColor: assigneeId === e.id ? '#D97757' : '#d1d1d1', background: assigneeId === e.id ? '#e8eaf6' : '#fff' }}>
+                  <div className="h-7 w-7 rounded-full" style={{ background: '#e8eaf6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 600, color: '#D97757' }}>{e.name.substring(0, 2)}</div>
                   <div>
                     <div className="text-xs font-semibold" style={{ color: '#242424' }}>{e.name}</div>
                     <div className="text-[10px]" style={{ color: '#616161' }}>{e.title}</div>
                   </div>
-                  {assigneeId === e.id && <CheckCircle2 size={14} color="#5b5fc7" className="ml-auto" />}
+                  {assigneeId === e.id && <CheckCircle2 size={14} color="#D97757" className="ml-auto" />}
                 </button>
               ))}
             </div>
           </div>
           <div className="flex justify-end gap-2 pt-2">
             <button type="button" onClick={close} className="rounded px-4 py-2 text-sm font-medium" style={{ border: '1px solid #d1d1d1', background: '#fff', color: '#616161', cursor: 'pointer' }}>Cancel</button>
-            <button type="submit" className="rounded px-4 py-2 text-sm font-medium text-white" style={{ background: '#5b5fc7', border: 'none', cursor: 'pointer' }}>Assign Task</button>
+            <button type="submit" className="rounded px-4 py-2 text-sm font-medium text-white" style={{ background: '#D97757', border: 'none', cursor: 'pointer' }}>Assign Task</button>
           </div>
         </form>
       )}

@@ -90,7 +90,7 @@ export default function JoinPage() {
         <div className="flex items-center gap-2">
           <div
             className="flex items-center justify-center rounded-lg"
-            style={{ width: 32, height: 32, backgroundColor: '#5b5fc7' }}
+            style={{ width: 32, height: 32, backgroundColor: '#D97757' }}
           >
             <Zap size={18} color="#fff" />
           </div>
@@ -111,7 +111,7 @@ export default function JoinPage() {
             >
               <div
                 className="flex items-center justify-center rounded-lg"
-                style={{ width: 44, height: 44, backgroundColor: workspaceExists ? '#5b5fc7' : '#e1e1e1' }}
+                style={{ width: 44, height: 44, backgroundColor: workspaceExists ? '#D97757' : '#e1e1e1' }}
               >
                 <Building2 size={20} color="#fff" />
               </div>
@@ -193,7 +193,7 @@ export default function JoinPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Min 8 characters"
-                  className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:border-[#5b5fc7]"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:border-[#D97757]"
                   style={{ borderColor: '#d1d1d1', backgroundColor: '#fff' }}
                 />
               </div>
@@ -202,7 +202,7 @@ export default function JoinPage() {
                 onClick={handleJoin}
                 disabled={loading}
                 className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90 disabled:opacity-60"
-                style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
+                style={{ backgroundColor: '#D97757', border: 'none', fontSize: 14 }}
               >
                 {loading ? 'Creating account...' : (
                   <>
@@ -214,7 +214,7 @@ export default function JoinPage() {
             </div>
 
             <p className="mt-4 text-center text-[11px]" style={{ color: '#a0a0a0' }}>
-              Already have an account? <a href="/#/login" className="font-medium hover:underline" style={{ color: '#5b5fc7' }}>Sign in</a>
+              Already have an account? <a href="/#/login" className="font-medium hover:underline" style={{ color: '#D97757' }}>Sign in</a>
             </p>
           </>
         )}
@@ -240,7 +240,7 @@ export default function JoinPage() {
             <button
               onClick={enterDashboard}
               className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90"
-              style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
+              style={{ backgroundColor: '#D97757', border: 'none', fontSize: 14 }}
             >
               Go to Dashboard
               <ArrowRight size={16} />

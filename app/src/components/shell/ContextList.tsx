@@ -188,7 +188,7 @@ function ChatList({ searchQuery }: { searchQuery: string }) {
             key={s.id}
             onClick={() => setSection(s.id)}
             className="relative flex flex-1 items-center justify-center gap-1 py-2 text-[10px] font-semibold"
-            style={{ color: section === s.id ? '#5b5fc7' : '#616161', borderBottom: section === s.id ? '2px solid #5b5fc7' : '2px solid transparent' }}
+            style={{ color: section === s.id ? '#D97757' : '#616161', borderBottom: section === s.id ? '2px solid #D97757' : '2px solid transparent' }}
             role="tab"
             aria-selected={section === s.id}
             aria-label={`${s.label} (${s.count})`}
@@ -209,7 +209,7 @@ function ChatList({ searchQuery }: { searchQuery: string }) {
                 key={f.id}
                 onClick={() => setFilterKind(f.id)}
                 className="rounded-full px-2 py-0.5 text-[9px] font-semibold"
-                style={{ backgroundColor: filterKind === f.id ? '#5b5fc7' : '#e8e8e8', color: filterKind === f.id ? '#ffffff' : '#616161' }}
+                style={{ backgroundColor: filterKind === f.id ? '#D97757' : '#e8e8e8', color: filterKind === f.id ? '#ffffff' : '#616161' }}
                 aria-pressed={filterKind === f.id}
               >
                 {f.label}
@@ -235,7 +235,7 @@ function ChatList({ searchQuery }: { searchQuery: string }) {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1">
                       <span className="truncate text-xs font-semibold" style={{ color: '#252422' }}>{emp.name}</span>
-                      {emp.kind === 'ai' && <span className="rounded px-1 py-0.5 text-[7px] font-bold" style={{ backgroundColor: '#f3e8ff', color: '#464775' }}>AI</span>}
+                      {emp.kind === 'ai' && <span className="rounded px-1 py-0.5 text-[7px] font-bold" style={{ backgroundColor: '#f3e8ff', color: '#C4623E' }}>AI</span>}
                     </div>
                     <span className="truncate text-[10px]" style={{ color: '#767676' }}>{emp.title}</span>
                   </div>
@@ -251,8 +251,8 @@ function ChatList({ searchQuery }: { searchQuery: string }) {
         <>
           <div className="flex items-center gap-1 px-3 py-1"><Users size={10} style={{ color: '#767676' }} /><span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: '#767676' }}>Team Groups</span></div>
           {filteredGroups.length === 0 ? <EmptySearchResult /> : filteredGroups.map((g) => {
-            const groupColors: Record<string, string> = { team: '#5b5fc7', leadership: '#c4314b', ai: '#464775', company: '#237b4b' };
-            const color = groupColors[g.type] || '#5b5fc7';
+            const groupColors: Record<string, string> = { team: '#D97757', leadership: '#c4314b', ai: '#C4623E', company: '#237b4b' };
+            const color = groupColors[g.type] || '#D97757';
             return (
               <KeyboardListItem
                 key={g.id}
@@ -266,7 +266,7 @@ function ChatList({ searchQuery }: { searchQuery: string }) {
                   <span className="truncate text-xs font-semibold" style={{ color: '#252422' }}>{g.name}</span>
                   <div className="flex items-center gap-1">
                     <span className="text-[9px]" style={{ color: '#767676' }}>{g.memberCount} members</span>
-                    {g.type === 'ai' && <span className="rounded px-1 py-0.5 text-[7px] font-bold" style={{ backgroundColor: '#f3e8ff', color: '#464775' }}>AI</span>}
+                    {g.type === 'ai' && <span className="rounded px-1 py-0.5 text-[7px] font-bold" style={{ backgroundColor: '#f3e8ff', color: '#C4623E' }}>AI</span>}
                   </div>
                 </div>
                 <CircleDot size={10} style={{ color, flexShrink: 0 }} />
@@ -287,7 +287,7 @@ function ChatList({ searchQuery }: { searchQuery: string }) {
                 key={ch.id}
                 ariaLabel={`#${ch.name} channel, ${ch.memberCount} members`}
               >
-                <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded" style={{ backgroundColor: ch.type === 'announcement' ? '#fef3c7' : ch.type === 'private' ? '#fee2e2' : '#e0e7ff', color: ch.type === 'announcement' ? '#f59e0b' : ch.type === 'private' ? '#ef4444' : '#5b5fc7' }}>
+                <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded" style={{ backgroundColor: ch.type === 'announcement' ? '#fef3c7' : ch.type === 'private' ? '#fee2e2' : '#e0e7ff', color: ch.type === 'announcement' ? '#f59e0b' : ch.type === 'private' ? '#ef4444' : '#D97757' }}>
                   <Icon size={11} />
                 </div>
                 <div className="min-w-0 flex-1">
@@ -354,7 +354,7 @@ function CallsList({ searchQuery }: { searchQuery: string }) {
             key={t.id}
             onClick={() => setTab(t.id)}
             className="flex-1 py-2 text-center text-[10px] font-semibold"
-            style={{ color: tab === t.id ? '#5b5fc7' : '#616161', borderBottom: tab === t.id ? '2px solid #5b5fc7' : '2px solid transparent' }}
+            style={{ color: tab === t.id ? '#D97757' : '#616161', borderBottom: tab === t.id ? '2px solid #D97757' : '2px solid transparent' }}
             role="tab"
             aria-selected={tab === t.id}
             tabIndex={tab === t.id ? 0 : -1}
@@ -364,7 +364,7 @@ function CallsList({ searchQuery }: { searchQuery: string }) {
         ))}
       </div>
       {filtered.length === 0 ? <EmptySearchResult /> : filtered.map((call) => {
-        const tc = typeColors[call.callType] || '#5b5fc7';
+        const tc = typeColors[call.callType] || '#D97757';
         const isSelected = selectedCallId === call.id;
         return (
           <KeyboardListItem
@@ -399,7 +399,7 @@ function CallsList({ searchQuery }: { searchQuery: string }) {
               </div>
             </div>
             {call.aiAttendants.length > 0 && (
-              <span className="mt-1 flex items-center gap-0.5 text-[9px] font-semibold" style={{ color: '#464775' }}>
+              <span className="mt-1 flex items-center gap-0.5 text-[9px] font-semibold" style={{ color: '#C4623E' }}>
                 <Sparkles size={8} /> {call.aiAttendants.length} AI attending
               </span>
             )}
@@ -429,11 +429,11 @@ function ProjectsContext({ searchQuery }: { searchQuery: string }) {
       <div className="border-b px-3 py-2.5" style={{ borderColor: 'var(--op-border, #e1e1e1)', backgroundColor: '#ebebea' }}>
         <div className="grid grid-cols-2 gap-2">
           <div className="flex items-center gap-1.5">
-            <TrendingUp size={12} color="#5b5fc7" />
+            <TrendingUp size={12} color="#D97757" />
             <span className="text-[10px] font-semibold" style={{ color: '#242424' }}>{projects.length} Active</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <Users size={12} color="#5b5fc7" />
+            <Users size={12} color="#D97757" />
             <span className="text-[10px] font-semibold" style={{ color: '#242424' }}>9 Members</span>
           </div>
           <div className="flex items-center gap-1.5">
@@ -467,7 +467,7 @@ function ProjectsContext({ searchQuery }: { searchQuery: string }) {
             </div>
             <div className="flex items-center justify-between">
               <span className="text-[10px]" style={{ color: '#767676' }}>{project.key} · {nonBugTickets.length} tasks</span>
-              <span className="text-[10px] font-semibold" style={{ color: '#5b5fc7' }}>{progress}%</span>
+              <span className="text-[10px] font-semibold" style={{ color: '#D97757' }}>{progress}%</span>
             </div>
             <div className="mt-1 w-full overflow-hidden rounded-full" style={{ height: 3, backgroundColor: '#e1e1e1' }}>
               <div className="h-full rounded-full" style={{ width: `${progress}%`, backgroundColor: getHealthColor(project.health) }} />
@@ -495,7 +495,7 @@ function TeamsContext({ searchQuery }: { searchQuery: string }) {
     <>
       {filtered.length === 0 ? <EmptySearchResult /> : filtered.map((t) => (
         <KeyboardListItem key={t.id} ariaLabel={`${t.name}, ${t.count} members`}>
-          <t.icon size={13} style={{ color: '#5b5fc7', flexShrink: 0 }} />
+          <t.icon size={13} style={{ color: '#D97757', flexShrink: 0 }} />
           <span className="flex-1 truncate text-xs font-medium" style={{ color: '#333' }}>{t.name}</span>
           <span className="text-[9px]" style={{ color: '#767676' }}>{t.count}</span>
         </KeyboardListItem>
@@ -520,7 +520,7 @@ function CalendarContext({ searchQuery }: { searchQuery: string }) {
     <>
       {filtered.length === 0 ? <EmptySearchResult /> : filtered.map((item, i) => (
         <KeyboardListItem key={i} ariaLabel={`${item.label}, ${item.detail}`}>
-          <item.icon size={13} style={{ color: '#5b5fc7' }} />
+          <item.icon size={13} style={{ color: '#D97757' }} />
           <span className="flex-1 text-xs font-medium" style={{ color: '#333' }}>{item.label}</span>
           <span className="text-[9px]" style={{ color: '#767676' }}>{item.detail}</span>
         </KeyboardListItem>
@@ -578,7 +578,7 @@ function SecurityContext({ searchQuery }: { searchQuery: string }) {
           <div className="flex items-center gap-1 px-3 py-1.5"><Shield size={10} style={{ color: '#767676' }} /><span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: '#767676' }}>Admin Controls</span></div>
           {items.map((item) => (
             <KeyboardListItem key={item} ariaLabel={item}>
-              <Shield size={12} color="#5b5fc7" /><span className="text-xs font-medium" style={{ color: '#252422' }}>{item}</span>
+              <Shield size={12} color="#D97757" /><span className="text-xs font-medium" style={{ color: '#252422' }}>{item}</span>
             </KeyboardListItem>
           ))}
         </>
@@ -588,7 +588,7 @@ function SecurityContext({ searchQuery }: { searchQuery: string }) {
           <div className="flex items-center gap-1 px-3 py-1.5"><Shield size={10} style={{ color: '#767676' }} /><span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: '#767676' }}>Security Manager</span></div>
           {items.map((item) => (
             <KeyboardListItem key={item} ariaLabel={item}>
-              <Shield size={12} color="#5b5fc7" /><span className="text-xs font-medium" style={{ color: '#252422' }}>{item}</span>
+              <Shield size={12} color="#D97757" /><span className="text-xs font-medium" style={{ color: '#252422' }}>{item}</span>
             </KeyboardListItem>
           ))}
         </>
@@ -610,7 +610,7 @@ function SecurityContext({ searchQuery }: { searchQuery: string }) {
           <div className="flex items-center gap-1 px-3 py-1.5"><Shield size={10} style={{ color: '#767676' }} /><span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: '#767676' }}>My Security</span></div>
           {items.map((item) => (
             <KeyboardListItem key={item} ariaLabel={item}>
-              <Shield size={12} color="#5b5fc7" /><span className="text-xs font-medium" style={{ color: '#252422' }}>{item}</span>
+              <Shield size={12} color="#D97757" /><span className="text-xs font-medium" style={{ color: '#252422' }}>{item}</span>
             </KeyboardListItem>
           ))}
         </>
@@ -635,7 +635,7 @@ function AppsContext({ searchQuery }: { searchQuery: string }) {
     <>
       {filtered.length === 0 ? <EmptySearchResult /> : filtered.map((app, i) => (
         <KeyboardListItem key={i} ariaLabel={app.label}>
-          <app.icon size={13} style={{ color: '#5b5fc7' }} />
+          <app.icon size={13} style={{ color: '#D97757' }} />
           <span className="text-xs font-medium" style={{ color: '#333' }}>{app.label}</span>
         </KeyboardListItem>
       ))}

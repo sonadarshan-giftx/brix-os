@@ -19,7 +19,7 @@ const T = {
   red:      '#ff4444',
   yellow:   '#ffbb00',
   blue:     '#4488ff',
-  purple:   '#7c7ff0',
+  purple:   '#E8946F',
   text:     '#e0e0f0',
   muted:    '#7070a0',
   mono:     "'Fira Code', 'JetBrains Mono', 'Courier New', monospace",

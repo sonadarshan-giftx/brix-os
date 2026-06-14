@@ -87,8 +87,8 @@ const AI_EMPLOYEES: AIEmployee[] = [
     status: 'working',
     statusMessage: 'Reviewing PR #342',
     model: 'Claude 3.5',
-    avatarColor: '#5b5fc7',
-    avatarGradient: 'linear-gradient(135deg, #7c7ff0, #5b5fc7)',
+    avatarColor: '#D97757',
+    avatarGradient: 'linear-gradient(135deg, #E8946F, #D97757)',
     skills: ['React', 'TypeScript', 'Node.js', 'GraphQL'],
     projects: ['Brix Core', 'Auth Service'],
     todayActivity: 'Reviewed 3 PRs, wrote 8 tests, fixed 2 bugs',
@@ -125,7 +125,7 @@ const AI_EMPLOYEES: AIEmployee[] = [
     activityFeed: [
       { id: 'b1', action: 'Deployed to staging', detail: 'notifications-service v1.4.2 — all health checks passed', time: '35 min ago', icon: Play, color: '#10b981' },
       { id: 'b2', action: 'Optimized query', detail: 'Reduced p95 latency from 240ms → 38ms on /tickets index', time: '2 hours ago', icon: Database, color: '#3b82f6' },
-      { id: 'b3', action: 'Created PR #341', detail: 'fix(kafka): add dead-letter queue for ai-service consumer', time: '4 hours ago', icon: GitPullRequest, color: '#5b5fc7' },
+      { id: 'b3', action: 'Created PR #341', detail: 'fix(kafka): add dead-letter queue for ai-service consumer', time: '4 hours ago', icon: GitPullRequest, color: '#D97757' },
     ],
     permissions: ['Write GitHub (backend repos)', 'Deploy to staging', 'Read Postgres schemas', 'Create Jira tickets'],
   },
@@ -148,7 +148,7 @@ const AI_EMPLOYEES: AIEmployee[] = [
     metrics: { tasksThisWeek: 22, prsReviewed: 4, bugsFound: 0, avgResponseMin: 8.7, accuracyPct: 88, costMonth: 1240 },
     activityFeed: [
       { id: 'c1', action: 'Exported component variants', detail: '4 button states × 3 sizes — uploaded to Figma', time: '20 min ago', icon: Layers, color: '#db2777' },
-      { id: 'c2', action: 'Updated design tokens', detail: 'Refreshed spacing scale and color palette', time: '3 hours ago', icon: Sliders, color: '#5b5fc7' },
+      { id: 'c2', action: 'Updated design tokens', detail: 'Refreshed spacing scale and color palette', time: '3 hours ago', icon: Sliders, color: '#D97757' },
     ],
     permissions: ['Read Figma files', 'Write Figma comments', 'Create Jira tickets', 'Read design system docs'],
   },
@@ -207,8 +207,8 @@ const AI_EMPLOYEES: AIEmployee[] = [
     status: 'online',
     statusMessage: 'Running cohort analysis',
     model: 'Claude 3.5',
-    avatarColor: '#464775',
-    avatarGradient: 'linear-gradient(135deg, #464775, #3a3d6b)',
+    avatarColor: '#C4623E',
+    avatarGradient: 'linear-gradient(135deg, #C4623E, #A8542F)',
     skills: ['SQL', 'Python', 'dbt', 'Metabase', 'Statistics'],
     projects: ['Analytics', 'Growth'],
     todayActivity: 'Published 2 dashboards, ran 5 queries',
@@ -217,7 +217,7 @@ const AI_EMPLOYEES: AIEmployee[] = [
     capabilities: ['Database queries', 'Create documentation', 'Access external APIs'],
     metrics: { tasksThisWeek: 24, prsReviewed: 2, bugsFound: 1, avgResponseMin: 5.4, accuracyPct: 92, costMonth: 980 },
     activityFeed: [
-      { id: 'f1', action: 'Published dashboard', detail: 'User retention cohort — 30/60/90 day curves', time: '30 min ago', icon: BarChart2, color: '#5b5fc7' },
+      { id: 'f1', action: 'Published dashboard', detail: 'User retention cohort — 30/60/90 day curves', time: '30 min ago', icon: BarChart2, color: '#D97757' },
       { id: 'f2', action: 'Ran ad-hoc query', detail: 'Conversion funnel for trial → paid last 30 days', time: '2 hours ago', icon: Database, color: '#3b82f6' },
     ],
     permissions: ['Read Postgres (analytics schema)', 'Write Metabase dashboards', 'Read S3 data lake', 'Create Jira tickets'],
@@ -249,10 +249,10 @@ const AI_EMPLOYEES: AIEmployee[] = [
 ];
 
 const HUMAN_EMPLOYEES: HumanEmployee[] = [
-  { id: 'h1', name: 'Alex Chen', role: 'Founder & CTO', type: 'human', status: 'online', avatarColor: '#5b5fc7' },
+  { id: 'h1', name: 'Alex Chen', role: 'Founder & CTO', type: 'human', status: 'online', avatarColor: '#D97757' },
   { id: 'h2', name: 'Priya K', role: 'Head of Product', type: 'human', status: 'online', avatarColor: '#3b82f6' },
   { id: 'h3', name: 'Ravi M', role: 'Senior Engineer', type: 'human', status: 'working', avatarColor: '#10b981' },
-  { id: 'h4', name: 'Ananya S', role: 'Designer', type: 'human', status: 'online', avatarColor: '#5b5fc7' },
+  { id: 'h4', name: 'Ananya S', role: 'Designer', type: 'human', status: 'online', avatarColor: '#D97757' },
   { id: 'h5', name: 'Karthik V', role: 'Backend Engineer', type: 'human', status: 'in-meeting', avatarColor: '#f59e0b' },
 ];
 
@@ -324,7 +324,7 @@ function AIAvatar({ employee, size = 48 }: { employee: AIEmployee; size?: number
       </div>
       <div
         className="absolute -bottom-1 -right-1 rounded-full border-2 border-white flex items-center justify-center"
-        style={{ width: size * 0.32, height: size * 0.32, background: '#464775' }}
+        style={{ width: size * 0.32, height: size * 0.32, background: '#C4623E' }}
       >
         <Bot size={size * 0.18} color="white" />
       </div>
@@ -378,11 +378,11 @@ function MetricCard({ label, value, sub, color }: { label: string; value: string
 function EmployeeCard({ employee, onClick }: { employee: AIEmployee; onClick: () => void }) {
   return (
     <motion.div
-      whileHover={{ y: -2, boxShadow: '0 8px 24px rgba(91,95,199,0.12)' }}
+      whileHover={{ y: -2, boxShadow: '0 8px 24px rgba(217,119,87,0.12)' }}
       transition={{ duration: 0.15 }}
       onClick={onClick}
       className="bg-white rounded-2xl p-5 cursor-pointer border-2 transition-colors"
-      style={{ borderColor: 'rgba(91,95,199,0.15)' }}
+      style={{ borderColor: 'rgba(217,119,87,0.15)' }}
     >
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-start gap-3">
@@ -410,7 +410,7 @@ function EmployeeCard({ employee, onClick }: { employee: AIEmployee; onClick: ()
 
       <div className="flex flex-wrap gap-1.5 mb-4">
         {employee.projects.map(p => (
-          <span key={p} className="text-xs bg-[#5b5fc7]/10 text-[#5b5fc7] rounded-full px-2 py-0.5 font-medium">{p}</span>
+          <span key={p} className="text-xs bg-[#D97757]/10 text-[#D97757] rounded-full px-2 py-0.5 font-medium">{p}</span>
         ))}
       </div>
 
@@ -438,7 +438,7 @@ function EmployeeCard({ employee, onClick }: { employee: AIEmployee; onClick: ()
         </button>
         <button
           onClick={e => { e.stopPropagation(); }}
-          className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-sm font-medium bg-[#5b5fc7]/10 text-[#5b5fc7] hover:bg-[#5b5fc7]/20 transition-colors"
+          className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-sm font-medium bg-[#D97757]/10 text-[#D97757] hover:bg-[#D97757]/20 transition-colors"
         >
           <MessageSquare size={13} /> Chat
         </button>
@@ -517,7 +517,7 @@ function EmployeeProfile({ employee, onClose }: { employee: AIEmployee; onClose:
           <p className="text-xs text-gray-400">Avg response</p>
         </div>
         <div className="text-center">
-          <p className="text-xl font-bold text-[#5b5fc7]">₹{employee.metrics.costMonth.toLocaleString()}</p>
+          <p className="text-xl font-bold text-[#D97757]">₹{employee.metrics.costMonth.toLocaleString()}</p>
           <p className="text-xs text-gray-400">Cost/month</p>
         </div>
       </div>
@@ -530,7 +530,7 @@ function EmployeeProfile({ employee, onClose }: { employee: AIEmployee; onClose:
             onClick={() => setActiveTab(tab.id)}
             className={`py-3 px-3 text-sm font-medium border-b-2 transition-colors ${
               activeTab === tab.id
-                ? 'border-[#5b5fc7] text-[#5b5fc7]'
+                ? 'border-[#D97757] text-[#D97757]'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -881,7 +881,7 @@ function OnboardingWizard({ onClose }: { onClose: () => void }) {
                       <button
                         onClick={() => setApprovalRequired(prev => ({ ...prev, [key]: !val }))}
                         className={`w-10 rounded-full relative transition-colors flex-shrink-0`}
-                        style={{ width: 40, height: 22, background: val ? '#464775' : '#d1d5db' }}
+                        style={{ width: 40, height: 22, background: val ? '#C4623E' : '#d1d5db' }}
                       >
                         <motion.div
                           className="w-4 h-4 bg-white rounded-full absolute top-[3px]"
@@ -913,7 +913,7 @@ function OnboardingWizard({ onClose }: { onClose: () => void }) {
                 <div className="flex items-center gap-4 p-4 bg-purple-50 rounded-2xl mb-5">
                   <div
                     className="w-14 h-14 rounded-xl flex items-center justify-center text-white font-bold text-lg flex-shrink-0"
-                    style={{ background: 'linear-gradient(135deg, #464775, #464775)' }}
+                    style={{ background: 'linear-gradient(135deg, #C4623E, #C4623E)' }}
                   >
                     {name ? name.slice(0, 2).toUpperCase() : 'AI'}
                   </div>
@@ -995,10 +995,10 @@ function AnalyticsPanel() {
         <span className="text-xs text-gray-400 flex items-center gap-1"><RefreshCw size={11} /> Live</span>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
-        <MetricCard label="AI Employees" value={AI_EMPLOYEES.length} sub="7 active" color="#464775" />
+        <MetricCard label="AI Employees" value={AI_EMPLOYEES.length} sub="7 active" color="#C4623E" />
         <MetricCard label="Tasks Today" value={156} sub="across all AIs" color="#10b981" />
         <MetricCard label="Time Saved" value="~48h" sub="estimated today" color="#3b82f6" />
-        <MetricCard label="Cost Today" value="₹840" sub={`₹${totalCost.toLocaleString()}/month total`} color="#5b5fc7" />
+        <MetricCard label="Cost Today" value="₹840" sub={`₹${totalCost.toLocaleString()}/month total`} color="#D97757" />
       </div>
 
       <div className="flex items-center gap-2 mb-3">
@@ -1248,7 +1248,7 @@ export default function AIEmployeesPage() {
                       <p className="text-xs text-gray-400">accuracy</p>
                     </div>
                     <div className="bg-gray-50 rounded-xl p-3">
-                      <p className="text-lg font-bold text-[#5b5fc7]">₹{emp.metrics.costMonth.toLocaleString()}</p>
+                      <p className="text-lg font-bold text-[#D97757]">₹{emp.metrics.costMonth.toLocaleString()}</p>
                       <p className="text-xs text-gray-400">cost/mo</p>
                     </div>
                   </div>

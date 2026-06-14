@@ -42,7 +42,7 @@ const HOUR_END = 23;
 const HOURS = Array.from({ length: HOUR_END - HOUR_START + 1 }, (_, i) => HOUR_START + i);
 
 const MEETING_COLORS: Record<string, { bg: string; border: string }> = {
-  standup: { bg: '#e8eaf6', border: '#5b5fc7' },
+  standup: { bg: '#e8eaf6', border: '#D97757' },
   '1:1': { bg: '#dbeafe', border: '#3b82f6' },
   planning: { bg: '#fef3c7', border: '#f59e0b' },
   retro: { bg: '#fce7f3', border: '#ec4899' },
@@ -378,7 +378,7 @@ export default function CalendarPage() {  useEffect(() => { document.title = "Ca
               padding: '4px 12px',
               fontSize: 12,
               fontWeight: 500,
-              background: '#5b5fc7',
+              background: '#D97757',
               color: '#fff',
               border: 'none',
             }}
@@ -393,7 +393,7 @@ export default function CalendarPage() {  useEffect(() => { document.title = "Ca
       {/* ── Loading State ── */}
       {isLoading && (
         <div className="flex items-center justify-center" style={{ height: 3, background: '#e8eaf6' }}>
-          <div className="h-full animate-pulse" style={{ width: '40%', background: '#5b5fc7' }} />
+          <div className="h-full animate-pulse" style={{ width: '40%', background: '#D97757' }} />
         </div>
       )}
 
@@ -497,7 +497,7 @@ function WeekView({
             <span
               style={{
                 fontSize: 11,
-                color: isToday(day) ? '#5b5fc7' : '#616161',
+                color: isToday(day) ? '#D97757' : '#616161',
                 fontWeight: 600,
                 textTransform: 'uppercase',
               }}
@@ -510,7 +510,7 @@ function WeekView({
                 width: 28,
                 height: 28,
                 borderRadius: '50%',
-                background: isToday(day) ? '#5b5fc7' : 'transparent',
+                background: isToday(day) ? '#D97757' : 'transparent',
                 color: isToday(day) ? '#fff' : '#242424',
                 fontSize: 14,
                 fontWeight: 600,
@@ -751,7 +751,7 @@ function MonthView({
                   width: 22,
                   height: 22,
                   borderRadius: '50%',
-                  background: isToday(day) ? '#5b5fc7' : 'transparent',
+                  background: isToday(day) ? '#D97757' : 'transparent',
                   color: isToday(day) ? '#fff' : '#242424',
                   fontSize: 12,
                   fontWeight: 500,
@@ -788,7 +788,7 @@ function MonthView({
                   );
                 })}
                 {dayMtgs.length > 3 && (
-                  <span style={{ fontSize: 10, color: '#5b5fc7', paddingLeft: 4 }}>
+                  <span style={{ fontSize: 10, color: '#D97757', paddingLeft: 4 }}>
                     +{dayMtgs.length - 3} more
                   </span>
                 )}
@@ -1152,7 +1152,7 @@ function EventDetailRail({
             aria-label="Edit event"
             title="Edit"
           >
-            <Edit2 size={14} color="#5b5fc7" />
+            <Edit2 size={14} color="#D97757" />
           </button>
           <button
             onClick={() => onDelete(event.id)}
@@ -1282,7 +1282,7 @@ function EventDetailRail({
               padding: '8px 0',
               fontSize: 13,
               fontWeight: 500,
-              background: '#5b5fc7',
+              background: '#D97757',
               color: '#fff',
               border: 'none',
             }}
@@ -1444,9 +1444,9 @@ function MeetingForm({
                 style={{
                   padding: '3px 8px',
                   fontSize: 11,
-                  border: template === t.id ? '1px solid #5b5fc7' : '1px solid #d1d1d1',
+                  border: template === t.id ? '1px solid #D97757' : '1px solid #d1d1d1',
                   background: template === t.id ? '#e8eaf6' : '#fff',
-                  color: template === t.id ? '#5b5fc7' : '#242424',
+                  color: template === t.id ? '#D97757' : '#242424',
                 }}
                 aria-label={`Apply ${t.label} template`}
               >
@@ -1529,9 +1529,9 @@ function MeetingForm({
                 style={{
                   padding: '3px 8px',
                   fontSize: 11,
-                  border: duration === d ? '1px solid #5b5fc7' : '1px solid #d1d1d1',
+                  border: duration === d ? '1px solid #D97757' : '1px solid #d1d1d1',
                   background: duration === d ? '#e8eaf6' : '#fff',
-                  color: duration === d ? '#5b5fc7' : '#242424',
+                  color: duration === d ? '#D97757' : '#242424',
                 }}
                 aria-label={`${d} minutes`}
               >
@@ -1600,7 +1600,7 @@ function MeetingForm({
                         fontSize: 9,
                         fontWeight: 700,
                         padding: '1px 4px',
-                        background: '#5b5fc7',
+                        background: '#D97757',
                         color: '#fff',
                       }}
                     >
@@ -1658,7 +1658,7 @@ function MeetingForm({
             height: 36,
             fontSize: 13,
             fontWeight: 600,
-            background: isValid && !isSubmitting ? '#5b5fc7' : '#d1d1d1',
+            background: isValid && !isSubmitting ? '#D97757' : '#d1d1d1',
             color: isValid ? '#fff' : '#a0a0a0',
             border: 'none',
             cursor: isValid && !isSubmitting ? 'pointer' : 'not-allowed',

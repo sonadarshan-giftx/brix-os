@@ -80,7 +80,7 @@ export function TitleBar({ onMenuToggle }: TitleBarProps) {
         className="relative z-50 flex w-full flex-shrink-0 items-center justify-between px-4 select-none"
         style={{
           height: 48,
-          background: 'linear-gradient(135deg, #3a3d6b 0%, #464775 50%, #4a4e82 100%)',
+          background: 'linear-gradient(135deg, #8B3A1E 0%, #C4623E 50%, #D97757 100%)',
           borderBottom: '1px solid rgba(255,255,255,0.08)',
           boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
         }}
@@ -102,10 +102,10 @@ export function TitleBar({ onMenuToggle }: TitleBarProps) {
           {/* Logo mark */}
           <div style={{
             width: 28, height: 28,
-            background: 'linear-gradient(135deg, #7c7ff0, #5b5fc7)',
+            background: 'linear-gradient(135deg, #E8946F, #D97757)',
             borderRadius: 8,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 2px 8px rgba(91,95,199,0.5)',
+            boxShadow: '0 2px 8px rgba(217,119,87,0.5)',
             flexShrink: 0,
           }}>
             <Zap size={15} color="#fff" strokeWidth={2.5} />
@@ -183,7 +183,7 @@ export function TitleBar({ onMenuToggle }: TitleBarProps) {
                   background: '#ef4444',
                   fontSize: 9, fontWeight: 700, color: '#fff',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  border: '1.5px solid #464775',
+                  border: '1.5px solid #C4623E',
                 }}>
                   {unreadNotifications > 9 ? '9+' : unreadNotifications}
                 </span>

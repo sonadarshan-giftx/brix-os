@@ -69,7 +69,7 @@ function ToggleSwitch({
         height: "24px",
         borderRadius: "12px",
         border: "none",
-        background: checked ? "#5b5fc7" : "#d4d4d4",
+        background: checked ? "#D97757" : "#d4d4d4",
         cursor: disabled ? "not-allowed" : "pointer",
         position: "relative",
         transition: "background 0.2s",
@@ -95,12 +95,12 @@ function ToggleSwitch({
 }
 
 const exportOptions = [
-  { id: "projects", label: "Projects", icon: <FileText size={18} color="#5b5fc7" /> },
-  { id: "tasks", label: "Tasks", icon: <CheckCircle size={18} color="#5b5fc7" /> },
-  { id: "chat", label: "Chat history", icon: <MessageSquare size={18} color="#5b5fc7" /> },
-  { id: "calendar", label: "Calendar events", icon: <Calendar size={18} color="#5b5fc7" /> },
-  { id: "team", label: "Team member list", icon: <Users size={18} color="#5b5fc7" /> },
-  { id: "files", label: "Files", icon: <Paperclip size={18} color="#5b5fc7" /> },
+  { id: "projects", label: "Projects", icon: <FileText size={18} color="#D97757" /> },
+  { id: "tasks", label: "Tasks", icon: <CheckCircle size={18} color="#D97757" /> },
+  { id: "chat", label: "Chat history", icon: <MessageSquare size={18} color="#D97757" /> },
+  { id: "calendar", label: "Calendar events", icon: <Calendar size={18} color="#D97757" /> },
+  { id: "team", label: "Team member list", icon: <Users size={18} color="#D97757" /> },
+  { id: "files", label: "Files", icon: <Paperclip size={18} color="#D97757" /> },
 ];
 
 export default function DataExportPage() {
@@ -222,7 +222,7 @@ export default function DataExportPage() {
         {/* Section 1: Export Your Data */}
         <div style={sectionCardStyle}>
           <div style={sectionIconBoxStyle}>
-            <Download size={22} color="#5b5fc7" />
+            <Download size={22} color="#D97757" />
           </div>
           <h2 style={{ fontSize: "20px", fontWeight: 600, margin: "0 0 8px", color: "#242424" }}>
             Export Your Data
@@ -254,7 +254,7 @@ export default function DataExportPage() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "8px",
-                  background: "#5b5fc7",
+                  background: "#D97757",
                   color: "#ffffff",
                   border: "none",
                   padding: "12px 24px",
@@ -292,13 +292,13 @@ export default function DataExportPage() {
                         gap: "10px",
                         padding: "12px 14px",
                         borderRadius: "8px",
-                        border: isSelected ? "2px solid #5b5fc7" : "2px solid #e0e0e0",
+                        border: isSelected ? "2px solid #D97757" : "2px solid #e0e0e0",
                         background: isSelected ? "#f0f0f8" : "#ffffff",
                         cursor: exportStatus === "processing" ? "not-allowed" : "pointer",
                         transition: "all 0.15s",
                         fontFamily: "Inter, sans-serif",
                         fontSize: "14px",
-                        color: isSelected ? "#5b5fc7" : "#616161",
+                        color: isSelected ? "#D97757" : "#616161",
                         fontWeight: isSelected ? 500 : 400,
                         textAlign: "left",
                         opacity: exportStatus === "processing" ? 0.6 : 1,
@@ -310,7 +310,7 @@ export default function DataExportPage() {
                           height: "20px",
                           borderRadius: "4px",
                           border: isSelected ? "none" : "1.5px solid #c4c4c4",
-                          background: isSelected ? "#5b5fc7" : "transparent",
+                          background: isSelected ? "#D97757" : "transparent",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
@@ -338,7 +338,7 @@ export default function DataExportPage() {
                       marginBottom: "8px",
                     }}
                   >
-                    <Loader2 size={16} color="#5b5fc7" style={{ animation: "spin 1s linear infinite" }} />
+                    <Loader2 size={16} color="#D97757" style={{ animation: "spin 1s linear infinite" }} />
                     <span style={{ fontSize: "14px", color: "#616161" }}>
                       Preparing your export... {Math.round(exportProgress)}%
                     </span>
@@ -356,7 +356,7 @@ export default function DataExportPage() {
                       style={{
                         width: `${exportProgress}%`,
                         height: "100%",
-                        background: "#5b5fc7",
+                        background: "#D97757",
                         borderRadius: "4px",
                         transition: "width 0.3s ease",
                       }}
@@ -372,7 +372,7 @@ export default function DataExportPage() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "8px",
-                  background: "#5b5fc7",
+                  background: "#D97757",
                   color: "#ffffff",
                   border: "none",
                   padding: "12px 24px",
@@ -489,7 +489,7 @@ export default function DataExportPage() {
         {/* Section 3: Cookie Preferences */}
         <div style={{ ...sectionCardStyle, marginTop: "20px" }}>
           <div style={sectionIconBoxStyle}>
-            <Cookie size={22} color="#5b5fc7" />
+            <Cookie size={22} color="#D97757" />
           </div>
           <h2 style={{ fontSize: "20px", fontWeight: 600, margin: "0 0 8px", color: "#242424" }}>
             Cookie Preferences
@@ -512,7 +512,7 @@ export default function DataExportPage() {
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <ShieldCheck size={20} color="#5b5fc7" />
+                <ShieldCheck size={20} color="#D97757" />
                 <div>
                   <div style={{ fontSize: "15px", fontWeight: 500, color: "#242424" }}>
                     Essential
@@ -537,7 +537,7 @@ export default function DataExportPage() {
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <Eye size={20} color="#5b5fc7" />
+                <Eye size={20} color="#D97757" />
                 <div>
                   <div style={{ fontSize: "15px", fontWeight: 500, color: "#242424" }}>
                     Analytics
@@ -565,7 +565,7 @@ export default function DataExportPage() {
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <Megaphone size={20} color="#5b5fc7" />
+                <Megaphone size={20} color="#D97757" />
                 <div>
                   <div style={{ fontSize: "15px", fontWeight: 500, color: "#242424" }}>
                     Marketing
@@ -593,7 +593,7 @@ export default function DataExportPage() {
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <Puzzle size={20} color="#5b5fc7" />
+                <Puzzle size={20} color="#D97757" />
                 <div>
                   <div style={{ fontSize: "15px", fontWeight: 500, color: "#242424" }}>
                     Functional
@@ -617,7 +617,7 @@ export default function DataExportPage() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "8px",
-                background: "#5b5fc7",
+                background: "#D97757",
                 color: "#ffffff",
                 border: "none",
                 padding: "10px 20px",
@@ -628,8 +628,8 @@ export default function DataExportPage() {
                 fontFamily: "Inter, sans-serif",
                 transition: "background 0.2s",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#464775")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "#5b5fc7")}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#C4623E")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#D97757")}
             >
               Save Preferences
             </button>

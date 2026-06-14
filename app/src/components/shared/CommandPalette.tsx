@@ -300,7 +300,7 @@ export function CommandPaletteProvider({ children }: { children: React.ReactNode
                               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f0f0fa')}
                               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                             >
-                              <span style={{ color: '#5b5fc7' }}>{feat.icon}</span>
+                              <span style={{ color: '#D97757' }}>{feat.icon}</span>
                               <span style={{ fontSize: 10, color: '#242424' }}>{feat.label}</span>
                             </button>
                           ))}
@@ -383,8 +383,8 @@ const CommandRow = forwardRef<HTMLDivElement, CommandRowProps>(
         role="option"
         aria-selected={isSelected}
       >
-        <span style={{ color: isSelected ? 'var(--op-accent, #5b5fc7)' : '#8a8a8a', flexShrink: 0 }}>{item.icon}</span>
-        <span className="flex-1 text-sm" style={{ color: isSelected ? 'var(--op-accent, #5b5fc7)' : '#252422', fontWeight: isSelected ? 600 : 400 }}>
+        <span style={{ color: isSelected ? 'var(--op-accent, #D97757)' : '#8a8a8a', flexShrink: 0 }}>{item.icon}</span>
+        <span className="flex-1 text-sm" style={{ color: isSelected ? 'var(--op-accent, #D97757)' : '#252422', fontWeight: isSelected ? 600 : 400 }}>
           {item.label}
         </span>
         {item.shortcut && (
@@ -392,7 +392,7 @@ const CommandRow = forwardRef<HTMLDivElement, CommandRowProps>(
             {item.shortcut}
           </kbd>
         )}
-        {isSelected && <ArrowRight size={14} style={{ color: 'var(--op-accent, #5b5fc7)', flexShrink: 0 }} />}
+        {isSelected && <ArrowRight size={14} style={{ color: 'var(--op-accent, #D97757)', flexShrink: 0 }} />}
       </div>
     );
   }

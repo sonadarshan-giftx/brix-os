@@ -135,7 +135,7 @@ export function EmptyState({
         className="mb-4 flex h-16 w-16 items-center justify-center rounded-full"
         style={{ backgroundColor: '#f0f0fa', color: 'var(--op-accent-muted, #a0a0a0)' }}
       >
-        <span style={{ color: 'var(--op-accent, #5b5fc7)', opacity: 0.6 }}>
+        <span style={{ color: 'var(--op-accent, #D97757)', opacity: 0.6 }}>
           {icon}
         </span>
       </div>
@@ -167,7 +167,7 @@ export function EmptyState({
               className="flex cursor-pointer items-center gap-1.5 rounded-lg px-4 py-2 font-medium"
               style={{
                 fontSize: 13,
-                backgroundColor: 'var(--op-accent, #5b5fc7)',
+                backgroundColor: 'var(--op-accent, #D97757)',
                 color: '#fff',
                 border: 'none',
               }}

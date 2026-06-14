@@ -147,7 +147,7 @@ export function MainContent({ id = 'main-content' }: MainContentProps) {
             exit={{ opacity: 0 }}
             className="pointer-events-none absolute inset-x-0 top-10 z-10 flex items-center justify-center py-2"
           >
-            <div className="rounded-full px-3 py-1 text-[11px] font-medium shadow-md" style={{ backgroundColor: '#5b5fc7', color: '#fff' }}>
+            <div className="rounded-full px-3 py-1 text-[11px] font-medium shadow-md" style={{ backgroundColor: '#D97757', color: '#fff' }}>
               Loading...
             </div>
           </motion.div>
@@ -211,7 +211,7 @@ function BreadcrumbNav({ activeItem }: { activeItem: string }) {
       <button
         onClick={() => setActiveRailItem('home')}
         className="flex items-center gap-1 rounded"
-        style={{ fontSize: 11, color: '#5b5fc7', background: 'transparent', border: 'none', cursor: 'pointer', fontWeight: 600 }}
+        style={{ fontSize: 11, color: '#D97757', background: 'transparent', border: 'none', cursor: 'pointer', fontWeight: 600 }}
         aria-label="Home"
       >
         <Home size={10} />

@@ -108,7 +108,7 @@ const progressBarStyle = `
     transition: background-color 0.12s ease;
   }
   .kbd:focus-visible {
-    outline: 2px solid #5b5fc7;
+    outline: 2px solid #D97757;
     outline-offset: 2px;
   }
 `;
@@ -131,7 +131,7 @@ const statusColor = (s: string) =>
   s === 'done'
     ? '#92c353'
     : s === 'in-progress'
-      ? '#5b5fc7'
+      ? '#D97757'
       : s === 'review'
         ? '#ffaa44'
         : '#d1d1d1';
@@ -212,21 +212,21 @@ export default function ProjectsPage() {
 function ProjectsKPIStrip({ userRole }: { userRole: string }) {
   const kpis = userRole === 'Owner'
     ? [
-        { label: 'Active Projects', value: String(mockProjects.filter(p => p.status === 'active').length), sub: 'on track', icon: <Target size={16} color="#5b5fc7" /> },
-        { label: 'Team Members', value: String(employees.length), sub: `${employees.filter(e => e.kind === 'ai').length} AI agents`, icon: <Users size={16} color="#5b5fc7" /> },
-        { label: 'Sprint Velocity', value: '42', sub: '+12% vs last', icon: <Zap size={16} color="#5b5fc7" /> },
-        { label: 'Budget Burn', value: '68%', sub: 'on track', icon: <DollarSign size={16} color="#5b5fc7" /> },
+        { label: 'Active Projects', value: String(mockProjects.filter(p => p.status === 'active').length), sub: 'on track', icon: <Target size={16} color="#D97757" /> },
+        { label: 'Team Members', value: String(employees.length), sub: `${employees.filter(e => e.kind === 'ai').length} AI agents`, icon: <Users size={16} color="#D97757" /> },
+        { label: 'Sprint Velocity', value: '42', sub: '+12% vs last', icon: <Zap size={16} color="#D97757" /> },
+        { label: 'Budget Burn', value: '68%', sub: 'on track', icon: <DollarSign size={16} color="#D97757" /> },
       ]
     : userRole === 'Manager'
     ? [
-        { label: 'Team Velocity', value: '38', sub: 'pts this sprint', icon: <Zap size={16} color="#5b5fc7" /> },
-        { label: 'Squad Members', value: '6', sub: '3 AI agents', icon: <Users size={16} color="#5b5fc7" /> },
+        { label: 'Team Velocity', value: '38', sub: 'pts this sprint', icon: <Zap size={16} color="#D97757" /> },
+        { label: 'Squad Members', value: '6', sub: '3 AI agents', icon: <Users size={16} color="#D97757" /> },
         { label: 'Open Risks', value: '2', sub: '1 needs attention', icon: <AlertTriangle size={16} color="#c4314b" /> },
         { label: 'Sprint Complete', value: '72%', sub: '3 days left', icon: <TrendingUp size={16} color="#237b4b" /> },
       ]
     : [
-        { label: 'My Tasks', value: '5', sub: '2 in progress', icon: <CheckCircle2 size={16} color="#5b5fc7" /> },
-        { label: 'My Points', value: '13', sub: '3 pts this sprint', icon: <Zap size={16} color="#5b5fc7" /> },
+        { label: 'My Tasks', value: '5', sub: '2 in progress', icon: <CheckCircle2 size={16} color="#D97757" /> },
+        { label: 'My Points', value: '13', sub: '3 pts this sprint', icon: <Zap size={16} color="#D97757" /> },
         { label: 'My PRs', value: '2', sub: '1 awaiting review', icon: <GitPullRequestIcon size={16} color="#f59e0b" /> },
         { label: 'Sprint Progress', value: '68%', sub: 'on track', icon: <TrendingUp size={16} color="#237b4b" /> },
       ];
@@ -331,7 +331,7 @@ function ProjectsList({
             style={{
               height: 32,
               fontSize: 13,
-              backgroundColor: '#5b5fc7',
+              backgroundColor: '#D97757',
               border: 'none',
               cursor: 'pointer',
             }}
@@ -690,7 +690,7 @@ function ProjectDetail({
               style={{
                 height: 28,
                 fontSize: 12,
-                backgroundColor: '#5b5fc7',
+                backgroundColor: '#D97757',
                 border: 'none',
                 cursor: 'pointer',
               }}
@@ -784,7 +784,7 @@ function MissionTab({ project }: { project: Project }) {
       {/* Mission Statement */}
       <Card>
         <div className="flex items-start gap-3">
-          <Target size={18} color="#5b5fc7" className="mt-0.5 flex-shrink-0" />
+          <Target size={18} color="#D97757" className="mt-0.5 flex-shrink-0" />
           <p
             className="italic"
             style={{ fontSize: 14, color: '#242424', lineHeight: '22px' }}
@@ -875,8 +875,8 @@ function MissionTab({ project }: { project: Project }) {
                 <Area
                   type="monotone"
                   dataKey="actual"
-                  stroke="#5b5fc7"
-                  fill="rgba(91,95,199,0.1)"
+                  stroke="#D97757"
+                  fill="rgba(217,119,87,0.1)"
                   strokeWidth={2}
                   name="Actual"
                 />
@@ -907,7 +907,7 @@ function MissionTab({ project }: { project: Project }) {
                     border: '1px solid #d1d1d1',
                   }}
                 />
-                <Bar dataKey="velocity" fill="#5b5fc7" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="velocity" fill="#D97757" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -952,7 +952,7 @@ function MissionTab({ project }: { project: Project }) {
       {/* Drift Narrative */}
       <Card>
         <div className="flex items-center gap-2" style={{ marginBottom: 8 }}>
-          <Sparkles size={14} color="#5b5fc7" />
+          <Sparkles size={14} color="#D97757" />
           <h3 style={{ fontSize: 14, fontWeight: 600, color: '#242424' }}>
             AI Narrative
           </h3>
@@ -1018,7 +1018,7 @@ const GoalsTab = memo(function GoalsTab({ project }: { project: Project }) {  co
       {/* Company Goal Link */}
       <Card>
         <div className="flex items-center gap-2" style={{ marginBottom: 8 }}>
-          <Target size={14} color="#5b5fc7" />
+          <Target size={14} color="#D97757" />
           <span style={{ fontSize: 13, color: '#616161' }}>{'Linked to company goal'}</span>
         </div>
         <p style={{ fontSize: 16, fontWeight: 600, color: '#242424' }}>
@@ -1123,7 +1123,7 @@ function PlanningTab({ project }: { project: Project }) {  const [activeTab, set
       {/* AI Planning badge */}
       <div className="flex items-center justify-between">
         <p style={{ fontSize: 13, color: '#616161' }}>Think before you build — <strong>{project.name}</strong></p>
-        <span className="rounded-full px-2.5 py-0.5 text-[11px] font-semibold" style={{ backgroundColor: '#e8eaf6', color: '#5b5fc7' }}>
+        <span className="rounded-full px-2.5 py-0.5 text-[11px] font-semibold" style={{ backgroundColor: '#e8eaf6', color: '#D97757' }}>
           <Sparkles size={10} className="mr-1 inline" /> {'AI Planning Active'}
         </span>
       </div>
@@ -1176,11 +1176,11 @@ function PlanningOwnerTab({ project, milestones }: { project: Project; milestone
       <Card>
         <label style={{ fontSize: 14, fontWeight: 600, color: '#242424', display: 'block', marginBottom: 8 }}>What do you want to build?</label>
         <textarea value={description} onChange={(e) => setDescription(e.target.value)}
-          className="w-full resize-none rounded border p-3 outline-none focus:border-[#5b5fc7] kbd"
+          className="w-full resize-none rounded border p-3 outline-none focus:border-[#D97757] kbd"
           style={{ fontSize: 14, color: '#242424', borderColor: '#d1d1d1', minHeight: 80, lineHeight: '20px' }} />
         <div className="mt-3 flex justify-end">
           <button onClick={() => setPlanGenerated(true)} className="btn-hover flex items-center gap-2 rounded px-4 font-medium text-white kbd"
-            style={{ height: 32, fontSize: 13, backgroundColor: '#5b5fc7', border: 'none', cursor: 'pointer' }}
+            style={{ height: 32, fontSize: 13, backgroundColor: '#D97757', border: 'none', cursor: 'pointer' }}
             aria-label="Generate Plan">
             <Sparkles size={14} /> "Generate Plan"
           </button>
@@ -1193,7 +1193,7 @@ function PlanningOwnerTab({ project, milestones }: { project: Project; milestone
             {/* Goal */}
             <Card>
               <div className="flex items-center gap-2" style={{ marginBottom: 12 }}>
-                <Target size={16} color="#5b5fc7" />
+                <Target size={16} color="#D97757" />
                 <h3 style={{ fontSize: 16, fontWeight: 600, color: '#242424' }}>{'Goal'}</h3>
               </div>
               <p style={{ fontSize: 14, color: '#242424' }}>{project.description}</p>
@@ -1211,7 +1211,7 @@ function PlanningOwnerTab({ project, milestones }: { project: Project; milestone
                         <p style={{ fontSize: 13, fontWeight: 500, color: '#242424' }}>{kr.text}</p>
                         <p style={{ fontSize: 11, color: '#616161' }}>Target: {kr.target} {kr.unit}</p>
                       </div>
-                      <span style={{ fontSize: 13, fontWeight: 600, color: pct >= 75 ? '#237b4b' : '#5b5fc7' }}>{kr.current}/{kr.target} ({pct}%)</span>
+                      <span style={{ fontSize: 13, fontWeight: 600, color: pct >= 75 ? '#237b4b' : '#D97757' }}>{kr.current}/{kr.target} ({pct}%)</span>
                     </div>
                   );
                 }) : (
@@ -1232,12 +1232,12 @@ function PlanningOwnerTab({ project, milestones }: { project: Project; milestone
                 ].map((cap, idx) => (
                   <div key={idx} className="flex items-center justify-between rounded-md p-3" style={{ backgroundColor: '#f5f5f5' }}>
                     <span style={{ fontSize: 13, color: '#242424' }}>{cap.name}</span>
-                    <span className="rounded px-1.5 py-0.5 text-[10px] font-semibold" style={{ backgroundColor: cap.status === 'completed' ? '#dcfce7' : '#dbeafe', color: cap.status === 'completed' ? '#237b4b' : '#5b5fc7' }}>{cap.status}</span>
+                    <span className="rounded px-1.5 py-0.5 text-[10px] font-semibold" style={{ backgroundColor: cap.status === 'completed' ? '#dcfce7' : '#dbeafe', color: cap.status === 'completed' ? '#237b4b' : '#D97757' }}>{cap.status}</span>
                   </div>
                 ))}
               </div>
               <div className="mt-3 flex items-center gap-2 rounded p-2" style={{ backgroundColor: '#e8eaf6' }}>
-                <Sparkles size={14} color="#5b5fc7" />
+                <Sparkles size={14} color="#D97757" />
                 <span style={{ fontSize: 12, color: '#9E4A28' }}>{'AI suggested approach based on project scope'}</span>
               </div>
             </Card>
@@ -1245,7 +1245,7 @@ function PlanningOwnerTab({ project, milestones }: { project: Project; milestone
             {/* Timeline */}
             <Card>
               <div className="flex items-center gap-2" style={{ marginBottom: 12 }}>
-                <Calendar size={16} color="#5b5fc7" />
+                <Calendar size={16} color="#D97757" />
                 <h3 style={{ fontSize: 16, fontWeight: 600, color: '#242424' }}>{'Timeline'}</h3>
               </div>
               <div className="space-y-3">
@@ -1268,12 +1268,12 @@ function PlanningOwnerTab({ project, milestones }: { project: Project; milestone
             {/* Budget Estimate */}
             <Card>
               <div className="flex items-center gap-2" style={{ marginBottom: 12 }}>
-                <DollarSign size={16} color="#5b5fc7" />
+                <DollarSign size={16} color="#D97757" />
                 <h3 style={{ fontSize: 16, fontWeight: 600, color: '#242424' }}>{'Budget'}</h3>
               </div>
               <div className="grid grid-cols-3 gap-4">
                 {[
-                  { label: 'Spent', value: `$${(project.budgetSpent / 1000).toFixed(1)}K`, color: '#5b5fc7' },
+                  { label: 'Spent', value: `$${(project.budgetSpent / 1000).toFixed(1)}K`, color: '#D97757' },
                   { label: 'Total', value: `$${(project.budgetTotal / 1000).toFixed(0)}K`, color: '#616161' },
                   { label: 'Remaining', value: `$${((project.budgetTotal - project.budgetSpent) / 1000).toFixed(1)}K`, color: '#237b4b' },
                 ].map((b) => (
@@ -1288,7 +1288,7 @@ function PlanningOwnerTab({ project, milestones }: { project: Project; milestone
             {/* Commit */}
             <button onClick={() => setCommitted(true)} disabled={committed}
               className="btn-hover flex w-full items-center justify-center gap-2 rounded-md font-medium text-white kbd"
-              style={{ height: 44, fontSize: 15, backgroundColor: committed ? '#237b4b' : '#5b5fc7', border: 'none', cursor: committed ? 'default' : 'pointer', opacity: committed ? 0.85 : 1 }}
+              style={{ height: 44, fontSize: 15, backgroundColor: committed ? '#237b4b' : '#D97757', border: 'none', cursor: committed ? 'default' : 'pointer', opacity: committed ? 0.85 : 1 }}
               aria-label={committed ? 'Plan already committed' : 'Commit plan'}>
               <CheckCircle2 size={18} /> {committed ? 'Plan Committed' : 'Commit Plan'}
             </button>
@@ -1357,7 +1357,7 @@ function PlanningManagerTab() {  const [selectedProject, setSelectedProject] = u
       <div className="flex items-center justify-between">
         <h3 style={{ fontSize: 14, fontWeight: 600, color: '#242424' }}>{'Backlog ({{count}} tickets)'.replace('{{count}}', String(backlogTickets.length))}</h3>
         <button onClick={() => setSelectedTickets(new Set(backlogTickets.slice(0, 4).map((t) => t.id)))}>
-          <span className="btn-hover flex items-center gap-1 rounded px-2 py-2 text-xs font-medium kbd" style={{backgroundColor: '#e8eaf6', color: '#5b5fc7', border: 'none', cursor: 'pointer'}}>
+          <span className="btn-hover flex items-center gap-1 rounded px-2 py-2 text-xs font-medium kbd" style={{backgroundColor: '#e8eaf6', color: '#D97757', border: 'none', cursor: 'pointer'}}>
             <Sparkles size={10} /> AI Suggest
           </span>
         </button>
@@ -1366,8 +1366,8 @@ function PlanningManagerTab() {  const [selectedProject, setSelectedProject] = u
         <div className="space-y-1.5">
           {backlogTickets.map((ticket) => (
             <div key={ticket.id} onClick={() => setSelectedTickets((prev) => { const n = new Set(prev); n.has(ticket.id) ? n.delete(ticket.id) : n.add(ticket.id); return n; })}
-              className="flex cursor-pointer items-center gap-2 rounded border p-2 kbd table-row-hover" style={{ borderColor: selectedTickets.has(ticket.id) ? '#5b5fc7' : '#d1d1d1', backgroundColor: selectedTickets.has(ticket.id) ? '#e8eaf6' : '#fff' }}>
-              <div className="flex-shrink-0 rounded-sm border" style={{ width: 14, height: 14, backgroundColor: selectedTickets.has(ticket.id) ? '#5b5fc7' : 'transparent', borderColor: selectedTickets.has(ticket.id) ? '#5b5fc7' : '#d1d1d1' }}>
+              className="flex cursor-pointer items-center gap-2 rounded border p-2 kbd table-row-hover" style={{ borderColor: selectedTickets.has(ticket.id) ? '#D97757' : '#d1d1d1', backgroundColor: selectedTickets.has(ticket.id) ? '#e8eaf6' : '#fff' }}>
+              <div className="flex-shrink-0 rounded-sm border" style={{ width: 14, height: 14, backgroundColor: selectedTickets.has(ticket.id) ? '#D97757' : 'transparent', borderColor: selectedTickets.has(ticket.id) ? '#D97757' : '#d1d1d1' }}>
                 {selectedTickets.has(ticket.id) && <CheckCircle2 size={12} color="#fff" />}
               </div>
               <span className="flex-1 text-xs" style={{ color: '#242424' }}>{ticket.key}: {ticket.title}</span>
@@ -1380,7 +1380,7 @@ function PlanningManagerTab() {  const [selectedProject, setSelectedProject] = u
       )}
 
       <button disabled={selectedTickets.size === 0} className="btn-hover flex w-full items-center justify-center gap-2 rounded-md font-medium text-white kbd"
-        style={{ height: 36, fontSize: 13, backgroundColor: selectedTickets.size > 0 ? '#5b5fc7' : '#d1d1d1', border: 'none', cursor: selectedTickets.size > 0 ? 'pointer' : 'default' }}
+        style={{ height: 36, fontSize: 13, backgroundColor: selectedTickets.size > 0 ? '#D97757' : '#d1d1d1', border: 'none', cursor: selectedTickets.size > 0 ? 'pointer' : 'default' }}
         aria-label={'Commit Sprint'}>
         <CheckCircle2 size={14} /> {'Commit Sprint'}
       </button>
@@ -1421,14 +1421,14 @@ function PlanningMemberTab() {  const [selectedTicketId, setSelectedTicketId] = 
                 <p style={{ fontSize: 12, color: '#616161' }}>{selectedTicket.key}</p>
                 <p style={{ fontSize: 15, fontWeight: 600, color: '#242424' }}>{selectedTicket.title}</p>
               </div>
-              <span className="rounded px-2 py-0.5 text-[11px] font-semibold" style={{ backgroundColor: '#e8eaf6', color: '#5b5fc7' }}>{selectedTicket.estimate} pts</span>
+              <span className="rounded px-2 py-0.5 text-[11px] font-semibold" style={{ backgroundColor: '#e8eaf6', color: '#D97757' }}>{selectedTicket.estimate} pts</span>
             </div>
           </Card>
 
           <Card>
             <label style={{ fontSize: 13, fontWeight: 600, color: '#242424', display: 'block', marginBottom: 6 }}>{'Approach'}</label>
             <textarea value={approach} onChange={(e) => setApproach(e.target.value)}
-              className="w-full resize-none rounded border p-2.5 outline-none focus:border-[#5b5fc7] kbd"
+              className="w-full resize-none rounded border p-2.5 outline-none focus:border-[#D97757] kbd"
               style={{ fontSize: 12, color: '#242424', borderColor: '#d1d1d1', minHeight: 50, lineHeight: '18px' }} />
           </Card>
 
@@ -1439,7 +1439,7 @@ function PlanningMemberTab() {  const [selectedTicketId, setSelectedTicketId] = 
                 <div key={st.id} className="flex items-center gap-2 rounded p-2" style={{ backgroundColor: st.done ? '#f0f0f0' : '#fff' }}>
                   <GripVertical size={12} color="#a0a0a0" />
                   <div onClick={() => setSubtasks((prev) => prev.map((s) => s.id === st.id ? { ...s, done: !s.done } : s))}
-                    className="flex-shrink-0 cursor-pointer rounded-sm border" style={{ width: 14, height: 14, backgroundColor: st.done ? '#5b5fc7' : 'transparent', borderColor: st.done ? '#5b5fc7' : '#d1d1d1' }}>
+                    className="flex-shrink-0 cursor-pointer rounded-sm border" style={{ width: 14, height: 14, backgroundColor: st.done ? '#D97757' : 'transparent', borderColor: st.done ? '#D97757' : '#d1d1d1' }}>
                     {st.done && <CheckCircle2 size={12} color="#fff" />}
                   </div>
                   <span className="flex-1 text-xs" style={{ color: st.done ? '#8a8a8a' : '#242424', textDecoration: st.done ? 'line-through' : 'none' }}>{st.text}</span>
@@ -1455,7 +1455,7 @@ function PlanningMemberTab() {  const [selectedTicketId, setSelectedTicketId] = 
                 className="flex-1 rounded border px-2 py-1 text-xs outline-none kbd" style={{ borderColor: '#d1d1d1' }}
                 onKeyDown={(e) => { if (e.key === 'Enter' && newSubtask.trim()) { setSubtasks((p) => [...p, { id: `st-${Date.now()}`, text: newSubtask, estimate: '30m', done: false }]); setNewSubtask(''); } }} />
               <button onClick={() => { if (newSubtask.trim()) { setSubtasks((p) => [...p, { id: `st-${Date.now()}`, text: newSubtask, estimate: '30m', done: false }]); setNewSubtask(''); }}}
-                className="btn-hover rounded px-2 py-1 text-xs font-medium kbd" style={{ backgroundColor: '#5b5fc7', color: '#fff', border: 'none', cursor: 'pointer' }}>+</button>
+                className="btn-hover rounded px-2 py-1 text-xs font-medium kbd" style={{ backgroundColor: '#D97757', color: '#fff', border: 'none', cursor: 'pointer' }}>+</button>
             </div>
           </Card>
         </>
@@ -1469,7 +1469,7 @@ function PlanningMemberTab() {  const [selectedTicketId, setSelectedTicketId] = 
 
 const ACTIVITY_ICON_MAP: Record<string, { icon: typeof GitCommit; color: string }> = {
   commit: { icon: GitCommit, color: '#616161' },
-  'pr-merged': { icon: GitPullRequest, color: '#5b5fc7' },
+  'pr-merged': { icon: GitPullRequest, color: '#D97757' },
   'deploy-shipped': { icon: Rocket, color: '#237b4b' },
   'ticket-completed': { icon: CheckCircle2, color: '#92c353' },
   mention: { icon: MessageSquare, color: '#ffaa44' },
@@ -1524,7 +1524,7 @@ function ActivityTab({ project }: { project: Project }) {  const [filter, setFil
             className="btn-hover cursor-pointer rounded-full px-3 py-1 font-medium capitalize kbd"
             style={{
               fontSize: 12,
-              backgroundColor: filter === f ? '#5b5fc7' : '#f0f0f0',
+              backgroundColor: filter === f ? '#D97757' : '#f0f0f0',
               color: filter === f ? '#ffffff' : '#616161',
               border: 'none',
             }}
@@ -1621,7 +1621,7 @@ function TasksTab({ project }: { project: Project }) {  const [sortBy, setSortBy
               style={{
                 fontSize: 12,
                 backgroundColor: sortBy === s ? '#e8eaf6' : 'transparent',
-                color: sortBy === s ? '#5b5fc7' : '#616161',
+                color: sortBy === s ? '#D97757' : '#616161',
                 border: 'none',
                 fontWeight: sortBy === s ? 600 : 400,
               }}
@@ -1692,7 +1692,7 @@ function TasksTab({ project }: { project: Project }) {  const [sortBy, setSortBy
                             e.currentTarget.style.backgroundColor = 'transparent';
                         }}
                       >
-                        <td className="px-3 py-2 font-medium" style={{ color: '#5b5fc7', whiteSpace: 'nowrap' }} role="gridcell">
+                        <td className="px-3 py-2 font-medium" style={{ color: '#D97757', whiteSpace: 'nowrap' }} role="gridcell">
                           {ticket.key}
                         </td>
                         <td className="px-3 py-2" style={{ color: '#242424', maxWidth: 240, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} role="gridcell">
@@ -1755,7 +1755,7 @@ function TasksTab({ project }: { project: Project }) {  const [sortBy, setSortBy
                               <span
                                 key={l}
                                 className="rounded px-1.5 py-0.5"
-                                style={{ fontSize: 10, backgroundColor: '#e8eaf6', color: '#5b5fc7' }}
+                                style={{ fontSize: 10, backgroundColor: '#e8eaf6', color: '#D97757' }}
                               >
                                 {l}
                               </span>
@@ -1878,7 +1878,7 @@ const TicketDetailPanel = memo(function TicketDetailPanel({ ticket }: { ticket: 
             <span
               key={l}
               className="rounded px-2 py-0.5 font-semibold"
-              style={{ fontSize: 11, backgroundColor: '#e8eaf6', color: '#5b5fc7' }}
+              style={{ fontSize: 11, backgroundColor: '#e8eaf6', color: '#D97757' }}
             >
               {l}
             </span>
@@ -1953,7 +1953,7 @@ function BugsTab({ project }: { project: Project }) {  const bugs = project.tick
                       className="table-row-hover"
                       style={{ borderBottom: '1px solid #f0f0f0' }}
                     >
-                      <td className="px-3 py-2 font-medium" style={{ color: '#5b5fc7' }}>
+                      <td className="px-3 py-2 font-medium" style={{ color: '#D97757' }}>
                         {bug.key}
                       </td>
                       <td className="px-3 py-2" style={{ color: '#242424', maxWidth: 300 }}>
@@ -2022,7 +2022,7 @@ function FilesTab() {
 
   const fileIconConfig = useMemo(() => ({
     pdf: { Icon: FileText, color: '#c4314b' },
-    image: { Icon: Image, color: '#5b5fc7' },
+    image: { Icon: Image, color: '#D97757' },
     code: { Icon: FileCode, color: '#237b4b' },
     design: { Icon: Sparkles, color: '#ffaa44' },
     sheet: { Icon: TableIcon, color: '#237b4b' },
@@ -2106,7 +2106,7 @@ function MembersTab({ project }: { project: Project }) {
                       {emp.kind === 'ai' && (
                         <span
                           className="rounded px-1 py-0.5 font-bold text-white"
-                          style={{ fontSize: 9, backgroundColor: '#5b5fc7' }}
+                          style={{ fontSize: 9, backgroundColor: '#D97757' }}
                         >
                           AI
                         </span>
@@ -2138,7 +2138,7 @@ function MembersTab({ project }: { project: Project }) {
                       className="progress-bar-animated h-full rounded-full"
                       style={{
                         width: `${workloadPct}%`,
-                        backgroundColor: '#5b5fc7',
+                        backgroundColor: '#D97757',
                       }}
                     />
                   </div>
@@ -2190,7 +2190,7 @@ function SprintsTab({ project }: { project: Project }) {
                   height: 10,
                   backgroundColor:
                     sprint.status === 'active'
-                      ? '#5b5fc7'
+                      ? '#D97757'
                       : sprint.status === 'completed'
                         ? '#92c353'
                         : '#d1d1d1',
@@ -2270,8 +2270,8 @@ function SprintsTab({ project }: { project: Project }) {
                           <Area
                             type="monotone"
                             dataKey="actual"
-                            stroke="#5b5fc7"
-                            fill="rgba(91,95,199,0.1)"
+                            stroke="#D97757"
+                            fill="rgba(217,119,87,0.1)"
                             strokeWidth={2}
                             name="Actual"
                           />
@@ -2328,7 +2328,7 @@ function BudgetTab({ project }: { project: Project }) {
             className="progress-bar-animated h-full rounded-full"
             style={{
               width: `${Math.round((totalSpent / Math.max(totalBudgeted, 1)) * 100)}%`,
-              backgroundColor: '#5b5fc7',
+              backgroundColor: '#D97757',
             }}
           />
         </div>
@@ -2390,7 +2390,7 @@ function BudgetTab({ project }: { project: Project }) {
       {/* AI Insight */}
       <Card>
         <div className="flex items-center gap-2">
-          <Sparkles size={14} color="#5b5fc7" />
+          <Sparkles size={14} color="#D97757" />
           <span style={{ fontSize: 13, color: '#9E4A28' }}>
             At current spend rate, you&apos;ll finish{' '}
             <strong>{totalSpent < totalBudgeted * 0.9 ? '8% under budget' : 'on budget'}</strong> — reallocate Design surplus to
@@ -2465,8 +2465,8 @@ function RoadmapTab({ project }: { project: Project }) {
   // Mock Gantt data — unique per project
   const ganttItemsByProject: Record<string, { lane: string; name: string; start: number; width: number; color: string }[]> = {
     'proj-tax': [
-      { lane: 'Backend', name: 'API Design', start: 0, width: 2, color: '#5b5fc7' },
-      { lane: 'Backend', name: 'IRS Integration', start: 2, width: 3, color: '#5b5fc7' },
+      { lane: 'Backend', name: 'API Design', start: 0, width: 2, color: '#D97757' },
+      { lane: 'Backend', name: 'IRS Integration', start: 2, width: 3, color: '#D97757' },
       { lane: 'Frontend', name: 'Wireframes', start: 0, width: 2, color: '#92c353' },
       { lane: 'Frontend', name: 'Form Wizard', start: 2, width: 3, color: '#92c353' },
       { lane: 'Design', name: 'Design System', start: 0, width: 2, color: '#ffaa44' },
@@ -2475,7 +2475,7 @@ function RoadmapTab({ project }: { project: Project }) {
       { lane: 'QA', name: 'UAT', start: 4, width: 2, color: '#c4314b' },
     ],
     'proj-mob': [
-      { lane: 'Backend', name: 'API Support', start: 1, width: 2, color: '#5b5fc7' },
+      { lane: 'Backend', name: 'API Support', start: 1, width: 2, color: '#D97757' },
       { lane: 'Frontend', name: 'Navigation', start: 0, width: 3, color: '#92c353' },
       { lane: 'Frontend', name: 'Dark Mode', start: 2, width: 2, color: '#92c353' },
       { lane: 'Design', name: 'Design Tokens', start: 0, width: 2, color: '#ffaa44' },
@@ -2484,9 +2484,9 @@ function RoadmapTab({ project }: { project: Project }) {
       { lane: 'QA', name: 'Cross-browser', start: 3, width: 2, color: '#c4314b' },
     ],
     'proj-api': [
-      { lane: 'Backend', name: 'GraphQL Schema', start: 0, width: 2, color: '#5b5fc7' },
-      { lane: 'Backend', name: 'Migration', start: 2, width: 3, color: '#5b5fc7' },
-      { lane: 'Backend', name: 'Rate Limiting', start: 1, width: 2, color: '#5b5fc7' },
+      { lane: 'Backend', name: 'GraphQL Schema', start: 0, width: 2, color: '#D97757' },
+      { lane: 'Backend', name: 'Migration', start: 2, width: 3, color: '#D97757' },
+      { lane: 'Backend', name: 'Rate Limiting', start: 1, width: 2, color: '#D97757' },
       { lane: 'Frontend', name: 'Client Update', start: 3, width: 2, color: '#92c353' },
       { lane: 'Design', name: 'API Docs', start: 2, width: 2, color: '#ffaa44' },
       { lane: 'QA', name: 'Load Testing', start: 2, width: 3, color: '#c4314b' },
@@ -2586,7 +2586,7 @@ function RoadmapTab({ project }: { project: Project }) {
             >
               <div
                 className="flex items-center gap-1 rounded px-1.5 py-0.5 font-semibold"
-                style={{ fontSize: 10, backgroundColor: '#e8eaf6', color: '#5b5fc7' }}
+                style={{ fontSize: 10, backgroundColor: '#e8eaf6', color: '#D97757' }}
               >
                 <Sparkles size={8} />
                 {m.label}
@@ -2676,7 +2676,7 @@ function QATab({ project }: { project: Project }) {
         </Card>
         <Card className="text-center">
           <p style={{ fontSize: 11, color: '#616161', marginBottom: 4 }}>Coverage</p>
-          <p style={{ fontSize: 28, fontWeight: 600, color: '#5b5fc7' }}>87%</p>
+          <p style={{ fontSize: 28, fontWeight: 600, color: '#D97757' }}>87%</p>
         </Card>
         <Card className="text-center">
           <p style={{ fontSize: 11, color: '#616161', marginBottom: 4 }}>Open Bugs</p>
@@ -2688,7 +2688,7 @@ function QATab({ project }: { project: Project }) {
       <Card>
         <div className="flex items-center justify-between" style={{ marginBottom: 16 }}>
           <h3 style={{ fontSize: 16, fontWeight: 600, color: '#242424' }}>Test Suites</h3>
-          <button onClick={() => showToast('success', 'Run all test suites')} className="btn-hover flex items-center gap-1 rounded px-3 text-white kbd" style={{ fontSize: 12, height: 28, backgroundColor: '#5b5fc7', border: 'none', cursor: 'pointer' }} aria-label="Run all test suites">
+          <button onClick={() => showToast('success', 'Run all test suites')} className="btn-hover flex items-center gap-1 rounded px-3 text-white kbd" style={{ fontSize: 12, height: 28, backgroundColor: '#D97757', border: 'none', cursor: 'pointer' }} aria-label="Run all test suites">
             <Zap size={12} /> Run All
           </button>
         </div>
@@ -2748,7 +2748,7 @@ function QATab({ project }: { project: Project }) {
                 <td style={{ padding: '8px' }}>
                   <span className="rounded-full px-2 py-0.5 text-[10px] font-semibold" style={{
                     backgroundColor: reg.status === 'completed' ? '#dcfce7' : reg.status === 'in-progress' ? '#dbeafe' : '#f0f0f0',
-                    color: reg.status === 'completed' ? '#237b4b' : reg.status === 'in-progress' ? '#5b5fc7' : '#616161',
+                    color: reg.status === 'completed' ? '#237b4b' : reg.status === 'in-progress' ? '#D97757' : '#616161',
                   }}>
                     {reg.status}
                   </span>
@@ -2757,7 +2757,7 @@ function QATab({ project }: { project: Project }) {
                 <td style={{ padding: '8px', fontSize: 12, color: '#242424', fontWeight: 500 }}>{reg.coverage}</td>
                 <td style={{ padding: '8px', fontSize: 12, color: reg.blocker !== '-' ? '#c4314b' : '#616161' }}>{reg.blocker}</td>
                 <td style={{ padding: '8px' }}>
-                  <button onClick={() => showToast('info', '')} className="btn-hover cursor-pointer kbd" style={{ fontSize: 11, color: '#5b5fc7', border: 'none', background: 'transparent' }} aria-label={`View ${reg.name}`}>View →</button>
+                  <button onClick={() => showToast('info', '')} className="btn-hover cursor-pointer kbd" style={{ fontSize: 11, color: '#D97757', border: 'none', background: 'transparent' }} aria-label={`View ${reg.name}`}>View →</button>
                 </td>
               </tr>
             ))}
@@ -2857,7 +2857,7 @@ function DevOpsTab({ project }: { project: Project }) {
             tabIndex={activeEnv === env.id ? 0 : -1}
             className="btn-hover flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-2 kbd"
             style={{
-              borderColor: activeEnv === env.id ? '#5b5fc7' : '#e1e1e1',
+              borderColor: activeEnv === env.id ? '#D97757' : '#e1e1e1',
               backgroundColor: activeEnv === env.id ? '#f8f8ff' : '#fff',
             }}
           >
@@ -2900,7 +2900,7 @@ function DevOpsTab({ project }: { project: Project }) {
       <Card>
         <div className="flex items-center justify-between" style={{ marginBottom: 16 }}>
           <h3 style={{ fontSize: 16, fontWeight: 600, color: '#242424' }}>Deployments</h3>
-          <button onClick={() => showToast('success', 'Run all test suites')} className="btn-hover flex items-center gap-1 rounded px-3 text-white kbd" style={{ fontSize: 12, height: 28, backgroundColor: '#5b5fc7', border: 'none', cursor: 'pointer' }} aria-label="Deploy to environment">
+          <button onClick={() => showToast('success', 'Run all test suites')} className="btn-hover flex items-center gap-1 rounded px-3 text-white kbd" style={{ fontSize: 12, height: 28, backgroundColor: '#D97757', border: 'none', cursor: 'pointer' }} aria-label="Deploy to environment">
             <Rocket size={12} /> Deploy
           </button>
         </div>
@@ -2936,7 +2936,7 @@ function DevOpsTab({ project }: { project: Project }) {
                 <td style={{ padding: '8px', fontSize: 12, color: '#242424' }}>{dep.deployer}</td>
                 <td style={{ padding: '8px', fontSize: 12, color: '#616161' }}>{dep.time}</td>
                 <td style={{ padding: '8px' }}>
-                  <button onClick={() => showToast('info', '')} className="btn-hover cursor-pointer kbd" style={{ fontSize: 11, color: '#5b5fc7', border: 'none', background: 'transparent' }} aria-label={`View logs for ${dep.version}`}>Logs</button>
+                  <button onClick={() => showToast('info', '')} className="btn-hover cursor-pointer kbd" style={{ fontSize: 11, color: '#D97757', border: 'none', background: 'transparent' }} aria-label={`View logs for ${dep.version}`}>Logs</button>
                 </td>
               </tr>
             ))}
@@ -2985,8 +2985,8 @@ function DevOpsTab({ project }: { project: Project }) {
             { label: 'CPU Usage', value: '34%', color: '#237b4b' },
             { label: 'Memory', value: '62%', color: '#b56200' },
             { label: 'Disk I/O', value: '18%', color: '#237b4b' },
-            { label: 'Network In', value: '45 Mbps', color: '#5b5fc7' },
-            { label: 'Network Out', value: '120 Mbps', color: '#5b5fc7' },
+            { label: 'Network In', value: '45 Mbps', color: '#D97757' },
+            { label: 'Network Out', value: '120 Mbps', color: '#D97757' },
             { label: 'DB Connections', value: '23/100', color: '#237b4b' },
           ].map((metric) => (
             <div key={metric.label} className="rounded-lg p-3" style={{ backgroundColor: '#f8f8f8' }}>

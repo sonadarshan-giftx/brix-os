@@ -118,7 +118,7 @@ export function AppRail({ collapsed = false }: AppRailProps) {
     }
   };
 
-  const ACCENT = '#5b5fc7';
+  const ACCENT = '#D97757';
 
   return (
     <div
@@ -196,7 +196,7 @@ export function AppRail({ collapsed = false }: AppRailProps) {
                     transform: 'translateY(-50%)',
                     width: 3, height: 22,
                     borderRadius: '0 3px 3px 0',
-                    background: `linear-gradient(180deg, #7c7ff0, ${ACCENT})`,
+                    background: `linear-gradient(180deg, #E8946F, ${ACCENT})`,
                     boxShadow: `0 0 6px ${ACCENT}80`,
                   }} />
                 )}

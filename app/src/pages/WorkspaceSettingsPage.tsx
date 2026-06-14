@@ -196,7 +196,7 @@ export default function WorkspaceSettingsPage() {
         <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-5">
           <div
             className="flex h-10 w-10 items-center justify-center rounded-lg"
-            style={{ background: "#5b5fc7" }}
+            style={{ background: "#D97757" }}
           >
             <Settings size={20} color="#ffffff" />
           </div>
@@ -228,8 +228,8 @@ export default function WorkspaceSettingsPage() {
                     onClick={() => setActiveTab(tab.id)}
                     className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors"
                     style={{
-                      background: isActive ? "rgba(91,95,199,0.08)" : "transparent",
-                      color: isActive ? "#5b5fc7" : "#616161",
+                      background: isActive ? "rgba(217,119,87,0.08)" : "transparent",
+                      color: isActive ? "#D97757" : "#616161",
                     }}
                   >
                     <Icon size={16} />
@@ -261,7 +261,7 @@ export default function WorkspaceSettingsPage() {
                         type="text"
                         value={wsName}
                         onChange={(e) => setWsName(e.target.value)}
-                        className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#5b5fc7] focus:ring-1 focus:ring-[#5b5fc7]"
+                        className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#D97757] focus:ring-1 focus:ring-[#D97757]"
                         style={{ borderColor: "#d1d1d1", color: "#242424", borderRadius: "12px" }}
                       />
                     </div>
@@ -292,7 +292,7 @@ export default function WorkspaceSettingsPage() {
                         value={wsDescription}
                         onChange={(e) => setWsDescription(e.target.value)}
                         rows={3}
-                        className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#5b5fc7] focus:ring-1 focus:ring-[#5b5fc7]"
+                        className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#D97757] focus:ring-1 focus:ring-[#D97757]"
                         style={{ borderColor: "#d1d1d1", color: "#242424", borderRadius: "12px", resize: "vertical" }}
                       />
                     </div>
@@ -339,7 +339,7 @@ export default function WorkspaceSettingsPage() {
                     <button
                       onClick={handleSaveGeneral}
                       className="rounded-lg px-5 py-2.5 text-sm font-medium text-white"
-                      style={{ background: "#5b5fc7", borderRadius: "12px" }}
+                      style={{ background: "#D97757", borderRadius: "12px" }}
                     >
                       Save changes
                     </button>
@@ -430,7 +430,7 @@ export default function WorkspaceSettingsPage() {
                   <button
                     onClick={() => setIsInviteOpen(true)}
                     className="flex items-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-medium text-white"
-                    style={{ background: "#5b5fc7", borderRadius: "12px" }}
+                    style={{ background: "#D97757", borderRadius: "12px" }}
                   >
                     <Plus size={16} />
                     Invite member
@@ -469,7 +469,7 @@ export default function WorkspaceSettingsPage() {
                               <div className="flex items-center gap-3">
                                 <div
                                   className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium text-white"
-                                  style={{ background: "#5b5fc7" }}
+                                  style={{ background: "#D97757" }}
                                 >
                                   {member.name
                                     .split(" ")
@@ -488,7 +488,7 @@ export default function WorkspaceSettingsPage() {
                               {member.role === "Owner" ? (
                                 <span
                                   className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium"
-                                  style={{ background: "rgba(91,95,199,0.1)", color: "#5b5fc7" }}
+                                  style={{ background: "rgba(217,119,87,0.1)", color: "#D97757" }}
                                 >
                                   <CrownPlaceholder />
                                   Owner
@@ -514,13 +514,13 @@ export default function WorkspaceSettingsPage() {
                                     member.status === "Active"
                                       ? "rgba(35, 123, 75, 0.1)"
                                       : member.status === "Invited"
-                                      ? "rgba(91,95,199,0.1)"
+                                      ? "rgba(217,119,87,0.1)"
                                       : "#f5f5f3",
                                   color:
                                     member.status === "Active"
                                       ? "#237b4b"
                                       : member.status === "Invited"
-                                      ? "#5b5fc7"
+                                      ? "#D97757"
                                       : "#616161",
                                 }}
                               >
@@ -588,7 +588,7 @@ export default function WorkspaceSettingsPage() {
                       <button
                         onClick={() => showToast("Upgrade to Enterprise — contact sales", "success")}
                         className="rounded-lg px-4 py-2.5 text-sm font-medium text-white"
-                        style={{ background: "#5b5fc7", borderRadius: "12px" }}
+                        style={{ background: "#D97757", borderRadius: "12px" }}
                       >
                         Upgrade
                       </button>
@@ -614,7 +614,7 @@ export default function WorkspaceSettingsPage() {
                       </span>
                     </div>
                     <div className="mt-3 h-2 w-full rounded-full" style={{ background: "#f5f5f3" }}>
-                      <div className="h-2 rounded-full" style={{ width: "50%", background: "#5b5fc7" }} />
+                      <div className="h-2 rounded-full" style={{ width: "50%", background: "#D97757" }} />
                     </div>
                   </div>
                   <div
@@ -633,7 +633,7 @@ export default function WorkspaceSettingsPage() {
                       </span>
                     </div>
                     <div className="mt-3 h-2 w-full rounded-full" style={{ background: "#f5f5f3" }}>
-                      <div className="h-2 rounded-full" style={{ width: "12.4%", background: "#5b5fc7" }} />
+                      <div className="h-2 rounded-full" style={{ width: "12.4%", background: "#D97757" }} />
                     </div>
                   </div>
                 </div>
@@ -664,7 +664,7 @@ export default function WorkspaceSettingsPage() {
                       <button
                         onClick={() => showToast("Billing email updated", "success")}
                         className="rounded-lg px-4 py-2.5 text-sm font-medium text-white"
-                        style={{ background: "#5b5fc7", borderRadius: "12px" }}
+                        style={{ background: "#D97757", borderRadius: "12px" }}
                       >
                         Save
                       </button>
@@ -722,7 +722,7 @@ export default function WorkspaceSettingsPage() {
                               </span>
                             </td>
                             <td className="px-4 py-3 text-right">
-                              <button className="inline-flex items-center gap-1 text-xs font-medium" style={{ color: "#5b5fc7" }}>
+                              <button className="inline-flex items-center gap-1 text-xs font-medium" style={{ color: "#D97757" }}>
                                 <FileText size={14} />
                                 Download
                               </button>
@@ -752,9 +752,9 @@ export default function WorkspaceSettingsPage() {
                       <div className="flex items-start gap-3">
                         <div
                           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-                          style={{ background: "rgba(91,95,199,0.08)" }}
+                          style={{ background: "rgba(217,119,87,0.08)" }}
                         >
-                          <Lock size={18} style={{ color: "#5b5fc7" }} />
+                          <Lock size={18} style={{ color: "#D97757" }} />
                         </div>
                         <div>
                           <p className="text-sm font-medium" style={{ color: "#242424" }}>
@@ -772,9 +772,9 @@ export default function WorkspaceSettingsPage() {
                       <div className="flex items-start gap-3">
                         <div
                           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-                          style={{ background: "rgba(91,95,199,0.08)" }}
+                          style={{ background: "rgba(217,119,87,0.08)" }}
                         >
-                          <Shield size={18} style={{ color: "#5b5fc7" }} />
+                          <Shield size={18} style={{ color: "#D97757" }} />
                         </div>
                         <div>
                           <p className="text-sm font-medium" style={{ color: "#242424" }}>
@@ -792,9 +792,9 @@ export default function WorkspaceSettingsPage() {
                       <div className="flex items-start gap-3">
                         <div
                           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-                          style={{ background: "rgba(91,95,199,0.08)" }}
+                          style={{ background: "rgba(217,119,87,0.08)" }}
                         >
-                          <Clock size={18} style={{ color: "#5b5fc7" }} />
+                          <Clock size={18} style={{ color: "#D97757" }} />
                         </div>
                         <div>
                           <p className="text-sm font-medium" style={{ color: "#242424" }}>
@@ -904,8 +904,8 @@ export default function WorkspaceSettingsPage() {
                           }
                           className="mt-4 w-full rounded-lg px-4 py-2 text-sm font-medium transition-colors"
                           style={{
-                            background: integration.connected ? "#fef2f2" : "rgba(91,95,199,0.08)",
-                            color: integration.connected ? "#dc2626" : "#5b5fc7",
+                            background: integration.connected ? "#fef2f2" : "rgba(217,119,87,0.08)",
+                            color: integration.connected ? "#dc2626" : "#D97757",
                             borderRadius: "12px",
                           }}
                         >
@@ -979,7 +979,7 @@ export default function WorkspaceSettingsPage() {
                 <button
                   onClick={sendInvite}
                   className="rounded-lg px-4 py-2.5 text-sm font-medium text-white"
-                  style={{ background: "#5b5fc7", borderRadius: "12px" }}
+                  style={{ background: "#D97757", borderRadius: "12px" }}
                 >
                   Send invite
                 </button>
@@ -1051,7 +1051,7 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
     <button
       onClick={() => onChange(!checked)}
       className="relative h-6 w-11 rounded-full transition-colors"
-      style={{ background: checked ? "#5b5fc7" : "#d1d1d1" }}
+      style={{ background: checked ? "#D97757" : "#d1d1d1" }}
     >
       <span
         className="absolute top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-all"

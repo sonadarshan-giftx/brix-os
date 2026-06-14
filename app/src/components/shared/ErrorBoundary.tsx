@@ -132,7 +132,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg py-2.5 font-medium"
                 style={{
                   fontSize: 13,
-                  backgroundColor: 'var(--op-accent, #5b5fc7)',
+                  backgroundColor: 'var(--op-accent, #D97757)',
                   color: '#fff',
                   border: 'none',
                 }}

@@ -209,7 +209,7 @@ export default function OnboardingPage() {
         <div className="flex items-center gap-2">
           <div
             className="flex items-center justify-center rounded font-bold text-white"
-            style={{ width: 28, height: 28, backgroundColor: '#5b5fc7', fontSize: 14 }}
+            style={{ width: 28, height: 28, backgroundColor: '#D97757', fontSize: 14 }}
           >
             I
           </div>
@@ -232,7 +232,7 @@ export default function OnboardingPage() {
                     style={{
                       width: 24,
                       height: 2,
-                      backgroundColor: isCompleted ? '#5b5fc7' : '#e1e1e1',
+                      backgroundColor: isCompleted ? '#D97757' : '#e1e1e1',
                       margin: '0 4px',
                     }}
                   />
@@ -247,9 +247,9 @@ export default function OnboardingPage() {
                     height: 28,
                     border: isCompleted || isCurrent ? 'none' : '2px solid #d1d1d1',
                     backgroundColor: isCompleted
-                      ? '#5b5fc7'
+                      ? '#D97757'
                       : isCurrent
-                        ? '#5b5fc7'
+                        ? '#D97757'
                         : '#ffffff',
                     color: isCompleted || isCurrent ? '#ffffff' : '#616161',
                     cursor: isClickable ? 'pointer' : 'default',
@@ -268,7 +268,7 @@ export default function OnboardingPage() {
                   style={{
                     fontSize: 11,
                     fontWeight: 600,
-                    color: isCurrent ? '#5b5fc7' : isCompleted ? '#242424' : '#a0a0a0',
+                    color: isCurrent ? '#D97757' : isCompleted ? '#242424' : '#a0a0a0',
                   }}
                 >
                   {s.label}
@@ -371,7 +371,7 @@ export default function OnboardingPage() {
             style={{
               height: 32,
               fontSize: 13,
-              backgroundColor: '#5b5fc7',
+              backgroundColor: '#D97757',
               color: '#ffffff',
               border: 'none',
             }}
@@ -444,7 +444,7 @@ function Step1Signup() {
           style={{
             height: 32,
             fontSize: 13,
-            backgroundColor: '#5b5fc7',
+            backgroundColor: '#D97757',
             color: '#ffffff',
             opacity: 0.6,
           }}
@@ -694,7 +694,7 @@ function Step4Security() {
       <div className="space-y-4">
         <Card padding="md" className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Shield size={18} color="#5b5fc7" />
+            <Shield size={18} color="#D97757" />
             <div>
               <div style={{ fontSize: 13, fontWeight: 600, color: '#242424' }}>Two-Factor Authentication</div>
               <div style={{ fontSize: 11, color: '#616161' }}>Require 2FA for all team members</div>
@@ -705,7 +705,7 @@ function Step4Security() {
 
         <Card padding="md" className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Settings size={18} color="#5b5fc7" />
+            <Settings size={18} color="#D97757" />
             <div>
               <div style={{ fontSize: 13, fontWeight: 600, color: '#242424' }}>Session Length</div>
               <div style={{ fontSize: 11, color: '#616161' }}>Auto-logout after inactivity</div>
@@ -716,7 +716,7 @@ function Step4Security() {
 
         <Card padding="md" className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Globe size={18} color="#5b5fc7" />
+            <Globe size={18} color="#D97757" />
             <div>
               <div style={{ fontSize: 13, fontWeight: 600, color: '#242424' }}>WireGuard VPN</div>
               <div style={{ fontSize: 11, color: '#616161' }}>Optional secure network access</div>
@@ -778,7 +778,7 @@ function Step5Hire({ hired, onHire }: { hired: string[]; onHire: (id: string) =>
                     borderRadius: '6px 6px 0 0',
                     fontSize: 10,
                     fontWeight: 600,
-                    color: '#5b5fc7',
+                    color: '#D97757',
                   }}
                 >
                   <Sparkles size={10} />
@@ -836,8 +836,8 @@ function Step5Hire({ hired, onHire }: { hired: string[]; onHire: (id: string) =>
                   style={{
                     height: 32,
                     fontSize: 13,
-                    backgroundColor: isHired ? '#e8eaf6' : '#5b5fc7',
-                    color: isHired ? '#5b5fc7' : '#ffffff',
+                    backgroundColor: isHired ? '#e8eaf6' : '#D97757',
+                    color: isHired ? '#D97757' : '#ffffff',
                     border: 'none',
                   }}
                 >
@@ -908,7 +908,7 @@ function Step6Project({
 
       <Card padding="lg" className="mb-4">
         <div className="flex items-center gap-2 mb-4">
-          <Sparkles size={16} color="#5b5fc7" />
+          <Sparkles size={16} color="#D97757" />
           <h3 style={{ fontSize: 14, fontWeight: 600, color: '#242424' }}>AI-Generated Plan Preview</h3>
         </div>
 
@@ -975,7 +975,7 @@ function Step6Project({
           style={{
             height: 36,
             fontSize: 14,
-            backgroundColor: '#5b5fc7',
+            backgroundColor: '#D97757',
             color: '#ffffff',
             border: 'none',
           }}
@@ -1046,7 +1046,7 @@ function Step7Invite({
           style={{
             height: 32,
             fontSize: 13,
-            backgroundColor: '#5b5fc7',
+            backgroundColor: '#D97757',
             color: '#ffffff',
             border: 'none',
           }}
@@ -1103,7 +1103,7 @@ function Step7Invite({
           style={{
             height: 36,
             fontSize: 14,
-            backgroundColor: '#5b5fc7',
+            backgroundColor: '#D97757',
             color: '#ffffff',
             border: 'none',
           }}
@@ -1144,7 +1144,7 @@ function Step8Integrations({
                 className="flex items-center justify-center rounded flex-shrink-0"
                 style={{ width: 36, height: 36, backgroundColor: '#e8eaf6' }}
               >
-                <IntgIcon size={18} color="#5b5fc7" />
+                <IntgIcon size={18} color="#D97757" />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
@@ -1161,8 +1161,8 @@ function Step8Integrations({
                     height: 28,
                     fontSize: 12,
                     backgroundColor: isConnected ? '#e8eaf6' : '#ffffff',
-                    color: isConnected ? '#5b5fc7' : '#242424',
-                    border: isConnected ? '1px solid #5b5fc7' : '1px solid #d1d1d1',
+                    color: isConnected ? '#D97757' : '#242424',
+                    border: isConnected ? '1px solid #D97757' : '1px solid #d1d1d1',
                   }}
                 >
                   {isConnected ? (
@@ -1194,7 +1194,7 @@ function Step8Integrations({
    ═══════════════════════════════════════════════ */
 function ConfettiOverlay() {
   // Simple CSS confetti
-  const colors = ['#5b5fc7', '#92c353', '#ffaa44', '#c4314b', '#237b4b'];
+  const colors = ['#D97757', '#92c353', '#ffaa44', '#c4314b', '#237b4b'];
   const pieces = Array.from({ length: 50 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,

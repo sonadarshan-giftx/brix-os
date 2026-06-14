@@ -88,25 +88,25 @@ interface DrawHistoryEntry {
 // ─── Mock Data ────────────────────────────────────────────────────────────────
 
 const MOCK_PARTICIPANTS: MockParticipant[] = [
-  { id: 'u1', name: 'Alex Rivera', initials: 'AR', color: '#5b5fc7', muted: false, cameraOff: false, handRaised: false, isSpeaking: true, role: 'host' },
-  { id: 'u2', name: 'Maya Chen', initials: 'MC', color: '#5b5fc7', muted: true, cameraOff: false, handRaised: true, isSpeaking: false, role: 'co-host' },
+  { id: 'u1', name: 'Alex Rivera', initials: 'AR', color: '#D97757', muted: false, cameraOff: false, handRaised: false, isSpeaking: true, role: 'host' },
+  { id: 'u2', name: 'Maya Chen', initials: 'MC', color: '#D97757', muted: true, cameraOff: false, handRaised: true, isSpeaking: false, role: 'co-host' },
   { id: 'u3', name: 'Jordan Kim', initials: 'JK', color: '#16a34a', muted: false, cameraOff: true, handRaised: false, isSpeaking: false, role: 'participant' },
   { id: 'u4', name: 'Sam Torres', initials: 'ST', color: '#c4314b', muted: true, cameraOff: true, handRaised: false, isSpeaking: false, role: 'participant' },
   { id: 'u5', name: 'Riley Patel', initials: 'RP', color: '#0891b2', muted: false, cameraOff: false, handRaised: false, isSpeaking: false, role: 'participant' },
-  { id: 'u6', name: 'Casey Wong', initials: 'CW', color: '#464775', muted: true, cameraOff: false, handRaised: false, isSpeaking: false, role: 'participant' },
+  { id: 'u6', name: 'Casey Wong', initials: 'CW', color: '#C4623E', muted: true, cameraOff: false, handRaised: false, isSpeaking: false, role: 'participant' },
 ];
 
 const TEAM_MEMBERS = [
-  { id: 't1', name: 'Alex Rivera', initials: 'AR', color: '#5b5fc7' },
-  { id: 't2', name: 'Maya Chen', initials: 'MC', color: '#5b5fc7' },
+  { id: 't1', name: 'Alex Rivera', initials: 'AR', color: '#D97757' },
+  { id: 't2', name: 'Maya Chen', initials: 'MC', color: '#D97757' },
   { id: 't3', name: 'Jordan Kim', initials: 'JK', color: '#16a34a' },
   { id: 't4', name: 'Sam Torres', initials: 'ST', color: '#c4314b' },
   { id: 't5', name: 'Riley Patel', initials: 'RP', color: '#0891b2' },
 ];
 
 const MOCK_ACTIVE_MEETINGS: ActiveMeeting[] = [
-  { id: 'm1', title: 'Weekly All-Hands', host: 'Alex Rivera', participants: MOCK_PARTICIPANTS, duration: 1847, color: '#5b5fc7' },
-  { id: 'm2', title: 'Design Review', host: 'Maya Chen', participants: MOCK_PARTICIPANTS.slice(0, 3), duration: 423, color: '#5b5fc7' },
+  { id: 'm1', title: 'Weekly All-Hands', host: 'Alex Rivera', participants: MOCK_PARTICIPANTS, duration: 1847, color: '#D97757' },
+  { id: 'm2', title: 'Design Review', host: 'Maya Chen', participants: MOCK_PARTICIPANTS.slice(0, 3), duration: 423, color: '#D97757' },
   { id: 'm3', title: 'Sprint Planning', host: 'Jordan Kim', participants: MOCK_PARTICIPANTS.slice(2, 6), duration: 2100, color: '#16a34a' },
 ];
 
@@ -138,8 +138,8 @@ const MOCK_RECENT: RecentMeeting[] = [
 ];
 
 const MOCK_RECORDINGS_DISPLAY = [
-  { id: 'rec-1', title: 'Weekly All-Hands — May 2026', date: Date.now() - 7 * 86400000, durationSecs: 3420, participantCount: 12, color: '#5b5fc7' },
-  { id: 'rec-2', title: 'Design Review — Dashboard v3', date: Date.now() - 3 * 86400000, durationSecs: 2160, participantCount: 5, color: '#5b5fc7' },
+  { id: 'rec-1', title: 'Weekly All-Hands — May 2026', date: Date.now() - 7 * 86400000, durationSecs: 3420, participantCount: 12, color: '#D97757' },
+  { id: 'rec-2', title: 'Design Review — Dashboard v3', date: Date.now() - 3 * 86400000, durationSecs: 2160, participantCount: 5, color: '#D97757' },
   { id: 'rec-3', title: 'Sprint 14 Retrospective', date: Date.now() - 86400000, durationSecs: 1800, participantCount: 8, color: '#16a34a' },
 ];
 
@@ -238,7 +238,7 @@ interface ControlButtonProps {
   activeColor?: string;
 }
 
-function ControlButton({ icon, label, onClick, active, activeColor = '#5b5fc7' }: ControlButtonProps) {
+function ControlButton({ icon, label, onClick, active, activeColor = '#D97757' }: ControlButtonProps) {
   return (
     <button
       onClick={onClick}
@@ -422,7 +422,7 @@ function DashboardView({
           <button
             onClick={() => setShowNewMeetingModal(true)}
             className="flex items-center gap-2 px-4 py-2 rounded-lg text-white font-medium text-sm hover:opacity-90 active:scale-95 transition-all"
-            style={{ background: '#5b5fc7' }}
+            style={{ background: '#D97757' }}
           >
             <Plus size={16} /> New Meeting
           </button>
@@ -444,7 +444,7 @@ function DashboardView({
             <button
               onClick={() => setShowNewMeetingModal(true)}
               className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium"
-              style={{ background: '#5b5fc7' }}
+              style={{ background: '#D97757' }}
             >
               <Video size={16} /> Start Now
             </button>
@@ -462,7 +462,7 @@ function DashboardView({
               <button
                 disabled={!joinLink}
                 className="px-3 py-2 rounded-lg text-white text-sm font-medium disabled:opacity-40"
-                style={{ background: '#5b5fc7' }}
+                style={{ background: '#D97757' }}
               >
                 Join
               </button>
@@ -493,7 +493,7 @@ function DashboardView({
               key={t.key}
               onClick={() => setDashTab(t.key)}
               className={`px-4 py-2 text-sm font-medium rounded-t transition-colors ${dashTab === t.key ? 'border-b-2 text-orange-600' : 'text-gray-500 hover:text-gray-700'}`}
-              style={{ borderColor: dashTab === t.key ? '#5b5fc7' : 'transparent' }}
+              style={{ borderColor: dashTab === t.key ? '#D97757' : 'transparent' }}
             >
               {t.label}
             </button>
@@ -529,7 +529,7 @@ function DashboardView({
                 <button
                   onClick={() => handleJoinMeeting(m.title)}
                   className="w-full py-2 rounded-lg text-white text-sm font-medium"
-                  style={{ background: '#5b5fc7' }}
+                  style={{ background: '#D97757' }}
                 >
                   Join
                 </button>
@@ -562,7 +562,7 @@ function DashboardView({
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={() => handleJoinMeeting(m.title)} className="px-3 py-1.5 text-xs font-medium rounded-lg text-white" style={{ background: '#5b5fc7' }}>Join</button>
+                  <button onClick={() => handleJoinMeeting(m.title)} className="px-3 py-1.5 text-xs font-medium rounded-lg text-white" style={{ background: '#D97757' }}>Join</button>
                   <button className="px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50">Edit</button>
                   <button className="px-3 py-1.5 text-xs font-medium rounded-lg border border-red-200 text-red-500 hover:bg-red-50">Cancel</button>
                 </div>
@@ -690,7 +690,7 @@ function DashboardView({
                 <button
                   onClick={handleStartNewMeeting}
                   className="flex-1 py-2.5 rounded-lg text-white text-sm font-medium"
-                  style={{ background: '#5b5fc7' }}
+                  style={{ background: '#D97757' }}
                 >
                   Start Now
                 </button>
@@ -819,7 +819,7 @@ function LobbyView({ meetingTitle, setMeetingTitle, localStream, muted, cameraOf
                   key={b.key}
                   onClick={() => setSelectedBg(b.key)}
                   className="flex-1 py-1.5 rounded-lg text-xs font-medium transition-all"
-                  style={{ background: selectedBg === b.key ? '#5b5fc7' : 'rgba(255,255,255,0.1)', color: selectedBg === b.key ? '#fff' : '#9ca3af' }}
+                  style={{ background: selectedBg === b.key ? '#D97757' : 'rgba(255,255,255,0.1)', color: selectedBg === b.key ? '#fff' : '#9ca3af' }}
                 >
                   {b.label}
                 </button>
@@ -912,7 +912,7 @@ function LobbyView({ meetingTitle, setMeetingTitle, localStream, muted, cameraOf
             <button
               onClick={onJoin}
               className="w-full py-3 rounded-xl text-white font-semibold text-sm"
-              style={{ background: '#5b5fc7' }}
+              style={{ background: '#D97757' }}
             >
               Join Now
             </button>
@@ -1120,7 +1120,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
             />
           ))}
           <VideoTile
-            participant={{ id: 'local', name: 'You', initials: 'Y', color: '#5b5fc7', muted, cameraOff, handRaised, isSpeaking: false, role: 'host' }}
+            participant={{ id: 'local', name: 'You', initials: 'Y', color: '#D97757', muted, cameraOff, handRaised, isSpeaking: false, role: 'host' }}
             isSpotlighted={false}
             onSpotlight={() => {}}
             isLocal
@@ -1180,7 +1180,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                         placeholder="Type a message..."
                         className="flex-1 bg-white/10 text-white text-sm px-3 py-2 rounded-lg border border-white/10 outline-none focus:border-orange-400 placeholder-gray-500"
                       />
-                      <button onClick={sendMessage} className="p-2 rounded-lg" style={{ background: '#5b5fc7' }}><Send size={16} className="text-white" /></button>
+                      <button onClick={sendMessage} className="p-2 rounded-lg" style={{ background: '#D97757' }}><Send size={16} className="text-white" /></button>
                     </div>
                   </div>
                 </div>
@@ -1194,14 +1194,14 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                     <button className="text-xs text-orange-400 hover:text-orange-300">Mute All</button>
                   </div>
                   <div className="flex-1 overflow-y-auto p-2 space-y-1">
-                    {[...MOCK_PARTICIPANTS, { id: 'local', name: 'You (Host)', initials: 'Y', color: '#5b5fc7', muted, cameraOff, handRaised, isSpeaking: false, role: 'host' as const }].map(p => (
+                    {[...MOCK_PARTICIPANTS, { id: 'local', name: 'You (Host)', initials: 'Y', color: '#D97757', muted, cameraOff, handRaised, isSpeaking: false, role: 'host' as const }].map(p => (
                       <div key={p.id} className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-white/5 group">
                         <Avatar initials={p.initials} color={p.color} size={32} />
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-1.5">
                             <span className="text-sm text-white font-medium truncate">{p.name}</span>
                             {p.role !== 'participant' && (
-                              <span className="text-xs px-1 rounded" style={{ background: '#5b5fc722', color: '#EBB59C' }}>{p.role}</span>
+                              <span className="text-xs px-1 rounded" style={{ background: '#D9775722', color: '#EBB59C' }}>{p.role}</span>
                             )}
                           </div>
                         </div>
@@ -1253,7 +1253,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                       <button
                         onClick={() => { if (qaInput.trim()) { store.addQaQuestion('local-user', 'You', qaInput.trim()); setQaInput(''); } }}
                         className="p-2 rounded-lg"
-                        style={{ background: '#5b5fc7' }}
+                        style={{ background: '#D97757' }}
                       >
                         <Send size={16} className="text-white" />
                       </button>
@@ -1273,16 +1273,16 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
         <ControlButton
           icon={isScreenSharing ? <MonitorOff size={18} /> : <Monitor size={18} />}
           label={isScreenSharing ? 'Stop Share' : 'Share Screen'}
-          active={isScreenSharing} activeColor="#5b5fc7"
+          active={isScreenSharing} activeColor="#D97757"
           onClick={() => isScreenSharing ? stopScreenShare() : shareScreen()}
         />
-        <ControlButton icon={<MessageSquare size={18} />} label="Chat" active={store.chatOpen} activeColor="#5b5fc7" onClick={() => { store.chatOpen ? closePanel() : openPanel('chat'); }} />
-        <ControlButton icon={<Users size={18} />} label="People" active={store.participantsOpen} activeColor="#5b5fc7" onClick={() => { store.participantsOpen ? closePanel() : openPanel('participants'); }} />
+        <ControlButton icon={<MessageSquare size={18} />} label="Chat" active={store.chatOpen} activeColor="#D97757" onClick={() => { store.chatOpen ? closePanel() : openPanel('chat'); }} />
+        <ControlButton icon={<Users size={18} />} label="People" active={store.participantsOpen} activeColor="#D97757" onClick={() => { store.participantsOpen ? closePanel() : openPanel('participants'); }} />
         <ControlButton icon={<Hand size={18} />} label="Raise Hand" active={handRaised} activeColor="#eab308" onClick={() => { setHandRaised(h => !h); handRaised ? store.lowerHand('local-user') : store.raiseHand('local-user'); }} />
 
         {/* Reactions */}
         <div className="relative">
-          <ControlButton icon={<Smile size={18} />} label="React" active={showReactionPicker} activeColor="#5b5fc7" onClick={() => setShowReactionPicker(p => !p)} />
+          <ControlButton icon={<Smile size={18} />} label="React" active={showReactionPicker} activeColor="#D97757" onClick={() => setShowReactionPicker(p => !p)} />
           <AnimatePresence>
             {showReactionPicker && (
               <motion.div
@@ -1494,7 +1494,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                         <div key={i} className="space-y-1">
                           <div className="flex justify-between text-xs text-gray-300"><span>{opt.label}</span><span>{pct}%</span></div>
                           <div className="h-2 rounded-full bg-white/10">
-                            <div className="h-2 rounded-full" style={{ width: `${pct}%`, background: '#5b5fc7' }} />
+                            <div className="h-2 rounded-full" style={{ width: `${pct}%`, background: '#D97757' }} />
                           </div>
                         </div>
                       );
@@ -1515,7 +1515,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                     }
                   }}
                   className="flex-1 py-2.5 rounded-lg text-white text-sm font-medium"
-                  style={{ background: '#5b5fc7' }}
+                  style={{ background: '#D97757' }}
                 >
                   Launch Poll
                 </button>
@@ -1567,7 +1567,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                 <label className="text-xs text-gray-400 font-medium block mb-1">Broadcast message</label>
                 <div className="flex gap-2">
                   <input value={broadcastMsg} onChange={e => setBroadcastMsg(e.target.value)} placeholder="Message to all rooms..." className="flex-1 bg-white/10 text-white text-sm px-3 py-2 rounded-lg border border-white/20 outline-none" />
-                  <button onClick={() => setBroadcastMsg('')} className="px-3 py-2 rounded-lg text-xs text-white" style={{ background: '#5b5fc7' }}>Send</button>
+                  <button onClick={() => setBroadcastMsg('')} className="px-3 py-2 rounded-lg text-xs text-white" style={{ background: '#D97757' }}>Send</button>
                 </div>
               </div>
               <div className="flex gap-3">
@@ -1575,7 +1575,7 @@ function CallView({ meetingTitle, localStream, muted, cameraOff, isScreenSharing
                 <button
                   onClick={() => { store.createBreakoutRooms(breakoutCount, MOCK_PARTICIPANTS.map(p => p.id)); setShowBreakoutModal(false); }}
                   className="flex-1 py-2.5 rounded-lg text-white text-sm font-medium"
-                  style={{ background: '#5b5fc7' }}
+                  style={{ background: '#D97757' }}
                 >
                   Open Rooms
                 </button>
@@ -1756,7 +1756,7 @@ function WhiteboardOverlay({ onClose }: { onClose: () => void }) {
   const [redoStack, setRedoStack] = useState<DrawHistoryEntry[]>([]);
   const lastPoint = useRef<DrawPoint | null>(null);
 
-  const COLORS = ['#000000', '#c4314b', '#5b5fc7', '#eab308', '#16a34a', '#5b5fc7'];
+  const COLORS = ['#000000', '#c4314b', '#D97757', '#eab308', '#16a34a', '#D97757'];
   const SIZES = [2, 5, 10];
 
   const getCtx = useCallback(() => canvasRef.current?.getContext('2d') ?? null, []);
@@ -1876,7 +1876,7 @@ function WhiteboardOverlay({ onClose }: { onClose: () => void }) {
         <button onClick={handleUndo} title="Undo" className="p-1.5 rounded hover:bg-gray-100 text-gray-500" disabled={history.length === 0}><RotateCcw size={15} /></button>
         <button onClick={handleRedo} title="Redo" className="p-1.5 rounded hover:bg-gray-100 text-gray-500" disabled={redoStack.length === 0}><RotateCw size={15} /></button>
         <button onClick={handleClear} className="px-3 py-1 text-sm rounded border border-gray-300 text-gray-600 hover:bg-gray-50">Clear</button>
-        <button onClick={handleExport} className="px-3 py-1 text-sm rounded text-white flex items-center gap-1" style={{ background: '#5b5fc7' }}>
+        <button onClick={handleExport} className="px-3 py-1 text-sm rounded text-white flex items-center gap-1" style={{ background: '#D97757' }}>
           <Download size={13} /> Export
         </button>
       </div>
@@ -2007,7 +2007,7 @@ function ScheduleView({ onScheduled, onCancel, store }: ScheduleViewProps) {
                 key={r.key}
                 onClick={() => setRecurrence(r.key)}
                 className="flex-1 py-2 rounded-lg text-sm font-medium border transition-all"
-                style={{ borderColor: recurrence === r.key ? '#5b5fc7' : '#d1d5db', color: recurrence === r.key ? '#5b5fc7' : '#4b5563', background: recurrence === r.key ? '#fff7ed' : 'white' }}
+                style={{ borderColor: recurrence === r.key ? '#D97757' : '#d1d5db', color: recurrence === r.key ? '#D97757' : '#4b5563', background: recurrence === r.key ? '#fff7ed' : 'white' }}
               >
                 {r.label}
               </button>
@@ -2024,7 +2024,7 @@ function ScheduleView({ onScheduled, onCancel, store }: ScheduleViewProps) {
                 key={key}
                 onClick={() => setCallType(key as 'video' | 'audio')}
                 className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl border text-sm font-medium transition-all"
-                style={{ borderColor: callType === key ? '#5b5fc7' : '#d1d5db', color: callType === key ? '#5b5fc7' : '#4b5563', background: callType === key ? '#fff7ed' : 'white' }}
+                style={{ borderColor: callType === key ? '#D97757' : '#d1d5db', color: callType === key ? '#D97757' : '#4b5563', background: callType === key ? '#fff7ed' : 'white' }}
               >
                 <Icon size={16} /> {label}
               </button>
@@ -2117,7 +2117,7 @@ function ScheduleView({ onScheduled, onCancel, store }: ScheduleViewProps) {
             onClick={handleSchedule}
             disabled={!title.trim()}
             className="flex-1 py-3 rounded-xl text-white text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
-            style={{ background: '#5b5fc7' }}
+            style={{ background: '#D97757' }}
           >
             Schedule Meeting
           </button>

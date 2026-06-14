@@ -38,7 +38,7 @@ import {
 } from "recharts";
 
 /* ─── Design Tokens ─── */
-const PRIMARY = "#5b5fc7";
+const PRIMARY = "#D97757";
 const BG = "#f5f5f3";
 const SURFACE = "#ffffff";
 const TEXT_PRIMARY = "#242424";

@@ -137,7 +137,7 @@ export default function InviteAcceptPage() {
         <div className="flex flex-col items-center gap-3">
           <div
             className="h-8 w-8 animate-spin rounded-full border-2 border-t-transparent"
-            style={{ borderColor: "#d1d1d1", borderTopColor: "#5b5fc7" }}
+            style={{ borderColor: "#d1d1d1", borderTopColor: "#D97757" }}
           />
           <p className="text-sm" style={{ color: "#616161" }}>
             Loading invitation...
@@ -157,7 +157,7 @@ export default function InviteAcceptPage() {
         <div className="mx-auto flex max-w-lg items-center gap-3">
           <div
             className="flex h-8 w-8 items-center justify-center rounded-lg"
-            style={{ background: "#5b5fc7" }}
+            style={{ background: "#D97757" }}
           >
             <Building2 size={18} color="#ffffff" />
           </div>
@@ -175,9 +175,9 @@ export default function InviteAcceptPage() {
         >
           <div
             className="mx-auto flex h-14 w-14 items-center justify-center rounded-full"
-            style={{ background: "rgba(91,95,199,0.08)" }}
+            style={{ background: "rgba(217,119,87,0.08)" }}
           >
-            <Mail size={24} style={{ color: "#5b5fc7" }} />
+            <Mail size={24} style={{ color: "#D97757" }} />
           </div>
 
           <h1 className="mt-4 text-xl font-semibold" style={{ color: "#242424" }}>
@@ -185,7 +185,7 @@ export default function InviteAcceptPage() {
           </h1>
           <p className="mt-1 text-sm" style={{ color: "#616161" }}>
             to join{" "}
-            <span className="font-medium" style={{ color: "#5b5fc7" }}>
+            <span className="font-medium" style={{ color: "#D97757" }}>
               {workspace?.name || "a workspace"}
             </span>
           </p>
@@ -198,7 +198,7 @@ export default function InviteAcceptPage() {
             <div className="flex items-center gap-3">
               <div
                 className="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-bold text-white"
-                style={{ background: "#5b5fc7" }}
+                style={{ background: "#D97757" }}
               >
                 {(workspace?.name || "W")[0].toUpperCase()}
               </div>
@@ -230,7 +230,7 @@ export default function InviteAcceptPage() {
             <button
               onClick={handleJoin}
               className="flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
-              style={{ background: "#5b5fc7", borderRadius: "12px" }}
+              style={{ background: "#D97757", borderRadius: "12px" }}
             >
               Join workspace
               <ArrowRight size={16} />
@@ -265,7 +265,7 @@ export default function InviteAcceptPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Jane Doe"
-                    className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#5b5fc7] focus:ring-1 focus:ring-[#5b5fc7]"
+                    className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#D97757] focus:ring-1 focus:ring-[#D97757]"
                     style={{ borderColor: "#d1d1d1", color: "#242424", borderRadius: "12px" }}
                   />
                 </div>
@@ -278,7 +278,7 @@ export default function InviteAcceptPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="jane@company.com"
-                    className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#5b5fc7] focus:ring-1 focus:ring-[#5b5fc7]"
+                    className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none transition-colors focus:border-[#D97757] focus:ring-1 focus:ring-[#D97757]"
                     style={{ borderColor: "#d1d1d1", color: "#242424", borderRadius: "12px" }}
                   />
                 </div>
@@ -292,7 +292,7 @@ export default function InviteAcceptPage() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Minimum 8 characters"
-                      className="w-full rounded-lg border px-3 py-2.5 pr-10 text-sm outline-none transition-colors focus:border-[#5b5fc7] focus:ring-1 focus:ring-[#5b5fc7]"
+                      className="w-full rounded-lg border px-3 py-2.5 pr-10 text-sm outline-none transition-colors focus:border-[#D97757] focus:ring-1 focus:ring-[#D97757]"
                       style={{ borderColor: "#d1d1d1", color: "#242424", borderRadius: "12px" }}
                     />
                     <button
@@ -314,15 +314,15 @@ export default function InviteAcceptPage() {
                     type="checkbox"
                     checked={agreeTerms}
                     onChange={(e) => setAgreeTerms(e.target.checked)}
-                    className="mt-0.5 h-4 w-4 rounded border-gray-300 text-[#5b5fc7] focus:ring-[#5b5fc7]"
+                    className="mt-0.5 h-4 w-4 rounded border-gray-300 text-[#D97757] focus:ring-[#D97757]"
                   />
                   <span className="text-xs" style={{ color: "#616161" }}>
                     I agree to the{" "}
-                    <a href="#" className="font-medium" style={{ color: "#5b5fc7" }}>
+                    <a href="#" className="font-medium" style={{ color: "#D97757" }}>
                       Terms of Service
                     </a>{" "}
                     and{" "}
-                    <a href="#" className="font-medium" style={{ color: "#5b5fc7" }}>
+                    <a href="#" className="font-medium" style={{ color: "#D97757" }}>
                       Privacy Policy
                     </a>
                   </span>
@@ -331,7 +331,7 @@ export default function InviteAcceptPage() {
                 <button
                   onClick={handleCreateAccount}
                   className="flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
-                  style={{ background: "#5b5fc7", borderRadius: "12px" }}
+                  style={{ background: "#D97757", borderRadius: "12px" }}
                 >
                   Create account and join
                   <ArrowRight size={16} />
@@ -346,7 +346,7 @@ export default function InviteAcceptPage() {
                 <button
                   onClick={handleLogin}
                   className="font-medium transition-colors hover:underline"
-                  style={{ color: "#5b5fc7" }}
+                  style={{ color: "#D97757" }}
                 >
                   Log in
                 </button>

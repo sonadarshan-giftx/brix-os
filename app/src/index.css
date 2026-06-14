@@ -7,12 +7,12 @@
 @layer base {
   :root {
     /* ── Brand ── */
-    --brand-primary: #5b5fc7;
-    --brand-deep: #464775;
-    --brand-deeper: #3a3d6b;
-    --brand-text-on-light: #4338ca;
-    --brand-light: #eef2ff;
-    --brand-glow: rgba(91,95,199,0.15);
+    --brand-primary: #D97757;
+    --brand-deep: #C4623E;
+    --brand-deeper: #A8542F;
+    --brand-text-on-light: #9E4A28;
+    --brand-light: #FBEFE9;
+    --brand-glow: rgba(217,119,87,0.15);
 
     /* ── Surfaces ── */
     --surface-primary: #ffffff;
@@ -22,25 +22,25 @@
     --surface-rail: #f0f0f1;
     --surface-hover: #ececee;
     --surface-active: #e2e2e6;
-    --surface-selected: #eef2ff;
+    --surface-selected: #FBEFE9;
     --surface-border: #e2e2e6;
     --surface-divider: #ebebed;
     --surface-overlay: rgba(0, 0, 0, 0.04);
-    --surface-dark: #0d0e1a;
+    --surface-dark: #26201A;
 
     /* ── Op (shell) aliases ── */
     --op-bg-primary: #ffffff;
     --op-bg-secondary: #f4f4f5;
     --op-rail-bg: #f0f0f1;
     --op-border: #e2e2e6;
-    --op-accent: #5b5fc7;
+    --op-accent: #D97757;
 
     /* ── Text ── */
     --text-primary: #18181b;
     --text-secondary: #52525b;
     --text-tertiary: #a1a1aa;
     --text-inverse: #ffffff;
-    --text-brand: #5b5fc7;
+    --text-brand: #D97757;
     --text-danger: #dc2626;
     --text-success: #16a34a;
     --text-warning: #d97706;
@@ -57,10 +57,10 @@
     --status-busy: #ef4444;
     --status-away: #f59e0b;
     --status-offline: #71717a;
-    --status-ai: #5b5fc7;
+    --status-ai: #C4623E;
 
     /* ── Chart Colors ── */
-    --chart-line-1: #5b5fc7;
+    --chart-line-1: #D97757;
     --chart-line-2: #22c55e;
     --chart-line-3: #f59e0b;
     --chart-line-4: #ef4444;
@@ -102,10 +102,10 @@
 
   /* ── Dark Mode ── */
   .dark {
-    --brand-primary: #7c7ff0;
-    --brand-deep: #5b5fc7;
-    --brand-light: #1e1f42;
-    --brand-glow: rgba(124,127,240,0.12);
+    --brand-primary: #E89B7D;
+    --brand-deep: #B5654A;
+    --brand-light: #3A2418;
+    --brand-glow: rgba(232,155,125,0.12);
 
     --surface-primary: #09090b;
     --surface-base: #0f0f12;
@@ -123,13 +123,13 @@
     --op-bg-secondary: #111114;
     --op-rail-bg: #0d0d10;
     --op-border: #27272a;
-    --op-accent: #7c7ff0;
+    --op-accent: #E89B7D;
 
     --text-primary: #fafafa;
     --text-secondary: #a1a1aa;
     --text-tertiary: #52525b;
     --text-inverse: #09090b;
-    --text-brand: #7c7ff0;
+    --text-brand: #E89B7D;
     --text-danger: #f87171;
     --text-success: #4ade80;
     --text-warning: #fbbf24;
@@ -224,7 +224,7 @@
 
   /* Gradient text */
   .gradient-text {
-    background: linear-gradient(135deg, #5b5fc7, #7c7ff0);
+    background: linear-gradient(135deg, #D97757, #C4623E);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
