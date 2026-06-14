@@ -372,8 +372,6 @@ export default function Home() {
   );
 }
 
-const BRAND_DARK = '#3a3d6b';
-
 /* ── Sub-components ── */
 
 function SectionCard({
