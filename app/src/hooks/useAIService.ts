@@ -93,7 +93,7 @@ export function useAIService() {
 
     const actionItems = [
       'Review discussed items within 24 hours',
-      'Update project status in Brixstac',
+      'Update project status in BrixOS',
       'Schedule follow-up if needed',
     ];
 

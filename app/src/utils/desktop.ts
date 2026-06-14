@@ -393,7 +393,7 @@ export class DesktopAPI {
    */
   static async getAppInfo(): Promise<AppVersion> {
     if (!isDesktop()) {
-      return { version: '1.0.0-web', name: 'Brixstac' };
+      return { version: '1.0.0-web', name: 'BrixOS' };
     }
     return invoke<AppVersion>('get_app_version');
   }

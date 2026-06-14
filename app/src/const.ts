@@ -239,7 +239,7 @@ export const CURRENCY_LOCALE = 'en-US';
 
 // ── Company Info ────────────────────────────────────────────
 export const COMPANY = {
-  name: 'Brixstac',
+  name: 'BrixOS',
   shortName: 'Brix',
   defaultAvatarPath: '/avatar-default.jpg',
 } as const;

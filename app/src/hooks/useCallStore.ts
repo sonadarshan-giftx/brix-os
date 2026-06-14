@@ -527,7 +527,7 @@ export const useCallStore = create<CallState>()(
       const meetingId = generateMeetingId();
       const meeting: ScheduledMeeting = {
         ...m, id, meetingId,
-        joinLink: `https://brixstac.app/join/${meetingId}`,
+        joinLink: `https://brixos.io/join/${meetingId}`,
       };
       set((s) => ({ scheduledMeetings: [...s.scheduledMeetings, meeting] }));
       return meeting;

@@ -594,10 +594,10 @@ export const useStore = create<AppState>()(
           // ── App Configuration ──
           appConfigs: {},
           appWebhooks: [
-            { id: 'wh-gh-1', app: 'GitHub', url: 'https://api.brixstac.io/webhooks/github', events: ['push', 'pr', 'merge'], status: 'active', lastDelivery: '2 min ago' },
-            { id: 'wh-slack-1', app: 'Slack', url: 'https://api.brixstac.io/webhooks/slack', events: ['message', 'reaction', 'channel'], status: 'active', lastDelivery: '1 min ago' },
-            { id: 'wh-linear-1', app: 'Linear', url: 'https://api.brixstac.io/webhooks/linear', events: ['issue', 'cycle'], status: 'active', lastDelivery: '5 min ago' },
-            { id: 'wh-sentry-1', app: 'Sentry', url: 'https://api.brixstac.io/webhooks/sentry', events: ['alert', 'event'], status: 'inactive', lastDelivery: 'Failed 12 min ago' },
+            { id: 'wh-gh-1', app: 'GitHub', url: 'https://api.brixos.io/webhooks/github', events: ['push', 'pr', 'merge'], status: 'active', lastDelivery: '2 min ago' },
+            { id: 'wh-slack-1', app: 'Slack', url: 'https://api.brixos.io/webhooks/slack', events: ['message', 'reaction', 'channel'], status: 'active', lastDelivery: '1 min ago' },
+            { id: 'wh-linear-1', app: 'Linear', url: 'https://api.brixos.io/webhooks/linear', events: ['issue', 'cycle'], status: 'active', lastDelivery: '5 min ago' },
+            { id: 'wh-sentry-1', app: 'Sentry', url: 'https://api.brixos.io/webhooks/sentry', events: ['alert', 'event'], status: 'inactive', lastDelivery: 'Failed 12 min ago' },
           ],
           appApiKeys: [
             { id: 'key-prod', name: 'Production API Key', prefix: 'ivxt_live_...', created: 'Jan 15, 2025', lastUsed: '2m ago', scopes: 'read,write' },
