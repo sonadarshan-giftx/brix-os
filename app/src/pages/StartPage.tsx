@@ -249,7 +249,7 @@ export default function StartPage() {
         <div className="flex items-center gap-2">
           <div
             className="flex items-center justify-center rounded-lg"
-            style={{ width: 32, height: 32, backgroundColor: '#D97757' }}
+            style={{ width: 32, height: 32, backgroundColor: '#5b5fc7' }}
           >
             <Zap size={18} color="#fff" />
           </div>
@@ -272,7 +272,7 @@ export default function StartPage() {
               <div
                 key={i}
                 className="h-1.5 flex-1 rounded-full transition-all"
-                style={{ backgroundColor: i < step ? '#D97757' : '#e1e1e1' }}
+                style={{ backgroundColor: i < step ? '#5b5fc7' : '#e1e1e1' }}
               />
             ))}
           </div>
@@ -340,7 +340,7 @@ export default function StartPage() {
                 />
               </div>
               <p className="mt-1 text-[11px]" style={{ color: '#a0a0a0' }}>
-                Unique identifier: <span style={{ color: '#D97757' }}>{workspaceSlug || 'your-company'}</span>
+                Unique identifier: <span style={{ color: '#5b5fc7' }}>{workspaceSlug || 'your-company'}</span>
               </p>
             </div>
 
@@ -364,16 +364,16 @@ export default function StartPage() {
             <button
               onClick={handleStep1}
               className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90"
-              style={{ backgroundColor: '#D97757', border: 'none', fontSize: 14 }}
+              style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
             >
               Continue <ArrowRight size={16} />
             </button>
 
             <p className="text-center text-[11px]" style={{ color: '#a0a0a0' }}>
               By continuing, you agree to our{' '}
-              <a href="/#/terms" className="hover:underline" style={{ color: '#D97757' }}>Terms</a>
+              <a href="/#/terms" className="hover:underline" style={{ color: '#5b5fc7' }}>Terms</a>
               {' '}and{' '}
-              <a href="/#/privacy" className="hover:underline" style={{ color: '#D97757' }}>Privacy Policy</a>
+              <a href="/#/privacy" className="hover:underline" style={{ color: '#5b5fc7' }}>Privacy Policy</a>
             </p>
           </div>
         )}
@@ -482,7 +482,7 @@ export default function StartPage() {
                 onClick={handleStep2}
                 disabled={loading}
                 className="flex-[2] flex cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90 disabled:opacity-60"
-                style={{ backgroundColor: '#D97757', border: 'none', fontSize: 14 }}
+                style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
               >
                 {loading ? 'Creating account…' : <><span>Send Verification Code</span> <ArrowRight size={16} /></>}
               </button>
@@ -514,7 +514,7 @@ export default function StartPage() {
                       codeRefs.current[i - 1]?.focus();
                     }
                   }}
-                  className="h-14 w-12 rounded-lg border text-center text-xl font-bold outline-none focus:border-[#D97757]"
+                  className="h-14 w-12 rounded-lg border text-center text-xl font-bold outline-none focus:border-[#5b5fc7]"
                   style={{ borderColor: '#d1d1d1', backgroundColor: '#fff' }}
                   autoFocus={i === 0}
                 />
@@ -523,7 +523,7 @@ export default function StartPage() {
 
             <p className="text-center text-xs" style={{ color: '#616161' }}>
               Didn&apos;t receive it?{' '}
-              <button onClick={handleResend} className="font-medium hover:underline" style={{ color: '#D97757' }}>
+              <button onClick={handleResend} className="font-medium hover:underline" style={{ color: '#5b5fc7' }}>
                 Resend code
               </button>
             </p>
@@ -540,7 +540,7 @@ export default function StartPage() {
                 onClick={handleStep3}
                 disabled={loading}
                 className="flex-[2] flex cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90 disabled:opacity-60"
-                style={{ backgroundColor: '#D97757', border: 'none', fontSize: 14 }}
+                style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
               >
                 {loading ? 'Verifying…' : <><span>Verify &amp; Continue</span> <ArrowRight size={16} /></>}
               </button>
@@ -553,9 +553,9 @@ export default function StartPage() {
           <div className="space-y-4">
             <div className="rounded-lg p-3" style={{ backgroundColor: '#faf9f6', border: '1px solid #e8e8e8' }}>
               <div className="flex items-start gap-2">
-                <Layers size={14} color="#D97757" className="mt-0.5 shrink-0" />
+                <Layers size={14} color="#5b5fc7" className="mt-0.5 shrink-0" />
                 <p className="text-[11px]" style={{ color: '#616161', lineHeight: 1.5 }}>
-                  Creating workspace: <strong>{companyName}</strong> at <strong style={{ color: '#D97757' }}>{workspaceSlug}</strong>
+                  Creating workspace: <strong>{companyName}</strong> at <strong style={{ color: '#5b5fc7' }}>{workspaceSlug}</strong>
                 </p>
               </div>
             </div>
@@ -569,7 +569,7 @@ export default function StartPage() {
                 onChange={(e) => setInviteEmails(e.target.value)}
                 placeholder="dev@company.com&#10;design@company.com&#10;pm@company.com"
                 rows={4}
-                className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:border-[#D97757]"
+                className="w-full rounded-lg border px-3 py-2.5 text-sm outline-none focus:border-[#5b5fc7]"
                 style={{ borderColor: '#d1d1d1', backgroundColor: '#fff', resize: 'vertical' }}
               />
               <p className="mt-1 text-[11px]" style={{ color: '#a0a0a0' }}>
@@ -613,7 +613,7 @@ export default function StartPage() {
                 {companyName} is live on Brix OS!
               </h2>
               <p className="text-center text-sm" style={{ color: '#616161' }}>
-                Workspace: <strong style={{ color: '#D97757' }}>{workspaceSlug}</strong>
+                Workspace: <strong style={{ color: '#5b5fc7' }}>{workspaceSlug}</strong>
               </p>
             </div>
 
@@ -626,7 +626,7 @@ export default function StartPage() {
                 </div>
               </div>
               <div className="flex items-center gap-3 rounded-lg p-3" style={{ backgroundColor: '#faf9f6' }}>
-                <Building2 size={18} color="#D97757" />
+                <Building2 size={18} color="#5b5fc7" />
                 <div>
                   <p className="text-sm font-medium" style={{ color: '#1A1209' }}>Workspace created</p>
                   <p className="text-[11px]" style={{ color: '#616161' }}>{industry} · Starter plan</p>
@@ -634,7 +634,7 @@ export default function StartPage() {
               </div>
               {inviteEmails.trim() && (
                 <div className="flex items-center gap-3 rounded-lg p-3" style={{ backgroundColor: '#faf9f6' }}>
-                  <Users size={18} color="#D97757" />
+                  <Users size={18} color="#5b5fc7" />
                   <div>
                     <p className="text-sm font-medium" style={{ color: '#1A1209' }}>Team invited</p>
                     <p className="text-[11px]" style={{ color: '#616161' }}>
@@ -648,7 +648,7 @@ export default function StartPage() {
             <button
               onClick={() => navigate('/projects', { replace: true })}
               className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90"
-              style={{ backgroundColor: '#D97757', border: 'none', fontSize: 14 }}
+              style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
             >
               <Rocket size={18} />
               Go to Dashboard

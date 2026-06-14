@@ -1391,7 +1391,7 @@ function MeetingForm({
       meetingType: template || 'sync',
       type: template || 'sync',
       attendees: selectedAttendees,
-      organizer: 'emp-sonadarshan',
+      organizer: 'emp-alex',
       location,
       channel: location,
       description: agenda,

@@ -25,7 +25,7 @@ const orgChannels = [
   { id: 'ch-backend', name: 'backend', type: 'public' as const, memberCount: 3, unreadCount: 5, lastMessage: 'Sage: DB migration complete', lastMessageTime: new Date(Date.now() - 40 * 60000).toISOString() },
   { id: 'ch-design', name: 'design', type: 'public' as const, memberCount: 3, unreadCount: 1, lastMessage: 'Pixel: New icon set uploaded', lastMessageTime: new Date(Date.now() - 60 * 60000).toISOString() },
   { id: 'ch-ai-updates', name: 'ai-agent-updates', type: 'announcement' as const, memberCount: 9, unreadCount: 4, lastMessage: 'Echo: Auto-scaled production cluster', lastMessageTime: new Date(Date.now() - 8 * 60000).toISOString() },
-  { id: 'ch-leadership', name: 'leadership', type: 'private' as const, memberCount: 3, unreadCount: 0, lastMessage: 'Sonadarshan: Q2 planning doc', lastMessageTime: new Date(Date.now() - 120 * 60000).toISOString() },
+  { id: 'ch-leadership', name: 'leadership', type: 'private' as const, memberCount: 3, unreadCount: 0, lastMessage: 'Alex Chen: Q2 planning doc', lastMessageTime: new Date(Date.now() - 120 * 60000).toISOString() },
   { id: 'ch-security', name: 'security-alerts', type: 'private' as const, memberCount: 4, unreadCount: 1, lastMessage: 'Echo: Firewall rule updated', lastMessageTime: new Date(Date.now() - 180 * 60000).toISOString() },
 ];
 
@@ -36,7 +36,7 @@ const callList = [
   { id: 'call-2', title: 'Sprint 14 Planning — All Teams', status: 'scheduled' as const, callType: 'planning', aiAttendants: ['aria', 'sage', 'echo'] },
   { id: 'call-3', title: 'Incident Review — API Latency', status: 'live' as const, callType: 'incident', recording: true, duration: 25, aiAttendants: ['echo', 'sage'] },
   { id: 'call-4', title: 'Weekly Engineering Review', status: 'ended' as const, callType: 'review', duration: 45, aiAttendants: ['manager'] },
-  { id: 'call-5', title: '1:1 — Sonadarshan & Raj', status: 'scheduled' as const, callType: '1on1', aiAttendants: [] },
+  { id: 'call-5', title: '1:1 — Alex Chen & Raj', status: 'scheduled' as const, callType: '1on1', aiAttendants: [] },
 ];
 
 const typeColors: Record<string, string> = { standup: '#22c55e', review: '#3b82f6', planning: '#f59e0b', incident: '#ef4444', '1on1': '#ec4899' };
@@ -142,7 +142,7 @@ const teamGroups = [
   { id: 'grp-eng', name: 'Engineering Team', memberCount: 6, type: 'team', lastMessage: 'Raj: API tests all green' },
   { id: 'grp-design', name: 'Design Studio', memberCount: 3, type: 'team', lastMessage: 'Pixel: New icons uploaded' },
   { id: 'grp-qa', name: 'QA Squad', memberCount: 3, type: 'team', lastMessage: 'Priya: Regression complete' },
-  { id: 'grp-mgmt', name: 'Management', memberCount: 3, type: 'leadership', lastMessage: 'Sonadarshan: Q2 goals doc' },
+  { id: 'grp-mgmt', name: 'Management', memberCount: 3, type: 'leadership', lastMessage: 'Alex Chen: Q2 goals doc' },
   { id: 'grp-ai', name: 'AI Agents', memberCount: 5, type: 'ai', lastMessage: 'Echo: Auto-scaled cluster' },
   { id: 'grp-all', name: 'Company All-Hands', memberCount: 9, type: 'company', lastMessage: 'Sage: Monthly report ready' },
 ];

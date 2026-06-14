@@ -159,7 +159,7 @@ export default function LoginPage() {
         >
           <div
             className="flex items-center justify-center rounded-lg"
-            style={{ width: 32, height: 32, backgroundColor: '#D97757' }}
+            style={{ width: 32, height: 32, backgroundColor: '#5b5fc7' }}
           >
             <Zap size={18} color="#fff" />
           </div>
@@ -186,7 +186,7 @@ export default function LoginPage() {
               <div
                 className="flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold transition-all"
                 style={{
-                  backgroundColor: i <= currentStepIndex ? '#D97757' : '#e1e1e1',
+                  backgroundColor: i <= currentStepIndex ? '#5b5fc7' : '#e1e1e1',
                   color: i <= currentStepIndex ? '#fff' : '#a0a0a0',
                 }}
               >
@@ -195,7 +195,7 @@ export default function LoginPage() {
               {i < 2 && (
                 <div
                   className="h-px w-8 transition-all"
-                  style={{ backgroundColor: i < currentStepIndex ? '#D97757' : '#e1e1e1' }}
+                  style={{ backgroundColor: i < currentStepIndex ? '#5b5fc7' : '#e1e1e1' }}
                 />
               )}
             </div>
@@ -208,7 +208,7 @@ export default function LoginPage() {
             <div className="mb-6 flex justify-center">
               <div
                 className="flex items-center justify-center rounded-xl"
-                style={{ width: 56, height: 56, backgroundColor: '#D97757' }}
+                style={{ width: 56, height: 56, backgroundColor: '#5b5fc7' }}
               >
                 <Building2 size={28} color="#fff" />
               </div>
@@ -254,7 +254,7 @@ export default function LoginPage() {
               <button
                 onClick={handleEmailSubmit}
                 className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90"
-                style={{ backgroundColor: '#D97757', border: 'none', fontSize: 14 }}
+                style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
               >
                 Continue
                 <ArrowRight size={16} />
@@ -263,7 +263,7 @@ export default function LoginPage() {
 
             <p className="mt-6 text-center text-xs" style={{ color: '#616161' }}>
               New to Brix OS?{' '}
-              <a href="/#/start" className="font-medium hover:underline" style={{ color: '#D97757' }}>
+              <a href="/#/start" className="font-medium hover:underline" style={{ color: '#5b5fc7' }}>
                 Create a workspace
               </a>
             </p>
@@ -287,7 +287,7 @@ export default function LoginPage() {
             >
               <div
                 className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
-                style={{ backgroundColor: '#D97757' }}
+                style={{ backgroundColor: '#5b5fc7' }}
               >
                 <Mail size={18} color="#fff" />
               </div>
@@ -320,7 +320,7 @@ export default function LoginPage() {
                   <label className="block text-xs font-semibold uppercase tracking-wider" style={{ color: '#616161' }}>
                     Password
                   </label>
-                  <a href="/#/forgot-password" className="text-xs hover:underline" style={{ color: '#D97757' }}>
+                  <a href="/#/forgot-password" className="text-xs hover:underline" style={{ color: '#5b5fc7' }}>
                     Forgot password?
                   </a>
                 </div>
@@ -349,7 +349,7 @@ export default function LoginPage() {
                 type="submit"
                 disabled={loading}
                 className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl py-3 font-semibold text-white transition-all hover:opacity-90 disabled:opacity-60"
-                style={{ backgroundColor: '#D97757', border: 'none', fontSize: 14 }}
+                style={{ backgroundColor: '#5b5fc7', border: 'none', fontSize: 14 }}
               >
                 {loading ? (
                   <span className="flex items-center gap-2">
@@ -373,7 +373,7 @@ export default function LoginPage() {
 
             <p className="mt-4 text-center text-xs" style={{ color: '#616161' }}>
               Don&apos;t have an account?{' '}
-              <a href="/#/start" className="font-medium hover:underline" style={{ color: '#D97757' }}>
+              <a href="/#/start" className="font-medium hover:underline" style={{ color: '#5b5fc7' }}>
                 Create workspace
               </a>
             </p>
@@ -405,12 +405,12 @@ export default function LoginPage() {
                 <button
                   key={ws.id}
                   onClick={() => handleWorkspacePick(ws)}
-                  className="flex w-full items-center gap-3 rounded-xl border p-4 text-left transition-all hover:border-[#D97757]"
+                  className="flex w-full items-center gap-3 rounded-xl border p-4 text-left transition-all hover:border-[#5b5fc7]"
                   style={{ borderColor: '#d1d1d1', backgroundColor: '#fff' }}
                 >
                   <div
                     className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-sm font-bold text-white"
-                    style={{ backgroundColor: '#D97757' }}
+                    style={{ backgroundColor: '#5b5fc7' }}
                   >
                     {ws.name?.[0]?.toUpperCase() || 'W'}
                   </div>

@@ -79,7 +79,7 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
 
   // Account fields (editable)
   const [accountName, setAccountName] = useState(currentUser.name);
-  const [accountEmail, setAccountEmail] = useState(currentUser.email || 'sonadarshan@acme-brixstac.com');
+  const [accountEmail, setAccountEmail] = useState(currentUser.email || 'alex@acme-brixstac.com');
   const [accountOrg, setAccountOrg] = useState('Acme Software');
 
   // 2FA
@@ -100,7 +100,7 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
     accentColor: persisted.accentColor,
     fontSize: persisted.fontSize,
     accountName: currentUser.name,
-    accountEmail: currentUser.email || 'sonadarshan@acme-brixstac.com',
+    accountEmail: currentUser.email || 'alex@acme-brixstac.com',
     accountOrg: 'Acme Software',
     twoFAEnabled: true,
   });
@@ -113,7 +113,7 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
         accentColor: p.accentColor,
         fontSize: p.fontSize,
         accountName: currentUser.name,
-        accountEmail: currentUser.email || 'sonadarshan@acme-brixstac.com',
+        accountEmail: currentUser.email || 'alex@acme-brixstac.com',
         accountOrg: 'Acme Software',
         twoFAEnabled: true,
       };
@@ -249,7 +249,7 @@ export function SettingsDialog() {  const settingsOpen = useStore((s) => s.setti
     setAccentColor(p.accentColor);
     setFontSize(p.fontSize);
     setAccountName(currentUser.name);
-    setAccountEmail(currentUser.email || 'sonadarshan@acme-brixstac.com');
+    setAccountEmail(currentUser.email || 'alex@acme-brixstac.com');
     setAccountOrg('Acme Software');
     setHasChanges(false);
     setShowUnsavedWarning(false);

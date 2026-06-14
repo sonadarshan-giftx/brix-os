@@ -2171,14 +2171,14 @@ function BrandingApp({ onBack }: { onBack: () => void }) {
    Audit App
    ═══════════════════════════════════════════ */
 const AUDIT_LOGS = [
-  { id: 1, actor: 'Sonadarshan', action: 'Approved production deploy', target: 'tax-filing-platform', time: '2h ago', severity: 'high' as const },
+  { id: 1, actor: 'Alex Chen', action: 'Approved production deploy', target: 'tax-filing-platform', time: '2h ago', severity: 'high' as const },
   { id: 2, actor: 'Echo (AI)', action: 'Auto-scaled infrastructure', target: 'api-gateway', time: '3h ago', severity: 'medium' as const },
   { id: 3, actor: 'Maya', action: 'Created sprint 14', target: 'Tax Filing Platform', time: '5h ago', severity: 'low' as const },
-  { id: 4, actor: 'Sonadarshan', action: 'Modified security policy', target: 'MFA Required', time: '1d ago', severity: 'high' as const },
+  { id: 4, actor: 'Alex Chen', action: 'Modified security policy', target: 'MFA Required', time: '1d ago', severity: 'high' as const },
   { id: 5, actor: 'Sage (AI)', action: 'Merged pull request #347', target: 'auth-service', time: '1d ago', severity: 'medium' as const },
   { id: 6, actor: 'Raj', action: 'Accessed customer data', target: 'User DB', time: '2d ago', severity: 'high' as const },
   { id: 7, actor: 'Priya', action: 'Created bug report', target: 'TAX-142', time: '2d ago', severity: 'low' as const },
-  { id: 8, actor: 'Sonadarshan', action: 'Granted admin access', target: 'Maya', time: '3d ago', severity: 'high' as const },
+  { id: 8, actor: 'Alex Chen', action: 'Granted admin access', target: 'Maya', time: '3d ago', severity: 'high' as const },
 ];
 
 function AuditApp({ onBack }: { onBack: () => void }) {
@@ -2268,7 +2268,7 @@ const COM_TEMPLATES = [
 ];
 
 const ANNOUNCEMENTS = [
-  { id: 1, title: 'Sprint 14 Kickoff Tomorrow', author: 'Sonadarshan', date: 'Apr 27, 2025', pinned: true, reactions: 8 },
+  { id: 1, title: 'Sprint 14 Kickoff Tomorrow', author: 'Alex Chen', date: 'Apr 27, 2025', pinned: true, reactions: 8 },
   { id: 2, title: 'New Security Policy Effective May 1', author: 'Echo (AI)', date: 'Apr 25, 2025', pinned: true, reactions: 12 },
   { id: 3, title: 'Office Closure — Memorial Day', author: 'Manager (AI)', date: 'Apr 20, 2025', pinned: false, reactions: 3 },
 ];

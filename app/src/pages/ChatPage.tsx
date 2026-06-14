@@ -173,8 +173,8 @@ const SLASH_COMMANDS = [
    ═══════════════════════════════════════════════════════════════ */
 
 const WORKSPACE_MEMBERS: WorkspaceMember[] = [
-  { id: 'u-sonadarshan', name: 'Sonadarshan', title: 'Owner / CEO', email: 'sona@brixstac.io', status: 'online', kind: 'human', initials: 'SO', color: '#c4314b', timezone: 'America/New_York' },
-  { id: 'u-sandesha', name: 'Sandesha', title: 'Co-founder', email: 'sandesha@brixstac.io', status: 'online', kind: 'human', initials: 'SA', color: '#0891b2', timezone: 'Asia/Kolkata' },
+  { id: 'u-alex', name: 'Alex Chen', title: 'CEO & Founder', email: 'alex@brixstac.io', status: 'online', kind: 'human', initials: 'AC', color: '#c4314b', timezone: 'America/New_York' },
+  { id: 'u-sarah', name: 'Sarah Kim', title: 'Co-founder & CTO', email: 'sarah@brixstac.io', status: 'online', kind: 'human', initials: 'SK', color: '#0891b2', timezone: 'Asia/Kolkata' },
   { id: 'u-aria', name: 'Aria', title: 'AI Sr. Developer', email: 'aria@brixstac.io', status: 'online', kind: 'ai', initials: 'AR', color: '#7c3aed' },
   { id: 'u-sage', name: 'Sage', title: 'AI Backend Dev', email: 'sage@brixstac.io', status: 'online', kind: 'ai', initials: 'SG', color: '#6d28d9' },
   { id: 'u-pixel', name: 'Pixel', title: 'AI Designer', email: 'pixel@brixstac.io', status: 'online', kind: 'ai', initials: 'PX', color: '#7c3aed' },
@@ -199,7 +199,7 @@ const INITIAL_CHANNELS: Channel[] = [
 const INITIAL_DMS: DMConversation[] = [
   { id: 'dm-aria', personId: 'u-aria', unread: 2, lastMessage: 'The PR is ready for review!', lastTime: '2m ago', readReceipt: 'delivered' },
   { id: 'dm-sage', personId: 'u-sage', unread: 0, lastMessage: 'API endpoints are all set', lastTime: '1h ago', readReceipt: 'read' },
-  { id: 'dm-sandesha', personId: 'u-sandesha', unread: 1, lastMessage: 'Can we sync tomorrow?', lastTime: '3h ago', readReceipt: 'sent' },
+  { id: 'dm-sarah', personId: 'u-sarah', unread: 1, lastMessage: 'Can we sync tomorrow?', lastTime: '3h ago', readReceipt: 'sent' },
 ];
 
 function generateMockMessages(channelId: string, currentUserId: string): ChatMessage[] {
@@ -256,10 +256,10 @@ function generateMockMessages(channelId: string, currentUserId: string): ChatMes
       timestamp: ts,
       isMe,
       reactions: i === 3 ? [
-        { emoji: '👍', count: 3, users: ['u-aria', 'u-sage', 'u-sandesha'] },
+        { emoji: '👍', count: 3, users: ['u-aria', 'u-sage', 'u-sarah'] },
         { emoji: '🚀', count: 2, users: ['u-pixel', 'u-echo'] },
       ] : i === 7 ? [
-        { emoji: '❤️', count: 1, users: ['u-sonadarshan'] },
+        { emoji: '❤️', count: 1, users: ['u-alex'] },
       ] : undefined,
       threadCount: i === 5 ? 4 : i === 10 ? 2 : 0,
       pinned: i === 2,
@@ -553,7 +553,7 @@ const ProfileCard = memo(({ member, onClose, onDm, isOwnProfile, onSetStatus }: 
         {!isOwnProfile && onDm && (
           <button
             onClick={() => { onDm(); onClose(); }}
-            className="flex-1 flex items-center justify-center gap-1.5 bg-[#D97757] hover:bg-[#c4674a] text-white text-xs font-medium py-2 rounded-lg transition-colors"
+            className="flex-1 flex items-center justify-center gap-1.5 bg-[#5b5fc7] hover:bg-[#c4674a] text-white text-xs font-medium py-2 rounded-lg transition-colors"
           >
             <MessageSquare size={13} />
             Message
@@ -594,7 +594,7 @@ const PollRenderer = memo(({ poll, messageId, currentUserId, isCreator, onVote, 
   return (
     <div className="mt-2 bg-white/5 rounded-xl p-4 max-w-sm border border-white/10">
       <div className="flex items-center gap-2 mb-3">
-        <BarChart2 size={15} className="text-[#D97757]" />
+        <BarChart2 size={15} className="text-[#5b5fc7]" />
         <span className="font-semibold text-white text-sm">{poll.question}</span>
       </div>
       <div className="space-y-2">
@@ -607,7 +607,7 @@ const PollRenderer = memo(({ poll, messageId, currentUserId, isCreator, onVote, 
               disabled={poll.closed}
               onClick={() => !poll.closed && onVote(messageId, opt.id)}
               className={`w-full text-left rounded-lg overflow-hidden border transition-colors ${
-                isMyChoice ? 'border-[#D97757]' : 'border-white/10 hover:border-white/20'
+                isMyChoice ? 'border-[#5b5fc7]' : 'border-white/10 hover:border-white/20'
               } ${poll.closed ? 'cursor-default' : 'cursor-pointer'}`}
             >
               <div className="relative px-3 py-2">
@@ -620,7 +620,7 @@ const PollRenderer = memo(({ poll, messageId, currentUserId, isCreator, onVote, 
                 />
                 <div className="relative flex items-center justify-between">
                   <div className="flex items-center gap-2 text-sm text-white">
-                    {isMyChoice && <Check size={12} className="text-[#D97757]" />}
+                    {isMyChoice && <Check size={12} className="text-[#5b5fc7]" />}
                     {opt.text}
                   </div>
                   <span className="text-xs text-gray-400">{pct}%</span>
@@ -952,9 +952,9 @@ const MessageComposer = memo(({
                 <button
                   key={cmd.command}
                   onClick={() => insertSlashCommand(cmd.command)}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm text-left transition-colors ${i === slashIndex ? 'bg-[#D97757]/20' : 'hover:bg-white/5'}`}
+                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm text-left transition-colors ${i === slashIndex ? 'bg-[#5b5fc7]/20' : 'hover:bg-white/5'}`}
                 >
-                  <Zap size={12} className="text-[#D97757] flex-shrink-0" />
+                  <Zap size={12} className="text-[#5b5fc7] flex-shrink-0" />
                   <span className="text-white font-medium">{cmd.command}</span>
                   <span className="text-gray-500 text-xs ml-auto">{cmd.description}</span>
                 </button>
@@ -976,7 +976,7 @@ const MessageComposer = memo(({
                 <button
                   key={item.id}
                   onClick={() => insertMention(showMentions ? `@${'name' in item ? item.name : ''}` : `#${'name' in item ? item.name : ''}`)}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm text-left transition-colors ${i === mentionIndex ? 'bg-[#D97757]/20' : 'hover:bg-white/5'}`}
+                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm text-left transition-colors ${i === mentionIndex ? 'bg-[#5b5fc7]/20' : 'hover:bg-white/5'}`}
                 >
                   {showMentions ? (
                     <>
@@ -1127,7 +1127,7 @@ const MessageComposer = memo(({
             <button
               onClick={doSend}
               disabled={!text.trim() && attachments.length === 0}
-              className="flex items-center gap-1.5 bg-[#D97757] hover:bg-[#c4674a] disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium px-3 py-1.5 rounded-lg transition-colors"
+              className="flex items-center gap-1.5 bg-[#5b5fc7] hover:bg-[#c4674a] disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium px-3 py-1.5 rounded-lg transition-colors"
             >
               <Send size={13} />
               Send
@@ -1298,7 +1298,7 @@ function renderMessageContent(text: string): string {
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
     .replace(/`(.*?)`/g, '<code style="background:rgba(255,255,255,.1);padding:1px 4px;border-radius:3px;font-family:monospace;font-size:12px">$1</code>')
-    .replace(/@(\w+)/g, '<span style="color:#D97757;font-weight:500;cursor:pointer">@$1</span>')
+    .replace(/@(\w+)/g, '<span style="color:#5b5fc7;font-weight:500;cursor:pointer">@$1</span>')
     .replace(/#(\w[-\w]*)/g, '<span style="color:#60a5fa;font-weight:500;cursor:pointer">#$1</span>')
     .replace(/\n/g, '<br>');
 }
@@ -1390,7 +1390,7 @@ const MessageItem = memo(({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.15 }}
-      className={`relative group flex gap-3 px-4 py-0.5 transition-colors ${hovered ? 'bg-white/[0.03]' : ''} ${isHighlighted ? 'bg-[#D97757]/10 ring-1 ring-[#D97757]/20 rounded-lg mx-2' : ''}`}
+      className={`relative group flex gap-3 px-4 py-0.5 transition-colors ${hovered ? 'bg-white/[0.03]' : ''} ${isHighlighted ? 'bg-[#5b5fc7]/10 ring-1 ring-[#5b5fc7]/20 rounded-lg mx-2' : ''}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -1459,7 +1459,7 @@ const MessageItem = memo(({
               autoFocus
             />
             <div className="flex gap-2 mt-1 text-xs">
-              <button onClick={() => onEditSave(message.id, editText)} className="text-[#D97757] hover:text-[#c4674a] font-medium">Save</button>
+              <button onClick={() => onEditSave(message.id, editText)} className="text-[#5b5fc7] hover:text-[#c4674a] font-medium">Save</button>
               <button onClick={onEditCancel} className="text-gray-400 hover:text-white">Cancel</button>
             </div>
           </div>
@@ -1472,7 +1472,7 @@ const MessageItem = memo(({
 
         {/* Link Preview Card */}
         {linkPreview && !previewDismissed && (
-          <div className="relative mt-2 flex items-start gap-3 bg-[rgba(0,0,0,0.03)] border border-white/10 border-l-4 border-l-[#D97757] rounded-lg p-3 max-w-sm group/preview">
+          <div className="relative mt-2 flex items-start gap-3 bg-[rgba(0,0,0,0.03)] border border-white/10 border-l-4 border-l-[#5b5fc7] rounded-lg p-3 max-w-sm group/preview">
             {linkPreview.image && (
               <img
                 src={linkPreview.image}
@@ -1495,7 +1495,7 @@ const MessageItem = memo(({
                 href={linkPreview.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 mt-1 text-xs text-[#D97757] hover:underline"
+                className="flex items-center gap-1 mt-1 text-xs text-[#5b5fc7] hover:underline"
               >
                 <Link2 size={10} />
                 {linkPreview.url.replace(/^https?:\/\//, '').slice(0, 50)}
@@ -1540,7 +1540,7 @@ const MessageItem = memo(({
                   </div>
                 ) : (
                   <div className="flex items-center gap-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-3 py-2.5 transition-colors cursor-pointer">
-                    <FileText size={16} className="text-[#D97757] flex-shrink-0" />
+                    <FileText size={16} className="text-[#5b5fc7] flex-shrink-0" />
                     <div>
                       <div className="text-xs font-medium text-white">{att.name}</div>
                       {att.size && <div className="text-xs text-gray-500">{att.size}</div>}
@@ -1564,7 +1564,7 @@ const MessageItem = memo(({
                   onClick={() => onReact(message.id, r.emoji)}
                   className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-sm border transition-colors ${
                     reacted
-                      ? 'bg-[#D97757]/20 border-[#D97757]/40 text-[#D97757]'
+                      ? 'bg-[#5b5fc7]/20 border-[#5b5fc7]/40 text-[#5b5fc7]'
                       : 'bg-white/5 border-white/10 text-gray-300 hover:border-white/20 hover:bg-white/10'
                   }`}
                   title={r.users.map(uid => getMemberById(uid)?.name || uid).join(', ')}
@@ -1725,7 +1725,7 @@ const CreateChannelModal = memo(({ workspaceId, authToken, members, onClose, onC
           )}
           <div>
             <label className="block text-xs text-gray-400 font-medium mb-1.5 uppercase tracking-wider">Channel name</label>
-            <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2 focus-within:border-[#D97757]/50">
+            <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2 focus-within:border-[#5b5fc7]/50">
               <Hash size={15} className="text-gray-500" />
               <input
                 value={name}
@@ -1744,7 +1744,7 @@ const CreateChannelModal = memo(({ workspaceId, authToken, members, onClose, onC
               onChange={e => setDescription(e.target.value)}
               placeholder="What is this channel about?"
               rows={2}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-[#D97757]/50 resize-none"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-[#5b5fc7]/50 resize-none"
             />
           </div>
           <div className="flex items-center justify-between py-2 px-3 bg-white/5 rounded-lg">
@@ -1757,14 +1757,14 @@ const CreateChannelModal = memo(({ workspaceId, authToken, members, onClose, onC
             </div>
             <button
               onClick={() => setIsPrivate(v => !v)}
-              className={`relative w-10 h-6 rounded-full transition-colors ${isPrivate ? 'bg-[#D97757]' : 'bg-white/10'}`}
+              className={`relative w-10 h-6 rounded-full transition-colors ${isPrivate ? 'bg-[#5b5fc7]' : 'bg-white/10'}`}
             >
               <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform shadow ${isPrivate ? 'translate-x-5' : 'translate-x-1'}`} />
             </button>
           </div>
           <div>
             <label className="block text-xs text-gray-400 font-medium mb-1.5 uppercase tracking-wider">Add members</label>
-            <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2 focus-within:border-[#D97757]/50 mb-2">
+            <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2 focus-within:border-[#5b5fc7]/50 mb-2">
               <Search size={13} className="text-gray-500" />
               <input
                 value={inviteQuery}
@@ -1807,7 +1807,7 @@ const CreateChannelModal = memo(({ workspaceId, authToken, members, onClose, onC
           <button
             onClick={handleSubmit}
             disabled={!name.trim() || loading}
-            className="flex-1 py-2.5 rounded-lg bg-[#D97757] hover:bg-[#c4674a] disabled:opacity-40 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
+            className="flex-1 py-2.5 rounded-lg bg-[#5b5fc7] hover:bg-[#c4674a] disabled:opacity-40 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
           >
             {loading ? <RefreshCw size={14} className="animate-spin" /> : <Plus size={14} />}
             Create Channel
@@ -1859,7 +1859,7 @@ const PollBuilder = memo(({ onClose, onInsert }: PollBuilderProps) => {
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-white/10">
-          <h2 className="text-lg font-bold text-white flex items-center gap-2"><BarChart2 size={18} className="text-[#D97757]" /> Create Poll</h2>
+          <h2 className="text-lg font-bold text-white flex items-center gap-2"><BarChart2 size={18} className="text-[#5b5fc7]" /> Create Poll</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors"><X size={20} /></button>
         </div>
         <div className="p-6 space-y-4">
@@ -1869,7 +1869,7 @@ const PollBuilder = memo(({ onClose, onInsert }: PollBuilderProps) => {
               value={question}
               onChange={e => setQuestion(e.target.value)}
               placeholder="Ask a question…"
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-gray-500 outline-none focus:border-[#D97757]/50"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-gray-500 outline-none focus:border-[#5b5fc7]/50"
               autoFocus
             />
           </div>
@@ -1882,7 +1882,7 @@ const PollBuilder = memo(({ onClose, onInsert }: PollBuilderProps) => {
                     value={opt}
                     onChange={e => updateOption(i, e.target.value)}
                     placeholder={`Option ${i + 1}`}
-                    className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-[#D97757]/50"
+                    className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-[#5b5fc7]/50"
                   />
                   {options.length > 2 && (
                     <button onClick={() => removeOption(i)} className="text-gray-500 hover:text-red-400 transition-colors"><X size={14} /></button>
@@ -1891,7 +1891,7 @@ const PollBuilder = memo(({ onClose, onInsert }: PollBuilderProps) => {
               ))}
             </div>
             {options.length < 10 && (
-              <button onClick={addOption} className="mt-2 flex items-center gap-1.5 text-xs text-[#D97757] hover:text-[#c4674a] transition-colors">
+              <button onClick={addOption} className="mt-2 flex items-center gap-1.5 text-xs text-[#5b5fc7] hover:text-[#c4674a] transition-colors">
                 <Plus size={13} /> Add option
               </button>
             )}
@@ -1900,7 +1900,7 @@ const PollBuilder = memo(({ onClose, onInsert }: PollBuilderProps) => {
             <div className="text-sm text-white">Allow multiple votes</div>
             <button
               onClick={() => setMultiSelect(v => !v)}
-              className={`relative w-10 h-6 rounded-full transition-colors ${multiSelect ? 'bg-[#D97757]' : 'bg-white/10'}`}
+              className={`relative w-10 h-6 rounded-full transition-colors ${multiSelect ? 'bg-[#5b5fc7]' : 'bg-white/10'}`}
             >
               <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform shadow ${multiSelect ? 'translate-x-5' : 'translate-x-1'}`} />
             </button>
@@ -1911,7 +1911,7 @@ const PollBuilder = memo(({ onClose, onInsert }: PollBuilderProps) => {
           <button
             onClick={handleInsert}
             disabled={!question.trim() || options.filter(o => o.trim()).length < 2}
-            className="flex-1 py-2.5 rounded-lg bg-[#D97757] hover:bg-[#c4674a] disabled:opacity-40 text-white text-sm font-medium transition-colors"
+            className="flex-1 py-2.5 rounded-lg bg-[#5b5fc7] hover:bg-[#c4674a] disabled:opacity-40 text-white text-sm font-medium transition-colors"
           >
             Insert Poll
           </button>
@@ -1995,7 +1995,7 @@ const CustomStatusModal = memo(({ currentStatus, onClose, onSave }: CustomStatus
               onChange={e => setText(e.target.value)}
               placeholder="What's your status?"
               maxLength={100}
-              className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-gray-500 outline-none focus:border-[#D97757]/50"
+              className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-gray-500 outline-none focus:border-[#5b5fc7]/50"
               autoFocus
             />
           </div>
@@ -2006,7 +2006,7 @@ const CustomStatusModal = memo(({ currentStatus, onClose, onSave }: CustomStatus
                 <button
                   key={opt.value}
                   onClick={() => setExpiry(opt.value)}
-                  className={`py-1.5 px-2 rounded-lg text-xs transition-colors ${expiry === opt.value ? 'bg-[#D97757] text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'}`}
+                  className={`py-1.5 px-2 rounded-lg text-xs transition-colors ${expiry === opt.value ? 'bg-[#5b5fc7] text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'}`}
                 >
                   {opt.label}
                 </button>
@@ -2018,7 +2018,7 @@ const CustomStatusModal = memo(({ currentStatus, onClose, onSave }: CustomStatus
           <button onClick={onClose} className="flex-1 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white text-sm font-medium transition-colors">Cancel</button>
           <button
             onClick={() => { onSave({ emoji, text, expiresAt: computeExpiry(expiry) }); onClose(); }}
-            className="flex-1 py-2 rounded-lg bg-[#D97757] hover:bg-[#c4674a] text-white text-sm font-medium transition-colors"
+            className="flex-1 py-2 rounded-lg bg-[#5b5fc7] hover:bg-[#c4674a] text-white text-sm font-medium transition-colors"
           >
             Save
           </button>
@@ -2089,7 +2089,7 @@ const SearchModal = memo(({ channels, members, allMessages, onClose, onNavigate 
     if (idx === -1) return text.slice(0, 120);
     const start = Math.max(0, idx - 30);
     const snippet = text.slice(start, start + 120);
-    return snippet.replace(new RegExp(q, 'gi'), m => `<mark class="bg-[#D97757]/30 text-[#D97757]">${m}</mark>`);
+    return snippet.replace(new RegExp(q, 'gi'), m => `<mark class="bg-[#5b5fc7]/30 text-[#5b5fc7]">${m}</mark>`);
   };
 
   return (
@@ -2127,7 +2127,7 @@ const SearchModal = memo(({ channels, members, allMessages, onClose, onNavigate 
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`flex-1 py-2.5 text-sm font-medium capitalize transition-colors ${activeTab === tab ? 'text-[#D97757] border-b-2 border-[#D97757]' : 'text-gray-400 hover:text-white'}`}
+              className={`flex-1 py-2.5 text-sm font-medium capitalize transition-colors ${activeTab === tab ? 'text-[#5b5fc7] border-b-2 border-[#5b5fc7]' : 'text-gray-400 hover:text-white'}`}
             >
               {tab}
             </button>
@@ -2273,7 +2273,7 @@ const ThreadPanel = memo(({ thread, currentUserId, onClose, onReply, onToggleFol
           <button
             onClick={onToggleFollow}
             title={thread.following ? 'Unfollow thread' : 'Follow thread'}
-            className={`flex items-center gap-1.5 text-xs px-2 py-1 rounded-lg transition-colors ${thread.following ? 'bg-[#D97757]/20 text-[#D97757]' : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'}`}
+            className={`flex items-center gap-1.5 text-xs px-2 py-1 rounded-lg transition-colors ${thread.following ? 'bg-[#5b5fc7]/20 text-[#5b5fc7]' : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'}`}
           >
             <Bell size={11} />
             {thread.following ? 'Following' : 'Follow'}
@@ -2372,7 +2372,7 @@ const PinnedPanel = memo(({ messages, onClose, onUnpin, onJump }: PinnedPanelPro
   >
     <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
       <div className="flex items-center gap-2">
-        <Pin size={15} className="text-[#D97757]" />
+        <Pin size={15} className="text-[#5b5fc7]" />
         <span className="font-semibold text-white text-sm">Pinned Messages</span>
         <span className="text-xs text-gray-500">{messages.length}</span>
       </div>
@@ -2592,14 +2592,14 @@ const ForwardMessageModal = memo(({ message, channels, workspaceId, authToken, o
       >
         <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-white/10">
           <h2 className="text-lg font-bold text-white flex items-center gap-2">
-            <Forward size={16} className="text-[#D97757]" />
+            <Forward size={16} className="text-[#5b5fc7]" />
             Forward message
           </h2>
           <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors"><X size={20} /></button>
         </div>
         <div className="p-6 space-y-4">
           {/* Original message preview */}
-          <div className="bg-white/5 border-l-4 border-[#D97757] rounded-r-lg px-3 py-2">
+          <div className="bg-white/5 border-l-4 border-[#5b5fc7] rounded-r-lg px-3 py-2">
             <div className="text-xs text-gray-400 mb-0.5 font-medium">{message.senderName}</div>
             <div className="text-sm text-gray-200 line-clamp-3">{message.text.slice(0, 100)}{message.text.length > 100 ? '…' : ''}</div>
           </div>
@@ -2607,7 +2607,7 @@ const ForwardMessageModal = memo(({ message, channels, workspaceId, authToken, o
           {/* Channel search */}
           <div>
             <label className="block text-xs text-gray-400 font-medium mb-1.5 uppercase tracking-wider">Forward to</label>
-            <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2 focus-within:border-[#D97757]/50 mb-2">
+            <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2 focus-within:border-[#5b5fc7]/50 mb-2">
               <Search size={13} className="text-gray-500" />
               <input
                 value={channelSearch}
@@ -2622,11 +2622,11 @@ const ForwardMessageModal = memo(({ message, channels, workspaceId, authToken, o
                 <button
                   key={ch.id}
                   onClick={() => setSelectedChannelId(ch.id)}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm text-left transition-colors ${selectedChannelId === ch.id ? 'bg-[#D97757]/20 text-white' : 'text-gray-300 hover:bg-white/5'}`}
+                  className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm text-left transition-colors ${selectedChannelId === ch.id ? 'bg-[#5b5fc7]/20 text-white' : 'text-gray-300 hover:bg-white/5'}`}
                 >
                   {ch.private ? <Lock size={12} className="text-gray-500" /> : <Hash size={12} className="text-gray-500" />}
                   <span className="flex-1 truncate">{ch.name}</span>
-                  {selectedChannelId === ch.id && <Check size={13} className="text-[#D97757] flex-shrink-0" />}
+                  {selectedChannelId === ch.id && <Check size={13} className="text-[#5b5fc7] flex-shrink-0" />}
                 </button>
               ))}
               {filteredChannels.length === 0 && (
@@ -2643,7 +2643,7 @@ const ForwardMessageModal = memo(({ message, channels, workspaceId, authToken, o
               onChange={e => setComment(e.target.value)}
               placeholder="Add a note…"
               rows={2}
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-[#D97757]/50 resize-none"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-[#5b5fc7]/50 resize-none"
             />
           </div>
         </div>
@@ -2652,7 +2652,7 @@ const ForwardMessageModal = memo(({ message, channels, workspaceId, authToken, o
           <button
             onClick={handleForward}
             disabled={!selectedChannelId || loading}
-            className="flex-1 py-2.5 rounded-lg bg-[#D97757] hover:bg-[#c4674a] disabled:opacity-40 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
+            className="flex-1 py-2.5 rounded-lg bg-[#5b5fc7] hover:bg-[#c4674a] disabled:opacity-40 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
           >
             {loading ? <RefreshCw size={14} className="animate-spin" /> : <Forward size={14} />}
             Forward
@@ -2674,7 +2674,7 @@ export default function ChatPage() {
   const workspaceId = workspace?.id || 'ws-default';
 
   // Derive current user id
-  const currentUserId = currentUser?.id || 'u-sonadarshan';
+  const currentUserId = currentUser?.id || 'u-alex';
   const currentMember: WorkspaceMember = useMemo(() => ({
     id: currentUserId,
     name: currentUser?.name || 'You',
@@ -3543,7 +3543,7 @@ export default function ChatPage() {
         {/* Workspace header */}
         <div className="flex items-center justify-between px-3 py-3 border-b border-white/5">
           <div className="flex items-center gap-2 min-w-0">
-            <div className="w-7 h-7 rounded-lg bg-[#D97757] flex items-center justify-center flex-shrink-0">
+            <div className="w-7 h-7 rounded-lg bg-[#5b5fc7] flex items-center justify-center flex-shrink-0">
               <span className="text-white font-bold text-xs">B</span>
             </div>
             <div className="min-w-0">
@@ -3556,7 +3556,7 @@ export default function ChatPage() {
           </div>
           <div className="flex items-center gap-1">
             {totalUnread > 0 && (
-              <span className="text-xs bg-[#D97757] text-white rounded-full px-1.5 py-0.5 font-medium min-w-5 text-center">{totalUnread > 99 ? '99+' : totalUnread}</span>
+              <span className="text-xs bg-[#5b5fc7] text-white rounded-full px-1.5 py-0.5 font-medium min-w-5 text-center">{totalUnread > 99 ? '99+' : totalUnread}</span>
             )}
             <button
               onClick={() => setShowSearchModal(true)}
@@ -3627,7 +3627,7 @@ export default function ChatPage() {
                     return (
                       <div
                         key={ch.id}
-                        className={`group relative flex items-center gap-2 px-3 py-1.5 cursor-pointer transition-colors ${isActive ? 'bg-[#D97757]/20 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'} ${ch.muted ? 'opacity-50' : ''}`}
+                        className={`group relative flex items-center gap-2 px-3 py-1.5 cursor-pointer transition-colors ${isActive ? 'bg-[#5b5fc7]/20 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'} ${ch.muted ? 'opacity-50' : ''}`}
                         onClick={() => selectChannel(ch.id)}
                         onContextMenu={e => handleChannelContextMenu(e, ch.id)}
                       >
@@ -3644,7 +3644,7 @@ export default function ChatPage() {
                         )}
                         {ch.muted && <VolumeX size={11} className="text-gray-600 flex-shrink-0" />}
                         {ch.unread > 0 && !ch.muted && (
-                          <span className="text-xs bg-[#D97757] text-white rounded-full px-1.5 py-0.5 font-medium min-w-5 text-center flex-shrink-0">
+                          <span className="text-xs bg-[#5b5fc7] text-white rounded-full px-1.5 py-0.5 font-medium min-w-5 text-center flex-shrink-0">
                             {ch.unread > 99 ? '99+' : ch.unread}
                           </span>
                         )}
@@ -3679,7 +3679,7 @@ export default function ChatPage() {
                                     <button
                                       key={pref}
                                       onClick={() => setNotifPref(ch.id, pref)}
-                                      className={`w-full flex items-center gap-2 px-3 py-2 text-sm transition-colors ${(notifPref || 'all') === pref ? 'text-[#D97757]' : 'text-gray-300 hover:bg-white/5'}`}
+                                      className={`w-full flex items-center gap-2 px-3 py-2 text-sm transition-colors ${(notifPref || 'all') === pref ? 'text-[#5b5fc7]' : 'text-gray-300 hover:bg-white/5'}`}
                                     >
                                       {(notifPref || 'all') === pref && <Check size={12} />}
                                       <span className="capitalize">{pref === 'all' ? 'All messages' : pref === 'mentions' ? '@Mentions & keywords' : pref === 'nothing' ? 'Nothing' : 'Mute channel'}</span>
@@ -3741,7 +3741,7 @@ export default function ChatPage() {
                       <div
                         key={dm.id}
                         onClick={() => { setActiveDmId(dm.id); setActiveChannelId(''); }}
-                        className={`flex items-center gap-2 px-3 py-1.5 cursor-pointer transition-colors ${isActive ? 'bg-[#D97757]/20' : 'hover:bg-white/5'}`}
+                        className={`flex items-center gap-2 px-3 py-1.5 cursor-pointer transition-colors ${isActive ? 'bg-[#5b5fc7]/20' : 'hover:bg-white/5'}`}
                       >
                         <div className="relative flex-shrink-0">
                           <div className="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-bold" style={{ background: person.color }}>
@@ -3753,7 +3753,7 @@ export default function ChatPage() {
                           <span className={`text-sm truncate block ${dm.unread > 0 ? 'font-semibold text-white' : 'text-gray-400'}`}>{person.name}</span>
                         </div>
                         {dm.unread > 0 && (
-                          <span className="text-xs bg-[#D97757] text-white rounded-full w-4 h-4 flex items-center justify-center font-medium flex-shrink-0">{dm.unread}</span>
+                          <span className="text-xs bg-[#5b5fc7] text-white rounded-full w-4 h-4 flex items-center justify-center font-medium flex-shrink-0">{dm.unread}</span>
                         )}
                         {dm.readReceipt === 'read' && <CheckCheck size={11} className="text-blue-400 flex-shrink-0" />}
                         {dm.readReceipt === 'delivered' && <CheckCheck size={11} className="text-gray-500 flex-shrink-0" />}
@@ -4025,7 +4025,7 @@ export default function ChatPage() {
                 <div key={em.id} className="flex items-start gap-3 px-4 py-1.5">
                   <div className="w-9 flex-shrink-0" />
                   <div className="flex items-center gap-2 text-sm text-gray-400 italic">
-                    <Zap size={12} className="text-[#D97757] flex-shrink-0" />
+                    <Zap size={12} className="text-[#5b5fc7] flex-shrink-0" />
                     <span>{em.text}</span>
                     <button onClick={() => setEphemeralMessages(prev => prev.filter(m => m.id !== em.id))} className="text-gray-600 hover:text-gray-400 ml-1">
                       <X size={10} />
@@ -4071,7 +4071,7 @@ export default function ChatPage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   onClick={() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); setShowJumpToPresent(false); }}
-                  className="absolute bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-[#D97757] hover:bg-[#c4674a] text-white text-xs font-medium px-4 py-2 rounded-full shadow-lg transition-colors z-10"
+                  className="absolute bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-[#5b5fc7] hover:bg-[#c4674a] text-white text-xs font-medium px-4 py-2 rounded-full shadow-lg transition-colors z-10"
                 >
                   <ChevronDown size={13} />
                   Jump to present
@@ -4318,15 +4318,15 @@ export default function ChatPage() {
               className="w-full max-w-sm bg-[#12122a] border border-white/10 rounded-2xl shadow-2xl p-6"
             >
               <div className="text-center mb-4">
-                <div className="w-14 h-14 rounded-full bg-[#D97757]/10 flex items-center justify-center mx-auto mb-3">
-                  <Download size={24} className="text-[#D97757]" />
+                <div className="w-14 h-14 rounded-full bg-[#5b5fc7]/10 flex items-center justify-center mx-auto mb-3">
+                  <Download size={24} className="text-[#5b5fc7]" />
                 </div>
                 <h3 className="text-lg font-bold text-white">Importing Workspace</h3>
                 <p className="text-sm text-gray-400 mt-1">{importStep}</p>
               </div>
               <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden mb-2">
                 <motion.div
-                  className="h-full bg-[#D97757] rounded-full"
+                  className="h-full bg-[#5b5fc7] rounded-full"
                   initial={{ width: 0 }}
                   animate={{ width: `${importProgress}%` }}
                   transition={{ duration: 0.5 }}
@@ -4347,7 +4347,7 @@ export default function ChatPage() {
             exit={{ opacity: 0, y: 10 }}
             className="fixed bottom-28 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-[#1e1e32] border border-white/10 rounded-xl px-4 py-2.5 shadow-xl z-40"
           >
-            <BarChart2 size={14} className="text-[#D97757]" />
+            <BarChart2 size={14} className="text-[#5b5fc7]" />
             <span className="text-sm text-white">Poll ready: "{pendingPoll.question.slice(0, 40)}"</span>
             <button onClick={() => setPendingPoll(undefined)} className="text-gray-400 hover:text-white ml-2"><X size={14} /></button>
           </motion.div>

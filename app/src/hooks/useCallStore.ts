@@ -258,7 +258,7 @@ const MOCK_RECORDINGS: Recording[] = [
     id: 'rec-1', meetingId: 'mtg-abc', title: 'Weekly All-Hands — May 2026',
     date: Date.now() - 7 * 24 * 3600 * 1000, durationSecs: 3420, participantCount: 12,
     aiSummary: 'Key decisions: Q3 roadmap approved, new hire onboarding revamped. Action items: Update docs by Friday, schedule 1:1s for new team members.',
-    transcript: 'Sonadarshan: Welcome everyone...\nMaya: Thanks for joining...',
+    transcript: 'Alex Chen: Welcome everyone...\nMaya: Thanks for joining...',
   },
   {
     id: 'rec-2', meetingId: 'mtg-def', title: 'Design Review — Dashboard v3',

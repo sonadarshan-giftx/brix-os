@@ -74,7 +74,7 @@ const USERS = [
   { id: 2, name: 'Maya Chen',      email: 'm.chen@corp.com',   risk: 62, mfa: true,  idp: 'Okta',     dept: 'Engineering',unusualActivity: true,  lastLogin: 'San Francisco, US' },
   { id: 3, name: 'Rahul Kumar',    email: 'r.kumar@corp.com',  risk: 38, mfa: true,  idp: 'Azure AD', dept: 'Sales',      unusualActivity: false, lastLogin: 'London, UK' },
   { id: 4, name: 'Ana Torres',     email: 'a.torres@corp.com', risk: 25, mfa: false, idp: 'Okta',     dept: 'Marketing',  unusualActivity: false, lastLogin: 'Madrid, ES' },
-  { id: 5, name: 'Sonadarshan',    email: 'sona@corp.com',     risk: 10, mfa: true,  idp: 'Azure AD', dept: 'Platform',   unusualActivity: false, lastLogin: 'San Francisco, US' },
+  { id: 5, name: 'Alex Chen',    email: 'sona@corp.com',     risk: 10, mfa: true,  idp: 'Azure AD', dept: 'Platform',   unusualActivity: false, lastLogin: 'San Francisco, US' },
   { id: 6, name: 'Echo (AI)',      email: 'echo@internal',     risk: 5,  mfa: true,  idp: 'Internal', dept: 'DevOps',     unusualActivity: false, lastLogin: 'Internal' },
 ];
 

@@ -2012,7 +2012,7 @@ function BugsTab({ project }: { project: Project }) {  const bugs = project.tick
 /* ═══════════════════ TAB: FILES ═══════════════════ */
 function FilesTab() {
   const files = [
-    { name: 'Product Requirements.pdf', size: '2.4 MB', type: 'pdf', date: 'Apr 28, 2025', authorId: 'emp-sonadarshan' },
+    { name: 'Product Requirements.pdf', size: '2.4 MB', type: 'pdf', date: 'Apr 28, 2025', authorId: 'emp-alex' },
     { name: 'Architecture Diagram.png', size: '1.8 MB', type: 'image', date: 'Apr 25, 2025', authorId: 'emp-sage' },
     { name: 'API Specification.md', size: '48 KB', type: 'code', date: 'Apr 30, 2025', authorId: 'emp-aria' },
     { name: 'Design System.fig', size: '12 MB', type: 'design', date: 'Apr 20, 2025', authorId: 'emp-pixel' },

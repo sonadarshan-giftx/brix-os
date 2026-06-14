@@ -405,7 +405,7 @@ function Step1Signup() {
           </label>
           <input
             type="email"
-            value="sonadarshan@acme-brixstac.com"
+            value="alex@acme-brixstac.com"
             disabled
             className="w-full rounded"
             style={{

@@ -249,7 +249,7 @@ const AI_EMPLOYEES: AIEmployee[] = [
 ];
 
 const HUMAN_EMPLOYEES: HumanEmployee[] = [
-  { id: 'h1', name: 'Sonadarshan', role: 'Founder & CTO', type: 'human', status: 'online', avatarColor: '#D97757' },
+  { id: 'h1', name: 'Alex Chen', role: 'Founder & CTO', type: 'human', status: 'online', avatarColor: '#5b5fc7' },
   { id: 'h2', name: 'Priya K', role: 'Head of Product', type: 'human', status: 'online', avatarColor: '#3b82f6' },
   { id: 'h3', name: 'Ravi M', role: 'Senior Engineer', type: 'human', status: 'working', avatarColor: '#10b981' },
   { id: 'h4', name: 'Ananya S', role: 'Designer', type: 'human', status: 'online', avatarColor: '#8b5cf6' },
@@ -410,7 +410,7 @@ function EmployeeCard({ employee, onClick }: { employee: AIEmployee; onClick: ()
 
       <div className="flex flex-wrap gap-1.5 mb-4">
         {employee.projects.map(p => (
-          <span key={p} className="text-xs bg-[#D97757]/10 text-[#D97757] rounded-full px-2 py-0.5 font-medium">{p}</span>
+          <span key={p} className="text-xs bg-[#5b5fc7]/10 text-[#5b5fc7] rounded-full px-2 py-0.5 font-medium">{p}</span>
         ))}
       </div>
 
@@ -438,7 +438,7 @@ function EmployeeCard({ employee, onClick }: { employee: AIEmployee; onClick: ()
         </button>
         <button
           onClick={e => { e.stopPropagation(); }}
-          className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-sm font-medium bg-[#D97757]/10 text-[#D97757] hover:bg-[#D97757]/20 transition-colors"
+          className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-sm font-medium bg-[#5b5fc7]/10 text-[#5b5fc7] hover:bg-[#5b5fc7]/20 transition-colors"
         >
           <MessageSquare size={13} /> Chat
         </button>
@@ -517,7 +517,7 @@ function EmployeeProfile({ employee, onClose }: { employee: AIEmployee; onClose:
           <p className="text-xs text-gray-400">Avg response</p>
         </div>
         <div className="text-center">
-          <p className="text-xl font-bold text-[#D97757]">₹{employee.metrics.costMonth.toLocaleString()}</p>
+          <p className="text-xl font-bold text-[#5b5fc7]">₹{employee.metrics.costMonth.toLocaleString()}</p>
           <p className="text-xs text-gray-400">Cost/month</p>
         </div>
       </div>
@@ -530,7 +530,7 @@ function EmployeeProfile({ employee, onClose }: { employee: AIEmployee; onClose:
             onClick={() => setActiveTab(tab.id)}
             className={`py-3 px-3 text-sm font-medium border-b-2 transition-colors ${
               activeTab === tab.id
-                ? 'border-[#D97757] text-[#D97757]'
+                ? 'border-[#5b5fc7] text-[#5b5fc7]'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -998,7 +998,7 @@ function AnalyticsPanel() {
         <MetricCard label="AI Employees" value={AI_EMPLOYEES.length} sub="7 active" color="#7c3aed" />
         <MetricCard label="Tasks Today" value={156} sub="across all AIs" color="#10b981" />
         <MetricCard label="Time Saved" value="~48h" sub="estimated today" color="#3b82f6" />
-        <MetricCard label="Cost Today" value="₹840" sub={`₹${totalCost.toLocaleString()}/month total`} color="#D97757" />
+        <MetricCard label="Cost Today" value="₹840" sub={`₹${totalCost.toLocaleString()}/month total`} color="#5b5fc7" />
       </div>
 
       <div className="flex items-center gap-2 mb-3">
@@ -1248,7 +1248,7 @@ export default function AIEmployeesPage() {
                       <p className="text-xs text-gray-400">accuracy</p>
                     </div>
                     <div className="bg-gray-50 rounded-xl p-3">
-                      <p className="text-lg font-bold text-[#D97757]">₹{emp.metrics.costMonth.toLocaleString()}</p>
+                      <p className="text-lg font-bold text-[#5b5fc7]">₹{emp.metrics.costMonth.toLocaleString()}</p>
                       <p className="text-xs text-gray-400">cost/mo</p>
                     </div>
                   </div>

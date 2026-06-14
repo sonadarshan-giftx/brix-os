@@ -753,7 +753,7 @@ def format_ssn(ssn: str) -> str:
             </div>
             <div className="flex-1 overflow-y-auto p-3 space-y-2">
               <div className="flex gap-2">
-                <Avatar src="/avatar-sonadarshan.jpg" alt="Sonal" size="xs" />
+                <Avatar src="/avatar-alex.jpg" alt="Alex" size="xs" />
                 <div
                   className="rounded p-2"
                   style={{ backgroundColor: '#f5f5f3', fontSize: 11, color: '#242424' }}
@@ -771,7 +771,7 @@ def format_ssn(ssn: str) -> str:
                 </div>
               </div>
               <div className="flex gap-2">
-                <Avatar src="/avatar-sonadarshan.jpg" alt="Sonal" size="xs" />
+                <Avatar src="/avatar-alex.jpg" alt="Alex" size="xs" />
                 <div
                   className="rounded p-2"
                   style={{ backgroundColor: '#f5f5f3', fontSize: 11, color: '#242424' }}
@@ -815,7 +815,7 @@ def format_ssn(ssn: str) -> str:
    ═══════════════════════════════════════════════ */
 function ParticipantsRow() {
   const participants = [
-    { id: 'p1', name: 'Sonadarshan', avatar: '/avatar-sonadarshan.jpg', color: '#5b5fc7', isAi: false },
+    { id: 'p1', name: 'Alex Chen', avatar: '/avatar-alex.jpg', color: '#5b5fc7', isAi: false },
     { id: 'p2', name: 'Aria', avatar: '/avatar-aria.jpg', color: '#92c353', isAi: true },
   ];
 

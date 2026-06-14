@@ -255,14 +255,14 @@ export interface CompanyGoal {
 
 export const employees: Employee[] = [
   {
-    id: 'emp-sonadarshan',
-    name: 'Sonadarshan',
-    email: 'sonadarshan@acme-brixstac.com',
+    id: 'emp-alex',
+    name: 'Alex Chen',
+    email: 'alex@acme-brixstac.com',
     role: 'Owner',
     kind: 'human',
     level: 'Lead',
-    title: 'Owner / CEO',
-    avatar: '/avatar-sonadarshan.jpg',
+    title: 'CEO & Founder',
+    avatar: '/avatar-alex.jpg',
     status: 'online',
     managerId: null,
     teamIds: ['team-leadership'],
@@ -278,7 +278,7 @@ export const employees: Employee[] = [
     title: 'Engineering Manager',
     avatar: '/avatar-maya.jpg',
     status: 'online',
-    managerId: 'emp-sonadarshan',
+    managerId: 'emp-alex',
     teamIds: ['team-engineering', 'team-leadership'],
     skills: ['Engineering Management', 'React', 'System Design', 'Mentoring'],
   },
@@ -337,7 +337,7 @@ export const employees: Employee[] = [
     title: 'Project Manager',
     avatar: '/avatar-manager.jpg',
     status: 'online',
-    managerId: 'emp-sonadarshan',
+    managerId: 'emp-alex',
     teamIds: ['team-leadership'],
     skills: ['Project Management', 'Agile', 'Scrum', 'Risk Analysis', 'Reporting'],
     modelBinding: { provider: 'OpenAI', model: 'gpt-4o', version: '2025-02' },
@@ -443,7 +443,7 @@ export const teams: Team[] = [
     name: 'Leadership',
     icon: 'crown',
     color: '#ffaa44',
-    memberIds: ['emp-sonadarshan', 'emp-maya', 'emp-manager'],
+    memberIds: ['emp-alex', 'emp-maya', 'emp-manager'],
     channels: [
       { id: 'ch-lead-general', name: '#general', type: 'private' },
       { id: 'ch-lead-planning', name: '#planning', type: 'private' },
@@ -462,7 +462,7 @@ function tKey(project: string, num: number): string {
 export const allTickets: Ticket[] = [
   // ── Tax Filing Platform (TAX) ──
   { id: `t-${++ticketIdCounter}`, key: tKey('TAX', 142), title: 'Implement OAuth 2.0 authentication flow', type: 'story', status: 'done', priority: 'high', assigneeId: 'emp-aria', reporterId: 'emp-maya', estimate: 5, labels: ['auth', 'backend'], createdAt: '2025-03-10T08:00:00Z', sprintId: 'spr-tax-12', projectId: 'proj-tax' },
-  { id: `t-${++ticketIdCounter}`, key: tKey('TAX', 143), title: 'Build tax form 1040 wizard UI', type: 'epic', status: 'in-progress', priority: 'critical', assigneeId: 'emp-raj', reporterId: 'emp-sonadarshan', estimate: 13, labels: ['frontend', '1040', 'ux'], createdAt: '2025-03-15T10:30:00Z', sprintId: 'spr-tax-12', projectId: 'proj-tax' },
+  { id: `t-${++ticketIdCounter}`, key: tKey('TAX', 143), title: 'Build tax form 1040 wizard UI', type: 'epic', status: 'in-progress', priority: 'critical', assigneeId: 'emp-raj', reporterId: 'emp-alex', estimate: 13, labels: ['frontend', '1040', 'ux'], createdAt: '2025-03-15T10:30:00Z', sprintId: 'spr-tax-12', projectId: 'proj-tax' },
   { id: `t-${++ticketIdCounter}`, key: tKey('TAX', 144), title: 'IRS API integration for e-filing', type: 'story', status: 'in-progress', priority: 'critical', assigneeId: 'emp-aria', reporterId: 'emp-maya', estimate: 8, labels: ['api', 'irs', 'integration', 'qa-needed'], createdAt: '2025-03-18T09:15:00Z', sprintId: 'spr-tax-12', projectId: 'proj-tax' },
   { id: `t-${++ticketIdCounter}`, key: tKey('TAX', 145), title: 'Form validation engine for Schedule C', type: 'task', status: 'todo', priority: 'medium', assigneeId: 'emp-sage', reporterId: 'emp-aria', estimate: 3, labels: ['backend', 'validation'], createdAt: '2025-03-20T11:00:00Z', sprintId: 'spr-tax-12', projectId: 'proj-tax' },
   { id: `t-${++ticketIdCounter}`, key: tKey('TAX', 146), title: 'Fix memory leak in PDF parser', type: 'bug', status: 'review', priority: 'high', assigneeId: 'emp-sage', reporterId: 'emp-priya', estimate: 3, labels: ['bug', 'pdf', 'memory', 'regression-test'], createdAt: '2025-03-22T14:20:00Z', sprintId: 'spr-tax-12', projectId: 'proj-tax' },
@@ -678,18 +678,18 @@ export const conversations: Conversation[] = [
     id: 'conv-aria',
     type: 'dm',
     name: 'Aria',
-    participantIds: ['emp-sonadarshan', 'emp-aria'],
+    participantIds: ['emp-alex', 'emp-aria'],
     messages: [
-      { id: 'm1', senderId: 'emp-sonadarshan', content: 'Aria, can you review the auth module PR?', timestamp: '2025-04-29T09:00:00Z' },
+      { id: 'm1', senderId: 'emp-alex', content: 'Aria, can you review the auth module PR?', timestamp: '2025-04-29T09:00:00Z' },
       { id: 'm2', senderId: 'emp-aria', content: 'On it. I see 3 potential issues in the token validation logic.', timestamp: '2025-04-29T09:01:00Z', isStreaming: false },
       { id: 'm3', senderId: 'emp-aria', content: 'First, the JWT expiry check is missing a grace period for clock skew. Second, the refresh token rotation isn\'t atomic — race condition possible. Third, rate limiting on login needs to be per-IP, not just per-user.', timestamp: '2025-04-29T09:02:30Z' },
-      { id: 'm4', senderId: 'emp-sonadarshan', content: 'Great catches. Can you open tickets for each?', timestamp: '2025-04-29T09:05:00Z' },
+      { id: 'm4', senderId: 'emp-alex', content: 'Great catches. Can you open tickets for each?', timestamp: '2025-04-29T09:05:00Z' },
       { id: 'm5', senderId: 'emp-aria', content: 'Done. TAX-151, TAX-152, TAX-153 created and assigned.', timestamp: '2025-04-29T09:06:00Z' },
-      { id: 'm6', senderId: 'emp-sonadarshan', content: 'How\'s the IRS API integration going?', timestamp: '2025-04-30T10:00:00Z' },
+      { id: 'm6', senderId: 'emp-alex', content: 'How\'s the IRS API integration going?', timestamp: '2025-04-30T10:00:00Z' },
       { id: 'm7', senderId: 'emp-aria', content: '87% complete. The staging environment is fully connected. I\'m working through edge cases for rejected filings. About 12 more scenarios to handle.', timestamp: '2025-04-30T10:01:00Z' },
-      { id: 'm8', senderId: 'emp-sonadarshan', content: 'Timeline looking good for May 15?', timestamp: '2025-04-30T10:03:00Z' },
+      { id: 'm8', senderId: 'emp-alex', content: 'Timeline looking good for May 15?', timestamp: '2025-04-30T10:03:00Z' },
       { id: 'm9', senderId: 'emp-aria', content: 'Yes, on track. I\'ll have the integration tests green by May 10.', timestamp: '2025-04-30T10:04:00Z' },
-      { id: 'm10', senderId: 'emp-sonadarshan', content: 'Perfect. Keep me posted.', timestamp: '2025-04-30T10:05:00Z' },
+      { id: 'm10', senderId: 'emp-alex', content: 'Perfect. Keep me posted.', timestamp: '2025-04-30T10:05:00Z' },
     ],
     lastMessageAt: '2025-04-30T10:05:00Z',
     unreadCount: 0,
@@ -709,7 +709,7 @@ export const conversations: Conversation[] = [
       { id: 'm6', senderId: 'emp-manager', content: 'Weekly report ready. Summary: All 3 projects active. 2 risks flagged this week. Velocity up 12% vs last sprint. Budget on track at 68% spent with 60% timeline elapsed.', timestamp: '2025-04-29T17:00:00Z' },
       { id: 'm7', senderId: 'emp-maya', content: 'Can you highlight the top risk for the leadership sync?', timestamp: '2025-04-29T17:05:00Z' },
       { id: 'm8', senderId: 'emp-manager', content: 'Top risk: Mobile App redesign is behind by 12% due to design system migration complexity. Pixel flagged 12 accessibility issues. Recommend allocating an additional frontend dev for 2 sprints.', timestamp: '2025-04-29T17:06:00Z' },
-      { id: 'm9', senderId: 'emp-maya', content: 'I\'ll discuss with Sonadarshan. Good work.', timestamp: '2025-04-29T17:10:00Z' },
+      { id: 'm9', senderId: 'emp-maya', content: 'I\'ll discuss with Alex Chen. Good work.', timestamp: '2025-04-29T17:10:00Z' },
       { id: 'm10', senderId: 'emp-manager', content: 'Standup starting in 5 minutes. 4 team members confirmed. Raj is out today — sick leave.', timestamp: '2025-04-30T09:25:00Z' },
     ],
     lastMessageAt: '2025-04-30T09:25:00Z',
@@ -750,22 +750,22 @@ export const conversations: Conversation[] = [
     lastMessageAt: '2025-04-29T11:20:00Z',
     unreadCount: 1,
   },
-  // DM: Sonadarshan <-> Maya
+  // DM: Alex Chen <-> Maya
   {
     id: 'conv-maya',
     type: 'dm',
     name: 'Maya',
-    participantIds: ['emp-sonadarshan', 'emp-maya'],
+    participantIds: ['emp-alex', 'emp-maya'],
     messages: [
-      { id: 'm1', senderId: 'emp-sonadarshan', content: 'Maya, how are we looking for the Q2 review?', timestamp: '2025-04-28T16:00:00Z' },
+      { id: 'm1', senderId: 'emp-alex', content: 'Maya, how are we looking for the Q2 review?', timestamp: '2025-04-28T16:00:00Z' },
       { id: 'm2', senderId: 'emp-maya', content: 'Overall positive. Tax Platform is on track, API Modernization is green. Only concern is Mobile App — behind by 12%.', timestamp: '2025-04-28T16:05:00Z' },
-      { id: 'm3', senderId: 'emp-sonadarshan', content: 'What do you need to get Mobile back on track?', timestamp: '2025-04-28T16:07:00Z' },
+      { id: 'm3', senderId: 'emp-alex', content: 'What do you need to get Mobile back on track?', timestamp: '2025-04-28T16:07:00Z' },
       { id: 'm4', senderId: 'emp-maya', content: 'I\'d like to pull Aria onto the Mobile sprint for 1 week. Her full-stack skills would unblock the frontend team.', timestamp: '2025-04-28T16:10:00Z' },
-      { id: 'm5', senderId: 'emp-sonadarshan', content: 'Approved. Make the call.', timestamp: '2025-04-28T16:12:00Z' },
+      { id: 'm5', senderId: 'emp-alex', content: 'Approved. Make the call.', timestamp: '2025-04-28T16:12:00Z' },
       { id: 'm6', senderId: 'emp-maya', content: 'Will do. I\'ll also schedule a design review with Pixel for the navigation component. We need to nail the UX before Raj implements.', timestamp: '2025-04-28T16:15:00Z' },
-      { id: 'm7', senderId: 'emp-sonadarshan', content: 'Good thinking. Keep me posted on the IRS integration timeline.', timestamp: '2025-04-28T16:18:00Z' },
+      { id: 'm7', senderId: 'emp-alex', content: 'Good thinking. Keep me posted on the IRS integration timeline.', timestamp: '2025-04-28T16:18:00Z' },
       { id: 'm8', senderId: 'emp-maya', content: 'Aria says May 10 for test completion. Production ready by May 15.', timestamp: '2025-04-28T16:20:00Z' },
-      { id: 'm9', senderId: 'emp-sonadarshan', content: 'That works. Tax season is winding down — we have a comfortable window.', timestamp: '2025-04-28T16:22:00Z' },
+      { id: 'm9', senderId: 'emp-alex', content: 'That works. Tax season is winding down — we have a comfortable window.', timestamp: '2025-04-28T16:22:00Z' },
     ],
     lastMessageAt: '2025-04-28T16:22:00Z',
     unreadCount: 0,
@@ -811,10 +811,10 @@ export const emailThreads: EmailThread[] = [
     id: 'mail-1',
     subject: 'Q2 Feature Request — Multi-State Filing Support',
     from: 'sarah.chen@clientcorp.com',
-    to: ['sonadarshan@acme-brixstac.com'],
+    to: ['alex@acme-brixstac.com'],
     messages: [
-      { id: 'em1-1', from: 'sarah.chen@clientcorp.com', content: 'Hi Sonadarshan, We\'d love to see multi-state tax filing in Q2. Our team files in CA, NY, and TX. Is this on the roadmap?', timestamp: '2025-04-28T10:00:00Z' },
-      { id: 'em1-2', from: 'sonadarshan@acme-brixstac.com', content: 'Hi Sarah, Yes! Multi-state is planned for Q3. I\'ll have our PM send you a detailed timeline by Friday.', timestamp: '2025-04-28T14:00:00Z' },
+      { id: 'em1-1', from: 'sarah.chen@clientcorp.com', content: 'Hi Alex, We\'d love to see multi-state tax filing in Q2. Our team files in CA, NY, and TX. Is this on the roadmap?', timestamp: '2025-04-28T10:00:00Z' },
+      { id: 'em1-2', from: 'alex@acme-brixstac.com', content: 'Hi Sarah, Yes! Multi-state is planned for Q3. I\'ll have our PM send you a detailed timeline by Friday.', timestamp: '2025-04-28T14:00:00Z' },
       { id: 'em1-3', from: 'sarah.chen@clientcorp.com', content: 'That\'s great news. We\'re happy to be beta testers when ready.', timestamp: '2025-04-29T09:00:00Z' },
     ],
     lastMessageAt: '2025-04-29T09:00:00Z',
@@ -825,7 +825,7 @@ export const emailThreads: EmailThread[] = [
     id: 'mail-2',
     subject: 'Invoice #2025-0427 — AWS Infrastructure',
     from: 'billing@aws.amazon.com',
-    to: ['echo@acme-brixstac.com', 'sonadarshan@acme-brixstac.com'],
+    to: ['echo@acme-brixstac.com', 'alex@acme-brixstac.com'],
     messages: [
       { id: 'em2-1', from: 'billing@aws.amazon.com', content: 'Your April 2025 AWS invoice is available. Total: $3,847.23. Due date: May 15, 2025.', timestamp: '2025-04-27T08:00:00Z' },
       { id: 'em2-2', from: 'echo@acme-brixstac.com', content: 'Received. Within budget. Auto-payment configured.', timestamp: '2025-04-27T09:00:00Z' },
@@ -851,10 +851,10 @@ export const emailThreads: EmailThread[] = [
     id: 'mail-4',
     subject: 'Partnership Proposal — Tax Software Integration',
     from: 'partnerships@intuit.com',
-    to: ['sonadarshan@acme-brixstac.com'],
+    to: ['alex@acme-brixstac.com'],
     messages: [
-      { id: 'em4-1', from: 'partnerships@intuit.com', content: 'Dear Sonadarshan, We\'d like to explore an integration partnership between Brixstac and QuickBooks. Could we schedule a call next week?', timestamp: '2025-04-24T11:00:00Z' },
-      { id: 'em4-2', from: 'sonadarshan@acme-brixstac.com', content: 'I\'m interested. How about Tuesday at 2 PM PT? I\'ll loop in our integrations lead.', timestamp: '2025-04-24T16:00:00Z' },
+      { id: 'em4-1', from: 'partnerships@intuit.com', content: 'Dear Alex, We\'d like to explore an integration partnership between Brixstac and QuickBooks. Could we schedule a call next week?', timestamp: '2025-04-24T11:00:00Z' },
+      { id: 'em4-2', from: 'alex@acme-brixstac.com', content: 'I\'m interested. How about Tuesday at 2 PM PT? I\'ll loop in our integrations lead.', timestamp: '2025-04-24T16:00:00Z' },
       { id: 'em4-3', from: 'partnerships@intuit.com', content: 'Tuesday works. I\'ll send a calendar invite.', timestamp: '2025-04-25T10:00:00Z' },
     ],
     lastMessageAt: '2025-04-25T10:00:00Z',
@@ -910,13 +910,13 @@ export const meetings: Meeting[] = [
     meetingType: 'retro', channel: '#general', recurring: false, description: 'What went well, what didn\'t, action items',
   },
   {
-    id: 'mtg-7', title: 'Sonadarshan <> Maya — Weekly Sync', startTime: '2025-05-02T10:00:00', endTime: '2025-05-02T10:30:00',
-    attendees: ['emp-sonadarshan', 'emp-maya'],
+    id: 'mtg-7', title: 'Alex Chen <> Maya — Weekly Sync', startTime: '2025-05-02T10:00:00', endTime: '2025-05-02T10:30:00',
+    attendees: ['emp-alex', 'emp-maya'],
     meetingType: '1:1', channel: '', recurring: true, description: 'Weekly leadership alignment — projects, hiring, strategy',
   },
   {
     id: 'mtg-8', title: 'QuickBooks Partnership Call', startTime: '2025-05-06T14:00:00', endTime: '2025-05-06T15:00:00',
-    attendees: ['emp-sonadarshan', 'emp-manager'],
+    attendees: ['emp-alex', 'emp-manager'],
     meetingType: 'sync', channel: '', recurring: false, description: 'Explore integration partnership with Intuit/QuickBooks',
   },
 ];
@@ -928,7 +928,7 @@ export const approvals: Approval[] = [
   {
     id: 'apr-1', type: 'deploy', title: 'Deploy Tax Platform v2.3.1 to Production',
     description: 'Bug fixes for payment gateway and PDF parser. Rollback plan: automatic rollback on error rate >0.1%.',
-    requesterId: 'emp-echo', approverId: 'emp-sonadarshan', status: 'pending',
+    requesterId: 'emp-echo', approverId: 'emp-alex', status: 'pending',
     createdAt: '2025-04-30T10:00:00Z', dueAt: '2025-05-01T10:00:00Z', sla: '24h',
   },
   {
@@ -940,13 +940,13 @@ export const approvals: Approval[] = [
   {
     id: 'apr-3', type: 'budget', title: 'Budget Override: Additional Compute Resources',
     description: 'Request $4,500/month additional AWS compute for load testing. Duration: 3 months. Reason: Tax season peak traffic.',
-    requesterId: 'emp-echo', approverId: 'emp-sonadarshan', status: 'pending',
+    requesterId: 'emp-echo', approverId: 'emp-alex', status: 'pending',
     createdAt: '2025-04-29T14:00:00Z', dueAt: '2025-05-02T14:00:00Z', sla: '72h',
   },
   {
     id: 'apr-4', type: 'customer-comm', title: 'Customer Communication: Service Maintenance Window',
     description: 'Planned maintenance May 10, 2-4 AM PT. Notify 15K active users. Email + in-app notification.',
-    requesterId: 'emp-manager', approverId: 'emp-sonadarshan', status: 'pending',
+    requesterId: 'emp-manager', approverId: 'emp-alex', status: 'pending',
     createdAt: '2025-04-30T09:00:00Z', dueAt: '2025-05-03T09:00:00Z', sla: '72h',
   },
   // ── Approved (12) ──
@@ -965,13 +965,13 @@ export const approvals: Approval[] = [
   {
     id: 'apr-7', type: 'budget', title: 'Q2 Design Tool Licenses — Figma',
     description: 'Renewal of 8 Figma Professional seats for Design team. $1,440/quarter.',
-    requesterId: 'emp-pixel', approverId: 'emp-sonadarshan', status: 'approved',
+    requesterId: 'emp-pixel', approverId: 'emp-alex', status: 'approved',
     createdAt: '2025-04-25T11:00:00Z', dueAt: '2025-04-28T11:00:00Z', sla: '72h',
   },
   {
     id: 'apr-8', type: 'customer-comm', title: 'Product Update Newsletter — April 2025',
     description: 'Monthly product update for 15K subscribers. Includes new features and roadmap.',
-    requesterId: 'emp-manager', approverId: 'emp-sonadarshan', status: 'approved',
+    requesterId: 'emp-manager', approverId: 'emp-alex', status: 'approved',
     createdAt: '2025-04-24T08:00:00Z', dueAt: '2025-04-26T08:00:00Z', sla: '48h',
   },
   {
@@ -983,7 +983,7 @@ export const approvals: Approval[] = [
   {
     id: 'apr-10', type: 'policy', title: 'Update Remote Work Policy v3.0',
     description: 'Revised remote work guidelines. HR reviewed. Effective May 1, 2025.',
-    requesterId: 'emp-manager', approverId: 'emp-sonadarshan', status: 'approved',
+    requesterId: 'emp-manager', approverId: 'emp-alex', status: 'approved',
     createdAt: '2025-04-22T09:00:00Z', dueAt: '2025-04-25T09:00:00Z', sla: '72h',
   },
   {
@@ -995,19 +995,19 @@ export const approvals: Approval[] = [
   {
     id: 'apr-12', type: 'budget', title: 'Kubernetes Cluster Expansion',
     description: 'Add 3 nodes to EKS cluster for tax season scaling. $2,100/month.',
-    requesterId: 'emp-echo', approverId: 'emp-sonadarshan', status: 'approved',
+    requesterId: 'emp-echo', approverId: 'emp-alex', status: 'approved',
     createdAt: '2025-04-20T13:00:00Z', dueAt: '2025-04-23T13:00:00Z', sla: '72h',
   },
   {
     id: 'apr-13', type: 'deploy', title: 'Emergency Hotfix: PDF Parser Memory Leak',
     description: 'Critical production fix. Patches memory leak in tax form PDF parser. Verified with load test.',
-    requesterId: 'emp-sage', approverId: 'emp-sonadarshan', status: 'approved',
+    requesterId: 'emp-sage', approverId: 'emp-alex', status: 'approved',
     createdAt: '2025-04-19T16:00:00Z', dueAt: '2025-04-19T18:00:00Z', sla: '2h',
   },
   {
     id: 'apr-14', type: 'customer-comm', title: 'Tax Deadline Reminder Email Campaign',
     description: 'Urgent reminder to 8,500 users about April 15 filing deadline. Pre-approved template.',
-    requesterId: 'emp-manager', approverId: 'emp-sonadarshan', status: 'approved',
+    requesterId: 'emp-manager', approverId: 'emp-alex', status: 'approved',
     createdAt: '2025-04-14T08:00:00Z', dueAt: '2025-04-14T12:00:00Z', sla: '4h',
   },
   {
@@ -1026,13 +1026,13 @@ export const approvals: Approval[] = [
   {
     id: 'apr-17', type: 'budget', title: 'Request for Standing Desk — 10 units',
     description: 'Purchase 10 motorized standing desks for engineering team. $12,000 one-time.',
-    requesterId: 'emp-maya', approverId: 'emp-sonadarshan', status: 'rejected',
+    requesterId: 'emp-maya', approverId: 'emp-alex', status: 'rejected',
     createdAt: '2025-04-15T10:00:00Z', dueAt: '2025-04-18T10:00:00Z', sla: '72h',
   },
   {
     id: 'apr-18', type: 'deploy', title: 'Deploy Experimental Feature Flag Service',
     description: 'New third-party feature flag tool integration. Security team flagged concerns.',
-    requesterId: 'emp-echo', approverId: 'emp-sonadarshan', status: 'rejected',
+    requesterId: 'emp-echo', approverId: 'emp-alex', status: 'rejected',
     createdAt: '2025-04-12T09:00:00Z', dueAt: '2025-04-13T09:00:00Z', sla: '24h',
   },
 ];
@@ -1056,7 +1056,7 @@ export const activities: Activity[] = [
   { id: 'act-14', type: 'commit', actorId: 'emp-sage', targetName: 'fix/pdf-memory-leak', message: 'Sage pushed commit `fix/pdf-memory-leak`', timestamp: '2025-04-30T08:45:00Z', projectId: 'proj-tax' },
   { id: 'act-15', type: 'comment', actorId: 'emp-aria', targetName: 'TAX-150', message: 'Aria commented on TAX-150: "Migration script ready for review"', timestamp: '2025-04-30T07:30:00Z', projectId: 'proj-tax' },
   { id: 'act-16', type: 'ticket-completed', actorId: 'emp-echo', targetName: 'API-58', message: 'Echo completed API rate limiting setup (API-58)', timestamp: '2025-04-29T18:00:00Z', projectId: 'proj-api' },
-  { id: 'act-17', type: 'mention', actorId: 'emp-sonadarshan', targetName: 'maya', message: 'Sonadarshan mentioned Maya: "Q2 review looking good"', timestamp: '2025-04-29T17:30:00Z' },
+  { id: 'act-17', type: 'mention', actorId: 'emp-alex', targetName: 'maya', message: 'Alex mentioned Maya: "Q2 review looking good"', timestamp: '2025-04-29T17:30:00Z' },
   { id: 'act-18', type: 'file-uploaded', actorId: 'emp-echo', targetName: 'k6-load-tests', message: 'Echo uploaded load test results for API endpoints', timestamp: '2025-04-29T15:00:00Z', projectId: 'proj-api' },
   { id: 'act-19', type: 'status-change', actorId: 'emp-pixel', targetName: 'MOB-89', message: 'Pixel completed design tokens task (MOB-89)', timestamp: '2025-04-29T14:00:00Z', projectId: 'proj-mob' },
   { id: 'act-20', type: 'deploy-shipped', actorId: 'emp-echo', targetName: 'production', message: 'Echo hotfixed production: PDF parser patch', timestamp: '2025-04-29T12:00:00Z', projectId: 'proj-tax' },
@@ -1071,7 +1071,7 @@ export const companyGoals: CompanyGoal[] = [
     id: 'goal-1',
     title: 'Ship Tax Filing Platform v2',
     status: 'green',
-    ownerId: 'emp-sonadarshan',
+    ownerId: 'emp-alex',
     progress: 73,
     keyResults: [
       { id: 'kr-1-1', text: 'Process 10K returns without errors', current: 7300, target: 10000, unit: 'returns', status: 'green' },
@@ -1108,7 +1108,7 @@ export const companyGoals: CompanyGoal[] = [
     id: 'goal-4',
     title: 'Scale Team to 25 Engineers',
     status: 'green',
-    ownerId: 'emp-sonadarshan',
+    ownerId: 'emp-alex',
     progress: 36,
     keyResults: [
       { id: 'kr-4-1', text: 'Hire 16 new engineers', current: 5, target: 16, unit: 'hires', status: 'green' },
@@ -1197,4 +1197,4 @@ export function getSparklineData(): number[] {
   return [32, 35, 34, 38, 40, 39, 42, 44, 43, 42];
 }
 
-export const currentUser = employees[0]; // Sonadarshan
+export const currentUser = employees[0]; // Alex Chen
