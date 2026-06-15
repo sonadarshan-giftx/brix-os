@@ -4,31 +4,32 @@ import { conversations, getPendingApprovalCount } from '@/data/mockData';
 import {
   FolderKanban, Users, MessageSquare, Calendar,
   CheckCircle2, Phone, Shield, BrainCircuit,
-  BookOpen, Bot, BarChart2, LayoutGrid, Home,
+  BookOpen, Bot, BarChart2, LayoutGrid, Home, Sparkles,
 } from 'lucide-react';
 
 const activeCallCount = 2;
 
 const railItems = [
-  { id: 'home',         label: 'Home',         icon: Home },
-  { id: 'projects',     label: 'Projects',     icon: FolderKanban },
-  { id: 'chat',         label: 'Chat',         icon: MessageSquare, badge: 'dm' as const },
-  { id: 'calls',        label: 'Calls',        icon: Phone,         badge: 'calls' as const },
-  { id: 'docs',         label: 'Docs',         icon: BookOpen },
-  { id: 'teams',        label: 'Teams',        icon: Users },
-  { id: 'calendar',     label: 'Calendar',     icon: Calendar },
-  { id: 'approvals',    label: 'Approvals',    icon: CheckCircle2,  badge: 'approval' as const },
-  { id: 'analytics',    label: 'Analytics',    icon: BarChart2 },
-  { id: 'ai-employees', label: 'AI Agents',    icon: Bot },
-  { id: 'ai-gateway',   label: 'AI Gateway',   icon: BrainCircuit },
-  { id: 'security',     label: 'Security',     icon: Shield },
-  { id: 'apps',         label: 'Apps',         icon: LayoutGrid },
+  { id: 'home',           label: 'Home',         icon: Home },
+  { id: 'projects',       label: 'Projects',     icon: FolderKanban },
+  { id: 'chat',           label: 'Chat',         icon: MessageSquare, badge: 'dm' as const },
+  { id: 'calls',          label: 'Calls',        icon: Phone,         badge: 'calls' as const },
+  { id: 'docs',           label: 'Docs',         icon: BookOpen },
+  { id: 'teams',          label: 'Teams',        icon: Users },
+  { id: 'calendar',       label: 'Calendar',     icon: Calendar },
+  { id: 'approvals',      label: 'Approvals',    icon: CheckCircle2,  badge: 'approval' as const },
+  { id: 'analytics',      label: 'Analytics',    icon: BarChart2 },
+  { id: 'ai-employees',   label: 'AI Agents',    icon: Bot },
+  { id: 'ai-companion',   label: 'AI Companion', icon: Sparkles },
+  { id: 'ai-gateway',     label: 'AI Gateway',   icon: BrainCircuit },
+  { id: 'security',       label: 'Security',     icon: Shield },
+  { id: 'apps',           label: 'Apps',         icon: LayoutGrid },
 ];
 
 const ROLE_ACCESS: Record<string, string[]> = {
-  Owner:   ['home', 'projects', 'chat', 'calls', 'docs', 'teams', 'calendar', 'approvals', 'analytics', 'ai-employees', 'ai-gateway', 'security', 'apps'],
-  Manager: ['home', 'projects', 'chat', 'calls', 'docs', 'teams', 'calendar', 'approvals', 'analytics', 'ai-employees', 'ai-gateway', 'security', 'apps'],
-  Member:  ['home', 'projects', 'chat', 'calls', 'docs', 'teams', 'calendar', 'analytics', 'ai-employees', 'ai-gateway', 'security', 'apps'],
+  Owner:   ['home', 'projects', 'chat', 'calls', 'docs', 'teams', 'calendar', 'approvals', 'analytics', 'ai-employees', 'ai-companion', 'ai-gateway', 'security', 'apps'],
+  Manager: ['home', 'projects', 'chat', 'calls', 'docs', 'teams', 'calendar', 'approvals', 'analytics', 'ai-employees', 'ai-companion', 'ai-gateway', 'security', 'apps'],
+  Member:  ['home', 'projects', 'chat', 'calls', 'docs', 'teams', 'calendar', 'analytics', 'ai-employees', 'ai-companion', 'ai-gateway', 'security', 'apps'],
 };
 
 function Tooltip({ text, children }: { text: string; children: React.ReactNode }) {

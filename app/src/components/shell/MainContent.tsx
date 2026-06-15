@@ -17,6 +17,7 @@ const ProfilePage = lazy(() => import('@/pages/ProfilePage'));
 const AutomationPage = lazy(() => import('@/pages/AutomationPage'));
 const ZeroTrustPage = lazy(() => import('@/pages/ZeroTrustPage'));
 const AIGatewayPage = lazy(() => import('@/pages/AIGateway'));
+const AICompanionPage = lazy(() => import('@/pages/AICompanionPage'));
 const DocsPage = lazy(() => import('@/pages/DocsPage'));
 const AIEmployeesPage = lazy(() => import('@/pages/AIEmployeesPage'));
 const AnalyticsPage = lazy(() => import('@/pages/AnalyticsPage'));
@@ -86,7 +87,7 @@ export function MainContent({ id = 'main-content' }: MainContentProps) {
       const item = hash.replace('#/', '');
       if (item && item !== activeRailItem) {
         const setItem = useStore.getState().setActiveRailItem;
-        if (['home', 'projects', 'teams', 'chat', 'calls', 'calendar', 'approvals', 'security', 'apps', 'profile', 'ai-gateway', 'docs', 'ai-employees', 'analytics'].includes(item)) {
+        if (['home', 'projects', 'teams', 'chat', 'calls', 'calendar', 'approvals', 'security', 'apps', 'profile', 'ai-gateway', 'ai-companion', 'docs', 'ai-employees', 'analytics'].includes(item)) {
           setItem(item);
         }
       }
@@ -192,6 +193,7 @@ function BreadcrumbNav({ activeItem }: { activeItem: string }) {
     profile: 'Profile',
     automation: 'Automation',
     'ai-gateway': 'AI Gateway',
+    'ai-companion': 'AI Companion',
     docs: 'Docs',
     'ai-employees': 'AI Employees',
     analytics: 'Analytics',
@@ -254,6 +256,8 @@ function SurfaceRouter({ activeItem }: { activeItem: string }) {
       return <AutomationPage />;
     case 'ai-gateway':
       return <AIGatewayPage />;
+    case 'ai-companion':
+      return <AICompanionPage />;
     case 'docs':
       return <DocsPage />;
     case 'ai-employees':
