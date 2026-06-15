@@ -71,6 +71,8 @@ const teamTabs = [
   { id: 'standups', label: 'Standups' },
   { id: 'calendar', label: 'Calendar' },
   { id: 'performance', label: 'Performance' },
+  { id: 'analytics', label: 'Analytics' },
+  { id: 'ai-agents', label: 'AI Agents' },
   { id: 'settings', label: 'Settings' },
 ];
 
@@ -907,6 +909,8 @@ function TeamScopeView({ team, onBack }: { team: Team; onBack: () => void }) {
             {activeTab === 'standups' && <TeamStandupsTab team={team} members={teamEmployees} />}
             {activeTab === 'calendar' && <TeamCalendarTab team={team} eventsList={eventsList} setAddEventOpen={setAddEventOpen} />}
             {activeTab === 'performance' && <TeamPerformanceTab team={team} members={teamEmployees} />}
+            {activeTab === 'analytics' && <TeamAnalyticsTab team={team} members={teamEmployees} />}
+            {activeTab === 'ai-agents' && <TeamAIAgentsTab team={team} members={teamEmployees} />}
             {activeTab === 'settings' && <TeamSettingsTab team={team} channelList={channelList} setChannelList={setChannelList} setCreateChannelOpen={setCreateChannelOpen} />}
           </motion.div>
         </AnimatePresence>
@@ -2093,6 +2097,125 @@ function TeamSettingsTab({ team, channelList, setChannelList, setCreateChannelOp
 // ═══════════════════════════════════════════════════════════
 // Helper: Team Icon
 // ═══════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════
+// Team Analytics Tab
+// ═══════════════════════════════════════════════════════════
+
+function TeamAnalyticsTab({ team, members }: { team: Team; members: Employee[] }) {
+  const ACCENT = '#D97757';
+  const metrics = [
+    { label: 'Velocity', value: '42 pts', change: '+12%', up: true },
+    { label: 'Bug Rate', value: '2.1%', change: '-0.4%', up: false },
+    { label: 'PR Cycle Time', value: '18h', change: '-3h', up: false },
+    { label: 'Code Coverage', value: '84%', change: '+6%', up: true },
+    { label: 'Deploys/Week', value: '8.3', change: '+2.1', up: true },
+    { label: 'Incidents', value: '1', change: '-3', up: false },
+  ];
+  const weeks = ['W20', 'W21', 'W22', 'W23', 'W24', 'W25'];
+  const velocityData = [32, 38, 35, 44, 40, 42];
+
+  return (
+    <div style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 20 }}>
+      {/* KPI grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+        {metrics.map(m => (
+          <div key={m.label} style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 12, padding: '14px 16px' }}>
+            <div style={{ fontSize: 11, color: '#6b7280', fontWeight: 600, marginBottom: 6 }}>{m.label}</div>
+            <div style={{ fontSize: 22, fontWeight: 800, color: '#111827' }}>{m.value}</div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: m.up ? '#16a34a' : '#16a34a', marginTop: 2 }}>
+              {m.change} vs last sprint
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Velocity chart (simple bars) */}
+      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 12, padding: 20 }}>
+        <div style={{ fontSize: 14, fontWeight: 700, color: '#111827', marginBottom: 16 }}>Team Velocity (last 6 sprints)</div>
+        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 10, height: 120 }}>
+          {velocityData.map((v, i) => (
+            <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+              <div style={{ fontSize: 10, fontWeight: 700, color: ACCENT }}>{v}</div>
+              <div style={{ width: '100%', background: i === 5 ? ACCENT : `${ACCENT}40`, borderRadius: '4px 4px 0 0', height: `${(v / 50) * 100}%`, transition: 'height 0.4s ease' }} />
+              <div style={{ fontSize: 10, color: '#9ca3af' }}>{weeks[i]}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Member contribution */}
+      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 12, padding: 20 }}>
+        <div style={{ fontSize: 14, fontWeight: 700, color: '#111827', marginBottom: 14 }}>Member Contributions</div>
+        {members.slice(0, 5).map((m, i) => {
+          const pct = [78, 65, 54, 48, 35][i] || 40;
+          return (
+            <div key={m.id} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#111827', width: 120, flexShrink: 0 }}>{m.name}</div>
+              <div style={{ flex: 1, height: 6, background: '#f3f4f6', borderRadius: 99 }}>
+                <div style={{ width: `${pct}%`, height: '100%', background: ACCENT, borderRadius: 99 }} />
+              </div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: ACCENT, width: 36 }}>{pct}%</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
+// Team AI Agents Tab
+// ═══════════════════════════════════════════════════════════
+
+function TeamAIAgentsTab({ team, members }: { team: Team; members: Employee[] }) {
+  const ACCENT = '#D97757';
+  const [enabled, setEnabled] = useState<Record<string, boolean>>({ dev: true, qa: true, pm: false, devops: true });
+
+  const agents = [
+    { id: 'dev', name: 'Dev Agent', role: 'Code Review & PR assistance', color: ACCENT, requestsToday: 87, saved: '$1.24', model: 'Claude 3.5 Haiku', tasks: ['Reviewed 4 PRs', 'Fixed 2 type errors', 'Suggested refactor in auth-service'] },
+    { id: 'qa', name: 'QA Agent', role: 'Test generation & bug detection', color: '#F59E0B', requestsToday: 143, saved: '$2.10', model: 'Claude 3.5 Haiku', tasks: ['Generated 18 test cases', 'Found 3 edge-case bugs', 'Updated test coverage to 84%'] },
+    { id: 'pm', name: 'PM Agent', role: 'Sprint planning & reporting', color: '#10B981', requestsToday: 31, saved: '$0.48', model: 'Llama 3.1 70B (free)', tasks: ['Drafted sprint retrospective', 'Updated roadmap priorities', 'Sent weekly update digest'] },
+    { id: 'devops', name: 'DevOps Agent', role: 'Infrastructure & deployments', color: '#8B5CF6', requestsToday: 24, saved: '$0.36', model: 'GPT-4o', tasks: ['Scaled k8s cluster x2', 'Rotated SSL certs', 'Triggered 3 staging deploys'] },
+  ];
+
+  return (
+    <div style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 14 }}>
+      <div style={{ background: `${ACCENT}08`, border: `1px solid ${ACCENT}20`, borderRadius: 10, padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{ fontSize: 13, color: '#374151' }}>
+          AI Agents for <strong>{team.name}</strong> are routed through <strong style={{ color: ACCENT }}>BrixIntelSmart</strong> — automatically selecting the best model per task.
+        </div>
+      </div>
+
+      {agents.map(a => (
+        <div key={a.id} style={{ background: '#fff', border: `1px solid ${enabled[a.id] ? a.color + '30' : '#e5e7eb'}`, borderRadius: 12, padding: 18, opacity: enabled[a.id] ? 1 : 0.6 }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 12 }}>
+            <div>
+              <div style={{ fontSize: 15, fontWeight: 800, color: '#111827' }}>{a.name}</div>
+              <div style={{ fontSize: 12, color: '#6b7280' }}>{a.role}</div>
+              <div style={{ fontSize: 10, color: a.color, fontWeight: 600, marginTop: 4 }}>Model: {a.model}</div>
+            </div>
+            <button onClick={() => setEnabled(p => ({ ...p, [a.id]: !p[a.id] }))}
+              style={{ padding: '5px 12px', borderRadius: 8, border: `1px solid ${enabled[a.id] ? a.color : '#e5e7eb'}`, background: enabled[a.id] ? a.color + '10' : '#f9fafb', color: enabled[a.id] ? a.color : '#6b7280', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>
+              {enabled[a.id] ? 'Active' : 'Paused'}
+            </button>
+          </div>
+          <div style={{ display: 'flex', gap: 16, marginBottom: 12 }}>
+            <div><div style={{ fontSize: 10, color: '#9ca3af', fontWeight: 600 }}>REQUESTS TODAY</div><div style={{ fontSize: 18, fontWeight: 800, color: '#111827' }}>{a.requestsToday}</div></div>
+            <div><div style={{ fontSize: 10, color: '#9ca3af', fontWeight: 600 }}>COST SAVED</div><div style={{ fontSize: 18, fontWeight: 800, color: '#16a34a' }}>{a.saved}</div></div>
+          </div>
+          <div style={{ fontSize: 11, color: '#6b7280', fontWeight: 600, marginBottom: 6 }}>RECENT ACTIONS</div>
+          {a.tasks.map((t, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+              <div style={{ width: 5, height: 5, borderRadius: '50%', background: a.color, flexShrink: 0 }} />
+              <span style={{ fontSize: 12, color: '#374151' }}>{t}</span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function TeamIcon({ team, size = 'md' }: { team: Team; size?: 'md' | 'lg' }) {
   const s = size === 'lg' ? 40 : 28;

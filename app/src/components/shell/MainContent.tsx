@@ -62,7 +62,9 @@ export function MainContent({ id = 'main-content' }: MainContentProps) {
         // Restore scroll position for new route
         requestAnimationFrame(() => {
           if (scrollRef.current) {
-            const savedPos = scrollPositions.get(activeRailItem) || 0;
+            // Pages with own internal scroll always start at top
+            const noRestorePages = ['chat', 'ai-companion', 'ai-gateway', 'ai-employees', 'analytics'];
+            const savedPos = noRestorePages.includes(activeRailItem) ? 0 : (scrollPositions.get(activeRailItem) || 0);
             scrollRef.current.scrollTop = savedPos;
           }
         });

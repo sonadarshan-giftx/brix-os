@@ -18,8 +18,6 @@ const railItems = [
   { id: 'teams',          label: 'Teams',        icon: Users },
   { id: 'calendar',       label: 'Calendar',     icon: Calendar },
   { id: 'approvals',      label: 'Approvals',    icon: CheckCircle2,  badge: 'approval' as const },
-  { id: 'analytics',      label: 'Analytics',    icon: BarChart2 },
-  { id: 'ai-employees',   label: 'AI Agents',    icon: Bot },
   { id: 'ai-companion',   label: 'AI Companion', icon: Sparkles },
   { id: 'ai-gateway',     label: 'AI Gateway',   icon: BrainCircuit },
   { id: 'security',       label: 'Security',     icon: Shield },
@@ -27,9 +25,9 @@ const railItems = [
 ];
 
 const ROLE_ACCESS: Record<string, string[]> = {
-  Owner:   ['home', 'projects', 'chat', 'calls', 'docs', 'teams', 'calendar', 'approvals', 'analytics', 'ai-employees', 'ai-companion', 'ai-gateway', 'security', 'apps'],
-  Manager: ['home', 'projects', 'chat', 'calls', 'docs', 'teams', 'calendar', 'approvals', 'analytics', 'ai-employees', 'ai-companion', 'ai-gateway', 'security', 'apps'],
-  Member:  ['home', 'projects', 'chat', 'calls', 'docs', 'teams', 'calendar', 'analytics', 'ai-employees', 'ai-companion', 'ai-gateway', 'security', 'apps'],
+  Owner:   ['home', 'projects', 'chat', 'calls', 'docs', 'teams', 'calendar', 'approvals', 'ai-companion', 'ai-gateway', 'security', 'apps'],
+  Manager: ['home', 'projects', 'chat', 'calls', 'docs', 'teams', 'calendar', 'approvals', 'ai-companion', 'ai-gateway', 'security', 'apps'],
+  Member:  ['home', 'projects', 'chat', 'calls', 'docs', 'teams', 'calendar', 'approvals', 'ai-companion', 'ai-gateway', 'security', 'apps'],
 };
 
 function Tooltip({ text, children }: { text: string; children: React.ReactNode }) {

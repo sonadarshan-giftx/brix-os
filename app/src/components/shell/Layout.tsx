@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ErrorBoundary } from '@/components/shared/ErrorBoundary';
 import { useStore } from '@/store/useStore';
 import { useAppData } from '@/hooks/useAppData';
@@ -10,85 +11,53 @@ import { CommandPaletteProvider } from '@/components/shared/CommandPalette';
 import { AiCopilot } from '@/components/shared/AiCopilot';
 import { Dialogs } from '@/components/shared/Dialogs';
 import { SettingsDialog } from '@/components/shared/SettingsDialog';
-/**
- * Layout — Root application shell
- *
- * Responsive, theme-aware, keyboard-shortcut-enabled layout
- * with skip links for accessibility and collapsible sidebars.
- */
+
 export function Layout() {
-  // Load real data from backends into the store
   useAppData();
 
   const contextListOpen = useStore((s) => s.contextListOpen);
   const activeRailItem = useStore((s) => s.activeRailItem);
   const theme = useStore((s) => s.theme);
 
-  // Mobile sidebar state
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  // Rail collapsed state
   const [railCollapsed, setRailCollapsed] = useState(false);
+  const [contextCollapsed, setContextCollapsed] = useState(false);
 
-  // ChatPage has its own built-in sidebar, so hide the global ContextList
-  const showContextList = contextListOpen && activeRailItem !== 'chat';
+  // Pages that have their own built-in sidebar — hide the global ContextList
+  const PAGES_WITH_OWN_SIDEBAR = ['chat', 'ai-companion', 'ai-gateway', 'ai-employees', 'analytics', 'docs', 'apps', 'home'];
+  const showContextList = contextListOpen && !PAGES_WITH_OWN_SIDEBAR.includes(activeRailItem);
 
-  // Apply theme class to document root
   useEffect(() => {
     const root = document.documentElement;
     const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const isDark = theme === 'dark' || (theme === 'system' && systemDark);
-
-    if (isDark) {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
+    isDark ? root.classList.add('dark') : root.classList.remove('dark');
   }, [theme]);
 
-  // Keyboard shortcuts
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      // Toggle sidebar (Ctrl+B)
       if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
         e.preventDefault();
-        if (window.innerWidth < 768) {
-          setMobileSidebarOpen((prev) => !prev);
-        } else {
-          setRailCollapsed((prev) => !prev);
-        }
+        window.innerWidth < 768 ? setMobileSidebarOpen((p) => !p) : setRailCollapsed((p) => !p);
       }
-      // Close mobile sidebar on Escape
-      if (e.key === 'Escape') {
-        setMobileSidebarOpen(false);
-      }
+      if (e.key === 'Escape') setMobileSidebarOpen(false);
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, []);
 
-  // Close mobile sidebar on route change
-  useEffect(() => {
-    setMobileSidebarOpen(false);
-  }, [activeRailItem]);
+  useEffect(() => { setMobileSidebarOpen(false); }, [activeRailItem]);
 
-  // CSS variable-based background for theme support
   const bgColor = 'var(--op-bg-primary, #ffffff)';
 
   return (
     <CommandPaletteProvider>
       <ErrorBoundary>
-        {/* Skip to content link for accessibility */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:z-[9999] focus:rounded focus:bg-[#D97757] focus:px-4 focus:py-2 focus:text-white focus:text-xs focus:font-semibold focus:top-1 focus:left-1 focus:outline-none"
-        >
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:z-[9999] focus:rounded focus:bg-[#D97757] focus:px-4 focus:py-2 focus:text-white focus:text-xs focus:font-semibold focus:top-1 focus:left-1 focus:outline-none">
           Skip to main content
         </a>
 
-        <div
-          className="flex h-screen w-screen flex-col overflow-hidden"
-          style={{ backgroundColor: bgColor }}
-        >
+        <div className="flex h-screen w-screen flex-col overflow-hidden" style={{ backgroundColor: bgColor }}>
           <Dialogs />
           <TitleBar
             onMenuToggle={() => setMobileSidebarOpen((p) => !p)}
@@ -96,48 +65,68 @@ export function Layout() {
             onRailCollapseToggle={() => setRailCollapsed((p) => !p)}
           />
 
-          <div
-            className="flex flex-1 overflow-hidden"
-            style={{ height: 'calc(100vh - 44px)' }}
-          >
-            {/* AppRail - hidden on mobile unless toggled */}
-            <div
-              className={`hidden md:block flex-shrink-0 transition-all duration-200 ${railCollapsed ? 'w-0 overflow-hidden opacity-0' : ''}`}
-            >
+          <div className="flex flex-1 overflow-hidden" style={{ height: 'calc(100vh - 44px)' }}>
+            {/* AppRail */}
+            <div className={`hidden md:block flex-shrink-0 transition-all duration-200 ${railCollapsed ? 'w-0 overflow-hidden opacity-0' : ''}`}>
               <AppRail collapsed={railCollapsed} onCollapseToggle={() => setRailCollapsed((p) => !p)} />
             </div>
 
-            {/* Mobile sidebar overlay */}
+            {/* Mobile sidebar */}
             {mobileSidebarOpen && (
               <>
-                {/* Backdrop */}
-                <div
-                  className="fixed inset-0 z-40 bg-black/40 md:hidden"
-                  onClick={() => setMobileSidebarOpen(false)}
-                  aria-hidden="true"
-                />
-                {/* Mobile rail */}
+                <div className="fixed inset-0 z-40 bg-black/40 md:hidden" onClick={() => setMobileSidebarOpen(false)} aria-hidden="true" />
                 <div className="fixed left-0 top-[44px] z-50 md:hidden" style={{ height: 'calc(100vh - 44px)' }}>
                   <AppRail collapsed={false} onCollapseToggle={() => setMobileSidebarOpen(false)} />
                 </div>
               </>
             )}
 
-            {/* ContextList - responsive */}
+            {/* ContextList — collapsible secondary sidebar */}
             {showContextList && (
               <div
-                className="hidden md:block flex-shrink-0"
-                style={{ width: 280, borderRight: '1px solid var(--op-border, #e1e1e1)', backgroundColor: 'var(--op-bg-secondary, #f5f5f3)' }}
+                className="hidden md:flex flex-shrink-0 relative"
+                style={{
+                  width: contextCollapsed ? 20 : 260,
+                  transition: 'width 0.2s ease',
+                  borderRight: '1px solid var(--op-border, #e1e1e1)',
+                  backgroundColor: 'var(--op-bg-secondary, #f5f5f3)',
+                  overflow: 'hidden',
+                }}
               >
-                <ContextList />
+                {!contextCollapsed && <ContextList />}
+
+                {/* Collapse toggle tab */}
+                <button
+                  onClick={() => setContextCollapsed((p) => !p)}
+                  title={contextCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+                  style={{
+                    position: 'absolute',
+                    right: -10,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    width: 20,
+                    height: 40,
+                    borderRadius: '0 6px 6px 0',
+                    background: '#D97757',
+                    border: 'none',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 10,
+                    boxShadow: '2px 0 6px rgba(0,0,0,0.12)',
+                  }}
+                >
+                  {contextCollapsed
+                    ? <ChevronRight size={11} color="#fff" />
+                    : <ChevronLeft size={11} color="#fff" />
+                  }
+                </button>
               </div>
             )}
 
             {/* Main content */}
-            <MainContent
-              id="main-content"
-              mobileRailOpen={mobileSidebarOpen}
-            />
+            <MainContent id="main-content" mobileRailOpen={mobileSidebarOpen} />
           </div>
         </div>
 
