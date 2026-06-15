@@ -21,7 +21,7 @@ export function Layout() {
 
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [railCollapsed, setRailCollapsed] = useState(false);
-  const [contextCollapsed, setContextCollapsed] = useState(false);
+  const [contextCollapsed, setContextCollapsed] = useState(true);
 
   // Pages that have their own built-in sidebar — hide the global ContextList
   const PAGES_WITH_OWN_SIDEBAR = ['chat', 'ai-companion', 'ai-gateway', 'ai-employees', 'analytics', 'docs', 'apps', 'home'];
